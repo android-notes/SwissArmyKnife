@@ -2,6 +2,7 @@ package com.wanjian.sak;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.view.View;
 import android.view.ViewGroup;
 
 /**
@@ -10,7 +11,7 @@ import android.view.ViewGroup;
 
 public abstract class AbsCanvas {
 
-    protected abstract void onDraw(Canvas canvas, Paint paint, ViewGroup viewGroup, int startLayer, int endLayer);
+    protected abstract void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer);
 
     @Override
     public int hashCode() {

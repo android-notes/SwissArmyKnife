@@ -21,11 +21,11 @@ public abstract class CanvasLayerAdapter extends AbsCanvas {
     private int curLayer = -1;
 
     @Override
-    protected void onDraw(Canvas canvas, Paint paint, ViewGroup viewGroup, int startLayer, int endLayer) {
+    protected void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer) {
         this.mStartLayer = startLayer;
         this.mEndLayer = endLayer;
         curLayer = -1;
-        layerCount(canvas, viewGroup, paint);
+        layerCount(canvas, view, paint);
     }
 
     private void layerCount(Canvas canvas, View view, Paint paint) {
