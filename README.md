@@ -2,14 +2,13 @@
 android免root兼容所有版本ui调试工具
 
 
-
-
-
 ### SwissArmyKnife是什么
    
 SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有android版本，不需要root权限。可以直接在android手机屏幕上显示当前Activity中所有控件（不管是否隐藏）的边界，内外边距大小，每一个控件大小，图片大小，字体颜色，大小，以及自定义信息。同时可以直接在屏幕上取色，另外还提供了直尺（单位为px和dp），圆角尺（单位dp）工具，可以直接测量大小。针对android开发者还提供了布局树查看功能，可以直接在手机屏幕查看当前Activity中所有控件层次信息等。
 
 可以通过滚动层级滚轮来控制只显示某一层级的信息，避免层级覆盖等。
+
+<!-- more -->
 
 ### 使用方式
 
@@ -21,16 +20,16 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 ### 功能界面
 
-![image](https://thumbnail0.baidupcs.com/thumbnail/5e9f4ae7a28829372c798c08640e765f?fid=555885822-250528-588498717107669&time=1480510800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-npRokEwKu55H17vNS%2BdcCCYlPZ0%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7767215077249327193&dp-callid=0&size=c710_u400&quality=100)
+![image](https://github.com/android-notes/blogimg/blob/master/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A21.jpg?raw=true)
 
-![img](https://thumbnail0.baidupcs.com/thumbnail/75c7b6291ad4e2ed6952174547a406bf?fid=555885822-250528-793968547586161&time=1480510800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-mMu8Ld8lgzWvEYGHcaH7A%2BaTLns%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7767343151315079449&dp-callid=0&size=c710_u400&quality=100)
+![img](https://raw.githubusercontent.com/android-notes/blogimg/master/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A22.jpg)
 
 
 ### 边框选项
 
 开启边框选项后可以在手机屏幕看到所有控件的边界，效果如下
 
-![image](https://thumbnail0.baidupcs.com/thumbnail/0a91cd6da71a471aad9ffcff515cf68a?fid=555885822-250528-50479474395734&time=1480510800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-FV4YAvjQYIKJHaC%2F2kP6UrcdRWw%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7767414550595420692&dp-callid=0&size=c710_u400&quality=100)
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E8%BE%B9%E6%A1%86.jpg)
 
 
 
@@ -38,7 +37,7 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 开启后会在屏幕看到如下效果
 
-![image](https://thumbnail0.baidupcs.com/thumbnail/a73fecf5ae4239f7730a5753f283fcba?fid=555885822-250528-698272847480876&time=1480510800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-FBHw2GHVv7AW5vT7lCi8oWGFoGY%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7767498614104691399&dp-callid=0&size=c710_u400&quality=100)
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E8%BE%B9%E6%A1%86%E5%8F%8A%E5%86%85%E5%A4%96%E8%BE%B9%E8%B7%9D%E5%A4%A7%E5%B0%8F.jpg)
 
 半透明绿色代表内边距，PT表示上边内边距（padding top），PL表示左内边距（padding left），PT表示右内边距（padding right），PB便是下内边距（padding bottom）。
 
@@ -51,22 +50,22 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 开启后会看到控件的宽高，单位是dp（pt）
 
-![image](https://thumbnail0.baidupcs.com/thumbnail/e73ba08691e5fbbd54d2810a6bc923b7?fid=555885822-250528-836704082111446&time=1480510800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-VgY7PFA6PJCoAaDu%2BlUnvSRIQCk%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7767612777723748888&dp-callid=0&size=c710_u400&quality=100)
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E6%8E%A7%E4%BB%B6%E5%A4%A7%E5%B0%8F.jpg)
 
 ### 图片宽高
 
-![image](https://thumbnail0.baidupcs.com/thumbnail/97ee37b67cc32e449dcc3568ce82cd5e?fid=555885822-250528-507940912182455&time=1480510800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-t%2BOqev8m2gjbIcB5dR4pWmcbtJY%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7767630468732386489&dp-callid=0&size=c710_u400&quality=100)
+![image](https://github.com/android-notes/blogimg/blob/master/%E5%9B%BE%E7%89%87%E5%A4%A7%E5%B0%8F.jpg?raw=true)
 
 
 ### 字体大小
 
-![image](https://thumbnail0.baidupcs.com/thumbnail/05bb927d05ea9529e3a3433c6105bc2f?fid=555885822-250528-221709577288847&time=1480510800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-Cmeo91FQnaUvgPhEN5J%2FjB72Jos%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7767648166155731589&dp-callid=0&size=c710_u400&quality=100)
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F.jpg)
 
 ### 字体颜色
 
 16进制，ARGB
 
-![image](https://thumbnail0.baidupcs.com/thumbnail/3ca30fc6ac31dd5a14be6c8ea3addf2d?fid=555885822-250528-211348384050459&time=1480510800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-8TGX9pUftBLiw1yaJp7ABLjaaB4%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7767656303987361601&dp-callid=0&size=c710_u400&quality=100)
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2.jpg)
 
 ### 强制图片宽高
 
@@ -92,14 +91,14 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 开启后会在屏幕左上角显示，取色器刚开启时只会在屏幕左上角看到一个黑框，拖动到要取色的位置后抬起手机即可完成取色，取色器四个角可以获取所指像素的颜色值。取色器可以获取native页面每个像素颜色，也可以获取webview中每一个像素的颜色。
 
-![image](https://thumbnail0.baidupcs.com/thumbnail/eeecddebe63a354b6486131f1c855da9?fid=555885822-250528-345581106229083&time=1480514400&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-pMUf6mzHZANi2Kc1o5Br6BNHQuU%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7768159078261866978&dp-callid=0&size=c710_u400&quality=100)
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E5%88%BB%E5%BA%A6%E5%B0%BA%E5%8F%8A%E5%8F%96%E8%89%B2%E5%99%A8.jpg)
 
 
 ### 布局树
  
  布局树可以双指缩放
  
-![image](https://thumbnail0.baidupcs.com/thumbnail/599f04860ec4657590f3ea06af6d047c?fid=555885822-250528-889020960262449&time=1480514400&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-rqGqdIAb60t4ZBIxEj0NQPTKiOg%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7768224679638263815&dp-callid=0&size=c710_u400&quality=100)
+![image](https://github.com/android-notes/blogimg/blob/master/%E5%B8%83%E5%B1%80%E6%A0%91.jpg?raw=true)
 
 
 
@@ -148,6 +147,12 @@ CanvasManager.getInstance(getContext()).addCanvas(new TextSizeCanvas());
 ```
 
 就可以了。
+
+
+
+## 工程代码：
+https://github.com/android-notes/SwissArmyKnife        
+
 
 
 
