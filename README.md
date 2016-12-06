@@ -154,6 +154,6 @@ CanvasManager.getInstance(getContext()).addCanvas(new TextSizeCanvas());
 https://github.com/android-notes/SwissArmyKnife        
 
 
-
-
+## jcenter正在审核，最近就可以引入直接引入包了
+ 
 
