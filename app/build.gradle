@@ -1,10 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
-        applicationId "com.wanjian.sak"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
@@ -27,3 +27,16 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
 }
+
+
+
+//添加
+publish {
+    userOrg = 'wanjiannotes'
+    groupId = 'com.wanjian'
+    artifactId = 'sak'
+    publishVersion = '0.0.1'
+    desc = 'debug tool 4 android'
+    website = 'https://github.com/android-notes/SwissArmyKnife'
+}
+
