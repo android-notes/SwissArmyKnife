@@ -12,6 +12,9 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 
 ### 使用方式
 
+
+`compile 'com.wanjian:sak:0.0.2'`
+
 android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.sak.LayoutManager.init(Application context) ` ,其他版本可以在activity的`onResume`中调用`com.wanjian.sak.LayoutManager.init(Activity act) `初始化。
 
 启动app后会在屏幕左上角看到一个 android logo ，点击即可进入功能界面。
@@ -154,6 +157,6 @@ CanvasManager.getInstance(getContext()).addCanvas(new TextSizeCanvas());
 https://github.com/android-notes/SwissArmyKnife        
 
 
-## jcenter正在审核，最近就可以引入直接引入包了
+
  
 
