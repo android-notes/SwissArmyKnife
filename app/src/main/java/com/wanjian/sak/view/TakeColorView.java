@@ -107,11 +107,11 @@ public class TakeColorView extends View implements DragViewContainer.OnMoveListe
         mPaint.setColor(color);
         canvas.drawRect(l, t, r, b, mPaint);
         if ((~color | 0xff000000) == color) {
-            color = 0xffff0000;
+            mPaint.setColor(0xffff0000);
         } else {
-            color = (~color | 0xff000000);
+            mPaint.setColor((~color | 0xff000000));
         }
-        mPaint.setColor(color);
+
         canvas.drawText(String.format("#%08x", color), l, t + textH, mPaint);
 
     }
