@@ -13,7 +13,7 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 ### 使用方式
 
 
-`compile 'com.wanjian:sak:0.0.2'`
+`compile 'com.wanjian:sak:0.0.3'`
 
 android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.sak.LayoutManager.init(Application context) ` ,其他版本可以在activity的`onResume`中调用`com.wanjian.sak.LayoutManager.init(Activity act) `初始化。
 
