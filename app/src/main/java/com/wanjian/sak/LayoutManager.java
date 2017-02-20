@@ -14,6 +14,7 @@ import com.wanjian.sak.view.ContaierView;
  * Created by wanjian on 2016/10/23.
  */
 
+@Deprecated
 public class LayoutManager {
     /**
      * API 14(ICE_CREAM_SANDWICH) 及以上可以在application的onCreate中调用该方法

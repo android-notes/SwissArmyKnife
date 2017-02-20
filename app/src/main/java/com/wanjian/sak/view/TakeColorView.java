@@ -9,31 +9,24 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.wanjian.sak.layerview.LayerView;
+
 /**
  * Created by wanjian on 2016/11/10.
  */
 
-public class TakeColorView extends View implements DragViewContainer.OnMoveListener {
+public class TakeColorView extends LayerView implements DragViewContainer.OnMoveListener {
     public TakeColorView(Context context) {
         super(context);
         init();
     }
 
-    public TakeColorView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+    @Override
+    protected String description() {
+        return "取色器";
     }
 
-    public TakeColorView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
 
-    @SuppressLint("NewApi")
-    public TakeColorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
 
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 

@@ -2,7 +2,6 @@ package com.wanjian.sak;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.view.ViewGroup;
 
 import java.util.HashSet;
@@ -11,11 +10,11 @@ import java.util.Set;
 /**
  * Created by wanjian on 2016/10/23.
  */
-
+@Deprecated
 public class CanvasManager {
 
-    private Set<AbsCanvas> mCanvasList = new HashSet<>();
-    private Paint defaultPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Set<AbsLayer> mCanvasList = new HashSet<>();
+//    private Paint defaultPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private int startLayer;
     private int endLayer = 30;
 
@@ -32,7 +31,7 @@ public class CanvasManager {
     }
 
     private CanvasManager(Context context) {
-        defaultPaint.setTextSize(dp2px(context, 10));
+//        defaultPaint.setTextSize(dp2px(context, 10));
     }
 
 
@@ -46,7 +45,7 @@ public class CanvasManager {
         endLayer = end;
     }
 
-    public CanvasManager addCanvas(AbsCanvas canvas) {
+    public CanvasManager addCanvas(AbsLayer canvas) {
         mCanvasList.add(canvas);
         return this;
     }
@@ -59,11 +58,11 @@ public class CanvasManager {
 //    }
 
     public void draw(Canvas canvas) {
-        for (AbsCanvas iCanvas : mCanvasList) {
+        for (AbsLayer iCanvas : mCanvasList) {
             if (iCanvas == null) {
                 continue;
             }
-            iCanvas.onDraw(canvas, defaultPaint, mViewGroup, startLayer, endLayer);
+            iCanvas.draw(canvas, mViewGroup, startLayer, endLayer);
         }
     }
 

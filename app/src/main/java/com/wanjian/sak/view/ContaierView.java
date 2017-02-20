@@ -1,8 +1,10 @@
 package com.wanjian.sak.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
@@ -10,16 +12,16 @@ import android.widget.TextView;
 
 import com.wanjian.sak.CanvasManager;
 import com.wanjian.sak.R;
-import com.wanjian.sak.canvasimpl.BackgroundColorCanvas;
-import com.wanjian.sak.canvasimpl.BitmapWidthHeightCanvas;
-import com.wanjian.sak.canvasimpl.BorderCanvas;
-import com.wanjian.sak.canvasimpl.ForceBitmapWidthHeightCanvas;
-import com.wanjian.sak.canvasimpl.InfoCanvas;
-import com.wanjian.sak.canvasimpl.MarginCanvas;
-import com.wanjian.sak.canvasimpl.PaddingCanvas;
-import com.wanjian.sak.canvasimpl.TextColorCanvas;
-import com.wanjian.sak.canvasimpl.TextSizeCanvas;
-import com.wanjian.sak.canvasimpl.WidthHeightCanvas;
+import com.wanjian.sak.canvasimpl.BackgroundColorLayer;
+import com.wanjian.sak.canvasimpl.BitmapWidthHeightLayer;
+import com.wanjian.sak.canvasimpl.BorderLayer;
+import com.wanjian.sak.canvasimpl.ForceBitmapWidthHeightLayer;
+import com.wanjian.sak.canvasimpl.InfoLayer;
+import com.wanjian.sak.canvasimpl.MarginLayer;
+import com.wanjian.sak.canvasimpl.PaddingLayer;
+import com.wanjian.sak.canvasimpl.TextColorLayer;
+import com.wanjian.sak.canvasimpl.TextSizeLayer;
+import com.wanjian.sak.canvasimpl.WidthHeightLayer;
 
 import static android.os.Build.VERSION.SDK_INT;
 
@@ -29,11 +31,13 @@ import static android.os.Build.VERSION.SDK_INT;
  */
 
 public class ContaierView extends RelativeLayout {
-    private Activity mActivity;
+    //    private Activity mActivity;
+    private DrawingBoardView drawBoard;
+    private OnLayoutChangeListener mOnLayoutChangeListener;
 
-    public ContaierView(Activity activity) {
-        super(activity);
-        this.mActivity = activity;
+    public ContaierView(Context context) {
+        super(context);
+//        this.mActivity = activity;
         init();
     }
 
@@ -41,7 +45,7 @@ public class ContaierView extends RelativeLayout {
     private void init() {
         inflate(getContext(), R.layout.sak_container_alyout, this);
 
-        final DrawingBoardView drawBoard = (DrawingBoardView) findViewById(R.id.drawBoard);
+        drawBoard = (DrawingBoardView) findViewById(R.id.drawBoard);
         FloatView floatView = (FloatView) findViewById(R.id.floatView);
         final OperatorView operatorView = (OperatorView) findViewById(R.id.operatorView);
 
@@ -52,14 +56,34 @@ public class ContaierView extends RelativeLayout {
                 operatorView.setVisibility(VISIBLE);
             }
         });
-        if (SDK_INT >= 11) {//低版本android不支持
-            mActivity.getWindow().getDecorView().addOnLayoutChangeListener(new OnLayoutChangeListener() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+            mOnLayoutChangeListener = new OnLayoutChangeListener() {
                 @Override
                 public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                     drawBoard.invalidate();
                 }
-            });
+            };
         }
+
+    }
+
+    public void attach(Activity activity) {
+        if (SDK_INT >= 11) {//低版本android不支持
+            activity.getWindow().getDecorView().addOnLayoutChangeListener(mOnLayoutChangeListener);
+        }
+    }
+
+    public void detach(Activity activity) {
+        if (SDK_INT >= 11) {//低版本android不支持
+            activity.getWindow().getDecorView().removeOnLayoutChangeListener(mOnLayoutChangeListener);
+        }
+    }
+
+    public ContaierView addLayerCheckBox(String desc) {
+        View item = LayoutInflater.from(getContext()).inflate(R.layout.sak_layer_item, this, false);
+        addView(item);
+
+        return this;
     }
 
     private void initView(final OperatorView operatorView) {
@@ -105,39 +129,39 @@ public class ContaierView extends RelativeLayout {
             public void onClick(View v) {
                 CanvasManager.getInstance(getContext()).resetCanvas();
                 if (in.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new PaddingCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new PaddingLayer());
                 } else {
 
                 }
                 if (out.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new MarginCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new MarginLayer());
                 }
 
                 if (widthHeight.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new WidthHeightCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new WidthHeightLayer());
                 }
                 if (info.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new InfoCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new InfoLayer());
                 }
 
                 if (bmpwidthHeight.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new BitmapWidthHeightCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new BitmapWidthHeightLayer());
                 }
 
                 if (txtSize.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new TextSizeCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new TextSizeLayer());
                 }
                 if (txtColor.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new TextColorCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new TextColorLayer());
                 }
                 if (bagColor.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new BackgroundColorCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new BackgroundColorLayer());
                 }
                 if (forcebmpWH.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new ForceBitmapWidthHeightCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new ForceBitmapWidthHeightLayer());
                 }
                 if (stroke.isChecked()) {
-                    CanvasManager.getInstance(getContext()).addCanvas(new BorderCanvas());
+                    CanvasManager.getInstance(getContext()).addCanvas(new BorderLayer());
                 }
 
 //                refresh

@@ -468,17 +468,6 @@
                 android:textColor="#000"
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-
-                android:gravity="center"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:text="有问题@万剑"
-                android:textColor="#e1e1e1"
-                />
 
 
         </LinearLayout>

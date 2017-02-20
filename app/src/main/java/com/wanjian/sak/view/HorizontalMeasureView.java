@@ -8,32 +8,26 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.wanjian.sak.layerview.LayerView;
+
 
 /**
  * Created by wanjian on 2016/11/10.
  */
 
-public class HorizontalMeasureView extends View {
+public class HorizontalMeasureView extends LayerView {
     public HorizontalMeasureView(Context context) {
         super(context);
         init();
     }
 
-    public HorizontalMeasureView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+
+    @Override
+    protected String description() {
+        return "水平直尺";
     }
 
-    public HorizontalMeasureView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
 
-    @SuppressLint("NewApi")
-    public HorizontalMeasureView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
 
     protected final String TAG = "HorizontalMeasureView";
     protected Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

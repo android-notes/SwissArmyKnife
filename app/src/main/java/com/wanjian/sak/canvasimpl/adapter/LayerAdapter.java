@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wanjian.sak.AbsCanvas;
+import com.wanjian.sak.AbsLayer;
 import com.wanjian.sak.view.ContaierView;
 
 
@@ -14,11 +14,15 @@ import com.wanjian.sak.view.ContaierView;
  * Created by wanjian on 2016/10/23.
  */
 
-public abstract class CanvasLayerAdapter extends AbsCanvas {
+public abstract class LayerAdapter extends AbsLayer {
     private int mStartLayer;
     private int mEndLayer;
 
     private int curLayer = -1;
+
+    public LayerAdapter(Context context) {
+        super(context);
+    }
 
     @Override
     protected void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer) {
@@ -30,6 +34,9 @@ public abstract class CanvasLayerAdapter extends AbsCanvas {
 
     private void layerCount(Canvas canvas, View view, Paint paint) {
         if (view == null) {
+            return;
+        }
+        if (curLayer + 1 > mEndLayer) {
             return;
         }
         curLayer++;
@@ -44,19 +51,9 @@ public abstract class CanvasLayerAdapter extends AbsCanvas {
                 layerCount(canvas, child, paint);
             }
         }
-
         curLayer--;
     }
 
-    protected int px2dp(Context context, float px) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (px / scale + 0.5f);
-    }
-
-    protected int px2sp(Context context, float pxValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (pxValue / fontScale + 0.5f);
-    }
 
     protected abstract void drawLayer(Canvas canvas, Paint paint, View view);
 }

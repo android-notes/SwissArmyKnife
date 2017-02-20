@@ -1,17 +1,21 @@
 package com.wanjian.sak;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.view.View;
-import android.view.ViewGroup;
+
+import com.wanjian.sak.view.ContaierView;
 
 /**
- * Created by wanjian on 2016/10/23.
+ * Created by wanjian on 2017/2/20.
  */
 
-public abstract class AbsCanvas {
-
-    protected abstract void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer);
+public class DefaultViewFilter extends ViewFilter {
+    @Override
+    public boolean apply(View view) {
+        if (view instanceof ContaierView) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public int hashCode() {
@@ -23,7 +27,6 @@ public abstract class AbsCanvas {
         if (obj == null) {
             return false;
         }
-
         return obj.getClass() == getClass();
     }
 }

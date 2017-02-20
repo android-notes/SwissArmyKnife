@@ -1,12 +1,11 @@
 package com.wanjian.sak.canvasimpl;
 
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.view.View;
 
 
-import com.wanjian.sak.canvasimpl.adapter.CanvasLayerTxtAdapter;
+import com.wanjian.sak.canvasimpl.adapter.LayerTxtAdapter;
 
 import java.lang.reflect.Field;
 
@@ -14,17 +13,22 @@ import java.lang.reflect.Field;
  * Created by wanjian on 2016/10/25.
  */
 
-public class ForceBitmapWidthHeightCanvas extends CanvasLayerTxtAdapter {
-    @Override
-    protected void drawLayer(Canvas canvas, Paint paint, View view) {
+public class ForceBitmapWidthHeightLayer extends LayerTxtAdapter {
+    public ForceBitmapWidthHeightLayer(Context context) {
+        super(context);
+    }
 
+
+    @Override
+    protected String getTxt(View view) {
         StringBuilder builder = new StringBuilder(10);
         Class<?> clz = view.getClass();
         findBmp(clz, view, builder);
         if (builder.length() > 0) {
-            drawTxt(builder.toString(), canvas, paint, view);
+            return builder.toString();
         }
 
+        return "";
     }
 
     private void findBmp(Class<?> clz, View view, StringBuilder builder) {
@@ -50,4 +54,8 @@ public class ForceBitmapWidthHeightCanvas extends CanvasLayerTxtAdapter {
 
     }
 
+    @Override
+    protected String description() {
+        return "强制图片宽高";
+    }
 }

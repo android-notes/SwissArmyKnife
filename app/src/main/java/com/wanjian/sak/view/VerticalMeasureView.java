@@ -5,6 +5,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 
+import com.wanjian.sak.layerview.LayerView;
+
+import static android.R.attr.maxHeight;
+import static android.R.attr.minHeight;
+
 /**
  * Created by wanjian on 2016/11/10.
  */
@@ -18,14 +23,12 @@ public class VerticalMeasureView extends HorizontalMeasureView {
         super(context, attrs);
     }
 
-    public VerticalMeasureView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    @Override
+    protected String description() {
+        return "竖直直尺";
     }
 
-    @SuppressLint("NewApi")
-    public VerticalMeasureView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
+
 
     @Override
     protected void onDraw(Canvas canvas) {

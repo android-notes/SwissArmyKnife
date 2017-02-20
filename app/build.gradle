@@ -37,10 +37,10 @@ dependencies {
 
 //添加
 publish {
-    userOrg = 'wanjiannotes'
+//    userOrg = 'wanjiannotes'
     groupId = 'com.wanjian'
     artifactId = 'sak'
-    publishVersion = '0.0.2'
+    publishVersion = '0.0.3'
     desc = 'debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 }

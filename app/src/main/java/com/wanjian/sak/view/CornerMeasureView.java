@@ -10,31 +10,23 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.wanjian.sak.layerview.LayerView;
+
 /**
  * Created by wanjian on 2016/11/10.
  */
 
-public class CornerMeasureView extends View {
+public class CornerMeasureView extends LayerView {
     public CornerMeasureView(Context context) {
         super(context);
         init();
     }
 
-    public CornerMeasureView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+    @Override
+    protected String description() {
+        return "圆角尺";
     }
 
-    public CornerMeasureView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
-
-    @SuppressLint("NewApi")
-    public CornerMeasureView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
 
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private int twoDP;
