@@ -29,7 +29,7 @@ public class TextColorLayer extends LayerTxtAdapter {
     }
 
     @Override
-    protected String description() {
+    public String description() {
         return "字体颜色";
     }
 }

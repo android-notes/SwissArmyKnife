@@ -3,6 +3,7 @@ package com.wanjian.sak.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wanjian.sak.CanvasManager;
+import com.wanjian.sak.ItemLayerLayout;
+import com.wanjian.sak.ItemLayerViewLayout;
 import com.wanjian.sak.R;
 import com.wanjian.sak.canvasimpl.BackgroundColorLayer;
 import com.wanjian.sak.canvasimpl.BitmapWidthHeightLayer;
@@ -22,6 +25,7 @@ import com.wanjian.sak.canvasimpl.PaddingLayer;
 import com.wanjian.sak.canvasimpl.TextColorLayer;
 import com.wanjian.sak.canvasimpl.TextSizeLayer;
 import com.wanjian.sak.canvasimpl.WidthHeightLayer;
+import com.wanjian.sak.layerview.LayerView;
 
 import static android.os.Build.VERSION.SDK_INT;
 
@@ -31,26 +35,43 @@ import static android.os.Build.VERSION.SDK_INT;
  */
 
 public class ContaierView extends RelativeLayout {
-    //    private Activity mActivity;
     private DrawingBoardView drawBoard;
     private OnLayoutChangeListener mOnLayoutChangeListener;
+    private OperatorView operatorView;
 
     public ContaierView(Context context) {
         super(context);
-//        this.mActivity = activity;
         init();
     }
 
+    public void addItem(ItemLayerLayout itemLayout) {
+        int res = itemLayout.getLayoutRes();
+        try {
+            View item = LayoutInflater.from(getContext()).inflate(res, this, false);
+            itemLayout.onCreate(item);
+            operatorView.addItem(item);
+        } catch (Resources.NotFoundException e) {
+            throw e;
+        }
+
+    }
+
+    public void addItem(ItemLayerViewLayout itemLayout) {
+        LayerView view = itemLayout.getLayerView();
+
+        itemLayout.onCreate(view);
+
+        operatorView.addItem(view);
+    }
 
     private void init() {
         inflate(getContext(), R.layout.sak_container_alyout, this);
 
         drawBoard = (DrawingBoardView) findViewById(R.id.drawBoard);
-        FloatView floatView = (FloatView) findViewById(R.id.floatView);
-        final OperatorView operatorView = (OperatorView) findViewById(R.id.operatorView);
+        operatorView = (OperatorView) findViewById(R.id.operatorView);
 
-        initView(operatorView);
-        floatView.setOnClickListener(new OnClickListener() {
+//        initView(operatorView);
+        findViewById(R.id.floatView).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 operatorView.setVisibility(VISIBLE);

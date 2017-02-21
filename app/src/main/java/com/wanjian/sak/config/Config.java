@@ -6,6 +6,7 @@ import android.util.ArraySet;
 import com.wanjian.sak.AbsLayer;
 import com.wanjian.sak.CheckNull;
 import com.wanjian.sak.DefaultViewFilter;
+import com.wanjian.sak.ILayer;
 import com.wanjian.sak.ViewFilter;
 import com.wanjian.sak.canvasimpl.BitmapWidthHeightLayer;
 import com.wanjian.sak.canvasimpl.BorderLayer;
@@ -34,11 +35,11 @@ import java.util.Set;
 
 public class Config {
 
-    protected Context mContext;
-    protected SizeConverter mSizeConverter;
-    protected List<AbsLayer> mLayers = new ArrayList<>();
-    protected List<LayerView> mLayerViews = new ArrayList<>();
-    protected Set<ViewFilter> mViewFilters = new HashSet<>();
+    private Context mContext;
+    private SizeConverter mSizeConverter;
+    private List<ILayer> mLayers = new ArrayList<>();
+    private List<LayerView> mLayerViews = new ArrayList<>();
+    private Set<ViewFilter> mViewFilters = new HashSet<>();
 
 
     private Config(Build build) {
@@ -47,42 +48,63 @@ public class Config {
         if (mSizeConverter == null) {
             mSizeConverter = new DefaultSizeConverter();
         }
-        mLayers.add(new BorderLayer(mContext));
-        mLayers.add(new MarginLayer(mContext));
-        mLayers.add(new PaddingLayer(mContext));
-        mLayers.add(new WidthHeightLayer(mContext));
-        mLayers.add(new BitmapWidthHeightLayer(mContext));
-        mLayers.add(new TextSizeLayer(mContext));
-        mLayers.add(new TextColorLayer(mContext));
-        mLayers.add(new ForceBitmapWidthHeightLayer(mContext));
-        mLayers.add(new InfoLayer(mContext));
 
-        mLayers.addAll(build.mLayers);
+        mLayers.addAll(build.mDefaultLayers);
+        mLayers.addAll(build.mCustomerLayers);
 
 
-        mLayerViews.add(new HorizontalMeasureView(mContext));
-        mLayerViews.add(new VerticalMeasureView(mContext));
-        mLayerViews.add(new CornerMeasureView(mContext));
-        mLayerViews.add(new TakeColorView(mContext));
-        mLayerViews.add(new TreeView(mContext));
-
-        mLayerViews.addAll(build.mLayerViews);
-
+        mLayerViews.addAll(build.mDefaultLayerViews);
+        mLayerViews.addAll(build.mCustomerLayerViews);
 
         mViewFilters.add(new DefaultViewFilter());
         mViewFilters.addAll(build.mViewFilters);
     }
 
+    public SizeConverter getSizeConverter() {
+        return mSizeConverter;
+    }
+
+    public List<ILayer> getLayers() {
+        return mLayers;
+    }
+
+    public List<LayerView> getLayerViews() {
+        return mLayerViews;
+    }
+
+    public Set<ViewFilter> getViewFilters() {
+        return mViewFilters;
+    }
+
     public static class Build {
         Context mContext;
         SizeConverter mSizeConverter;
-        List<AbsLayer> mLayers = new ArrayList<>();
-        List<LayerView> mLayerViews = new ArrayList<>();
+        List<ILayer> mDefaultLayers = new ArrayList<>();
+        List<ILayer> mCustomerLayers = new ArrayList<>();
+        List<LayerView> mDefaultLayerViews = new ArrayList<>();
+        List<LayerView> mCustomerLayerViews = new ArrayList<>();
         Set<ViewFilter> mViewFilters = new HashSet<>();
 
         public Build(Context context) {
             CheckNull.check(context, "context");
-            mContext = context;
+            mContext = context.getApplicationContext();
+
+            mDefaultLayers.add(new BorderLayer(mContext));
+            mDefaultLayers.add(new MarginLayer(mContext));
+            mDefaultLayers.add(new PaddingLayer(mContext));
+            mDefaultLayers.add(new WidthHeightLayer(mContext));
+            mDefaultLayers.add(new BitmapWidthHeightLayer(mContext));
+            mDefaultLayers.add(new TextSizeLayer(mContext));
+            mDefaultLayers.add(new TextColorLayer(mContext));
+            mDefaultLayers.add(new ForceBitmapWidthHeightLayer(mContext));
+            mDefaultLayers.add(new InfoLayer(mContext));
+
+            mDefaultLayerViews.add(new HorizontalMeasureView(mContext));
+            mDefaultLayerViews.add(new VerticalMeasureView(mContext));
+            mDefaultLayerViews.add(new CornerMeasureView(mContext));
+            mDefaultLayerViews.add(new TakeColorView(mContext));
+            mDefaultLayerViews.add(new TreeView(mContext));
+
         }
 
         public Build size(SizeConverter sizeConverter) {
@@ -93,13 +115,15 @@ public class Config {
 
         public Build addLayer(AbsLayer layer) {
             CheckNull.check(layer, "layer");
-            mLayers.add(layer);
+            mDefaultLayers.clear();
+            mCustomerLayers.add(layer);
             return this;
         }
 
         public Build addLayerView(LayerView layerView) {
             CheckNull.check(layerView, "layerView");
-            mLayerViews.add(layerView);
+            mDefaultLayerViews.clear();
+            mCustomerLayerViews.add(layerView);
             return this;
         }
 

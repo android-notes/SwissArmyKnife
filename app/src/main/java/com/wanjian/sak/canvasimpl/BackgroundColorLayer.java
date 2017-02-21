@@ -37,7 +37,7 @@ public class BackgroundColorLayer extends LayerTxtAdapter {
     }
 
     @Override
-    protected String description() {
+    public String description() {
         return "背景色";
     }
 }

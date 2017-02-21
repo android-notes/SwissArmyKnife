@@ -29,7 +29,7 @@ public class TextSizeLayer extends LayerTxtAdapter {
     }
 
     @Override
-    protected String description() {
+    public String description() {
         return "字体大小";
     }
 }

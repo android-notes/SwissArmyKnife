@@ -43,7 +43,7 @@ public class ForceBitmapWidthHeightLayer extends LayerTxtAdapter {
                 field.setAccessible(true);
                 try {
                     Bitmap bitmap = ((Bitmap) field.get(view));
-                    builder.append(bitmap.getWidth()).append("-").append(bitmap.getHeight()).append(" ");
+                    builder.append(convertSize(bitmap.getWidth())).append("-").append(convertSize(bitmap.getHeight())).append(" ");
                 } catch (Exception e) {
                 }
                 field.setAccessible(false);
@@ -55,7 +55,7 @@ public class ForceBitmapWidthHeightLayer extends LayerTxtAdapter {
     }
 
     @Override
-    protected String description() {
+    public String description() {
         return "强制图片宽高";
     }
 }

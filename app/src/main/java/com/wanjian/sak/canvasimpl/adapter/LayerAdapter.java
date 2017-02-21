@@ -24,6 +24,8 @@ public abstract class LayerAdapter extends AbsLayer {
         super(context);
     }
 
+
+
     @Override
     protected void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer) {
         this.mStartLayer = startLayer;

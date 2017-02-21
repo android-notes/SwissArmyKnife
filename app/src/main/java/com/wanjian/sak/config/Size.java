@@ -57,4 +57,9 @@ public class Size {
             sList.add(size);
         }
     }
+
+    @Override
+    public String toString() {
+        return length + " " + unit;
+    }
 }

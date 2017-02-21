@@ -11,4 +11,8 @@ public class CheckNull {
             throw new NullPointerException(what + " can not be null !");
         }
     }
+
+    public static void throwException(String msg) {
+        throw new RuntimeException(msg);
+    }
 }

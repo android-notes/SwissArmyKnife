@@ -3,9 +3,7 @@ package com.wanjian.sak;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.wanjian.sak.config.Color;
 import com.wanjian.sak.config.Size;
@@ -16,10 +14,11 @@ import com.wanjian.sak.config.SizeConverter;
  * Created by wanjian on 2016/10/23.
  */
 
-public abstract class AbsLayer {
+public abstract class AbsLayer extends ILayer {
 
     protected Context mContext;
     private Paint mPaint;
+    private boolean enable;
 
     public AbsLayer(Context context) {
         mContext = context;
@@ -27,9 +26,16 @@ public abstract class AbsLayer {
         mPaint.setColor(getColor());
     }
 
-    protected abstract String description();
+    public abstract String description();
 
-    protected final void draw(Canvas canvas, View view, int startLayer, int endLayer) {
+    public void enable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public final void draw(Canvas canvas, View view, int startLayer, int endLayer) {
+        if (!enable) {
+            return;
+        }
         onDraw(canvas, mPaint, view, startLayer, endLayer);
     }
 

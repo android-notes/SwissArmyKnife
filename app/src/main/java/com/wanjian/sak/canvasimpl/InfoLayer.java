@@ -33,7 +33,7 @@ public class InfoLayer extends LayerTxtAdapter {
     }
 
     @Override
-    protected String description() {
+    public String description() {
         return "自定义信息";
     }
 }

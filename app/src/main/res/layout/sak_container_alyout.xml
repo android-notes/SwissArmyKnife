@@ -2,7 +2,8 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       xmlns:tools="http://schemas.android.com/tools">
+       xmlns:tools="http://schemas.android.com/tools"
+   >
 
     <com.wanjian.sak.view.DrawingBoardView
         android:id="@+id/drawBoard"
@@ -21,7 +22,7 @@
         android:id="@+id/operatorView"
         tools:visibility="visible"
         android:visibility="gone"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.wanjian.sak.view.OperatorView>
 
 </merge>

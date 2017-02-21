@@ -21,13 +21,13 @@ public class WidthHeightLayer extends LayerTxtAdapter {
     protected String getTxt(View view) {
         int w = view.getWidth();
         int h = view.getHeight();
-        String txt = "w:" + px2dp(w) + " h:" + px2dp(h);
+        String txt = "w:" + convertSize(w) + " h:" + convertSize(h);
 
         return txt;
     }
 
     @Override
-    protected String description() {
+    public String description() {
         return "宽高";
     }
 }

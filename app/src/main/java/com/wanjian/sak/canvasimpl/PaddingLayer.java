@@ -40,7 +40,7 @@ public class PaddingLayer extends LayerAdapter {
 
         Rect rect = new Rect();
         if (l != 0) {
-            String txt = "PL" + px2dp(l);
+            String txt = "PL" + convertSize(l);
             paint.getTextBounds(txt, 0, txt.length(), rect);
             paint.setColor(0x88ffffff);
             paint.setStyle(Paint.Style.FILL);
@@ -49,7 +49,7 @@ public class PaddingLayer extends LayerAdapter {
             canvas.drawText(txt, locationSize[0], locationSize[1] + h / 2 + rect.height(), paint);
         }
         if (t != 0) {
-            String txt = "PT" + px2dp(t);
+            String txt = "PT" + convertSize(t);
             paint.getTextBounds(txt, 0, txt.length(), rect);
             paint.setColor(0x88ffffff);
             paint.setStyle(Paint.Style.FILL);
@@ -58,7 +58,7 @@ public class PaddingLayer extends LayerAdapter {
             canvas.drawText(txt, locationSize[0] + w / 2, locationSize[1] + rect.height(), paint);
         }
         if (r != 0) {
-            String txt = "PR" + px2dp(r);
+            String txt = "PR" + convertSize(r);
             paint.getTextBounds(txt, 0, txt.length(), rect);
             paint.setColor(0x88ffffff);
             paint.setStyle(Paint.Style.FILL);
@@ -67,7 +67,7 @@ public class PaddingLayer extends LayerAdapter {
             canvas.drawText(txt, locationSize[0] + w - rect.width(), locationSize[1] + h / 2 + rect.height(), paint);
         }
         if (b != 0) {
-            String txt = "PB" + px2dp(b);
+            String txt = "PB" + convertSize(b);
             paint.getTextBounds(txt, 0, txt.length(), rect);
             paint.setColor(0x88ffffff);
             paint.setStyle(Paint.Style.FILL);
@@ -78,7 +78,7 @@ public class PaddingLayer extends LayerAdapter {
     }
 
     @Override
-    protected String description() {
+    public String description() {
         return "内边距";
     }
 }
