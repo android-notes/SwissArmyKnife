@@ -1,6 +1,10 @@
 # SwissArmyKnife
 android免root兼容所有版本ui调试工具
 
+#### 版本更新
+
+* 0.0.9 新增页面渲染时间以及每个控件渲染时间统计
+
 
 ### SwissArmyKnife是什么
    
