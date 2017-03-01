@@ -18,7 +18,6 @@ public class LayoutManager {
     /**
      * API 14(ICE_CREAM_SANDWICH) 及以上可以在application的onCreate中调用该方法
      *
-     * @param context
      */
     public static void init(Application context) {
         if (context != null) {

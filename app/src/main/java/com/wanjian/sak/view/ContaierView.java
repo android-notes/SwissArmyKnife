@@ -20,6 +20,8 @@ import com.wanjian.sak.canvasimpl.PaddingCanvas;
 import com.wanjian.sak.canvasimpl.TextColorCanvas;
 import com.wanjian.sak.canvasimpl.TextSizeCanvas;
 import com.wanjian.sak.canvasimpl.WidthHeightCanvas;
+import com.wanjian.sak.canvasimpl.performance.DrawTimeCanvas;
+import com.wanjian.sak.canvasimpl.performance.PageDrawTime;
 
 import static android.os.Build.VERSION.SDK_INT;
 
@@ -79,6 +81,8 @@ public class ContaierView extends RelativeLayout {
         final CheckBox bagColor;
         final CheckBox forcebmpWH;
         final CheckBox stroke;
+        final CheckBox drawTime;
+        final CheckBox pageDrawTime;
 
 
         out = (CheckBox) operatorView.findViewById(R.id.out);
@@ -91,6 +95,8 @@ public class ContaierView extends RelativeLayout {
         bagColor = (CheckBox) operatorView.findViewById(R.id.bagColor);
         forcebmpWH = (CheckBox) operatorView.findViewById(R.id.forcebmpWH);
         stroke = (CheckBox) operatorView.findViewById(R.id.stroke);
+        drawTime = (CheckBox) operatorView.findViewById(R.id.drawTime);
+        pageDrawTime = (CheckBox) operatorView.findViewById(R.id.pageDrawTime);
 
         from = (WheelView) operatorView.findViewById(R.id.from);
         to = (WheelView) operatorView.findViewById(R.id.to);
@@ -138,6 +144,12 @@ public class ContaierView extends RelativeLayout {
                 }
                 if (stroke.isChecked()) {
                     CanvasManager.getInstance(getContext()).addCanvas(new BorderCanvas());
+                }
+                if (drawTime.isChecked()) {
+                    CanvasManager.getInstance(getContext()).addCanvas(new DrawTimeCanvas());
+                }
+                if (pageDrawTime.isChecked()) {
+                    CanvasManager.getInstance(getContext()).addCanvas(new PageDrawTime());
                 }
 
 //                refresh
