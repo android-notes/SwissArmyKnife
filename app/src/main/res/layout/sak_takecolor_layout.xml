@@ -5,5 +5,6 @@
 
     <com.wanjian.sak.view.TakeColorView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></com.wanjian.sak.view.TakeColorView>
+        android:layout_height="wrap_content"
+        android:background="@drawable/sak_take_color_bag"></com.wanjian.sak.view.TakeColorView>
 </com.wanjian.sak.view.DragViewContainer>

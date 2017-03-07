@@ -15,9 +15,10 @@ import com.wanjian.sak.view.ContaierView;
  */
 
 public class LayoutManager {
+    public static final int INFO_KEY = CanvasManager.INFO_KEY;
+
     /**
      * API 14(ICE_CREAM_SANDWICH) 及以上可以在application的onCreate中调用该方法
-     *
      */
     public static void init(Application context) {
         if (context != null) {
@@ -33,11 +34,12 @@ public class LayoutManager {
 
                     @Override
                     public void onActivityResumed(Activity activity) {
-                        init(activity);
+                        attach(activity);
                     }
 
                     @Override
                     public void onActivityPaused(Activity activity) {
+                        detch(activity);
                     }
 
                     @Override
@@ -58,26 +60,41 @@ public class LayoutManager {
         }
     }
 
-
-    public static void init(Activity activity) {
-
-        ViewGroup dectorView = ((ViewGroup) activity.getWindow().getDecorView());
-        CanvasManager.getInstance(activity.getApplicationContext()).setViewGroup(dectorView);
-
-        int i;
-        for (i = dectorView.getChildCount() - 1; i > -1; i--) {
-            View v = dectorView.getChildAt(i);
-            if (v instanceof ContaierView) {
-                break;
-            }
-        }
-
-        if (i == -1) {
-            ContaierView contaierView = new ContaierView(activity);
-            dectorView.addView(contaierView);
-        }
-        dectorView.requestLayout();
+    private static void attach(Activity activity) {
+        CanvasManager.getInstance(activity).attach(activity);
     }
+
+    private static void detch(Activity activity) {
+        CanvasManager.getInstance(activity).detch(activity);
+    }
+
+    public static void pause(Activity activity) {
+        detch(activity);
+    }
+
+    public static void resume(Activity activity) {
+        attach(activity);
+    }
+
+//    private static void init(Activity activity) {
+//
+//        ViewGroup dectorView = ((ViewGroup) activity.getWindow().getDecorView());
+//        CanvasManager.getInstance(activity.getApplicationContext()).setViewGroup(dectorView);
+//
+//        int i;
+//        for (i = dectorView.getChildCount() - 1; i > -1; i--) {
+//            View v = dectorView.getChildAt(i);
+//            if (v instanceof ContaierView) {
+//                break;
+//            }
+//        }
+//
+//        if (i == -1) {
+//            ContaierView contaierView = new ContaierView(activity);
+//            dectorView.addView(contaierView);
+//        }
+//        dectorView.requestLayout();
+//    }
 
     private LayoutManager() {
     }

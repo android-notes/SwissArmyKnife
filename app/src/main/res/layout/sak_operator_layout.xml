@@ -51,6 +51,7 @@
 
                 <CheckBox
                     android:id="@+id/stroke"
+                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -340,6 +341,7 @@
 
                 <CheckBox
                     android:id="@+id/refresh"
+                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

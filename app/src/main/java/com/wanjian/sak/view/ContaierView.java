@@ -1,6 +1,7 @@
 package com.wanjian.sak.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
@@ -31,11 +32,12 @@ import static android.os.Build.VERSION.SDK_INT;
  */
 
 public class ContaierView extends RelativeLayout {
-    private Activity mActivity;
+    //    private Activity mActivity;
+    private DrawingBoardView drawBoard;
 
-    public ContaierView(Activity activity) {
+    public ContaierView(Context activity) {
         super(activity);
-        this.mActivity = activity;
+//        this.mActivity = activity;
         init();
     }
 
@@ -43,7 +45,7 @@ public class ContaierView extends RelativeLayout {
     private void init() {
         inflate(getContext(), R.layout.sak_container_alyout, this);
 
-        final DrawingBoardView drawBoard = (DrawingBoardView) findViewById(R.id.drawBoard);
+        drawBoard = (DrawingBoardView) findViewById(R.id.drawBoard);
         FloatView floatView = (FloatView) findViewById(R.id.floatView);
         final OperatorView operatorView = (OperatorView) findViewById(R.id.operatorView);
 
@@ -55,13 +57,17 @@ public class ContaierView extends RelativeLayout {
             }
         });
         if (SDK_INT >= 11) {//低版本android不支持
-            mActivity.getWindow().getDecorView().addOnLayoutChangeListener(new OnLayoutChangeListener() {
-                @Override
-                public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                    drawBoard.invalidate();
-                }
-            });
+//            mActivity.getWindow().getDecorView().addOnLayoutChangeListener(new OnLayoutChangeListener() {
+//                @Override
+//                public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//                    drawBoard.invalidate();
+//                }
+//            });
         }
+    }
+
+    public void invalidate() {
+        drawBoard.invalidate();
     }
 
     private void initView(final OperatorView operatorView) {

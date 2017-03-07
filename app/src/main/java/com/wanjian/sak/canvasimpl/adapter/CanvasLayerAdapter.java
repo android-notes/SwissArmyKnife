@@ -29,11 +29,14 @@ public abstract class CanvasLayerAdapter extends AbsCanvas {
     }
 
     private void layerCount(Canvas canvas, View view, Paint paint) {
-        if (view == null) {
+        if (view == null || view.getVisibility() == View.GONE) {
+            return;
+        }
+        if (curLayer + 1 > mEndLayer) {
             return;
         }
         curLayer++;
-        if (curLayer >= mStartLayer && curLayer <= mEndLayer && !(view instanceof ContaierView)) {
+        if (curLayer >= mStartLayer && !(view instanceof ContaierView)) {
             drawLayer(canvas, paint, view);
         }
 
