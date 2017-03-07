@@ -40,7 +40,7 @@ publish {
 //    userOrg = 'wanjiannotes'
     groupId = 'com.wanjian'
     artifactId = 'sak'
-    publishVersion = '0.1.0'
+    publishVersion = '0.1.0.1'
     desc = 'debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 }

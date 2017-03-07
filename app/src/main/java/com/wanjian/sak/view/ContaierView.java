@@ -208,7 +208,7 @@ public class ContaierView extends RelativeLayout {
         operatorView.findViewById(R.id.help).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Uri uri = Uri.parse("http://android-notes.github.io");
+                final Uri uri = Uri.parse("https://github.com/android-notes/SwissArmyKnife");
                 final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
