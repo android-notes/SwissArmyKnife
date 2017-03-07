@@ -1,6 +1,10 @@
 # SwissArmyKnife
 android免root兼容所有版本ui调试工具
 
+#### 版本更新
+
+* 0.0.9 新增页面渲染时间以及每个控件渲染时间统计
+
 
 ### SwissArmyKnife是什么
    
@@ -8,12 +12,14 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 
 可以通过滚动层级滚轮来控制只显示某一层级的信息，避免层级覆盖等。
 
+### 原理
+获取当前Activity的跟布局，activity.getWindow().getDecorView(),该view是个FrameLayout，给该view添加一个蒙层view，通过遍历跟view得到所有view的位置大小等信息，并绘制在蒙层上。
 <!-- more -->
 
 ### 使用方式
 
 
-`compile 'com.wanjian:sak:0.0.3'`
+`compile 'com.wanjian:sak:0.0.9'`
 
 android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.sak.LayoutManager.init(Application context) ` ,其他版本可以在activity的`onResume`中调用`com.wanjian.sak.LayoutManager.init(Activity act) `初始化。
 
@@ -96,6 +102,18 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 ![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E5%88%BB%E5%BA%A6%E5%B0%BA%E5%8F%8A%E5%8F%96%E8%89%B2%E5%99%A8.jpg)
 
+
+### 页面绘制时间
+
+建议同时开始实时刷新选项。当开启后手指在屏幕滑动时会实时显示渲染整个页面所需要的时间，该时间可以大致反应渲染时间。原理很简单，获取跟布局rootview，手动调用rootview.draw(new Canvas(bitmap))，计算调用该方法的时间差即可。
+
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/sak%E9%A1%B5%E9%9D%A2%E7%BB%98%E5%88%B6%E6%97%B6%E9%97%B4.jpg)
+
+
+### 绘制时间
+
+开启后可以看到各子控件绘制时间，建议同时开始实时刷新选项。实现原理同上。
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/sakview%E7%BB%98%E5%88%B6%E6%97%B6%E9%97%B4.jpg)
 
 ### 布局树
  
