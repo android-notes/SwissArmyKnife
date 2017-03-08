@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
 
-import com.wanjian.sak.config.Color;
 import com.wanjian.sak.config.Size;
 import com.wanjian.sak.config.SizeConverter;
 
@@ -14,12 +13,11 @@ import com.wanjian.sak.config.SizeConverter;
  * Created by wanjian on 2016/10/23.
  */
 
-public abstract class AbsLayer extends ILayer {
+public abstract class AbsLayer {
 
     protected Context mContext;
     private Paint mPaint;
     private boolean enable;
-
     public AbsLayer(Context context) {
         mContext = context;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -56,9 +54,8 @@ public abstract class AbsLayer extends ILayer {
     }
 
     protected Size convertSize(int length) {
-        return SizeConverter.DEFAULT.convert(mContext, length);
+        return SizeConverter.CONVERTER.convert(mContext,length);
     }
-
     protected int dp2px(float dip) {
         float density = mContext.getResources().getDisplayMetrics().density;
         return (int) (dip * density + 0.5);

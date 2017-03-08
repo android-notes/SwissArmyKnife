@@ -10,6 +10,11 @@ public class DefaultSizeConverter implements SizeConverter {
 
 
     @Override
+    public String desc() {
+        return "Origin(px)";
+    }
+
+    @Override
     public Size convert(Context context, int length) {
 
         Size size = Size.obtain();

@@ -5,7 +5,7 @@ import android.content.Context;
 import com.wanjian.sak.AbsLayer;
 import com.wanjian.sak.Check;
 import com.wanjian.sak.DefaultViewFilter;
-import com.wanjian.sak.ILayer;
+import com.wanjian.sak.AbsLayer;
 import com.wanjian.sak.ViewFilter;
 import com.wanjian.sak.canvasimpl.BitmapWidthHeightLayer;
 import com.wanjian.sak.canvasimpl.BorderLayer;
@@ -35,35 +35,26 @@ import java.util.Set;
 public class Config {
 
     private Context mContext;
-    private SizeConverter mSizeConverter;
-    private List<ILayer> mLayers = new ArrayList<>();
+    private List<AbsLayer> mLayers = new ArrayList<>();
     private List<LayerView> mLayerViews = new ArrayList<>();
-    private Set<ViewFilter> mViewFilters = new HashSet<>();
-
 
     private Config(Build build) {
         mContext = build.mContext;
-        mSizeConverter = build.mSizeConverter;
-        if (mSizeConverter == null) {
-            mSizeConverter = new DefaultSizeConverter();
-        }
+
 
         mLayers.addAll(build.mDefaultLayers);
         mLayers.addAll(build.mCustomerLayers);
 
 
-        mLayerViews.addAll(build.mDefaultLayerViews);
-        mLayerViews.addAll(build.mCustomerLayerViews);
+//        mLayerViews.addAll(build.mDefaultLayerViews);
+//        mLayerViews.addAll(build.mCustomerLayerViews);
 
-        mViewFilters.add(new DefaultViewFilter());
-        mViewFilters.addAll(build.mViewFilters);
+        ViewFilter.FILTER = build.mViewFilter;
+        SizeConverter.CONVERTER = build.mSizeConverter;
     }
 
-    public SizeConverter getSizeConverter() {
-        return mSizeConverter;
-    }
 
-    public List<ILayer> getLayers() {
+    public List<AbsLayer> getLayers() {
         return mLayers;
     }
 
@@ -71,18 +62,15 @@ public class Config {
         return mLayerViews;
     }
 
-    public Set<ViewFilter> getViewFilters() {
-        return mViewFilters;
-    }
 
     public static class Build {
         Context mContext;
         SizeConverter mSizeConverter;
-        List<ILayer> mDefaultLayers = new ArrayList<>();
-        List<ILayer> mCustomerLayers = new ArrayList<>();
+        List<AbsLayer> mDefaultLayers = new ArrayList<>();
+        List<AbsLayer> mCustomerLayers = new ArrayList<>();
         List<LayerView> mDefaultLayerViews = new ArrayList<>();
         List<LayerView> mCustomerLayerViews = new ArrayList<>();
-        Set<ViewFilter> mViewFilters = new HashSet<>();
+        ViewFilter mViewFilter;
 
         public Build(Context context) {
             Check.isNull(context, "context");
@@ -104,6 +92,8 @@ public class Config {
             mDefaultLayerViews.add(new TakeColorView(mContext));
             mDefaultLayerViews.add(new TreeView(mContext));
 
+            mViewFilter = ViewFilter.FILTER;
+            mSizeConverter = SizeConverter.CONVERTER;
         }
 
         public Build sizeConverter(SizeConverter sizeConverter) {
@@ -126,9 +116,9 @@ public class Config {
             return this;
         }
 
-        public Build addViewFilter(ViewFilter viewFilter) {
+        public Build viewFilter(ViewFilter viewFilter) {
             Check.isNull(viewFilter, "viewFilter");
-            mViewFilters.add(viewFilter);
+            mViewFilter = viewFilter;
             return this;
         }
 

@@ -11,9 +11,6 @@ import com.wanjian.sak.view.SAKCoverView;
 public class DefaultViewFilter extends ViewFilter {
     @Override
     public boolean apply(View view) {
-        if (view instanceof SAKCoverView) {
-            return false;
-        }
         return true;
     }
 

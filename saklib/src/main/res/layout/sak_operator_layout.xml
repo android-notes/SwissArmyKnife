@@ -43,6 +43,31 @@
 
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="实时刷新"
+                    android:textColor="#000"/>
+
+                <CheckBox
+                    android:id="@+id/refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:checked="true"
+                    />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,10 +104,9 @@
                     android:layout_width="@dimen/sak_wheel_width"
                     android:layout_height="@dimen/sak_wheel_height"
                     android:background="@drawable/sak_box_bag"
-                    app:sak_default_position="20">
+                    app:sak_default_position="30">
                 </com.wanjian.sak.view.WheelView>
             </LinearLayout>
-
 
 
             <TextView
@@ -118,6 +142,22 @@
                 />
 
             <TextView
+                android:id="@+id/ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/sak_corner_but_bag"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="确定"
+                android:textColor="#000"
+                />
+
+            <TextView
                 android:id="@+id/help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,7 +172,6 @@
                 android:text="帮助"
                 android:textColor="#000"
                 />
-
 
 
         </LinearLayout>

@@ -6,7 +6,12 @@ import android.content.Context;
  * Created by wanjian on 2017/2/20.
  */
 
-public class Px2dpSizeConverter implements SizeConverter {
+public class Px2dpSizeConverter extends SizeConverter {
+    @Override
+    public String desc() {
+        return "Dp(pt)";
+    }
+
     @Override
     public Size convert(Context context, int length) {
         Size size = Size.obtain();

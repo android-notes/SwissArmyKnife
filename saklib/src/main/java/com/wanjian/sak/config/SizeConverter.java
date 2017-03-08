@@ -6,8 +6,10 @@ import android.content.Context;
  * Created by wanjian on 2017/2/20.
  */
 
-public interface SizeConverter {
-    SizeConverter DEFAULT = new DefaultSizeConverter();
+public abstract class SizeConverter {
+    abstract String desc();
 
-    Size convert(Context context, int length);
+    public  static SizeConverter CONVERTER = new Px2dpSizeConverter();
+
+    abstract Size convert(Context context, int length);
 }

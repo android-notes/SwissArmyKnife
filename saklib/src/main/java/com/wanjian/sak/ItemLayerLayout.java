@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 public class ItemLayerLayout {
 
-    private ILayer mLayer;
+    private AbsLayer mLayer;
 
-    public ItemLayerLayout(ILayer layer) {
+    public ItemLayerLayout(AbsLayer layer) {
         mLayer = layer;
     }
 
@@ -27,7 +27,9 @@ public class ItemLayerLayout {
 
     public void onCreate(View view) {
         ((TextView) view.findViewById(R.id.desc)).setText(mLayer.description());
-        ((CheckBox) view.findViewById(R.id.checkbox)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkbox);
+        mLayer.enable(checkBox.isChecked());
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mLayer.enable(isChecked);

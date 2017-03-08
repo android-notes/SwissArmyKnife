@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.view.View;
 
 import com.wanjian.sak.canvasimpl.adapter.LayerAdapter;
-import com.wanjian.sak.config.Color;
+import com.wanjian.sak.Color;
 
 
 /**

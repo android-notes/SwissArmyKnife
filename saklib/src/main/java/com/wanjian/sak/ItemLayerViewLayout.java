@@ -25,12 +25,12 @@ public class ItemLayerViewLayout {
 
 
     public void onCreate(final LayerView view) {
-        ((TextView) view.findViewById(R.id.desc)).setText(mLayer.description());
-        ((CheckBox) view.findViewById(R.id.checkbox)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                view.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-            }
-        });
+//        ((TextView) view.findViewById(R.id.desc)).setText(mLayer.description());
+//        ((CheckBox) view.findViewById(R.id.checkbox)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                view.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+//            }
+//        });
     }
 }

@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wanjian.sak.AbsLayer;
+import com.wanjian.sak.ViewFilter;
 import com.wanjian.sak.view.SAKCoverView;
+
 
 
 /**
@@ -34,7 +36,7 @@ public abstract class LayerAdapter extends AbsLayer {
     }
 
     private void layerCount(Canvas canvas, View view, Paint paint) {
-        if (view == null || view.getVisibility() == View.GONE) {
+        if (view == null || view.getVisibility() == View.GONE|| ViewFilter.FILTER.filter(view)) {
             return;
         }
         if (curLayer + 1 > mEndLayer) {

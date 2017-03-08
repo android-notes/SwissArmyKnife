@@ -24,29 +24,33 @@ public class DrawingBoardView extends View {
         super(context, attrs);
     }
 
-    public DrawingBoardView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+    private boolean mNeededRefresh;
 
-    @SuppressLint("NewApi")
-    public DrawingBoardView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
+    private OnDrawListener mOnDrawListener;
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        CanvasManager.getInstance(getContext()).draw(canvas);
+        if (mOnDrawListener!=null){
+            mOnDrawListener.onDraw(canvas);
+        }
+    }
+
+    public void setOnDrawListener(OnDrawListener drawListener) {
+        mOnDrawListener = drawListener;
+    }
+
+    public void neededRefresh(boolean refresh) {
+        mNeededRefresh = refresh;
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if (CanvasManager.getInstance(getContext()).isNeedRefresh()) {
-//            getRootView().findViewById(android.R.id.content).dispatchTouchEvent(event);
+        if (mNeededRefresh) {
             ViewGroup viewGroup = (ViewGroup) getRootView();
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
                 View view = viewGroup.getChildAt(i);
-                if (view instanceof SAKCoverView) {
+                if ((view instanceof SAKCoverView) || view.getVisibility() != VISIBLE) {
                     continue;
                 }
                 view.dispatchTouchEvent(event);
@@ -59,9 +63,8 @@ public class DrawingBoardView extends View {
         }
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        invalidate();
-//        return super.onTouchEvent(event);
-//    }
+   public interface OnDrawListener {
+        void onDraw(Canvas canvas);
+    }
+
 }
