@@ -33,7 +33,7 @@ class Manager {
     private int mStartLayer = 5;
     private int mEndLayer = 30;
 
-    public Manager(Context context, Config config) {
+    Manager(Context context, Config config) {
         mConfig = config;
         mCoverView = new SAKCoverView(context.getApplicationContext());
         final List<AbsLayer> layers = config.getLayers();
@@ -88,12 +88,12 @@ class Manager {
     }
 
 
-    public void detach(Activity activity) {
+    void detach(Activity activity) {
         mCoverView.detach(activity);
         ((ViewGroup) activity.getWindow().getDecorView()).removeView(mCoverView);
     }
 
-    public void attach(Activity activity) {
+    void attach(Activity activity) {
         if (mCoverView.getParent() != null) {
             ((ViewGroup) mCoverView.getParent()).removeView(mCoverView);
         }

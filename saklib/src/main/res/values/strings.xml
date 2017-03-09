@@ -18,8 +18,9 @@
     <string name="sak_layer">层级</string>
     <string name="sak_unit">单位</string>
     <string name="sak_bag_color">背景色</string>
-    <string name="sak_view_draw_performance">view渲染时间</string>
+    <string name="sak_view_draw_performance">View渲染时间</string>
     <string name="sak_page_draw_performance">页面渲染时间</string>
+    <string name="sak_view_name">View类型</string>
     <string name="sak_close">关闭</string>
     <string name="sak_ok">确定</string>
     <string name="sak_help">帮助</string>

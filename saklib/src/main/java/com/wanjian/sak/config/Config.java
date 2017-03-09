@@ -9,6 +9,7 @@ import com.wanjian.sak.converter.Px2dpSizeConverter;
 import com.wanjian.sak.converter.SizeConverter;
 import com.wanjian.sak.layer.PageDrawPerformanceLayer;
 import com.wanjian.sak.layer.ViewDrawPerformanceLayer;
+import com.wanjian.sak.layer.ViewClassLayer;
 import com.wanjian.sak.layerview.AbsLayerView;
 import com.wanjian.sak.utils.Check;
 import com.wanjian.sak.filter.ViewFilter;
@@ -21,7 +22,6 @@ import com.wanjian.sak.layer.PaddingLayer;
 import com.wanjian.sak.layer.TextColorLayer;
 import com.wanjian.sak.layer.TextSizeLayer;
 import com.wanjian.sak.layer.WidthHeightLayer;
-import com.wanjian.sak.layerview.DragLayerView;
 import com.wanjian.sak.layerview.CornerMeasureView;
 import com.wanjian.sak.layerview.HorizontalMeasureView;
 import com.wanjian.sak.layerview.TakeColorView;
@@ -89,6 +89,7 @@ public class Config {
             mDefaultLayers.add(new TextColorLayer(mContext));
             mDefaultLayers.add(new ForceBitmapWidthHeightLayer(mContext));
             mDefaultLayers.add(new InfoLayer(mContext));
+            mDefaultLayers.add(new ViewClassLayer(mContext));
 
             mDefaultLayerViews.add(new HorizontalMeasureView(mContext));
             mDefaultLayerViews.add(new VerticalMeasureView(mContext));

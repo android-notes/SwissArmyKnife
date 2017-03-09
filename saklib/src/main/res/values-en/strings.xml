@@ -20,6 +20,7 @@
     <string name="sak_bag_color">Background Color</string>
     <string name="sak_view_draw_performance">View Rendering Performance</string>
     <string name="sak_page_draw_performance">Page Rendering Performance</string>
+    <string name="sak_view_name">View Class</string>
     <string name="sak_close">Close</string>
     <string name="sak_ok">OK</string>
     <string name="sak_help">Help</string>

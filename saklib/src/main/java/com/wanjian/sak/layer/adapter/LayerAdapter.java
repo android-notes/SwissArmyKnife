@@ -35,7 +35,7 @@ public abstract class LayerAdapter extends AbsLayer {
     }
 
     private void layerCount(Canvas canvas, View view, Paint paint) {
-        if (view == null || !ViewFilter.FILTER.filter(view)) {
+        if (view == null || view instanceof SAKCoverView) {
             return;
         }
         if (mCurLayer + 1 > mEndLayer) {
@@ -43,7 +43,9 @@ public abstract class LayerAdapter extends AbsLayer {
         }
         mCurLayer++;
         if (mCurLayer >= mStartLayer && mCurLayer <= mEndLayer) {
-            drawLayer(canvas, paint, view);
+            if (ViewFilter.FILTER.filter(view)) {
+                drawLayer(canvas, paint, view);
+            }
         }
 
         if (view instanceof ViewGroup) {
