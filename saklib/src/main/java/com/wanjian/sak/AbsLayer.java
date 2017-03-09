@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.wanjian.sak.config.Size;
 import com.wanjian.sak.config.SizeConverter;
+import com.wanjian.sak.utils.Color;
 
 
 /**

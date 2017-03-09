@@ -1,4 +1,4 @@
-package com.wanjian.sak.canvasimpl;
+package com.wanjian.sak.layerimpl;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.wanjian.sak.canvasimpl.adapter.LayerTxtAdapter;
+import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 
 /**

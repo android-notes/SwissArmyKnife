@@ -1,8 +1,8 @@
-package com.wanjian.sak;
+package com.wanjian.sak.filter;
 
 import android.view.View;
 
-import com.wanjian.sak.view.SAKCoverView;
+import com.wanjian.sak.filter.ViewFilter;
 
 /**
  * Created by wanjian on 2017/2/20.

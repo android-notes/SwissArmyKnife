@@ -1,4 +1,4 @@
-package com.wanjian.sak.canvasimpl.adapter;
+package com.wanjian.sak.layerimpl.adapter;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wanjian.sak.AbsLayer;
-import com.wanjian.sak.ViewFilter;
+import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.view.SAKCoverView;
 
 

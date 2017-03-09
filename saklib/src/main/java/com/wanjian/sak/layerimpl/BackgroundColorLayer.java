@@ -1,11 +1,11 @@
-package com.wanjian.sak.canvasimpl;
+package com.wanjian.sak.layerimpl;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.wanjian.sak.canvasimpl.adapter.LayerTxtAdapter;
+import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 import static android.os.Build.VERSION.SDK_INT;
 

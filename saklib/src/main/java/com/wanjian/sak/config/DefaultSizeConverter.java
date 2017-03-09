@@ -6,7 +6,7 @@ import android.content.Context;
  * Created by wanjian on 2017/2/20.
  */
 
-public class DefaultSizeConverter implements SizeConverter {
+public class DefaultSizeConverter extends SizeConverter {
 
 
     @Override

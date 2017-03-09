@@ -1,4 +1,4 @@
-package com.wanjian.sak;
+package com.wanjian.sak.utils;
 
 /**
  * Created by wanjian on 2017/2/20.

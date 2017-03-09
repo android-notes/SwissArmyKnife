@@ -1,4 +1,4 @@
-package com.wanjian.sak.canvasimpl;
+package com.wanjian.sak.layerimpl;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
 
-import com.wanjian.sak.canvasimpl.adapter.LayerAdapter;
+import com.wanjian.sak.layerimpl.adapter.LayerAdapter;
 
 
 /**

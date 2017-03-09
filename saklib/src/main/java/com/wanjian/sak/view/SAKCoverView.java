@@ -2,30 +2,18 @@ package com.wanjian.sak.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.wanjian.sak.CanvasManager;
 import com.wanjian.sak.ItemLayerLayout;
 import com.wanjian.sak.ItemLayerViewLayout;
 import com.wanjian.sak.R;
-import com.wanjian.sak.canvasimpl.BackgroundColorLayer;
-import com.wanjian.sak.canvasimpl.BitmapWidthHeightLayer;
-import com.wanjian.sak.canvasimpl.BorderLayer;
-import com.wanjian.sak.canvasimpl.ForceBitmapWidthHeightLayer;
-import com.wanjian.sak.canvasimpl.InfoLayer;
-import com.wanjian.sak.canvasimpl.MarginLayer;
-import com.wanjian.sak.canvasimpl.PaddingLayer;
-import com.wanjian.sak.canvasimpl.TextColorLayer;
-import com.wanjian.sak.canvasimpl.TextSizeLayer;
-import com.wanjian.sak.canvasimpl.WidthHeightLayer;
 import com.wanjian.sak.layerview.LayerView;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -78,6 +66,12 @@ public class SAKCoverView extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 operatorView.setVisibility(GONE);
+            }
+        });
+        ((RadioGroup) operatorView.findViewById(R.id.unitGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Toast.makeText(group.getContext(), ""+checkedId, Toast.LENGTH_SHORT).show();
             }
         });
 

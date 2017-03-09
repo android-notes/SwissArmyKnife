@@ -7,9 +7,10 @@ import android.content.Context;
  */
 
 public abstract class SizeConverter {
-    abstract String desc();
+    public abstract String desc();
 
     public  static SizeConverter CONVERTER = new Px2dpSizeConverter();
 
-    abstract Size convert(Context context, int length);
+    public abstract Size convert(Context context, int length);
+
 }

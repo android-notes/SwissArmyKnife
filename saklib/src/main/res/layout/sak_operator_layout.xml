@@ -108,6 +108,61 @@
                 </com.wanjian.sak.view.WheelView>
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="单位"
+                android:textColor="#000"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/unitGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/unitdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Dp(pt)"/>
+
+                    <RadioButton
+                        android:id="@+id/unitpx"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Px"/>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Px"/>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Px"/>
+
+                    <RadioButton
+                        android:id="@+id/unitpx222"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Px"/>
+
+                    <RadioButton
+                        android:id="@+id/unitpx33"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Px"/>
+
+
+                </RadioGroup>
+            </HorizontalScrollView>
 
             <TextView
                 android:id="@+id/close"

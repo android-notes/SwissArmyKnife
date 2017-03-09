@@ -1,9 +1,9 @@
-package com.wanjian.sak.canvasimpl;
+package com.wanjian.sak.layerimpl;
 
 import android.content.Context;
 import android.view.View;
 
-import com.wanjian.sak.canvasimpl.adapter.LayerTxtAdapter;
+import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 
 /**

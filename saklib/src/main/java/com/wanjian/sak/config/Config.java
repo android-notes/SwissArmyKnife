@@ -3,19 +3,17 @@ package com.wanjian.sak.config;
 import android.content.Context;
 
 import com.wanjian.sak.AbsLayer;
-import com.wanjian.sak.Check;
-import com.wanjian.sak.DefaultViewFilter;
-import com.wanjian.sak.AbsLayer;
-import com.wanjian.sak.ViewFilter;
-import com.wanjian.sak.canvasimpl.BitmapWidthHeightLayer;
-import com.wanjian.sak.canvasimpl.BorderLayer;
-import com.wanjian.sak.canvasimpl.ForceBitmapWidthHeightLayer;
-import com.wanjian.sak.canvasimpl.InfoLayer;
-import com.wanjian.sak.canvasimpl.MarginLayer;
-import com.wanjian.sak.canvasimpl.PaddingLayer;
-import com.wanjian.sak.canvasimpl.TextColorLayer;
-import com.wanjian.sak.canvasimpl.TextSizeLayer;
-import com.wanjian.sak.canvasimpl.WidthHeightLayer;
+import com.wanjian.sak.utils.Check;
+import com.wanjian.sak.filter.ViewFilter;
+import com.wanjian.sak.layerimpl.BitmapWidthHeightLayer;
+import com.wanjian.sak.layerimpl.BorderLayer;
+import com.wanjian.sak.layerimpl.ForceBitmapWidthHeightLayer;
+import com.wanjian.sak.layerimpl.InfoLayer;
+import com.wanjian.sak.layerimpl.MarginLayer;
+import com.wanjian.sak.layerimpl.PaddingLayer;
+import com.wanjian.sak.layerimpl.TextColorLayer;
+import com.wanjian.sak.layerimpl.TextSizeLayer;
+import com.wanjian.sak.layerimpl.WidthHeightLayer;
 import com.wanjian.sak.layerview.LayerView;
 import com.wanjian.sak.view.CornerMeasureView;
 import com.wanjian.sak.view.HorizontalMeasureView;
@@ -24,9 +22,7 @@ import com.wanjian.sak.view.TreeView;
 import com.wanjian.sak.view.VerticalMeasureView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by wanjian on 2017/2/20.
@@ -37,6 +33,7 @@ public class Config {
     private Context mContext;
     private List<AbsLayer> mLayers = new ArrayList<>();
     private List<LayerView> mLayerViews = new ArrayList<>();
+    private List<SizeConverter> mSizeConverterList = new ArrayList<>();
 
     private Config(Build build) {
         mContext = build.mContext;
@@ -50,7 +47,7 @@ public class Config {
 //        mLayerViews.addAll(build.mCustomerLayerViews);
 
         ViewFilter.FILTER = build.mViewFilter;
-        SizeConverter.CONVERTER = build.mSizeConverter;
+        mSizeConverterList.addAll(build.mSizeConverterList);
     }
 
 
@@ -65,7 +62,7 @@ public class Config {
 
     public static class Build {
         Context mContext;
-        SizeConverter mSizeConverter;
+        List<SizeConverter> mSizeConverterList = new ArrayList<>();
         List<AbsLayer> mDefaultLayers = new ArrayList<>();
         List<AbsLayer> mCustomerLayers = new ArrayList<>();
         List<LayerView> mDefaultLayerViews = new ArrayList<>();
@@ -93,12 +90,11 @@ public class Config {
             mDefaultLayerViews.add(new TreeView(mContext));
 
             mViewFilter = ViewFilter.FILTER;
-            mSizeConverter = SizeConverter.CONVERTER;
         }
 
-        public Build sizeConverter(SizeConverter sizeConverter) {
+        public Build addSizeConverter(SizeConverter sizeConverter) {
             Check.isNull(sizeConverter, "size");
-            mSizeConverter = sizeConverter;
+            mSizeConverterList.add(sizeConverter);
             return this;
         }
 
