@@ -7,6 +7,8 @@ import com.wanjian.sak.converter.OriginSizeConverter;
 import com.wanjian.sak.converter.Px2SpSizeConverter;
 import com.wanjian.sak.converter.Px2dpSizeConverter;
 import com.wanjian.sak.converter.SizeConverter;
+import com.wanjian.sak.layer.PageDrawPerformanceLayer;
+import com.wanjian.sak.layer.ViewDrawPerformanceLayer;
 import com.wanjian.sak.utils.Check;
 import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layer.BitmapWidthHeightLayer;
@@ -92,6 +94,10 @@ public class Config {
             mDefaultLayerViews.add(new CornerMeasureView(mContext));
             mDefaultLayerViews.add(new TakeColorView(mContext));
             mDefaultLayerViews.add(new TreeView(mContext));
+
+            mDefaultLayers.add(new ViewDrawPerformanceLayer(mContext));
+            mDefaultLayers.add(new PageDrawPerformanceLayer(mContext));
+
 
             mSizeConverterList.add(new Px2dpSizeConverter());
             mSizeConverterList.add(new OriginSizeConverter());
