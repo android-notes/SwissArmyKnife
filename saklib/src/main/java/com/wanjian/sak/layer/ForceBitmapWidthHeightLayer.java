@@ -43,7 +43,7 @@ public class ForceBitmapWidthHeightLayer extends LayerTxtAdapter {
                 field.setAccessible(true);
                 try {
                     Bitmap bitmap = ((Bitmap) field.get(view));
-                    builder.append(convertSize(bitmap.getWidth())).append("-").append(convertSize(bitmap.getHeight())).append(" ");
+                    builder.append(convertSize(bitmap.getWidth()).getLength()).append("-").append(convertSize(bitmap.getHeight()).getLength()).append(" ");
                 } catch (Exception e) {
                 }
                 field.setAccessible(false);

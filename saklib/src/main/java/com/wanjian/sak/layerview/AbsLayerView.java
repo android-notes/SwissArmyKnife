@@ -17,10 +17,6 @@ public abstract class AbsLayerView extends View {
 
     public abstract String description();
 
-    /**
-     * @param enable
-     * @hide
-     */
     public void enable(boolean enable) {
         this.mEnable = enable;
     }

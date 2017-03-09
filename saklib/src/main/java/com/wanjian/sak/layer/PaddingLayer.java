@@ -16,7 +16,7 @@ import com.wanjian.sak.layer.adapter.LayerAdapter;
  */
 
 public class PaddingLayer extends LayerAdapter {
-
+    private Rect mRect = new Rect();
     public PaddingLayer(Context context) {
         super(context);
     }
@@ -39,40 +39,40 @@ public class PaddingLayer extends LayerAdapter {
         canvas.drawRect(locationSize[0], locationSize[1] + h - b, locationSize[0] + w, locationSize[1] + h, paint);
 
 
-        Rect rect = new Rect();
+
         if (l != 0) {
             String txt = "PL" + convertSize(l).getLength();
-            paint.getTextBounds(txt, 0, txt.length(), rect);
+            paint.getTextBounds(txt, 0, txt.length(), mRect);
             paint.setColor(0x88ffffff);
             paint.setStyle(Paint.Style.FILL);
-            canvas.drawRect(locationSize[0], locationSize[1] + h / 2, locationSize[0] + rect.width(), locationSize[1] + h / 2 + rect.height(), paint);
+            canvas.drawRect(locationSize[0], locationSize[1] + h / 2, locationSize[0] + mRect.width(), locationSize[1] + h / 2 + mRect.height(), paint);
             paint.setColor(Color.BLACK);
-            canvas.drawText(txt, locationSize[0], locationSize[1] + h / 2 + rect.height(), paint);
+            canvas.drawText(txt, locationSize[0], locationSize[1] + h / 2 + mRect.height(), paint);
         }
         if (t != 0) {
             String txt = "PT" + convertSize(t).getLength();
-            paint.getTextBounds(txt, 0, txt.length(), rect);
+            paint.getTextBounds(txt, 0, txt.length(), mRect);
             paint.setColor(0x88ffffff);
             paint.setStyle(Paint.Style.FILL);
-            canvas.drawRect(locationSize[0] + w / 2, locationSize[1], locationSize[0] + w / 2 + rect.width(), locationSize[1] + rect.height(), paint);
+            canvas.drawRect(locationSize[0] + w / 2, locationSize[1], locationSize[0] + w / 2 + mRect.width(), locationSize[1] + mRect.height(), paint);
             paint.setColor(Color.BLACK);
-            canvas.drawText(txt, locationSize[0] + w / 2, locationSize[1] + rect.height(), paint);
+            canvas.drawText(txt, locationSize[0] + w / 2, locationSize[1] + mRect.height(), paint);
         }
         if (r != 0) {
             String txt = "PR" + convertSize(r).getLength();
-            paint.getTextBounds(txt, 0, txt.length(), rect);
+            paint.getTextBounds(txt, 0, txt.length(), mRect);
             paint.setColor(0x88ffffff);
             paint.setStyle(Paint.Style.FILL);
-            canvas.drawRect(locationSize[0] + w - rect.width(), locationSize[1] + h / 2, locationSize[0] + w, locationSize[1] + h / 2 + rect.height(), paint);
+            canvas.drawRect(locationSize[0] + w - mRect.width(), locationSize[1] + h / 2, locationSize[0] + w, locationSize[1] + h / 2 + mRect.height(), paint);
             paint.setColor(Color.BLACK);
-            canvas.drawText(txt, locationSize[0] + w - rect.width(), locationSize[1] + h / 2 + rect.height(), paint);
+            canvas.drawText(txt, locationSize[0] + w - mRect.width(), locationSize[1] + h / 2 + mRect.height(), paint);
         }
         if (b != 0) {
             String txt = "PB" + convertSize(b).getLength();
-            paint.getTextBounds(txt, 0, txt.length(), rect);
+            paint.getTextBounds(txt, 0, txt.length(), mRect);
             paint.setColor(0x88ffffff);
             paint.setStyle(Paint.Style.FILL);
-            canvas.drawRect(locationSize[0] + w / 2, locationSize[1] + h - rect.height(), locationSize[0] + w / 2 + rect.width(), locationSize[1] + h, paint);
+            canvas.drawRect(locationSize[0] + w / 2, locationSize[1] + h - mRect.height(), locationSize[0] + w / 2 + mRect.width(), locationSize[1] + h, paint);
             paint.setColor(Color.BLACK);
             canvas.drawText(txt, locationSize[0] + w / 2, locationSize[1] + h, paint);
         }

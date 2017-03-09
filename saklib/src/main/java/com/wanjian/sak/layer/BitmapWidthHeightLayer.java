@@ -28,8 +28,7 @@ public class BitmapWidthHeightLayer extends LayerTxtAdapter {
             if (drawable instanceof BitmapDrawable) {
                 Bitmap bmp = ((BitmapDrawable) drawable).getBitmap();
                 if (bmp != null && !bmp.isRecycled()) {
-                    String txt = convertSize(bmp.getWidth()) + ":" + convertSize(bmp.getHeight());
-                    return txt;
+                    return convertSize(bmp.getWidth()).getLength() + ":" + convertSize(bmp.getHeight()).getLength();
                 }
             }
         }

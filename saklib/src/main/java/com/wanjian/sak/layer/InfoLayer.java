@@ -23,7 +23,7 @@ public class InfoLayer extends LayerTxtAdapter {
         Object obj = view.getTag(SAK.INFO_KEY);
         String info;
         if (obj == null) {
-            info = "null";
+            info = "";
         } else {
             info = obj.toString();
         }

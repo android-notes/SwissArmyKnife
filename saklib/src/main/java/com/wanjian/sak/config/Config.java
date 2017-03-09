@@ -9,6 +9,7 @@ import com.wanjian.sak.converter.Px2dpSizeConverter;
 import com.wanjian.sak.converter.SizeConverter;
 import com.wanjian.sak.layer.PageDrawPerformanceLayer;
 import com.wanjian.sak.layer.ViewDrawPerformanceLayer;
+import com.wanjian.sak.layerview.AbsLayerView;
 import com.wanjian.sak.utils.Check;
 import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layer.BitmapWidthHeightLayer;
@@ -37,7 +38,7 @@ import java.util.List;
 public class Config {
 
     private List<AbsLayer> mLayers = new ArrayList<>();
-    private List<DragLayerView> mLayerViews = new ArrayList<>();
+    private List<AbsLayerView> mLayerViews = new ArrayList<>();
     private List<SizeConverter> mSizeConverterList = new ArrayList<>();
 
     private Config(Build build) {
@@ -58,7 +59,7 @@ public class Config {
         return mLayers;
     }
 
-    public List<DragLayerView> getLayerViews() {
+    public List<AbsLayerView> getLayerViews() {
         return mLayerViews;
     }
 
@@ -71,8 +72,8 @@ public class Config {
         List<SizeConverter> mSizeConverterList = new ArrayList<>();
         List<AbsLayer> mDefaultLayers = new ArrayList<>();
         List<AbsLayer> mCustomerLayers = new ArrayList<>();
-        List<DragLayerView> mDefaultLayerViews = new ArrayList<>();
-        List<DragLayerView> mCustomerLayerViews = new ArrayList<>();
+        List<AbsLayerView> mDefaultLayerViews = new ArrayList<>();
+        List<AbsLayerView> mCustomerLayerViews = new ArrayList<>();
         ViewFilter mViewFilter;
 
         public Build(Context context) {
@@ -118,7 +119,7 @@ public class Config {
             return this;
         }
 
-        public Build addLayerView(DragLayerView layerView) {
+        public Build addLayerView(AbsLayerView layerView) {
             Check.isNull(layerView, "layerView");
             mDefaultLayerViews.clear();
             mCustomerLayerViews.add(layerView);

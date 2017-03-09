@@ -6,6 +6,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.layerview.AbsLayerView;
 import com.wanjian.sak.layerview.DragLayerView;
 
 /**
@@ -14,9 +15,9 @@ import com.wanjian.sak.layerview.DragLayerView;
 
 public class ItemLayerViewLayout {
 
-    private DragLayerView mLayer;
+    private AbsLayerView mLayer;
 
-    public ItemLayerViewLayout(DragLayerView layer) {
+    public ItemLayerViewLayout(AbsLayerView layer) {
         mLayer = layer;
     }
 
@@ -28,7 +29,7 @@ public class ItemLayerViewLayout {
         return R.layout.sak_layer_item;
     }
 
-    public DragLayerView getLayerView() {
+    public AbsLayerView getLayerView() {
         return mLayer;
     }
 

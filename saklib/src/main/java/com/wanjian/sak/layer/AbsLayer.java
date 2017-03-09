@@ -54,7 +54,7 @@ public abstract class AbsLayer {
     }
 
     /**
-     * @param view
+     * @param view view
      * @return x, y, width,height
      */
     protected int[] getLocationAndSize(View view) {

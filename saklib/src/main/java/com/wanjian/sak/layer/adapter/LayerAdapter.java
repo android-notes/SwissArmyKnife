@@ -42,11 +42,11 @@ public abstract class LayerAdapter extends AbsLayer {
             return;
         }
         mCurLayer++;
-        if (mCurLayer >= mStartLayer && mCurLayer <= mEndLayer && !(view instanceof SAKCoverView)) {
+        if (mCurLayer >= mStartLayer && mCurLayer <= mEndLayer) {
             drawLayer(canvas, paint, view);
         }
 
-        if (view instanceof ViewGroup && !(view instanceof SAKCoverView)) {
+        if (view instanceof ViewGroup) {
             ViewGroup vg = ((ViewGroup) view);
             for (int i = 0; i < vg.getChildCount(); i++) {
                 View child = vg.getChildAt(i);

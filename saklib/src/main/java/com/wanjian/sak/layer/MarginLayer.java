@@ -18,6 +18,7 @@ import com.wanjian.sak.layer.adapter.LayerAdapter;
 
 public class MarginLayer extends LayerAdapter {
 
+    private Rect mRect = new Rect();
     public MarginLayer(Context context) {
         super(context);
     }
@@ -43,44 +44,44 @@ public class MarginLayer extends LayerAdapter {
             canvas.drawRect(locationSize[0], t, locationSize[0] + w, locationSize[1], paint);
             canvas.drawRect(locationSize[0], locationSize[1] + h, locationSize[0] + w, b, paint);
 
-            Rect rect = new Rect();
+
             if (marginLayoutParams.leftMargin != 0) {
                 String txt = "ML" + convertSize(marginLayoutParams.leftMargin).getLength();
-                paint.getTextBounds(txt, 0, txt.length(), rect);
+                paint.getTextBounds(txt, 0, txt.length(), mRect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(l, locationSize[1], l + rect.width(), locationSize[1] + rect.height(), paint);
+                canvas.drawRect(l, locationSize[1], l + mRect.width(), locationSize[1] + mRect.height(), paint);
                 paint.setColor(Color.BLACK);
-                canvas.drawText(txt, l, locationSize[1] + rect.height(), paint);
+                canvas.drawText(txt, l, locationSize[1] + mRect.height(), paint);
             }
             if (marginLayoutParams.topMargin != 0) {
                 String txt = "MT" + convertSize(marginLayoutParams.topMargin).getLength();
-                paint.getTextBounds(txt, 0, txt.length(), rect);
+                paint.getTextBounds(txt, 0, txt.length(), mRect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(locationSize[0], t, locationSize[0] + rect.width(), t + rect.height(), paint);
+                canvas.drawRect(locationSize[0], t, locationSize[0] + mRect.width(), t + mRect.height(), paint);
                 paint.setColor(Color.BLACK);
-                canvas.drawText(txt, locationSize[0], locationSize[1] - marginLayoutParams.topMargin + rect.height(), paint);
+                canvas.drawText(txt, locationSize[0], locationSize[1] - marginLayoutParams.topMargin + mRect.height(), paint);
             }
 
             if (marginLayoutParams.rightMargin != 0) {
                 String txt = "MR" + convertSize(marginLayoutParams.rightMargin).getLength();
-                paint.getTextBounds(txt, 0, txt.length(), rect);
+                paint.getTextBounds(txt, 0, txt.length(), mRect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(locationSize[0] + w, locationSize[1], locationSize[0] + w + rect.width(), locationSize[1] + rect.height(), paint);
+                canvas.drawRect(locationSize[0] + w, locationSize[1], locationSize[0] + w + mRect.width(), locationSize[1] + mRect.height(), paint);
                 paint.setColor(Color.BLACK);
-                canvas.drawText(txt, locationSize[0] + w, locationSize[1] + rect.height(), paint);
+                canvas.drawText(txt, locationSize[0] + w, locationSize[1] + mRect.height(), paint);
             }
 
             if (marginLayoutParams.bottomMargin != 0) {
                 String txt = "MB" + convertSize(marginLayoutParams.bottomMargin).getLength();
-                paint.getTextBounds(txt, 0, txt.length(), rect);
+                paint.getTextBounds(txt, 0, txt.length(), mRect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(locationSize[0], locationSize[1] + h, locationSize[0] + rect.width(), locationSize[1] + h + rect.height(), paint);
+                canvas.drawRect(locationSize[0], locationSize[1] + h, locationSize[0] + mRect.width(), locationSize[1] + h + mRect.height(), paint);
                 paint.setColor(Color.BLACK);
-                canvas.drawText(txt, locationSize[0], locationSize[1] + h + rect.height(), paint);
+                canvas.drawText(txt, locationSize[0], locationSize[1] + h + mRect.height(), paint);
             }
 
 

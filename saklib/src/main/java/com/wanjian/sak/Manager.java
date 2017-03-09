@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.wanjian.sak.config.Config;
 import com.wanjian.sak.converter.SizeConverter;
 import com.wanjian.sak.layer.AbsLayer;
+import com.wanjian.sak.layerview.AbsLayerView;
 import com.wanjian.sak.layerview.DragLayerView;
 import com.wanjian.sak.mapper.ItemLayerLayout;
 import com.wanjian.sak.mapper.ItemLayerViewLayout;
@@ -41,8 +42,8 @@ class Manager {
             mCoverView.addItem(new ItemLayerLayout(layer));
         }
 
-        List<DragLayerView> layerViews = config.getLayerViews();
-        for (DragLayerView layerView : layerViews) {
+        List<AbsLayerView> layerViews = config.getLayerViews();
+        for (AbsLayerView layerView : layerViews) {
             mCoverView.addItem(new ItemLayerViewLayout(layerView));
         }
         for (SizeConverter converter : config.getSizeConverters()) {
