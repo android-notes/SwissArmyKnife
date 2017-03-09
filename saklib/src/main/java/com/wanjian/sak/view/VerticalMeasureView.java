@@ -3,6 +3,7 @@ package com.wanjian.sak.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 
 /**
  * Created by wanjian on 2016/11/10.
@@ -19,6 +20,12 @@ public class VerticalMeasureView extends HorizontalMeasureView {
         return "竖直直尺";
     }
 
+    @Override
+    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
+        params.width = dp2px(60);
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        return params;
+    }
 
 
     @Override

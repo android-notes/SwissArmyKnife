@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
 
 import com.wanjian.sak.layerview.LayerView;
 
@@ -90,13 +92,15 @@ public class CornerMeasureView extends LayerView {
     }
 
 
-    private int dp2px(int dip) {
-        float density = getResources().getDisplayMetrics().density;
-        return (int) (dip * density + 0.5);
+    @Override
+    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
+        params.width = dp2px(150);
+        params.height = dp2px(120);
+        return params;
     }
 
     @Override
-    public void onChange() {
+    public void onChange(MotionEvent motionEvent) {
 
     }
 }

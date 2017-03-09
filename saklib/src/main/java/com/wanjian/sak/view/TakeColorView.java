@@ -5,15 +5,18 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerview.LayerView;
 
 /**
  * Created by wanjian on 2016/11/10.
  */
 
-public class TakeColorView extends LayerView implements DragViewContainer.OnMoveListener {
+public class TakeColorView extends LayerView {
     public TakeColorView(Context context) {
         super(context);
         init();
@@ -24,6 +27,16 @@ public class TakeColorView extends LayerView implements DragViewContainer.OnMove
         return "取色器";
     }
 
+    @Override
+    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
+        Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
+        textH = fontMetrics.bottom - fontMetrics.top;
+        textW = (int) mPaint.measureText("#ffffffff");
+
+        params.width = textW * 3;
+        params.height = textH * 6;
+        return params;
+    }
 
 
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -42,29 +55,9 @@ public class TakeColorView extends LayerView implements DragViewContainer.OnMove
         mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setTextSize(dp2px(12));
+        setBackgroundResource(R.drawable.sak_take_color_bag);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-        Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
-        textH = fontMetrics.bottom - fontMetrics.top;
-        textW = (int) mPaint.measureText("#ffffffff");
-
-
-//        String txt = "#ffffffff ";
-//        Rect rect = new Rect();
-//        mPaint.getTextBounds(txt, 0, txt.length(), rect);
-//        textH = rect.height();
-//        textW = rect.width();
-
-        setMeasuredDimension(textW * 3, textH * 6);
-    }
-
-    protected int dp2px(int dip) {
-        float density = getResources().getDisplayMetrics().density;
-        return (int) (dip * density + 0.5);
-    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -107,7 +100,6 @@ public class TakeColorView extends LayerView implements DragViewContainer.OnMove
 
     }
 
-    @Override
     public void down(float x, float y) {
         ltColor = null;
         rtColor = null;
@@ -115,12 +107,6 @@ public class TakeColorView extends LayerView implements DragViewContainer.OnMove
         rbColor = null;
     }
 
-    @Override
-    public void move(float x, float y) {
-
-    }
-
-    @Override
     public void up(float x, float y) {
 
         setVisibility(INVISIBLE);
@@ -169,13 +155,16 @@ public class TakeColorView extends LayerView implements DragViewContainer.OnMove
         return getRootView();
     }
 
-    @Override
-    public void cancel(float x, float y) {
-
-    }
 
     @Override
-    public void onChange() {
-
+    public void onChange(MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                down(motionEvent.getX(), motionEvent.getY());
+                break;
+            case MotionEvent.ACTION_UP:
+                up(motionEvent.getX(), motionEvent.getY());
+                break;
+        }
     }
 }

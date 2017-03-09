@@ -46,10 +46,7 @@ public class TreeView extends LayerView {
         txtH = rect.height() * 2;
     }
 
-    private int dp2px(int dip) {
-        float density = getContext().getResources().getDisplayMetrics().density;
-        return (int) (dip * density + 0.5);
-    }
+
 
     //    private ViewGroup mViewGroup;
     private int mStartLayer;
@@ -255,7 +252,13 @@ public class TreeView extends LayerView {
     }
 
     @Override
-    public void onChange() {
+    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
+        return params;
+    }
+
+
+    @Override
+    public void onChange(MotionEvent motionEvent) {
 
     }
 }

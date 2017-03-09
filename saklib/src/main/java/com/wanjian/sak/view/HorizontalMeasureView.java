@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.wanjian.sak.layerview.LayerView;
 
@@ -25,8 +28,6 @@ public class HorizontalMeasureView extends LayerView {
     }
 
 
-
-    protected final String TAG = "HorizontalMeasureView";
     protected Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     protected int oneDP;
@@ -42,6 +43,7 @@ public class HorizontalMeasureView extends LayerView {
 //        mPaint.setTextSize(dp2px(12));
         maxHeight = dp2px(10);
         minHeight = dp2px(5);
+
     }
 
 
@@ -51,7 +53,6 @@ public class HorizontalMeasureView extends LayerView {
 
         int h = getHeight();
         int w = getWidth();
-//        canvas.clipRect(0,0,w,h);
         canvas.translate(0, maxHeight);
         canvas.drawLine(0, 0, w, 0, mPaint);
 
@@ -72,18 +73,17 @@ public class HorizontalMeasureView extends LayerView {
 
     }
 
-    protected int px2dp(float pxValue) {
-        final float scale = getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
-    }
-
-    protected int dp2px(int dip) {
-        float density = getResources().getDisplayMetrics().density;
-        return (int) (dip * density + 0.5);
-    }
 
     @Override
-    public void onChange() {
+    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = dp2px(60);
+        return params;
+    }
+
+
+    @Override
+    public void onChange(MotionEvent motionEvent) {
 
     }
 }

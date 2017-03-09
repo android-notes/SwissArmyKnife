@@ -2,7 +2,9 @@ package com.wanjian.sak.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -94,8 +96,8 @@ public class SAKCoverView extends RelativeLayout {
         int res = itemLayout.getLayoutRes();
         try {
             View item = LayoutInflater.from(getContext()).inflate(res, null);
-            itemLayout.onCreate(item);
             operatorView.addItem(item);
+            itemLayout.onCreate(item);
         } catch (Resources.NotFoundException e) {
             throw e;
         }
@@ -103,17 +105,19 @@ public class SAKCoverView extends RelativeLayout {
     }
 
     public void addItem(ItemLayerViewLayout itemLayout) {
-        LayerView view = itemLayout.getLayerView();
-
-        itemLayout.onCreate(view);
-
+        LayerView layerView = itemLayout.getLayerView();
+        View view = LayoutInflater.from(getContext()).inflate(itemLayout.getLayoutRes(), null);
+        layerView.setVisibility(GONE);
         operatorView.addItem(view);
+        layerView.setLayoutParams(layerView.getLayoutParams(generateDefaultLayoutParams()));
+        addView(layerView, 1);
+        itemLayout.onCreate(view);
     }
 
     public void addItem(UnitLayout unitLayout) {
         View view = LayoutInflater.from(getContext()).inflate(unitLayout.getLayoutRes(), mUnitGroup, false);
-        unitLayout.onCreate(view);
         mUnitGroup.addView(view);
+        unitLayout.onCreate(view);
     }
 
     public void attach(Activity activity) {
@@ -143,7 +147,7 @@ public class SAKCoverView extends RelativeLayout {
         ((WheelView) operatorView.findViewById(R.id.to)).setOnChangeListener(endLayerChangeListener);
     }
 
-    public void setOnCloseListener(final OnClickListener listener){
+    public void setOnCloseListener(final OnClickListener listener) {
         operatorView.findViewById(R.id.close).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,6 +157,7 @@ public class SAKCoverView extends RelativeLayout {
             }
         });
     }
+
     private void initView(final OperatorView operatorView) {
 
 //        from = (WheelView) operatorView.findViewById(R.id.from);

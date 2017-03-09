@@ -43,8 +43,8 @@ public class Config {
         mLayers.addAll(build.mCustomerLayers);
 
 
-//        mLayerViews.addAll(build.mDefaultLayerViews);
-//        mLayerViews.addAll(build.mCustomerLayerViews);
+        mLayerViews.addAll(build.mDefaultLayerViews);
+        mLayerViews.addAll(build.mCustomerLayerViews);
 
         ViewFilter.FILTER = build.mViewFilter;
         mSizeConverterList.addAll(build.mSizeConverterList);

@@ -42,7 +42,9 @@ public abstract class AbsLayer {
         if (!enable) {
             return;
         }
+        canvas.save();
         onDraw(canvas, mPaint, view, startLayer, endLayer);
+        canvas.restore();
     }
 
     protected abstract void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer);
