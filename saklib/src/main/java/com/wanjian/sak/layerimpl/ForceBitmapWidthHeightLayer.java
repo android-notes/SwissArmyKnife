@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 import java.lang.reflect.Field;
@@ -55,6 +56,6 @@ public class ForceBitmapWidthHeightLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return "强制图片宽高";
+        return mContext.getString(R.string.sak_force_image_w_h);
     }
 }

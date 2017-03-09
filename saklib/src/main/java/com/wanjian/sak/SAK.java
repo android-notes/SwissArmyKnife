@@ -20,12 +20,12 @@ public class SAK {
     }
 
     public static synchronized void init(Application application) {
-        Check.isNull(application, "application can not be null !");
+        Check.isNull(application, "application");
         init(application, null);
     }
 
     public static synchronized void init(Application application, Config config) {
-        Check.isNull(application, "application can not be null !");
+        Check.isNull(application, "application");
         if (sManager == null) {
             if (config == null) {
                 config = new Config.Build(application).build();
@@ -53,20 +53,22 @@ public class SAK {
 
 
     public static void attach(Activity activity) {
-        Check.isNull(sManager, "init first!");
-        Check.isNull(activity, "activity can not be null !");
+        if (sManager == null) {
+            throw new RuntimeException("init first!");
+        }
+        Check.isNull(activity, "activity");
         sManager.attach(activity);
     }
 
     public static void detch(Activity activity) {
         Check.isNull(sManager, "init first!");
-        Check.isNull(activity, "activity can not be null !");
+        Check.isNull(activity, "activity");
         sManager.detach(activity);
     }
 
-    public static void unInstall(Activity activity) {
-        Check.isNull(activity, "activity can not be null !");
-        detch(activity);
-    }
+//    public static void unInstall(Activity activity) {
+//        Check.isNull(activity, "activity");
+//        detch(activity);
+//    }
 
 }

@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerimpl.adapter.LayerAdapter;
 
 
@@ -88,6 +89,6 @@ public class MarginLayer extends LayerAdapter {
 
     @Override
     public String description() {
-        return "外边距";
+        return mContext.getString(R.string.sak_margin);
     }
 }

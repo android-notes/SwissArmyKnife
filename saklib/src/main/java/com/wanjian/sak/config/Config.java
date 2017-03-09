@@ -96,13 +96,13 @@ public class Config {
         }
 
         public Build addSizeConverter(SizeConverter sizeConverter) {
-            Check.isNull(sizeConverter, "size");
+            Check.isNull(sizeConverter, "sizeConverter");
             mSizeConverterList.add(sizeConverter);
             return this;
         }
 
         public Build addLayer(AbsLayer layer) {
-            Check.isNull(layer, "layer");
+            Check.isNull(layer, "absLayer");
             mDefaultLayers.clear();
             mCustomerLayers.add(layer);
             return this;

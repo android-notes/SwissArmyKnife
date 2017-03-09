@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 
@@ -29,6 +30,6 @@ public class TextSizeLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return "字体大小";
+        return mContext.getString(R.string.sak_txt_size);
     }
 }

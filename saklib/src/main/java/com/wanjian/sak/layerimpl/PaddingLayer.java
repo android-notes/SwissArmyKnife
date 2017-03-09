@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerimpl.adapter.LayerAdapter;
 
 
@@ -79,6 +80,6 @@ public class PaddingLayer extends LayerAdapter {
 
     @Override
     public String description() {
-        return "内边距";
+        return mContext.getString(R.string.sak_padding);
     }
 }

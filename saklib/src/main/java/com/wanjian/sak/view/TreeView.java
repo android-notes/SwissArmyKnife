@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wanjian.sak.CanvasManager;
+import com.wanjian.sak.R;
 import com.wanjian.sak.SAK;
 import com.wanjian.sak.config.SizeConverter;
 import com.wanjian.sak.filter.ViewFilter;
@@ -37,7 +38,7 @@ public class TreeView extends LayerView {
 
     @Override
     public String description() {
-        return "布局树";
+        return getContext().getString(R.string.sak_layout_tree);
     }
 
     private int convertSize(int leng) {

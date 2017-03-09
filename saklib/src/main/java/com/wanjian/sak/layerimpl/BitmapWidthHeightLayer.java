@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 
@@ -38,6 +39,6 @@ public class BitmapWidthHeightLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return "图片宽高";
+        return mContext.getString(R.string.sak_image_w_h);
     }
 }

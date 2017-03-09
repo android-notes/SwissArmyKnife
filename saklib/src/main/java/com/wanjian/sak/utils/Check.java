@@ -8,7 +8,7 @@ public class Check {
 
     public static void isNull(Object obj, String what) {
         if (obj == null) {
-            throw new NullPointerException(what + " can not be null !");
+            throw new NullPointerException(what + " cannot be null !");
         }
     }
 

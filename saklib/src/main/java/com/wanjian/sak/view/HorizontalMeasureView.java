@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerview.LayerView;
 
 
@@ -24,7 +25,7 @@ public class HorizontalMeasureView extends LayerView {
 
     @Override
     public String description() {
-        return "水平直尺";
+        return getContext().getString(R.string.sak_horizontal_measure);
     }
 
 

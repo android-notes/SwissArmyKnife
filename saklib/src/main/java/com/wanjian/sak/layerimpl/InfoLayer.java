@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.wanjian.sak.CanvasManager;
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 
@@ -33,6 +34,6 @@ public class InfoLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return "自定义信息";
+        return mContext.getString(R.string.sak_personal_info);
     }
 }

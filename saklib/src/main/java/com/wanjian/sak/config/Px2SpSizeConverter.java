@@ -9,7 +9,7 @@ import android.content.Context;
 public class Px2SpSizeConverter extends SizeConverter {
     @Override
     public String desc() {
-        return "Sp(字体)";
+        return "Sp";
     }
 
     @Override

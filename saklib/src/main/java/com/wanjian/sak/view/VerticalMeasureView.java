@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
+import com.wanjian.sak.R;
+
 /**
  * Created by wanjian on 2016/11/10.
  */
@@ -17,7 +19,7 @@ public class VerticalMeasureView extends HorizontalMeasureView {
 
     @Override
     public String description() {
-        return "竖直直尺";
+        return getContext().getString(R.string.sak_vertical_measure);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.wanjian.sak.layerimpl;
 import android.content.Context;
 import android.view.View;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 
@@ -28,6 +29,6 @@ public class WidthHeightLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return "宽高";
+        return mContext.getString(R.string.sak_width_height);
     }
 }

@@ -24,7 +24,7 @@ public class TakeColorView extends LayerView {
 
     @Override
     public String description() {
-        return "取色器";
+        return getContext().getString(R.string.sak_take_color);
     }
 
     @Override

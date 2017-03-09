@@ -9,6 +9,7 @@ import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerview.LayerView;
 
 /**
@@ -23,7 +24,7 @@ public class CornerMeasureView extends LayerView {
 
     @Override
     public String description() {
-        return "圆角尺";
+        return getContext().getString(R.string.sak_corner_measure);
     }
 
 

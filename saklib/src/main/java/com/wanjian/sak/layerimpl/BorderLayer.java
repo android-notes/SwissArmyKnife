@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerimpl.adapter.LayerAdapter;
 import com.wanjian.sak.utils.Color;
 
@@ -74,6 +75,6 @@ public class BorderLayer extends LayerAdapter {
 
     @Override
     public String description() {
-        return "边框";
+        return mContext.getString(R.string.sak_border);
     }
 }

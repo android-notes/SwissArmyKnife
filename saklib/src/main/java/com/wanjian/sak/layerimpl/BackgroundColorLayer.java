@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import com.wanjian.sak.R;
 import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -37,6 +38,6 @@ public class BackgroundColorLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return "背景色";
+        return mContext.getString(R.string.sak_bag_color);
     }
 }
