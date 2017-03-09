@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Build;
 
 import com.wanjian.sak.config.Config;
+import com.wanjian.sak.mess.LifecycleCallbacksAdapter;
 import com.wanjian.sak.utils.Check;
 
 /**

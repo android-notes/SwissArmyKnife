@@ -11,13 +11,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.wanjian.sak.ItemLayerLayout;
-import com.wanjian.sak.ItemLayerViewLayout;
+import com.wanjian.sak.mapper.ItemLayerLayout;
+import com.wanjian.sak.mapper.ItemLayerViewLayout;
 import com.wanjian.sak.R;
-import com.wanjian.sak.UnitLayout;
-import com.wanjian.sak.layerview.LayerView;
+import com.wanjian.sak.mapper.UnitLayout;
+import com.wanjian.sak.layerview.DragLayerView;
 
 import static android.os.Build.VERSION.SDK_INT;
 
@@ -105,7 +104,7 @@ public class SAKCoverView extends RelativeLayout {
     }
 
     public void addItem(ItemLayerViewLayout itemLayout) {
-        LayerView layerView = itemLayout.getLayerView();
+        DragLayerView layerView = itemLayout.getLayerView();
         View view = LayoutInflater.from(getContext()).inflate(itemLayout.getLayoutRes(), null);
         layerView.setVisibility(GONE);
         mOperatorView.addItem(view);

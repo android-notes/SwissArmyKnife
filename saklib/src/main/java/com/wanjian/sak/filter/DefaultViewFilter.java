@@ -11,19 +11,9 @@ import com.wanjian.sak.filter.ViewFilter;
 public class DefaultViewFilter extends ViewFilter {
     @Override
     public boolean apply(View view) {
-        return true;
+
+        return view.getVisibility() == View.VISIBLE;
     }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass() == getClass();
-    }
 }

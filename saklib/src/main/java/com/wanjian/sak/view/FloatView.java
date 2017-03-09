@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -13,7 +14,7 @@ import android.widget.ImageView;
  * Created by wanjian on 2016/10/23.
  */
 
-public class FloatView extends ImageView {
+public class FloatView extends View {
     public FloatView(Context context) {
         super(context);
         init();
@@ -39,7 +40,7 @@ public class FloatView extends ImageView {
             downY = event.getRawY();
         }
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            int s = dp2px(10);
+            int s = dp2px(5);
             if (Math.abs(event.getRawX() - downX) <= s && Math.abs(event.getRawY() - downY) <= s) {
                 performClick();
             }
@@ -89,8 +90,5 @@ public class FloatView extends ImageView {
         return dm.heightPixels;
     }
 
-    private int dp2px(Context context, int dip) {
-        float density = context.getResources().getDisplayMetrics().density;
-        return (int) (dip * density + 0.5);
-    }
+
 }

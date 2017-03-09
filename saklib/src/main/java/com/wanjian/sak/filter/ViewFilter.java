@@ -20,4 +20,16 @@ public abstract class ViewFilter {
 
     public abstract boolean apply(View view);
 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        return obj.getClass() == getClass();
+    }
 }

@@ -1,18 +1,18 @@
 package com.wanjian.sak;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.wanjian.sak.config.Config;
-import com.wanjian.sak.config.SizeConverter;
-import com.wanjian.sak.layerview.LayerView;
+import com.wanjian.sak.converter.SizeConverter;
+import com.wanjian.sak.layer.AbsLayer;
+import com.wanjian.sak.layerview.DragLayerView;
+import com.wanjian.sak.mapper.ItemLayerLayout;
+import com.wanjian.sak.mapper.ItemLayerViewLayout;
+import com.wanjian.sak.mapper.UnitLayout;
 import com.wanjian.sak.view.DrawingBoardView;
 import com.wanjian.sak.view.SAKCoverView;
 import com.wanjian.sak.view.WheelView;
@@ -23,7 +23,7 @@ import java.util.List;
  * Created by wanjian on 2017/3/7.
  */
 
-public class Manager {
+class Manager {
 
     private Config mConfig;
 
@@ -41,8 +41,8 @@ public class Manager {
             mCoverView.addItem(new ItemLayerLayout(layer));
         }
 
-        List<LayerView> layerViews = config.getLayerViews();
-        for (LayerView layerView : layerViews) {
+        List<DragLayerView> layerViews = config.getLayerViews();
+        for (DragLayerView layerView : layerViews) {
             mCoverView.addItem(new ItemLayerViewLayout(layerView));
         }
         for (SizeConverter converter : config.getSizeConverters()) {

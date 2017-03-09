@@ -136,10 +136,6 @@ public class WheelView extends ListView {
         canvas.drawLine(0, h / 3.0f * 2, w, h / 3.0f * 2, mPaint);
     }
 
-    public void setNum(int numValue) {
-        setSelection(numValue);
-    }
-
     @Override
     public void setSelection(int position) {
         try {
@@ -159,14 +155,5 @@ public class WheelView extends ListView {
         void onChange(int num);
     }
 
-    public int getNum() {
-        View child = getChildAt(1);
-        if (child instanceof TextView) {
-            try {
-                return Integer.parseInt(((TextView) child).getText().toString());
-            } catch (Exception e) {
-            }
-        }
-        return 0;
-    }
+
 }
