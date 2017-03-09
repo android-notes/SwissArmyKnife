@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Size {
 
-    private int length;
+    private float length;
     private String unit;
 
     private Size() {
@@ -21,20 +21,22 @@ public class Size {
         this.unit = unit;
     }
 
-    public int getLength() {
+    public float getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public Size setLength(float length) {
         this.length = length;
+        return this;
     }
 
     public String getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public Size setUnit(String unit) {
         this.unit = unit;
+        return this;
     }
 
 

@@ -13,7 +13,7 @@ public class Px2dpSizeConverter extends SizeConverter {
     }
 
     @Override
-    public Size convert(Context context, int length) {
+    public Size convert(Context context, float length) {
         Size size = Size.obtain();
 
         size.setLength(px2dp(context, length));

@@ -21,8 +21,7 @@ public class TextSizeLayer extends LayerTxtAdapter {
     protected String getTxt(View view) {
         if (view instanceof TextView) {
             float size = ((TextView) view).getTextSize();
-            String txt = px2sp(size) + "sp/ " + px2dp(size) + "dp";
-            return txt;
+            return String.valueOf(convertSize(size).getLength());
         }
 
         return "";

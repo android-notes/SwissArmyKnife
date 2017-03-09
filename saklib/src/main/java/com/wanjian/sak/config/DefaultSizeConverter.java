@@ -15,8 +15,7 @@ public class DefaultSizeConverter extends SizeConverter {
     }
 
     @Override
-    public Size convert(Context context, int length) {
-
+    public Size convert(Context context, float length) {
         Size size = Size.obtain();
 
         size.setLength(length);
@@ -24,4 +23,5 @@ public class DefaultSizeConverter extends SizeConverter {
 
         return size;
     }
+
 }

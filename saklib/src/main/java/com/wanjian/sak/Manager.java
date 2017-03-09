@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wanjian.sak.config.Config;
+import com.wanjian.sak.config.SizeConverter;
 import com.wanjian.sak.layerview.LayerView;
 import com.wanjian.sak.view.DrawingBoardView;
 import com.wanjian.sak.view.SAKCoverView;
@@ -45,6 +46,9 @@ public class Manager {
         List<LayerView> layerViews = config.getLayerViews();
         for (LayerView layerView : layerViews) {
             mCoverView.addItem(new ItemLayerViewLayout(layerView));
+        }
+        for (SizeConverter converter : config.getSizeConverters()) {
+            mCoverView.addItem(new UnitLayout(converter));
         }
         initCoverView();
     }

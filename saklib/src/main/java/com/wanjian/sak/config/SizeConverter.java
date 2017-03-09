@@ -11,6 +11,6 @@ public abstract class SizeConverter {
 
     public  static SizeConverter CONVERTER = new Px2dpSizeConverter();
 
-    public abstract Size convert(Context context, int length);
+    public abstract Size convert(Context context, float length);
 
 }

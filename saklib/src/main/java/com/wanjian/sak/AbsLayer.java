@@ -54,7 +54,7 @@ public abstract class AbsLayer {
         return new int[]{locations[0], locations[1], view.getWidth(), view.getHeight()};
     }
 
-    protected Size convertSize(int length) {
+    protected Size convertSize(float length) {
         return SizeConverter.CONVERTER.convert(mContext,length);
     }
     protected int dp2px(float dip) {

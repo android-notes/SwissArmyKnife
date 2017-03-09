@@ -17,10 +17,6 @@ public abstract class LayerTxtAdapter extends LayerAdapter {
         super(context);
     }
 
-    protected int px2sp(float px) {
-        final float fontScale = mContext.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (px / fontScale + 0.5f);
-    }
 
     @Override
     protected void drawLayer(Canvas canvas, Paint paint, View view) {

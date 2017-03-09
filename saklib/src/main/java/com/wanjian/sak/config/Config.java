@@ -59,6 +59,9 @@ public class Config {
         return mLayerViews;
     }
 
+    public List<SizeConverter> getSizeConverters() {
+        return mSizeConverterList;
+    }
 
     public static class Build {
         Context mContext;
@@ -89,6 +92,9 @@ public class Config {
             mDefaultLayerViews.add(new TakeColorView(mContext));
             mDefaultLayerViews.add(new TreeView(mContext));
 
+            mSizeConverterList.add(new Px2dpSizeConverter());
+            mSizeConverterList.add(new DefaultSizeConverter());
+            mSizeConverterList.add(new Px2SpSizeConverter());
             mViewFilter = ViewFilter.FILTER;
         }
 

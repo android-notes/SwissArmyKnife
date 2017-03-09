@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:gravity="center_vertical"
@@ -123,43 +124,9 @@
                     android:id="@+id/unitGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/unitdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="Dp(pt)"/>
-
-                    <RadioButton
-                        android:id="@+id/unitpx"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Px"/>
-
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Px"/>
-
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Px"/>
-
-                    <RadioButton
-                        android:id="@+id/unitpx222"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Px"/>
-
-                    <RadioButton
-                        android:id="@+id/unitpx33"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Px"/>
-
+                    tools:layout_height="40dp"
+                    android:orientation="horizontal"
+                    >
 
                 </RadioGroup>
             </HorizontalScrollView>

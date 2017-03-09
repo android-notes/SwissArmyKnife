@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.wanjian.sak.ItemLayerLayout;
 import com.wanjian.sak.ItemLayerViewLayout;
 import com.wanjian.sak.R;
+import com.wanjian.sak.UnitLayout;
 import com.wanjian.sak.layerview.LayerView;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -27,6 +28,7 @@ public class SAKCoverView extends RelativeLayout {
     private DrawingBoardView drawBoard;
     private OnLayoutChangeListener mOnLayoutChangeListener;
     private OperatorView operatorView;
+    private RadioGroup mUnitGroup;
 
     public SAKCoverView(Context context) {
         super(context);
@@ -68,12 +70,13 @@ public class SAKCoverView extends RelativeLayout {
                 operatorView.setVisibility(GONE);
             }
         });
-        ((RadioGroup) operatorView.findViewById(R.id.unitGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Toast.makeText(group.getContext(), ""+checkedId, Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        mUnitGroup = ((RadioGroup) operatorView.findViewById(R.id.unitGroup));
+//        mUnitGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//            }
+//        });
 
     }
 
@@ -99,6 +102,12 @@ public class SAKCoverView extends RelativeLayout {
         itemLayout.onCreate(view);
 
         operatorView.addItem(view);
+    }
+
+    public void addItem(UnitLayout unitLayout) {
+        View view = LayoutInflater.from(getContext()).inflate(unitLayout.getLayoutRes(), mUnitGroup, false);
+        unitLayout.onCreate(view);
+        mUnitGroup.addView(view);
     }
 
     public void attach(Activity activity) {
