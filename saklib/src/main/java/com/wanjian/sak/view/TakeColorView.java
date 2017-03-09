@@ -30,26 +30,26 @@ public class TakeColorView extends LayerView {
     @Override
     public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
         Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
-        textH = fontMetrics.bottom - fontMetrics.top;
-        textW = (int) mPaint.measureText("#ffffffff");
+        mTextH = fontMetrics.bottom - fontMetrics.top;
+        mTextW = (int) mPaint.measureText("#ffffffff");
 
-        params.width = textW * 3;
-        params.height = textH * 6;
+        params.width = mTextW * 3;
+        params.height = mTextH * 6;
         return params;
     }
 
 
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    private int textW;
-    private int textH;
+    private int mTextW;
+    private int mTextH;
 
-    private Integer ltColor;
-    private Integer rtColor;
-    private Integer lbColor;
-    private Integer rbColor;
+    private Integer mLtColor;
+    private Integer mRtColor;
+    private Integer mLbColor;
+    private Integer mRbColor;
 
-    private Bitmap bitmap;
+    private Bitmap mBitmap;
 
     private void init() {
         mPaint.setColor(Color.BLACK);
@@ -66,18 +66,18 @@ public class TakeColorView extends LayerView {
         int h = getHeight();
 
         mPaint.setStyle(Paint.Style.FILL);
-        if (ltColor != null) {
-            drawColor(canvas, ltColor, 0, 0, w / 2, h / 2);
+        if (mLtColor != null) {
+            drawColor(canvas, mLtColor, 0, 0, w / 2, h / 2);
         }
-        if (lbColor != null) {
-            drawColor(canvas, lbColor, 0, h / 2, w / 2, h);
+        if (mLbColor != null) {
+            drawColor(canvas, mLbColor, 0, h / 2, w / 2, h);
         }
 
-        if (rtColor != null) {
-            drawColor(canvas, rtColor, w / 2, 0, w, h / 2);
+        if (mRtColor != null) {
+            drawColor(canvas, mRtColor, w / 2, 0, w, h / 2);
         }
-        if (rbColor != null) {
-            drawColor(canvas, rbColor, w / 2, h / 2, w, h);
+        if (mRbColor != null) {
+            drawColor(canvas, mRbColor, w / 2, h / 2, w, h);
         }
 
         mPaint.setStyle(Paint.Style.STROKE);
@@ -96,15 +96,15 @@ public class TakeColorView extends LayerView {
             mPaint.setColor((~color | 0xff000000));
         }
 
-        canvas.drawText(String.format("#%08x", color), l, t + textH, mPaint);
+        canvas.drawText(String.format("#%08x", color), l, t + mTextH, mPaint);
 
     }
 
     public void down(float x, float y) {
-        ltColor = null;
-        rtColor = null;
-        lbColor = null;
-        rbColor = null;
+        mLtColor = null;
+        mRtColor = null;
+        mLbColor = null;
+        mRbColor = null;
     }
 
     public void up(float x, float y) {
@@ -112,41 +112,41 @@ public class TakeColorView extends LayerView {
         setVisibility(INVISIBLE);
         try {
             View root = findRootView();
-            if (bitmap == null) {
-                bitmap = Bitmap.createBitmap(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
+            if (mBitmap == null) {
+                mBitmap = Bitmap.createBitmap(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
             }
-            if (bitmap.getWidth() < root.getWidth() || bitmap.getHeight() < root.getHeight()) {
-                bitmap = Bitmap.createBitmap(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
+            if (mBitmap.getWidth() < root.getWidth() || mBitmap.getHeight() < root.getHeight()) {
+                mBitmap = Bitmap.createBitmap(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
             }
-            root.draw(new Canvas(bitmap));
+            root.draw(new Canvas(mBitmap));
             int location[] = new int[2];
             getLocationOnScreen(location);
             try {
-                ltColor = bitmap.getPixel(location[0], location[1]);
+                mLtColor = mBitmap.getPixel(location[0], location[1]);
             } catch (Exception e) {
-                ltColor = null;
+                mLtColor = null;
             }
             try {
-                rtColor = bitmap.getPixel(location[0] + getWidth(), location[1]);
+                mRtColor = mBitmap.getPixel(location[0] + getWidth(), location[1]);
             } catch (Exception e) {
-                rtColor = null;
+                mRtColor = null;
             }
             try {
-                lbColor = bitmap.getPixel(location[0], location[1] + getHeight());
+                mLbColor = mBitmap.getPixel(location[0], location[1] + getHeight());
             } catch (Exception e) {
-                lbColor = null;
+                mLbColor = null;
             }
             try {
-                rbColor = bitmap.getPixel(location[0] + getWidth(), location[1] + getHeight());
+                mRbColor = mBitmap.getPixel(location[0] + getWidth(), location[1] + getHeight());
             } catch (Exception e) {
-                rbColor = null;
+                mRbColor = null;
             }
 
         } catch (Exception e) {
-            ltColor = null;
-            rtColor = null;
-            lbColor = null;
-            rbColor = null;
+            mLtColor = null;
+            mRtColor = null;
+            mLbColor = null;
+            mRbColor = null;
         }
         setVisibility(VISIBLE);
     }

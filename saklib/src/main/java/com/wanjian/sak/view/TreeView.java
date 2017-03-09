@@ -49,27 +49,27 @@ public class TreeView extends LayerView {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.WHITE);
         mPaint.setTextSize(dp2px(12));
-        tabW = dp2px(20);
+        mTabW = dp2px(20);
         Rect rect = new Rect();
         mPaint.getTextBounds("Aj", 0, 2, rect);
-        txtH = rect.height() * 2;
+        mTxtH = rect.height() * 2;
         setBackgroundColor(0x88000000);
     }
 
 
     private Paint mPaint;
-    private int tabW;
-    private int txtH;
-    private int curLayer;
+    private int mTabW;
+    private int mTxtH;
+    private int mCurLayer;
     private Matrix mMatrix;
 
-    private int[] location = new int[2];
+    private int[] mLocation = new int[2];
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.scale(factor, factor);
-        curLayer = -1;
+        mCurLayer = -1;
         layerCount(canvas, getRootView());
     }
 
@@ -77,7 +77,7 @@ public class TreeView extends LayerView {
         if (view == null || view instanceof SAKCoverView) {
             return;
         }
-        curLayer++;
+        mCurLayer++;
         drawLayer(canvas, view);
         if (view instanceof ViewGroup) {
             ViewGroup vg = ((ViewGroup) view);
@@ -86,22 +86,22 @@ public class TreeView extends LayerView {
                 layerCount(canvas, child);
             }
         }
-        curLayer--;
+        mCurLayer--;
     }
 
     private void drawLayer(Canvas canvas, View view) {
-        canvas.translate(0, txtH);
+        canvas.translate(0, mTxtH);
         canvas.save();
         if (view.getVisibility() != VISIBLE) {
             mPaint.setColor(Color.GRAY);
         } else {
             mPaint.setColor(Color.WHITE);
         }
-        for (int i = 0; i < curLayer; i++) {
-            canvas.translate(tabW, 0);
+        for (int i = 0; i < mCurLayer; i++) {
+            canvas.translate(mTabW, 0);
             canvas.drawText("|", 0, 0, mPaint);
         }
-        canvas.translate(tabW, 0);
+        canvas.translate(mTabW, 0);
         String txt = getInfo(view);
         canvas.drawText(txt, 0, 0, mPaint);
         if (view instanceof ImageView) {
@@ -126,13 +126,13 @@ public class TreeView extends LayerView {
                 } else {
                     mMatrix.reset();
                 }
-                float scale = txtH * 1.0f / bmp.getHeight();
+                float scale = mTxtH * 1.0f / bmp.getHeight();
                 float w = scale * bmp.getWidth();
                 canvas.drawText(" -bmp(w:" + convertSize(bmp.getWidth()) + " h:" + convertSize(bmp.getHeight()) + ")", w, 0, mPaint);
                 mMatrix.setScale(scale, scale);
-                canvas.translate(0, -txtH >> 1);
+                canvas.translate(0, -mTxtH >> 1);
                 canvas.drawBitmap(bmp, mMatrix, mPaint);
-                canvas.translate(0, txtH >> 1);
+                canvas.translate(0, mTxtH >> 1);
             }
         }
 
@@ -145,15 +145,15 @@ public class TreeView extends LayerView {
         sb.append("-(w:").append(convertSize(view.getWidth()));
         sb.append(" h:").append(convertSize(view.getHeight())).append(") ");
 
-        view.getLocationOnScreen(location);
+        view.getLocationOnScreen(mLocation);
         sb.append(" -loc(x:")
-                .append(convertSize(location[0]))
+                .append(convertSize(mLocation[0]))
                 .append("-")
-                .append(convertSize(location[0] + view.getWidth()))
+                .append(convertSize(mLocation[0] + view.getWidth()))
                 .append(" y:")
-                .append(convertSize(location[1]))
+                .append(convertSize(mLocation[1]))
                 .append("-")
-                .append(convertSize(location[1] + view.getHeight()))
+                .append(convertSize(mLocation[1] + view.getHeight()))
                 .append(")");
 
         sb.append(" -P(l:").append(convertSize(view.getPaddingLeft())).append(" t:").append(convertSize(view.getPaddingTop()))

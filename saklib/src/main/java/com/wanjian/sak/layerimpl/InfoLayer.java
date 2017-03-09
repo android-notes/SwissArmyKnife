@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.wanjian.sak.CanvasManager;
 import com.wanjian.sak.R;
+import com.wanjian.sak.SAK;
 import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
 
 
@@ -13,7 +14,6 @@ import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
  */
 
 public class InfoLayer extends LayerTxtAdapter {
-    //    public static final int INFO_KEY= R.id. // TODO: 2017/2/20
     public InfoLayer(Context context) {
         super(context);
     }
@@ -21,7 +21,7 @@ public class InfoLayer extends LayerTxtAdapter {
 
     @Override
     protected String getTxt(View view) {
-        Object obj = view.getTag(CanvasManager.INFO_KEY);
+        Object obj = view.getTag(SAK.INFO_KEY);
         String info;
         if (obj == null) {
             info = "null";

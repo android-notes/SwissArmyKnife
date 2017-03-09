@@ -18,7 +18,7 @@ public abstract class AbsLayer {
 
     protected Context mContext;
     private Paint mPaint;
-    private boolean enable;
+    private boolean mEnable;
 
     public AbsLayer(Context context) {
         mContext = context;
@@ -30,16 +30,16 @@ public abstract class AbsLayer {
     public abstract String description();
 
     public void enable(boolean enable) {
-        this.enable = enable;
+        this.mEnable = enable;
     }
 
     public boolean isEnable() {
-        return enable;
+        return mEnable;
     }
 
 
     public final void draw(Canvas canvas, View view, int startLayer, int endLayer) {
-        if (!enable) {
+        if (!mEnable) {
             return;
         }
         canvas.save();

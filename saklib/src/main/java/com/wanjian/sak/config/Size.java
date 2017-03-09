@@ -1,6 +1,8 @@
 package com.wanjian.sak.config;
 
 
+import com.wanjian.sak.utils.Check;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,22 +45,21 @@ public class Size {
     private static List<Size> sList = new LinkedList<>();
 
     public static Size obtain() {
-        if (sList.isEmpty()) {
-            return new Size();
-        }
+//        if (sList.isEmpty()) {
+//            return new Size();
+//        }
+//
+//        return sList.get(0);
 
-        return sList.get(0);
-
+        return new Size();
     }
 
-    public static void returnSize(Size size) {
-        if (size == null) {
-            throw new RuntimeException("size can not be null!");
-        }
-        if (sList.size() < 100) {
-            sList.add(size);
-        }
-    }
+//    public static void returnSize(Size size) {
+//        Check.isNull(size, "size");
+//        if (sList.size() < 100) {
+//            sList.add(size);
+//        }
+//    }
 
     @Override
     public String toString() {

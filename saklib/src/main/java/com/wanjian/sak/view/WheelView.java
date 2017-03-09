@@ -34,20 +34,10 @@ public class WheelView extends ListView {
         init(attrs);
     }
 
-    @SuppressLint("NewApi")
-    public WheelView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(attrs);
-    }
-
-    @SuppressLint("NewApi")
-    public WheelView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs);
-    }
 
 
-    private int height;
+
+    private int mHeight;
     private OnChangeListener mOnChangeListener;
 
     private void init(AttributeSet attrs) {
@@ -55,7 +45,7 @@ public class WheelView extends ListView {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.GRAY);
         mPaint.setStyle(Paint.Style.STROKE);
-        height = (int) getResources().getDimension(R.dimen.sak_wheel_height);
+        mHeight = (int) getResources().getDimension(R.dimen.sak_wheel_height);
 
         setAdapter(new BaseAdapter() {
             @Override
@@ -80,7 +70,7 @@ public class WheelView extends ListView {
                     textView = new TextView(getContext());
                     textView.setTextColor(Color.BLACK);
                     textView.setGravity(Gravity.CENTER);
-                    LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, height / 3);
+                    LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, mHeight / 3);
                     textView.setLayoutParams(params);
                 } else {
                     textView = (TextView) convertView;

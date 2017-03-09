@@ -34,7 +34,6 @@ public class VerticalMeasureView extends HorizontalMeasureView {
     protected void onDraw(Canvas canvas) {
 
         int h = getHeight();
-        int w = getWidth();
         canvas.translate(maxHeight, 0);
         canvas.drawLine(0, 0, 0, h, mPaint);
 

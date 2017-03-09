@@ -19,7 +19,7 @@ public abstract class LayerAdapter extends AbsLayer {
     private int mStartLayer;
     private int mEndLayer;
 
-    private int curLayer = -1;
+    private int mCurLayer = -1;
 
     public LayerAdapter(Context context) {
         super(context);
@@ -30,7 +30,7 @@ public abstract class LayerAdapter extends AbsLayer {
     protected void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer) {
         this.mStartLayer = startLayer;
         this.mEndLayer = endLayer;
-        curLayer = -1;
+        mCurLayer = -1;
         layerCount(canvas, view, paint);
     }
 
@@ -38,11 +38,11 @@ public abstract class LayerAdapter extends AbsLayer {
         if (view == null || view.getVisibility() == View.GONE || !ViewFilter.FILTER.filter(view)) {
             return;
         }
-        if (curLayer + 1 > mEndLayer) {
+        if (mCurLayer + 1 > mEndLayer) {
             return;
         }
-        curLayer++;
-        if (curLayer >= mStartLayer && curLayer <= mEndLayer && !(view instanceof SAKCoverView)) {
+        mCurLayer++;
+        if (mCurLayer >= mStartLayer && mCurLayer <= mEndLayer && !(view instanceof SAKCoverView)) {
             drawLayer(canvas, paint, view);
         }
 
@@ -53,7 +53,7 @@ public abstract class LayerAdapter extends AbsLayer {
                 layerCount(canvas, child, paint);
             }
         }
-        curLayer--;
+        mCurLayer--;
     }
 
 

@@ -12,7 +12,7 @@ import com.wanjian.sak.OnChangeListener;
  */
 
 public abstract class LayerView extends View implements OnChangeListener {
-    private boolean enable;
+    private boolean mEnable;
 
     public LayerView(Context context) {
         super(context);
@@ -22,12 +22,12 @@ public abstract class LayerView extends View implements OnChangeListener {
      * @param enable
      * @hide
      */
-    public void enable(boolean enable) {
-        this.enable = enable;
+    public void mEnable(boolean enable) {
+        this.mEnable = enable;
     }
 
     public boolean isEnable() {
-        return enable;
+        return mEnable;
     }
 
 

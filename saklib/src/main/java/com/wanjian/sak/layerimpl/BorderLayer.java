@@ -17,8 +17,8 @@ import com.wanjian.sak.utils.Color;
 public class BorderLayer extends LayerAdapter {
 
     private int[] mLocationSize;
-    private int cornerW;
-    private int strokeW;
+    private int mCornerW;
+    private int mStrokeW;
 
     private int w;
     private int h;
@@ -30,8 +30,8 @@ public class BorderLayer extends LayerAdapter {
 
     @Override
     protected void drawLayer(Canvas canvas, Paint paint, View view) {
-        cornerW = dp2px(6);
-        strokeW = dp2px(1);
+        mCornerW = dp2px(6);
+        mStrokeW = dp2px(1);
         w = view.getWidth();
         h = view.getHeight();
         mLocationSize = getLocationAndSize(view);
@@ -56,19 +56,19 @@ public class BorderLayer extends LayerAdapter {
 
     private void drawCorner(Canvas canvas, View v, Paint mPaint) {
         float sw = mPaint.getStrokeWidth();
-        mPaint.setStrokeWidth(strokeW);
+        mPaint.setStrokeWidth(mStrokeW);
 
-        canvas.drawLine(mLocationSize[0], mLocationSize[1], mLocationSize[0] + cornerW, mLocationSize[1], mPaint);
-        canvas.drawLine(mLocationSize[0], mLocationSize[1], mLocationSize[0], mLocationSize[1] + cornerW, mPaint);
+        canvas.drawLine(mLocationSize[0], mLocationSize[1], mLocationSize[0] + mCornerW, mLocationSize[1], mPaint);
+        canvas.drawLine(mLocationSize[0], mLocationSize[1], mLocationSize[0], mLocationSize[1] + mCornerW, mPaint);
 
-        canvas.drawLine(mLocationSize[0] + w - cornerW, mLocationSize[1], mLocationSize[0] + w, mLocationSize[1], mPaint);
-        canvas.drawLine(mLocationSize[0] + w, mLocationSize[1], mLocationSize[0] + w, mLocationSize[1] + cornerW, mPaint);
+        canvas.drawLine(mLocationSize[0] + w - mCornerW, mLocationSize[1], mLocationSize[0] + w, mLocationSize[1], mPaint);
+        canvas.drawLine(mLocationSize[0] + w, mLocationSize[1], mLocationSize[0] + w, mLocationSize[1] + mCornerW, mPaint);
 
-        canvas.drawLine(mLocationSize[0], mLocationSize[1] + h, mLocationSize[0], mLocationSize[1] + h - cornerW, mPaint);
-        canvas.drawLine(mLocationSize[0], mLocationSize[1] + h, mLocationSize[0] + cornerW, mLocationSize[1] + h, mPaint);
+        canvas.drawLine(mLocationSize[0], mLocationSize[1] + h, mLocationSize[0], mLocationSize[1] + h - mCornerW, mPaint);
+        canvas.drawLine(mLocationSize[0], mLocationSize[1] + h, mLocationSize[0] + mCornerW, mLocationSize[1] + h, mPaint);
 
-        canvas.drawLine(mLocationSize[0] + w - cornerW, mLocationSize[1] + h, mLocationSize[0] + w, mLocationSize[1] + h, mPaint);
-        canvas.drawLine(mLocationSize[0] + w, mLocationSize[1] + h - cornerW, mLocationSize[0] + w, mLocationSize[1] + h, mPaint);
+        canvas.drawLine(mLocationSize[0] + w - mCornerW, mLocationSize[1] + h, mLocationSize[0] + w, mLocationSize[1] + h, mPaint);
+        canvas.drawLine(mLocationSize[0] + w, mLocationSize[1] + h - mCornerW, mLocationSize[0] + w, mLocationSize[1] + h, mPaint);
         mPaint.setStrokeWidth(sw);
 
     }
