@@ -93,7 +93,7 @@ public class Config {
             mDefaultLayerViews.add(new TreeView(mContext));
 
             mSizeConverterList.add(new Px2dpSizeConverter());
-            mSizeConverterList.add(new DefaultSizeConverter());
+            mSizeConverterList.add(new OriginSizeConverter());
             mSizeConverterList.add(new Px2SpSizeConverter());
             mViewFilter = ViewFilter.FILTER;
         }

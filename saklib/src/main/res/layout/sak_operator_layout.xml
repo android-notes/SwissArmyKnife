@@ -148,22 +148,6 @@
                 />
 
             <TextView
-                android:id="@+id/exit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/sak_corner_but_bag"
-                android:gravity="center"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:text="取消"
-                android:textColor="#000"
-                />
-
-            <TextView
                 android:id="@+id/ok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

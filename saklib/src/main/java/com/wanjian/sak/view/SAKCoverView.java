@@ -64,6 +64,7 @@ public class SAKCoverView extends RelativeLayout {
                 }
             };
         }
+
         operatorView.findViewById(R.id.ok).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,11 +73,16 @@ public class SAKCoverView extends RelativeLayout {
         });
 
         mUnitGroup = ((RadioGroup) operatorView.findViewById(R.id.unitGroup));
-//        mUnitGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//            }
-//        });
+        operatorView.findViewById(R.id.help).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Uri uri = Uri.parse("http://android-notes.github.io");
+                final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -137,6 +143,16 @@ public class SAKCoverView extends RelativeLayout {
         ((WheelView) operatorView.findViewById(R.id.to)).setOnChangeListener(endLayerChangeListener);
     }
 
+    public void setOnCloseListener(final OnClickListener listener){
+        operatorView.findViewById(R.id.close).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                listener.onClick(v);
+                operatorView.setVisibility(GONE);
+            }
+        });
+    }
     private void initView(final OperatorView operatorView) {
 
 //        from = (WheelView) operatorView.findViewById(R.id.from);

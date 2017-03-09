@@ -28,6 +28,7 @@ public class ItemLayerLayout {
     public void onCreate(View view) {
         ((TextView) view.findViewById(R.id.desc)).setText(mLayer.description());
         CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkbox);
+        checkBox.setChecked(mLayer.isEnable());
         mLayer.enable(checkBox.isChecked());
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

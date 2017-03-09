@@ -36,7 +36,7 @@ public abstract class LayerAdapter extends AbsLayer {
     }
 
     private void layerCount(Canvas canvas, View view, Paint paint) {
-        if (view == null || view.getVisibility() == View.GONE|| ViewFilter.FILTER.filter(view)) {
+        if (view == null || view.getVisibility() == View.GONE|| !ViewFilter.FILTER.filter(view)) {
             return;
         }
         if (curLayer + 1 > mEndLayer) {

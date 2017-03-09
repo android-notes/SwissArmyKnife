@@ -33,7 +33,9 @@ public class UnitLayout {
         ((RadioButton) view).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SizeConverter.CONVERTER = mSizeConverter;
+                if (isChecked) {
+                    SizeConverter.CONVERTER = mSizeConverter;
+                }
             }
         });
 

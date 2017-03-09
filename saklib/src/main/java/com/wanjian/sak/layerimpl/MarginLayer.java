@@ -44,7 +44,7 @@ public class MarginLayer extends LayerAdapter {
 
             Rect rect = new Rect();
             if (marginLayoutParams.leftMargin != 0) {
-                String txt = "ML" + convertSize(marginLayoutParams.leftMargin);
+                String txt = "ML" + convertSize(marginLayoutParams.leftMargin).getLength();
                 paint.getTextBounds(txt, 0, txt.length(), rect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
@@ -53,7 +53,7 @@ public class MarginLayer extends LayerAdapter {
                 canvas.drawText(txt, l, locationSize[1] + rect.height(), paint);
             }
             if (marginLayoutParams.topMargin != 0) {
-                String txt = "MT" + convertSize(marginLayoutParams.topMargin);
+                String txt = "MT" + convertSize(marginLayoutParams.topMargin).getLength();
                 paint.getTextBounds(txt, 0, txt.length(), rect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
@@ -63,7 +63,7 @@ public class MarginLayer extends LayerAdapter {
             }
 
             if (marginLayoutParams.rightMargin != 0) {
-                String txt = "MR" + convertSize(marginLayoutParams.rightMargin);
+                String txt = "MR" + convertSize(marginLayoutParams.rightMargin).getLength();
                 paint.getTextBounds(txt, 0, txt.length(), rect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
@@ -73,7 +73,7 @@ public class MarginLayer extends LayerAdapter {
             }
 
             if (marginLayoutParams.bottomMargin != 0) {
-                String txt = "MB" + convertSize(marginLayoutParams.bottomMargin);
+                String txt = "MB" + convertSize(marginLayoutParams.bottomMargin).getLength();
                 paint.getTextBounds(txt, 0, txt.length(), rect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);

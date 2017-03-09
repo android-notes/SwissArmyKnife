@@ -21,7 +21,7 @@ public class WidthHeightLayer extends LayerTxtAdapter {
     protected String getTxt(View view) {
         int w = view.getWidth();
         int h = view.getHeight();
-        String txt = "w:" + convertSize(w) + " h:" + convertSize(h);
+        String txt = convertSize(w).getLength() + ":" + convertSize(h).getLength();
 
         return txt;
     }

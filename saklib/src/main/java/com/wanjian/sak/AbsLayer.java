@@ -19,9 +19,11 @@ public abstract class AbsLayer {
     protected Context mContext;
     private Paint mPaint;
     private boolean enable;
+
     public AbsLayer(Context context) {
         mContext = context;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setTextSize(dp2px(10));
         mPaint.setColor(getColor());
     }
 
@@ -30,6 +32,11 @@ public abstract class AbsLayer {
     public void enable(boolean enable) {
         this.enable = enable;
     }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
 
     public final void draw(Canvas canvas, View view, int startLayer, int endLayer) {
         if (!enable) {
@@ -55,8 +62,9 @@ public abstract class AbsLayer {
     }
 
     protected Size convertSize(float length) {
-        return SizeConverter.CONVERTER.convert(mContext,length);
+        return SizeConverter.CONVERTER.convert(mContext, length);
     }
+
     protected int dp2px(float dip) {
         float density = mContext.getResources().getDisplayMetrics().density;
         return (int) (dip * density + 0.5);
