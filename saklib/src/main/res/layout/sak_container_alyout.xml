@@ -3,7 +3,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        xmlns:tools="http://schemas.android.com/tools"
-   >
+    >
 
     <com.wanjian.sak.view.DrawingBoardView
         android:id="@+id/drawBoard"
@@ -12,13 +12,13 @@
         />
 
 
-
     <com.wanjian.sak.view.OperatorView
         android:id="@+id/operatorView"
         tools:visibility="visible"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.wanjian.sak.view.OperatorView>
+        android:layout_height="wrap_content"
+        android:background="#88888888"></com.wanjian.sak.view.OperatorView>
 
     <com.wanjian.sak.view.FloatView
         android:id="@+id/floatView"

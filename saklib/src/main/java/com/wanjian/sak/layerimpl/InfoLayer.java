@@ -12,7 +12,7 @@ import com.wanjian.sak.layerimpl.adapter.LayerTxtAdapter;
  */
 
 public class InfoLayer extends LayerTxtAdapter {
-//    public static final int INFO_KEY= R.id. // TODO: 2017/2/20
+    //    public static final int INFO_KEY= R.id. // TODO: 2017/2/20
     public InfoLayer(Context context) {
         super(context);
     }

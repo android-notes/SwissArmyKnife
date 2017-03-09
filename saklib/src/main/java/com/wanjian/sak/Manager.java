@@ -27,14 +27,12 @@ public class Manager {
 
     private Config mConfig;
 
-    //    private Context mContext;
     private SAKCoverView mCoverView;
 
     private int mStartLayer = 5;
     private int mEndLayer = 30;
 
     public Manager(Context context, Config config) {
-//        Context mContext = context.getApplicationContext();
         mConfig = config;
         mCoverView = new SAKCoverView(context.getApplicationContext());
         final List<AbsLayer> layers = config.getLayers();
@@ -88,21 +86,6 @@ public class Manager {
 
     }
 
-//    public void refresh(Canvas canvas) {
-//        List<AbsLayer> layers = mConfig.getLayers();
-//
-//        for (AbsLayer layer : layers) {
-////            layer.draw(canvas, );
-//        }
-//    }
-//
-//    public void regist(Activity activity) {
-//        attach(activity);
-//    }
-//
-//
-//    public void unRegist() {
-//    }
 
     public void detach(Activity activity) {
         mCoverView.detach(activity);

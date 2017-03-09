@@ -30,14 +30,11 @@ import java.util.List;
 
 public class Config {
 
-    private Context mContext;
     private List<AbsLayer> mLayers = new ArrayList<>();
     private List<LayerView> mLayerViews = new ArrayList<>();
     private List<SizeConverter> mSizeConverterList = new ArrayList<>();
 
     private Config(Build build) {
-        mContext = build.mContext;
-
 
         mLayers.addAll(build.mDefaultLayers);
         mLayers.addAll(build.mCustomerLayers);

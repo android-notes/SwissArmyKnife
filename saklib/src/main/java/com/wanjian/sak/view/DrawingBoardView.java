@@ -31,7 +31,7 @@ public class DrawingBoardView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (mOnDrawListener!=null){
+        if (mOnDrawListener != null) {
             mOnDrawListener.onDraw(canvas);
         }
     }
@@ -63,7 +63,7 @@ public class DrawingBoardView extends View {
         }
     }
 
-   public interface OnDrawListener {
+    public interface OnDrawListener {
         void onDraw(Canvas canvas);
     }
 

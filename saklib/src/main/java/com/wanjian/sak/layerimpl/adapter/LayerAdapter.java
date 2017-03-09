@@ -11,7 +11,6 @@ import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.view.SAKCoverView;
 
 
-
 /**
  * Created by wanjian on 2016/10/23.
  */
@@ -36,7 +35,7 @@ public abstract class LayerAdapter extends AbsLayer {
     }
 
     private void layerCount(Canvas canvas, View view, Paint paint) {
-        if (view == null || view.getVisibility() == View.GONE|| !ViewFilter.FILTER.filter(view)) {
+        if (view == null || view.getVisibility() == View.GONE || !ViewFilter.FILTER.filter(view)) {
             return;
         }
         if (curLayer + 1 > mEndLayer) {

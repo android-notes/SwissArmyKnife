@@ -27,9 +27,9 @@ import static android.os.Build.VERSION.SDK_INT;
  */
 
 public class SAKCoverView extends RelativeLayout {
-    private DrawingBoardView drawBoard;
+    private DrawingBoardView mDrawBoard;
     private OnLayoutChangeListener mOnLayoutChangeListener;
-    private OperatorView operatorView;
+    private OperatorView mOperatorView;
     private RadioGroup mUnitGroup;
 
     public SAKCoverView(Context context) {
@@ -41,41 +41,41 @@ public class SAKCoverView extends RelativeLayout {
     private void init() {
         inflate(getContext(), R.layout.sak_container_alyout, this);
 
-        drawBoard = (DrawingBoardView) findViewById(R.id.drawBoard);
-        operatorView = (OperatorView) findViewById(R.id.operatorView);
+        mDrawBoard = (DrawingBoardView) findViewById(R.id.drawBoard);
+        mOperatorView = (OperatorView) findViewById(R.id.operatorView);
 
-        CheckBox checkBox = ((CheckBox) operatorView.findViewById(R.id.refresh));
-        drawBoard.neededRefresh(checkBox.isChecked());
+        CheckBox checkBox = ((CheckBox) mOperatorView.findViewById(R.id.refresh));
+        mDrawBoard.neededRefresh(checkBox.isChecked());
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                drawBoard.neededRefresh(isChecked);
+                mDrawBoard.neededRefresh(isChecked);
             }
         });
         findViewById(R.id.floatView).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                operatorView.setVisibility(VISIBLE);
+                mOperatorView.setVisibility(VISIBLE);
             }
         });
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
             mOnLayoutChangeListener = new OnLayoutChangeListener() {
                 @Override
                 public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                    drawBoard.invalidate();
+                    mDrawBoard.invalidate();
                 }
             };
         }
 
-        operatorView.findViewById(R.id.ok).setOnClickListener(new OnClickListener() {
+        mOperatorView.findViewById(R.id.ok).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                operatorView.setVisibility(GONE);
+                mOperatorView.setVisibility(GONE);
             }
         });
 
-        mUnitGroup = ((RadioGroup) operatorView.findViewById(R.id.unitGroup));
-        operatorView.findViewById(R.id.help).setOnClickListener(new OnClickListener() {
+        mUnitGroup = ((RadioGroup) mOperatorView.findViewById(R.id.unitGroup));
+        mOperatorView.findViewById(R.id.help).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Uri uri = Uri.parse("http://android-notes.github.io");
@@ -89,14 +89,14 @@ public class SAKCoverView extends RelativeLayout {
     }
 
     public void setOnDrawListener(DrawingBoardView.OnDrawListener drawListener) {
-        drawBoard.setOnDrawListener(drawListener);
+        mDrawBoard.setOnDrawListener(drawListener);
     }
 
     public void addItem(ItemLayerLayout itemLayout) {
         int res = itemLayout.getLayoutRes();
         try {
             View item = LayoutInflater.from(getContext()).inflate(res, null);
-            operatorView.addItem(item);
+            mOperatorView.addItem(item);
             itemLayout.onCreate(item);
         } catch (Resources.NotFoundException e) {
             throw e;
@@ -108,7 +108,7 @@ public class SAKCoverView extends RelativeLayout {
         LayerView layerView = itemLayout.getLayerView();
         View view = LayoutInflater.from(getContext()).inflate(itemLayout.getLayoutRes(), null);
         layerView.setVisibility(GONE);
-        operatorView.addItem(view);
+        mOperatorView.addItem(view);
         layerView.setLayoutParams(layerView.getLayoutParams(generateDefaultLayoutParams()));
         addView(layerView, 1);
         itemLayout.onCreate(view);
@@ -132,99 +132,25 @@ public class SAKCoverView extends RelativeLayout {
         }
     }
 
-//    public SAKCoverView addLayerCheckBox(String desc) {
-//        View item = LayoutInflater.from(getContext()).inflate(R.layout.sak_layer_item, this, false);
-//        addView(item);
-//
-//        return this;
-//    }
 
     public void setStartLayerChangeListener(WheelView.OnChangeListener startLayerChangeListener) {
-        ((WheelView) operatorView.findViewById(R.id.from)).setOnChangeListener(startLayerChangeListener);
+        ((WheelView) mOperatorView.findViewById(R.id.from)).setOnChangeListener(startLayerChangeListener);
     }
 
     public void setEndLayerChangeListener(WheelView.OnChangeListener endLayerChangeListener) {
-        ((WheelView) operatorView.findViewById(R.id.to)).setOnChangeListener(endLayerChangeListener);
+        ((WheelView) mOperatorView.findViewById(R.id.to)).setOnChangeListener(endLayerChangeListener);
     }
 
     public void setOnCloseListener(final OnClickListener listener) {
-        operatorView.findViewById(R.id.close).setOnClickListener(new OnClickListener() {
+        mOperatorView.findViewById(R.id.close).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 listener.onClick(v);
-                operatorView.setVisibility(GONE);
+                mOperatorView.setVisibility(GONE);
             }
         });
     }
 
-    private void initView(final OperatorView operatorView) {
 
-//        from = (WheelView) operatorView.findViewById(R.id.from);
-//        to = (WheelView) operatorView.findViewById(R.id.to);
-//
-//        to.setNum(20);
-//        tree = (TextView) operatorView.findViewById(R.id.tree);
-//        close = (TextView) operatorView.findViewById(R.id.close);
-//
-//
-//        tree.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CanvasManager.getInstance(getContext()).setLayer(from.getNum(), to.getNum());
-//                operatorView.setVisibility(GONE);
-//                showTree();
-//            }
-//        });
-//
-//        close.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CanvasManager.getInstance(getContext()).setLayer(0, -1);
-//                operatorView.setVisibility(GONE);
-//            }
-//        });
-//
-//        from.setOnChangeListener(new WheelView.OnChangeListener() {
-//            @Override
-//            public void onChange(int num) {
-//                CanvasManager.getInstance(getContext()).setLayer(0, CanvasManager.getInstance(getContext()).getEndLayer());
-//            }
-//        });
-//        to.setOnChangeListener(new WheelView.OnChangeListener() {
-//            @Override
-//            public void onChange(int num) {
-//                CanvasManager.getInstance(getContext()).setLayer(CanvasManager.getInstance(getContext()).getStartLayer(), num);
-//            }
-//        });
-//        operatorView.findViewById(R.id.exit).setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                operatorView.setVisibility(GONE);
-//            }
-//        });
-//        operatorView.findViewById(R.id.help).setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final Uri uri = Uri.parse("http://android-notes.github.io");
-//                final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                getContext().startActivity(intent);
-//
-//            }
-//        });
-
-
-    }
-
-    private void showTree() {
-        final TreeViewOperator viewOperator = new TreeViewOperator(getContext());
-        addView(viewOperator);
-        viewOperator.findViewById(R.id.exit).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeView(viewOperator);
-            }
-        });
-    }
 }

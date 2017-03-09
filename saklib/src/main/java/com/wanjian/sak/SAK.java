@@ -13,7 +13,7 @@ import com.wanjian.sak.utils.Check;
 
 public class SAK {
 
-
+    public static final int INFO_KEY = R.layout.sak_container_alyout;
     private static Manager sManager;
 
     private SAK() {

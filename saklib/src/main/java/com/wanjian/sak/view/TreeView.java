@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wanjian.sak.CanvasManager;
+import com.wanjian.sak.SAK;
+import com.wanjian.sak.config.SizeConverter;
+import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layerview.LayerView;
 
 
@@ -24,8 +27,11 @@ import com.wanjian.sak.layerview.LayerView;
  */
 
 public class TreeView extends LayerView {
+    private Context mContext;
+
     public TreeView(Context context) {
         super(context);
+        mContext = context;
         init();
     }
 
@@ -34,7 +40,9 @@ public class TreeView extends LayerView {
         return "布局树";
     }
 
-
+    private int convertSize(int leng) {
+        return (int) SizeConverter.CONVERTER.convert(mContext, leng).getLength();
+    }
 
     private void init() {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -44,19 +52,14 @@ public class TreeView extends LayerView {
         Rect rect = new Rect();
         mPaint.getTextBounds("Aj", 0, 2, rect);
         txtH = rect.height() * 2;
+        setBackgroundColor(0x88000000);
     }
 
 
-
-    //    private ViewGroup mViewGroup;
-    private int mStartLayer;
-    private int mEndLayer;
-
     private Paint mPaint;
-    private int curLayer = -1;
     private int tabW;
     private int txtH;
-
+    private int curLayer;
     private Matrix mMatrix;
 
     private int[] location = new int[2];
@@ -65,23 +68,17 @@ public class TreeView extends LayerView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.scale(factor, factor);
-        CanvasManager canvasManager = CanvasManager.getInstance(getContext());
-        mStartLayer = canvasManager.getStartLayer();
-        mEndLayer = canvasManager.getEndLayer();
         curLayer = -1;
-        layerCount(canvas, canvasManager.getViewGroup());
+        layerCount(canvas, getRootView());
     }
 
     private void layerCount(Canvas canvas, View view) {
-        if (view == null) {
+        if (view == null || view instanceof SAKCoverView) {
             return;
         }
-
         curLayer++;
-        if (curLayer >= mStartLayer && curLayer <= mEndLayer && !(view instanceof SAKCoverView)) {
-            drawLayer(canvas, view);
-        }
-        if (view instanceof ViewGroup && !(view instanceof SAKCoverView)) {
+        drawLayer(canvas, view);
+        if (view instanceof ViewGroup) {
             ViewGroup vg = ((ViewGroup) view);
             for (int i = 0; i < vg.getChildCount(); i++) {
                 View child = vg.getChildAt(i);
@@ -130,7 +127,7 @@ public class TreeView extends LayerView {
                 }
                 float scale = txtH * 1.0f / bmp.getHeight();
                 float w = scale * bmp.getWidth();
-                canvas.drawText(" -bmp(w:" + bmp.getWidth() + " h:" + bmp.getHeight() + ")", w, 0, mPaint);
+                canvas.drawText(" -bmp(w:" + convertSize(bmp.getWidth()) + " h:" + convertSize(bmp.getHeight()) + ")", w, 0, mPaint);
                 mMatrix.setScale(scale, scale);
                 canvas.translate(0, -txtH >> 1);
                 canvas.drawBitmap(bmp, mMatrix, mPaint);
@@ -144,28 +141,28 @@ public class TreeView extends LayerView {
         StringBuilder sb = new StringBuilder(100);
         sb.append(view.getClass().getName()).append(" ");
 
-        sb.append("-(w:").append(view.getWidth());
-        sb.append(" h:").append(view.getHeight()).append(") ");
+        sb.append("-(w:").append(convertSize(view.getWidth()));
+        sb.append(" h:").append(convertSize(view.getHeight())).append(") ");
 
         view.getLocationOnScreen(location);
         sb.append(" -loc(x:")
-                .append(location[0])
+                .append(convertSize(location[0]))
                 .append("-")
-                .append(location[0] + view.getWidth())
+                .append(convertSize(location[0] + view.getWidth()))
                 .append(" y:")
-                .append(location[1])
+                .append(convertSize(location[1]))
                 .append("-")
-                .append(location[1] + view.getHeight())
+                .append(convertSize(location[1] + view.getHeight()))
                 .append(")");
 
-        sb.append(" -P(l:").append(view.getPaddingLeft()).append(" t:").append(view.getPaddingTop())
-                .append(" r:").append(view.getPaddingRight()).append(" b:").append(view.getPaddingBottom()).append(")");
+        sb.append(" -P(l:").append(convertSize(view.getPaddingLeft())).append(" t:").append(convertSize(view.getPaddingTop()))
+                .append(" r:").append(convertSize(view.getPaddingRight())).append(" b:").append(convertSize(view.getPaddingBottom())).append(")");
 
         ViewGroup.LayoutParams param = view.getLayoutParams();
         if (param instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) param);
-            sb.append(" -M(l:").append(marginLayoutParams.leftMargin).append(" t:").append(marginLayoutParams.topMargin)
-                    .append(" r:").append(marginLayoutParams.rightMargin).append(" b:").append(marginLayoutParams.bottomMargin).append(")");
+            sb.append(" -M(l:").append(convertSize(marginLayoutParams.leftMargin)).append(" t:").append(convertSize(marginLayoutParams.topMargin))
+                    .append(" r:").append(convertSize(marginLayoutParams.rightMargin)).append(" b:").append(convertSize(marginLayoutParams.bottomMargin)).append(")");
 
         }
         int visible = view.getVisibility();
@@ -183,7 +180,7 @@ public class TreeView extends LayerView {
             sb.append(" -txt:").append(txt);
         }
         sb.append(" -visible:").append(visStr).append(" ");
-        sb.append(" -extra:").append(view.getTag(CanvasManager.INFO_KEY));
+        sb.append(" -extra:").append(view.getTag(SAK.INFO_KEY));
 
         return sb.toString();
     }

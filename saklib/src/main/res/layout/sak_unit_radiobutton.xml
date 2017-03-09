@@ -7,4 +7,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:text="Dp(pt)"
     android:padding="5dp"
-    android:textColor="#000" />
+    android:textColor="#000"/>
