@@ -1,6 +1,16 @@
 # SwissArmyKnife
 android免root兼容所有版本ui调试工具
 
+### 更新日志
+* `compile 'com.wanjian:sak:0.1.2.4'` （测试版）
+   新增view渲染性能，页面渲染性能
+   新增单位转换功能，可以控制所有长度的单位
+   新增view类型功能
+   新增自定义扩展功能，参考最后的  自定义功能
+   修复取色器等无法关闭的bug
+   修复可能存在的内存泄露
+   修复布局树缩放时的bug
+
 
 ### SwissArmyKnife是什么
 
@@ -8,7 +18,7 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 
 可以通过滚动层级滚轮来控制只显示某一层级的信息，避免层级覆盖等。
 
-<!-- more -->
+
 
 ### 使用方式
 
@@ -146,10 +156,41 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 ```
 
-可以按照如上所示定义自己的ViewFilter，决定要显示哪种view，比如只显示ImageView子类和LinearLayout子类。也可以添加自定义的view和图层，单位转换等。自定义的view要继承自`AbsLayerView`，自定义图层要继承自`AbsLayer`或`LayerAdapter`或`LayerTxtAdapter`，区别在于`LayerAdapter `的子类可以通过功能界面的层级滚轮进行控制，`LayerTxtAdapter `继承自`LayerAdapter `，提供了绘制文本的功能。
+可以按照如上所示定义自己的ViewFilter，决定要显示哪种view，比如只显示ImageView子类和LinearLayout子类，若想要显示所有可见的view，则直接返回
+view.getVisibility()==View.VISIBLE即可。
+
+也可以添加自定义的view和图层，单位转换等。自定义的view要继承自`AbsLayerView`，自定义图层要继承自`AbsLayer`或`LayerAdapter`或`LayerTxtAdapter`，区别在于`LayerAdapter `的子类可以通过功能界面的层级滚轮进行控制，`LayerTxtAdapter `继承自`LayerAdapter `，提供了绘制文本的功能。
+
 可以添加多个单位转换SizeConverter，默认提供了原始数值SizeConverter，PX2DP SizeConverter，PX2SP SizeConverter，子定义的SizeConverter需要继承自`SizeConverter `，并重写相关方法即可。
 
 然后参考上述初始化SAK即可。
+
+
+目前SAK提供的Layer如下,默认初始化（SAK.init(Application)）会包含如下所有的Layer，通过Config初始化时不会包含任何Layer，可以根据需要添加如下Layer
+中的若干个，也可以添加自定义的Layer
+
+* BackgroundColorLayer
+* BitmapWidthHeightLayer
+* BorderLayer
+* ForceBitmapWidthHeightLayer
+* InfoLayer
+* MarginLayer
+* PaddingLayer
+* PageDrawPerformanceLayer
+* TextColorLayer
+* TextSizeLayer
+* ViewClassLayer
+* ViewDrawPerformanceLayer
+* WidthHeightLayer
+
+
+
+### 原理
+
+获取当前显示的Activity的根布局（ ViewGroup root=(ViewGroup) activity.getWindow().getDecorView()），并为其添加蒙层view（ root.addView(mCoverView)），遍历view树，把相关信息绘制在蒙层上即可
+4.0及以上通过  application.registerActivityLifecycleCallbacks(）获取当前显示的Activity。
+
+手动调用view的draw（new Canvas（bmp）），统计该方法的执行时间即可得到渲染时间
 
 
 ## 工程代码：
