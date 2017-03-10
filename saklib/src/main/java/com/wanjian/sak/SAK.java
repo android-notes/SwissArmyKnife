@@ -38,13 +38,13 @@ public class SAK {
                     @Override
                     public void onActivityResumed(Activity activity) {
                         super.onActivityResumed(activity);
-                        attach(activity);
+                        resume(activity);
                     }
 
                     @Override
                     public void onActivityPaused(Activity activity) {
                         super.onActivityPaused(activity);
-                        detch(activity);
+                        pause(activity);
                     }
                 });
             }
@@ -53,7 +53,7 @@ public class SAK {
     }
 
 
-    public static void attach(Activity activity) {
+    public static void resume(Activity activity) {
         if (sManager == null) {
             throw new RuntimeException("init first!");
         }
@@ -61,7 +61,7 @@ public class SAK {
         sManager.attach(activity);
     }
 
-    public static void detch(Activity activity) {
+    public static void pause(Activity activity) {
         Check.isNull(sManager, "init first!");
         Check.isNull(activity, "activity");
         sManager.detach(activity);

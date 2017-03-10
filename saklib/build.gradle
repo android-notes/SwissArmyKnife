@@ -37,7 +37,7 @@ dependencies {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak'
-    publishVersion = '0.1.2.2'
+    publishVersion = '0.1.2.4'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 }

@@ -23,7 +23,7 @@ public class LayoutManager {
 
 
     public static void init(Activity activity) {
-        SAK.attach(activity);
+        SAK.resume(activity);
 
     }
 
