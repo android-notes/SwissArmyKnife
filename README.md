@@ -2,14 +2,15 @@
 android免root兼容所有版本ui调试工具
 
 ### 更新日志
-* `compile 'com.wanjian:sak:0.1.2.4'` （测试版）
-   新增view渲染性能，页面渲染性能
-   新增单位转换功能，可以控制所有长度的单位
-   新增view类型功能
-   新增自定义扩展功能，参考最后的  自定义功能
-   修复取色器等无法关闭的bug
-   修复可能存在的内存泄露
-   修复布局树缩放时的bug
+* `compile 'com.wanjian:sak:0.1.2.4'` （测试版）2017-3-10
+	*  新增view渲染性能，页面渲染性能
+	*  新增单位转换功能，可以控制所有长度的单位
+	*  新增view类型功能
+	*  新增自定义扩展功能，参考最后的  自定义功能
+	*  修复取色器等无法关闭的bug
+	*  修复可能存在的内存泄露
+	*  修复布局树缩放时的bug
+
 
 
 ### SwissArmyKnife是什么
@@ -25,7 +26,7 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 `compile 'com.wanjian:sak:0.1.2.4'` （测试版）
 
 
-android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.sak.SAK.init(Application context) ` ,其他版本还需要在每一个activity的`onResume`中调用`com.wanjian.sak.SAK.resume(Activity act) `，并在Activity的`OnPause`中调用`com.wanjian.sak.SAK.pause(Activity act) `。
+android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.sak.SAK.init(Application context) ` ,其他版本还需要在每一个activity的`onResume`中调用`com.wanjian.sak.SAK.resume(Activity act) `，并在Activity的`onPause`中调用`com.wanjian.sak.SAK.pause(Activity act) `。
 
 启动app后会在屏幕左上角看到一个 蓝色Logo ，点击即可进入功能界面。
 
@@ -188,6 +189,8 @@ view.getVisibility()==View.VISIBLE即可。
 ### 原理
 
 获取当前显示的Activity的根布局（ ViewGroup root=(ViewGroup) activity.getWindow().getDecorView()），并为其添加蒙层view（ root.addView(mCoverView)），遍历view树，把相关信息绘制在蒙层上即可
+
+
 4.0及以上通过  application.registerActivityLifecycleCallbacks(）获取当前显示的Activity。
 
 手动调用view的draw（new Canvas（bmp）），统计该方法的执行时间即可得到渲染时间
