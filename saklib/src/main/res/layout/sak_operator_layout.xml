@@ -88,7 +88,7 @@
                     android:layout_height="@dimen/sak_wheel_height"
                     android:layout_marginLeft="8dp"
                     android:background="@drawable/sak_box_bag"
-                    app:sak_default_position="5">
+                    app:sak_default_position="3">
                 </com.wanjian.sak.view.WheelView>
 
                 <TextView

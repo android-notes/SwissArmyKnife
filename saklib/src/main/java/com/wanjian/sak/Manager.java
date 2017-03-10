@@ -30,7 +30,7 @@ class Manager {
 
     private SAKCoverView mCoverView;
 
-    private int mStartLayer = 5;
+    private int mStartLayer = 3;
     private int mEndLayer = 30;
 
     Manager(Context context, Config config) {
