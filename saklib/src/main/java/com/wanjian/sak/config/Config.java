@@ -7,6 +7,7 @@ import com.wanjian.sak.converter.OriginSizeConverter;
 import com.wanjian.sak.converter.Px2SpSizeConverter;
 import com.wanjian.sak.converter.Px2dpSizeConverter;
 import com.wanjian.sak.converter.SizeConverter;
+import com.wanjian.sak.layer.BackgroundColorLayer;
 import com.wanjian.sak.layer.PageDrawPerformanceLayer;
 import com.wanjian.sak.layer.ViewDrawPerformanceLayer;
 import com.wanjian.sak.layer.ViewClassLayer;
@@ -87,6 +88,7 @@ public class Config {
             mDefaultLayers.add(new BitmapWidthHeightLayer(mContext));
             mDefaultLayers.add(new TextSizeLayer(mContext));
             mDefaultLayers.add(new TextColorLayer(mContext));
+            mDefaultLayers.add(new BackgroundColorLayer(mContext));
             mDefaultLayers.add(new ForceBitmapWidthHeightLayer(mContext));
             mDefaultLayers.add(new InfoLayer(mContext));
             mDefaultLayers.add(new ViewClassLayer(mContext));
