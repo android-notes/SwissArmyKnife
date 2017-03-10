@@ -1,4 +1,5 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion 22
@@ -8,7 +9,6 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
-        applicationId 'com.wanjian.sak.demo'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,13 +25,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:22+'
     testCompile 'junit:junit:4.12'
-    compile project(':saklib')
 }
 
+//添加
+publish {
+    groupId = 'com.wanjian'
+    artifactId = 'sak'
+    publishVersion = '0.1.2.2'
+    desc = 'ui debug tool 4 android'
+    website = 'https://github.com/android-notes/SwissArmyKnife'
+}
 
