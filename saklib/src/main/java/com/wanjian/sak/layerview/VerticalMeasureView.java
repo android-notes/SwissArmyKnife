@@ -37,16 +37,12 @@ public class VerticalMeasureView extends HorizontalMeasureView {
         canvas.translate(maxHeight, 0);
         canvas.drawLine(0, 0, 0, h, mPaint);
 
-        for (int i = 0; i <= h; i += 5) {
-            if (i % 10 == 0) {
-                canvas.drawLine(-maxHeight, i, maxHeight, i, mPaint);
-            } else {
-                canvas.drawLine(-minHeight, i, minHeight, i, mPaint);
-            }
+        for (int i = 0; i <= h; i += mTwoDP) {
+            canvas.drawLine(-minHeight, i, minHeight, i, mPaint);
 
-            if (i % (oneDP * 20) == 0) {
+            if ((i / mTwoDP << 1) % 20 == 0) {
                 canvas.drawLine(-maxHeight * 2f, i, maxHeight * 2f, i, mPaint);
-                canvas.drawText(String.valueOf(i) + "/" + px2dp(i), maxHeight, i + mPaint.getTextSize() / 2, mPaint);
+                canvas.drawText(String.valueOf(i) + "/" + (i / mTwoDP << 1), maxHeight, i + mPaint.getTextSize() / 2, mPaint);
             }
         }
 

@@ -29,7 +29,7 @@ public class HorizontalMeasureView extends DragLayerView {
 
     protected Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    protected int oneDP;
+    protected int mTwoDP;
 
     protected int maxHeight;
     protected int minHeight;
@@ -37,9 +37,8 @@ public class HorizontalMeasureView extends DragLayerView {
 
     private void init() {
         mPaint.setColor(Color.BLACK);
-        oneDP = dp2px(1);
+        mTwoDP = dp2px(2);
         mPaint.setTextSize(dp2px(8));
-//        mPaint.setTextSize(dp2px(12));
         maxHeight = dp2px(10);
         minHeight = dp2px(5);
 
@@ -50,22 +49,16 @@ public class HorizontalMeasureView extends DragLayerView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int h = getHeight();
         int w = getWidth();
         canvas.translate(0, maxHeight);
         canvas.drawLine(0, 0, w, 0, mPaint);
 
-        for (int i = 0; i <= w; i += 5) {
-            if (i % 10 == 0) {
-                canvas.drawLine(i, -maxHeight, i, maxHeight, mPaint);
-            } else {
-                canvas.drawLine(i, -minHeight, i, minHeight, mPaint);
-            }
-
-            if (i % (oneDP * 20) == 0) {
+        for (int i = 0; i <= w; i += mTwoDP) {
+            canvas.drawLine(i, -minHeight, i, minHeight, mPaint);
+            if ((i / mTwoDP << 1) % 20 == 0) {
                 canvas.drawLine(i, -maxHeight * 2f, i, maxHeight * 2f, mPaint);
                 canvas.rotate(90, i, maxHeight);
-                canvas.drawText(String.valueOf(i) + "/" + px2dp(i), i, maxHeight + mPaint.getTextSize() / 2, mPaint);
+                canvas.drawText(String.valueOf(i) + "/" + (i / mTwoDP << 1), i, maxHeight + mPaint.getTextSize() / 2, mPaint);
                 canvas.rotate(-90, i, maxHeight);
             }
         }

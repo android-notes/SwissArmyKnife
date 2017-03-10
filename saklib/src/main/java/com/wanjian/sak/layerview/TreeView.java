@@ -2,6 +2,7 @@ package com.wanjian.sak.layerview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -19,6 +20,11 @@ import com.wanjian.sak.R;
 import com.wanjian.sak.SAK;
 import com.wanjian.sak.converter.SizeConverter;
 import com.wanjian.sak.view.SAKCoverView;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -52,6 +58,7 @@ public class TreeView extends DragLayerView {
         mPaint.getTextBounds("Aj", 0, 2, rect);
         mTxtH = rect.height() * 2;
         setBackgroundColor(0x88000000);
+        mDrawMatrix = new Matrix();
     }
 
 
@@ -61,12 +68,13 @@ public class TreeView extends DragLayerView {
     private int mCurLayer;
     private Matrix mMatrix;
 
+    private Matrix mDrawMatrix;
     private int[] mLocation = new int[2];
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.scale(mCurFactor, mCurFactor);
+        canvas.setMatrix(mDrawMatrix);
         mCurLayer = -1;
         layerCount(canvas, getRootView());
     }
@@ -91,7 +99,7 @@ public class TreeView extends DragLayerView {
         canvas.translate(0, mTxtH);
         canvas.save();
         if (view.getVisibility() != VISIBLE) {
-            mPaint.setColor(Color.GRAY);
+            mPaint.setColor(0xFFAAAAAA);
         } else {
             mPaint.setColor(Color.WHITE);
         }
@@ -189,10 +197,9 @@ public class TreeView extends DragLayerView {
     private float mLastY;
 
     private int mMode = 0;
-    float mStartDist;
-    float mCurFactor = 1;
-    float mLastFactor = 1;
+    private float mLastDist;
 
+    private boolean mIsScale;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -201,33 +208,38 @@ public class TreeView extends DragLayerView {
             case MotionEvent.ACTION_DOWN:
                 mLastX = event.getX();
                 mLastY = event.getY();
+                mIsScale = false;
                 mMode = 1;
                 break;
             case MotionEvent.ACTION_UP:
                 mMode = 0;
                 break;
             case MotionEvent.ACTION_POINTER_UP:
-                mLastFactor = mCurFactor;
                 mMode -= 1;
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
-                mStartDist = spacing(event);
+                mLastDist = spacing(event);
                 mMode += 1;
                 break;
 
             case MotionEvent.ACTION_MOVE:
                 if (mMode >= 2) {
                     float newDist = spacing(event);
-                    mCurFactor = mLastFactor * newDist / mStartDist;
-                    invalidate();
-
+                    float factor = newDist / mLastDist;
+                    mDrawMatrix.postScale(factor, factor);
+                    mLastDist = newDist;
+                    mIsScale = true;
                 } else {
+                    if (mIsScale) {
+                        break;
+                    }
                     float curX = event.getX();
                     float curY = event.getY();
-                    scrollBy((int) (mLastX - curX), (int) (mLastY - curY));
+                    mDrawMatrix.postTranslate(curX - mLastX, curY - mLastY);
                     mLastX = curX;
                     mLastY = curY;
                 }
+                invalidate();
                 break;
         }
 

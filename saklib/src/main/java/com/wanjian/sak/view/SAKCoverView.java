@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
@@ -26,7 +27,7 @@ import static android.os.Build.VERSION.SDK_INT;
  * Created by wanjian on 2016/10/23.
  */
 
-public class SAKCoverView extends RelativeLayout {
+public class SAKCoverView extends FrameLayout {
     private DrawingBoardView mDrawBoard;
     private OnLayoutChangeListener mOnLayoutChangeListener;
     private OperatorView mOperatorView;
@@ -39,6 +40,7 @@ public class SAKCoverView extends RelativeLayout {
 
 
     private void init() {
+
         inflate(getContext(), R.layout.sak_container_layout, this);
 
         mDrawBoard = (DrawingBoardView) findViewById(R.id.drawBoard);

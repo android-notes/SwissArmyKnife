@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -27,68 +28,84 @@ public class FloatView extends View {
 
 
     private void init() {
-
+        mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop() << 1;
     }
 
-    private float downX;
-    private float downY;
+    private float mLastX;
+    private float mLastY;
+    private Boolean mIsDrag;
+    private int mTouchSlop;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            downX = event.getRawX();
-            downY = event.getRawY();
-        }
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            int s = dp2px(5);
-            if (Math.abs(event.getRawX() - downX) <= s && Math.abs(event.getRawY() - downY) <= s) {
-                performClick();
-            }
-        }
-        if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            ViewGroup.LayoutParams param = getLayoutParams();
-            if (param instanceof ViewGroup.MarginLayoutParams) {
-                ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) param);
 
-                marginLayoutParams.leftMargin = (int) event.getRawX() - getWidth() / 2;
-                marginLayoutParams.topMargin = (int) event.getRawY() - getHeight() / 2;
-                int dp30 = dp2px(30);
-                int w = getWindwosWidth() - dp30;
-                if (marginLayoutParams.leftMargin > w) {
-                    marginLayoutParams.leftMargin = w;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mIsDrag = null;
+                mLastX = event.getRawX();
+                mLastY = event.getRawY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                float curX = event.getRawX();
+                float curY = event.getRawY();
+                if (mIsDrag == null) {
+                    if (Math.pow(curX - mLastX, 2) + Math.pow(curY - mLastY, 2) > mTouchSlop) {
+                        mIsDrag = true;
+                        mLastX = curX;
+                        mLastY = curY;
+                        break;
+                    }
+                } else if (mIsDrag) {
+                    ViewGroup.LayoutParams params = getLayoutParams();
+                    if (!(params instanceof ViewGroup.MarginLayoutParams)) {
+                        return super.onTouchEvent(event);
+                    }
+                    ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) params);
+                    marginLayoutParams.leftMargin += (curX - mLastX);
+                    marginLayoutParams.topMargin += (curY - mLastY);
+                    requestLayout();
+                    mLastX = curX;
+                    mLastY = curY;
                 }
 
-                int h = getWindwosHeight() - dp30;
-                if (marginLayoutParams.topMargin > h) {
-                    marginLayoutParams.topMargin = h;
+                break;
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+                if (mIsDrag == null) {
+                    performClick();
                 }
-
-                if (marginLayoutParams.topMargin < dp30) {
-                    marginLayoutParams.topMargin = dp30;
-                }
-                setLayoutParams(marginLayoutParams);
-            }
-
+                moveIfNeeded();
+                break;
         }
+
         return true;
     }
+
+    private void moveIfNeeded() {
+        ViewGroup.LayoutParams params = getLayoutParams();
+        if (!(params instanceof ViewGroup.MarginLayoutParams)) {
+            return;
+        }
+        ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) params);
+        if (marginLayoutParams.leftMargin < 0) {
+            marginLayoutParams.leftMargin = 0;
+        }
+        if (marginLayoutParams.topMargin < dp2px(30)) {
+            marginLayoutParams.topMargin = dp2px(30);
+        }
+        if (marginLayoutParams.leftMargin + getWidth() > ((View) getParent()).getWidth()) {
+            marginLayoutParams.leftMargin = ((View) getParent()).getWidth() - getWidth();
+        }
+        if (marginLayoutParams.topMargin + getHeight() > ((View) getParent()).getHeight()) {
+            marginLayoutParams.topMargin = ((View) getParent()).getHeight() - getHeight();
+        }
+        requestLayout();
+    }
+
 
     private int dp2px(int dip) {
         float density = getContext().getResources().getDisplayMetrics().density;
         return (int) (dip * density + 0.5);
     }
-
-    private int getWindwosWidth() {
-        Resources resources = getResources();
-        DisplayMetrics dm = resources.getDisplayMetrics();
-        return dm.widthPixels;
-    }
-
-    private int getWindwosHeight() {
-        Resources resources = getResources();
-        DisplayMetrics dm = resources.getDisplayMetrics();
-        return dm.heightPixels;
-    }
-
 
 }
