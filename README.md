@@ -1,6 +1,10 @@
 # SwissArmyKnife
 android免root兼容所有版本ui调试工具
 
+#### 版本更新
+
+* 0.0.9 新增页面渲染时间以及每个控件渲染时间统计
+* 0.1.0 修复部分bug
 
 ### SwissArmyKnife是什么
    
@@ -8,14 +12,18 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 
 可以通过滚动层级滚轮来控制只显示某一层级的信息，避免层级覆盖等。
 
+### 原理
+获取当前Activity的跟布局，activity.getWindow().getDecorView(),该view是个FrameLayout，给该view添加一个蒙层view，通过遍历跟view得到所有view的位置大小等信息，并绘制在蒙层上。
 <!-- more -->
 
 ### 使用方式
 
 
-`compile 'com.wanjian:sak:0.0.2'`
+`compile 'com.wanjian:sak:0.1.0'`
 
-android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.sak.LayoutManager.init(Application context) ` ,其他版本可以在activity的`onResume`中调用`com.wanjian.sak.LayoutManager.init(Activity act) `初始化。
+直接在application的onCreate中调用 `com.wanjian.sak.LayoutManager.init(Application context) `即可 ,
+API 14以下还需要在activity的`onResume`中调用`com.wanjian.sak.LayoutManager.resume(Activity act) `,
+并在activity的`onPause`中调用`com.wanjian.sak.LayoutManager.pause(Activity act) `。
 
 启动app后会在屏幕左上角看到一个 android logo ，点击即可进入功能界面。
 
@@ -92,10 +100,22 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 ### 直尺圆角尺，取色器
 
-开启后会在屏幕左上角显示，取色器刚开启时只会在屏幕左上角看到一个黑框，拖动到要取色的位置后抬起手机即可完成取色，取色器四个角可以获取所指像素的颜色值。取色器可以获取native页面每个像素颜色，也可以获取webview中每一个像素的颜色。
+开启后会在屏幕左上角显示，取色器刚开启时只会在屏幕左上角看到一个马赛克方块，拖动到要取色的位置后抬起手机即可完成取色，取色器四个角可以获取所指像素的颜色值。取色器可以获取native页面每个像素颜色，也可以获取webview中每一个像素的颜色。
 
 ![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E5%88%BB%E5%BA%A6%E5%B0%BA%E5%8F%8A%E5%8F%96%E8%89%B2%E5%99%A8.jpg)
 
+
+### 页面绘制时间
+
+建议同时开始实时刷新选项。当开启后手指在屏幕滑动时会实时显示渲染整个页面所需要的时间，该时间可以大致反应渲染时间。原理很简单，获取跟布局rootview，手动调用rootview.draw(new Canvas(bitmap))，计算调用该方法的时间差即可。
+
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/sak%E9%A1%B5%E9%9D%A2%E7%BB%98%E5%88%B6%E6%97%B6%E9%97%B4.jpg)
+
+
+### 绘制时间
+
+开启后可以看到各子控件绘制时间，建议同时开始实时刷新选项。实现原理同上。
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/sakview%E7%BB%98%E5%88%B6%E6%97%B6%E9%97%B4.jpg)
 
 ### 布局树
  
