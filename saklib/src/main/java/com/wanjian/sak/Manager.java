@@ -76,15 +76,6 @@ class Manager {
                 mEndLayer = num;
             }
         });
-        mCoverView.setOnCloseListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (AbsLayer layer : mConfig.getLayers()) {
-                    layer.enable(false);
-                }
-            }
-        });
-
     }
 
 

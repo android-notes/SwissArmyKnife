@@ -141,16 +141,6 @@ public class SAKCoverView extends RelativeLayout {
         ((WheelView) mOperatorView.findViewById(R.id.to)).setOnChangeListener(endLayerChangeListener);
     }
 
-    public void setOnCloseListener(final OnClickListener listener) {
-        mOperatorView.findViewById(R.id.close).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                listener.onClick(v);
-                mOperatorView.setVisibility(GONE);
-            }
-        });
-    }
 
 
 }

@@ -25,7 +25,7 @@ public class BorderLayer extends LayerAdapter {
 
     public BorderLayer(Context context) {
         super(context);
-        enable(true);
+//        enable(true);
     }
 
     @Override
