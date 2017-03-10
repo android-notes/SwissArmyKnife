@@ -3,8 +3,8 @@ android免root兼容所有版本ui调试工具
 
 
 ### SwissArmyKnife是什么
-   
-SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有android版本，不需要root权限。可以直接在android手机屏幕上显示当前Activity中所有控件（不管是否隐藏）的边界，内外边距大小，每一个控件大小，图片大小，字体颜色，大小，以及自定义信息。同时可以直接在屏幕上取色，另外还提供了直尺（单位为px和dp），圆角尺（单位dp）工具，可以直接测量大小。针对android开发者还提供了布局树查看功能，可以直接在手机屏幕查看当前Activity中所有控件层次信息等。
+
+SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有android版本，不需要root权限。可以直接在android手机屏幕上显示当前Activity中所有控件的边界，内外边距大小，每一个控件大小，图片大小，字体颜色，大小，以及自定义信息。同时可以直接在屏幕上取色，另外还提供了直尺，圆角尺等工具，可以直接测量大小。针对android开发者还提供了布局树查看功能，可以直接在手机屏幕查看当前Activity中所有控件层次信息等。最新的版本还提供了view渲染性能和页面渲染性能统计工具。
 
 可以通过滚动层级滚轮来控制只显示某一层级的信息，避免层级覆盖等。
 
@@ -12,20 +12,20 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 
 ### 使用方式
 
+`compile 'com.wanjian:sak:0.1.2.4'` （测试版）
 
-`compile 'com.wanjian:sak:0.0.2'`
 
-android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.sak.LayoutManager.init(Application context) ` ,其他版本可以在activity的`onResume`中调用`com.wanjian.sak.LayoutManager.init(Activity act) `初始化。
+android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.sak.SAK.init(Application context) ` ,其他版本还需要在每一个activity的`onResume`中调用`com.wanjian.sak.SAK.resume(Activity act) `，并在Activity的`OnPause`中调用`com.wanjian.sak.SAK.pause(Activity act) `。
 
-启动app后会在屏幕左上角看到一个 android logo ，点击即可进入功能界面。
+启动app后会在屏幕左上角看到一个 蓝色Logo ，点击即可进入功能界面。
 
 
 
 ### 功能界面
 
-![image](https://github.com/android-notes/blogimg/blob/master/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A21.jpg?raw=true)
+![image](https://raw.githubusercontent.com/android-notes/blogimg/master/newSAK%E5%8A%9F%E8%83%BD1.jpg)
 
-![img](https://raw.githubusercontent.com/android-notes/blogimg/master/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A22.jpg)
+![img](https://raw.githubusercontent.com/android-notes/blogimg/master/newSAK%E5%8A%9F%E8%83%BD2.jpg)
 
 
 ### 边框选项
@@ -46,12 +46,12 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 半透明红色代表外边距， ML，MT，MR，MB分别表示左外边距，上外边距，右外边距，下外边距。
 
-所有边距单位都是dp（pt），android中会四舍五入，所有边距都是整数，所以可能跟设计图中有不超过1dp（pt）的误差。
+单位可以在功能界面控制
 
 
 ### 宽高选项
 
-开启后会看到控件的宽高，单位是dp（pt）
+开启后会看到控件的宽高，单位可以在功能界面控制
 
 ![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E6%8E%A7%E4%BB%B6%E5%A4%A7%E5%B0%8F.jpg)
 
@@ -76,9 +76,9 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 ### 自定义信息
 
-自定义信息用于android开发者调试使用，开发者可以为view设置`setTag(com.wanjian.sak.CanvasManager.INFO_KEY,Object)`,设置后并开启自定义信息选项后就可以在控件左上角看到自定义的文本信息了。
+自定义信息用于android开发者调试使用，开发者可以为view设置`setTag(com.wanjian.sak.SAK.INFO_KEY,Object)`,设置后并开启自定义信息选项后就可以在控件左上角看到自定义的文本信息了。
 
-比如开发者想要在屏幕上看到TextView中有多少个文字，就可以这样使用`textview.setTag(com.wanjian.sak.CanvasManager.INFO_KEY,textview.getText().length())`,这样开启自定义信息选项后就可以在TextView上看到文字长度了。
+比如开发者想要在屏幕上看到TextView中有多少个文字，就可以这样使用`textview.setTag(com.wanjian.sak.SAK.INFO_KEY,textview.getText().length())`,这样开启自定义信息选项后就可以在TextView上看到文字长度了。
 
 ### 实时刷新
 
@@ -92,71 +92,70 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 ### 直尺圆角尺，取色器
 
-开启后会在屏幕左上角显示，取色器刚开启时只会在屏幕左上角看到一个黑框，拖动到要取色的位置后抬起手机即可完成取色，取色器四个角可以获取所指像素的颜色值。取色器可以获取native页面每个像素颜色，也可以获取webview中每一个像素的颜色。
+开启后会在屏幕左上角显示，取色器刚开启时只会在屏幕左上角看到一个马赛克方块，拖动到要取色的位置后抬起手机即可完成取色，取色器四个角可以获取所指像素的颜色值。取色器可以获取native页面每个像素颜色，也可以获取webview中每一个像素的颜色。
 
 ![image](https://raw.githubusercontent.com/android-notes/blogimg/master/%E5%88%BB%E5%BA%A6%E5%B0%BA%E5%8F%8A%E5%8F%96%E8%89%B2%E5%99%A8.jpg)
 
 
 ### 布局树
- 
+
  布局树可以双指缩放
- 
+
 ![image](https://github.com/android-notes/blogimg/blob/master/%E5%B8%83%E5%B1%80%E6%A0%91.jpg?raw=true)
 
 
 
-### 扩展
-
-用户可以方便的对SAK进行扩展，只需要继承自`AbsCanvas`并重新` onDraw(Canvas canvas, Paint paint, ViewGroup viewGroup, int startLayer, int endLayer)`,
-
-或者继承自`CanvasLayerAdapter`并重写`drawLayer(Canvas canvas, Paint paint, View view)`
-
-又或者继承自`CanvasLayerTxtAdapter`
-
-区别在于onDraw中没对层级进行处理，drawLayer中的view已经是层级区间的view，CanvasLayerTxtAdapter提供了
-`drawTxt(String txt, Canvas canvas, Paint paint, View view) `方法，可以直接调用drawTxt就可以把txt绘制到当前view左上角。
-
-
-写完自定义的Canvas后还需要在OperatorView布局中加入布局代码，用于开启自定义的Canvas，比如在布局中加入开关按钮，并为按钮添加监听，开启后调用
-`CanvasManager.getInstance(getContext()).addCanvas(new 你的Canvas())`
-
-比如我想自定义一个查看TextView字体大小的，我可以先实现一个Canvas
+### 自定义功能
 
 ```java
 
 
-public class TextSizeCanvas extends CanvasLayerTxtAdapter {
+        Config config = new Config.Build(this)
+                .viewFilter(new ViewFilter() {
+                    @Override
+                    public boolean apply(View view) {
+                        if (view instanceof ImageView) {
+                            return true;
+                        }
+                        if (view instanceof LinearLayout) {
+                            return true;
+                        }
+                        return false;
+                    }
+                })
+                .addLayerView(new TakeColorView(this))
+                .addLayer(new InfoLayer(this))
+                .addLayer(new BorderLayer(this))
+                .addLayer(new BitmapWidthHeightLayer(this))
+                .addLayer(new ViewClassLayer(this))
+                .addSizeConverter(new SizeConverter() {
+                    @Override
+                    public String desc() {
+                        return "my converter";
+                    }
 
-    @Override
-    protected void drawLayer(Canvas canvas, Paint paint, View view) {
-        if (view instanceof TextView) {
-            float size = ((TextView) view).getTextSize();
-            String txt = px2sp(view.getContext(), size) + "sp/ " + px2dp(view.getContext(), size) + "dp";
-            drawTxt(txt, canvas, paint, view);
-        }
+                    @Override
+                    public Size convert(Context context, float length) {
+                        return Size.obtain().setLength(length / 2).setUnit("myU");
+                    }
+                })
+                .build();
+        SAK.init(this, config);
 
-    }
-}
 
 
 ```
 
-然后在OperatorView布局中加入开关，当开启后执行
+可以按照如上所示定义自己的ViewFilter，决定要显示哪种view，比如只显示ImageView子类和LinearLayout子类。也可以添加自定义的view和图层，单位转换等。自定义的view要继承自`AbsLayerView`，自定义图层要继承自`AbsLayer`或`LayerAdapter`或`LayerTxtAdapter`，区别在于`LayerAdapter `的子类可以通过功能界面的层级滚轮进行控制，`LayerTxtAdapter `继承自`LayerAdapter `，提供了绘制文本的功能。
+可以添加多个单位转换SizeConverter，默认提供了原始数值SizeConverter，PX2DP SizeConverter，PX2SP SizeConverter，子定义的SizeConverter需要继承自`SizeConverter `，并重写相关方法即可。
 
-```java
-
-CanvasManager.getInstance(getContext()).addCanvas(new TextSizeCanvas());
-
-```
-
-就可以了。
-
+然后参考上述初始化SAK即可。
 
 
 ## 工程代码：
-https://github.com/android-notes/SwissArmyKnife        
+https://github.com/android-notes/SwissArmyKnife
 
 
 
- 
+
 

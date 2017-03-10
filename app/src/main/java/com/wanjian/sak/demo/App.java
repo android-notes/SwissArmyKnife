@@ -25,7 +25,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+//
 //        Config config = new Config.Build(this)
 //                .viewFilter(new ViewFilter() {
 //                    @Override
@@ -57,6 +57,8 @@ public class App extends Application {
 //                })
 //                .build();
 //        SAK.init(this, config);
+//
+//
         SAK.init(this);
     }
 }
