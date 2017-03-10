@@ -66,7 +66,7 @@ public class TreeView extends DragLayerView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.scale(factor, factor);
+        canvas.scale(mCurFactor, mCurFactor);
         mCurLayer = -1;
         layerCount(canvas, getRootView());
     }
@@ -185,54 +185,53 @@ public class TreeView extends DragLayerView {
     }
 
 
-    private float lastX;
-    private float lastY;
+    private float mLastX;
+    private float mLastY;
 
-    private int mode = 0;
-    float oldDist;
-    float factor = 1;
+    private int mMode = 0;
+    float mStartDist;
+    float mCurFactor = 1;
+    float mLastFactor = 1;
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                lastX = event.getX();
-                lastY = event.getY();
-                mode = 1;
+                mLastX = event.getX();
+                mLastY = event.getY();
+                mMode = 1;
                 break;
             case MotionEvent.ACTION_UP:
-                mode = 0;
+                mMode = 0;
                 break;
             case MotionEvent.ACTION_POINTER_UP:
-                mode -= 1;
+                mLastFactor = mCurFactor;
+                mMode -= 1;
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
-                oldDist = spacing(event);
-                mode += 1;
+                mStartDist = spacing(event);
+                mMode += 1;
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                if (mode >= 2) {
+                if (mMode >= 2) {
                     float newDist = spacing(event);
-                    zoom(newDist / oldDist);
+                    mCurFactor = mLastFactor * newDist / mStartDist;
+                    invalidate();
 
                 } else {
                     float curX = event.getX();
                     float curY = event.getY();
-                    scrollBy((int) (lastX - curX), (int) (lastY - curY));
-                    lastX = curX;
-                    lastY = curY;
+                    scrollBy((int) (mLastX - curX), (int) (mLastY - curY));
+                    mLastX = curX;
+                    mLastY = curY;
                 }
                 break;
         }
 
         return true;
-    }
-
-    private void zoom(float f) {
-        factor = f;
-        invalidate();
     }
 
 
@@ -241,6 +240,7 @@ public class TreeView extends DragLayerView {
         float y = event.getY(0) - event.getY(1);
         return (float) Math.sqrt(x * x + y * y);
     }
+
 
     protected int px2dp(float px) {
         final float scale = getContext().getResources().getDisplayMetrics().density;
