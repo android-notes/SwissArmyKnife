@@ -29,7 +29,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:22+'
     testCompile 'junit:junit:4.12'
 }
 
@@ -37,7 +36,7 @@ dependencies {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak'
-    publishVersion = '0.1.2.5'
+    publishVersion = '0.1.2.8'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 }

@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.view.ViewGroup;
 
 import com.wanjian.sak.R;
-import com.wanjian.sak.layerview.HorizontalMeasureView;
 
 /**
  * Created by wanjian on 2016/11/10.

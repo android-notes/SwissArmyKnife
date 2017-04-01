@@ -5,11 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.utils.BitmapCreater;
 
 /**
  * Created by wanjian on 2016/11/10.
@@ -95,10 +97,18 @@ public class TakeColorView extends DragLayerView {
         setVisibility(INVISIBLE);
         View root = getRootView();
         if (mBitmap == null) {
-            mBitmap = Bitmap.createBitmap(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
+            mBitmap = BitmapCreater.create(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
+        }
+        if (mBitmap == null) {
+            Log.w("SAK", "out of memory....");
+            return;
         }
         if (mBitmap.getWidth() < root.getWidth() || mBitmap.getHeight() < root.getHeight()) {
-            mBitmap = Bitmap.createBitmap(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
+            mBitmap = BitmapCreater.create(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
+        }
+        if (mBitmap == null) {
+            Log.w("SAK", "out of memory....");
+            return;
         }
         root.draw(new Canvas(mBitmap));
         int location[] = new int[2];
@@ -144,7 +154,6 @@ public class TakeColorView extends DragLayerView {
         }
         return true;
     }
-
 
 
     @Override

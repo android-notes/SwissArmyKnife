@@ -5,8 +5,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.wanjian.sak.layer.AbsLayer;
 import com.wanjian.sak.R;
+import com.wanjian.sak.layer.AbsLayer;
 
 /**
  * Created by wanjian on 2017/2/21.

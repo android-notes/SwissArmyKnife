@@ -6,8 +6,8 @@ import android.graphics.Paint;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wanjian.sak.layer.AbsLayer;
 import com.wanjian.sak.filter.ViewFilter;
+import com.wanjian.sak.layer.AbsLayer;
 import com.wanjian.sak.view.SAKCoverView;
 
 

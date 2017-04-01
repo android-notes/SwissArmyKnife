@@ -37,10 +37,8 @@ public abstract class LayerTxtAdapter extends LayerAdapter {
 
         paint.getTextBounds(txt, 0, txt.length(), mRect);
         paint.setColor(getBackgroundColor());
-        paint.setStyle(Paint.Style.FILL);
         canvas.drawRect(locationSize[0], locationSize[1], locationSize[0] + mRect.width() + 2, locationSize[1] + mRect.height() + 2, paint);
         paint.setColor(getColor());
-        paint.setStyle(Paint.Style.STROKE);
         canvas.drawText(txt, locationSize[0] + 1, locationSize[1] + 1 + mRect.height(), paint);
     }
 

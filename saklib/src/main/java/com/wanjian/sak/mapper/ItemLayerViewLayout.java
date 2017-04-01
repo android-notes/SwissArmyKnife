@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.wanjian.sak.R;
 import com.wanjian.sak.layerview.AbsLayerView;
-import com.wanjian.sak.layerview.DragLayerView;
 
 /**
  * Created by wanjian on 2017/2/21.

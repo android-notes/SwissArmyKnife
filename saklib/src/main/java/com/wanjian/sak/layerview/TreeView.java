@@ -2,7 +2,6 @@ package com.wanjian.sak.layerview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -20,11 +19,6 @@ import com.wanjian.sak.R;
 import com.wanjian.sak.SAK;
 import com.wanjian.sak.converter.SizeConverter;
 import com.wanjian.sak.view.SAKCoverView;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 
 /**

@@ -6,8 +6,8 @@ import android.graphics.Paint;
 import android.view.View;
 
 import com.wanjian.sak.converter.SizeConverter;
-import com.wanjian.sak.utils.Color;
 import com.wanjian.sak.mess.Size;
+import com.wanjian.sak.utils.Color;
 
 
 /**

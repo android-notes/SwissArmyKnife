@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wanjian.sak.R;
-import com.wanjian.sak.view.SAKCoverView;
 
 /**
  * Created by wanjian on 2017/3/1.

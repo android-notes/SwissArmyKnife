@@ -3,68 +3,26 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
-    <TextView
+    <Button
+        android:id="@+id/install"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="hello sak"
-        android:padding="10dp"
-        android:textSize="13sp"
-        android:textColor="#000"/>
+        android:textColor="#000"
+        android:text="Install"/>
+
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/open"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#f00"
-        android:textSize="20sp"
-        android:text="button"
-        android:layout_margin="10dp"/>
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:background="#e1e1e1">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:background="#fff"
-            >
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:orientation="vertical"
-                android:background="#e1e1e1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="text"
-                    android:textColor="#e1e1"
-                    android:textSize="15dp"
-                    android:background="#fff"
-                    />
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_margin="10dp"
-                    android:background="#fff"/>
-            </LinearLayout>
-        </RelativeLayout>
-    </FrameLayout>
-
-    <ImageView
-        android:layout_width="80dp"
+        android:textColor="#000"
+        android:text="new Act"/>
+    <com.wanjian.sak.demo.MyView
+        android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher"
-        android:layout_margin="10dp"
-        android:background="#fff"/>
+        android:background="#e1e1e1"/>
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher"
-        android:layout_margin="10dp"
-        android:background="#fff"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview"></ListView>
 </LinearLayout>

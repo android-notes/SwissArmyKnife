@@ -9,7 +9,13 @@ import com.wanjian.sak.view.SAKCoverView;
  */
 
 public abstract class ViewFilter {
-    public static ViewFilter FILTER = new DefaultViewFilter();
+    public static ViewFilter FILTER = new ViewFilter() {
+        @Override
+        public boolean apply(View view) {
+            return view.getVisibility() == View.VISIBLE;
+        }
+    };
+
 
     public final boolean filter(View view) {
         if (view instanceof SAKCoverView) {
