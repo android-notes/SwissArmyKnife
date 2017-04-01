@@ -5,7 +5,7 @@ android免root兼容所有版本ui调试工具
 ### 更新日志   
 * `compile 'com.wanjian:sak:0.1.2.8'` （测试版）2017-4-1
 	*  自动刷新
-        *  关闭功能 `SAK.unInstall(application)`
+    *  关闭功能 `SAK.unInstall(application)`
 
 	
 
@@ -99,11 +99,6 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 自定义信息用于android开发者调试使用，开发者可以为view设置`setTag(com.wanjian.sak.SAK.INFO_KEY,Object)`,设置后并开启自定义信息选项后就可以在控件左上角看到自定义的文本信息了。
 
 比如开发者想要在屏幕上看到TextView中有多少个文字，就可以这样使用`textview.setTag(com.wanjian.sak.SAK.INFO_KEY,textview.getText().length())`,这样开启自定义信息选项后就可以在TextView上看到文字长度了。
-
-### 实时刷新
-
-开启实时刷新后当手指在屏幕上移动时就可以实时看到相关信息，开启实时刷新后可能会导致滑动卡顿，也可能导致触摸，点击等失效。
-
 
 ### 层级信息
 
