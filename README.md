@@ -5,6 +5,8 @@ android免root兼容所有版本ui调试工具
 ### 更新日志   
 * `compile 'com.wanjian:sak:0.1.2.8'` （测试版）2017-4-1
 	*  自动刷新
+        *  关闭功能 `SAK.unInstall(application)`
+
 	
 
 
