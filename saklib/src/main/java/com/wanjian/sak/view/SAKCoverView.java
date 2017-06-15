@@ -42,7 +42,11 @@ public class SAKCoverView extends FrameLayout {
         findViewById(R.id.floatView).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOperatorView.setVisibility(VISIBLE);
+                if (mOperatorView.getVisibility() != VISIBLE) {
+                    mOperatorView.setVisibility(VISIBLE);
+                } else {
+                    mOperatorView.setVisibility(GONE);
+                }
             }
         });
 
