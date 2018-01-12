@@ -75,9 +75,9 @@ public class SAK {
         if (sManager == null) {
             return;
         }
-         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-             Check.isNull(application, "application");
-             application.unregisterActivityLifecycleCallbacks(sLifecycleCallbacksAdapter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            Check.isNull(application, "application");
+            application.unregisterActivityLifecycleCallbacks(sLifecycleCallbacksAdapter);
         }
         sManager.unInstall();
         sManager = null;

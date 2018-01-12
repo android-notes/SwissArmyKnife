@@ -19,6 +19,7 @@ import com.wanjian.sak.layer.adapter.LayerAdapter;
 public class MarginLayer extends LayerAdapter {
 
     private Rect mRect = new Rect();
+
     public MarginLayer(Context context) {
         super(context);
     }

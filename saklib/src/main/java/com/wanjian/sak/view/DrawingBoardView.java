@@ -12,16 +12,16 @@ import android.view.View;
  */
 
 public class DrawingBoardView extends View {
+    private Bitmap mBitmap;
+
     public DrawingBoardView(Context context) {
         super(context);
     }
 
+
     public DrawingBoardView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
-
-    private Bitmap mBitmap;
 
     @Override
     protected void onDraw(Canvas canvas) {

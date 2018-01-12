@@ -11,16 +11,15 @@ import android.app.Application;
 @Deprecated
 public class LayoutManager {
 
+    private LayoutManager() {
+    }
+
     public static void init(Application context) {
         SAK.init(context);
     }
 
-
     public static void init(Activity activity) {
         SAK.resume(activity);
 
-    }
-
-    private LayoutManager() {
     }
 }

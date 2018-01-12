@@ -15,25 +15,20 @@ import com.wanjian.sak.R;
  */
 
 public class HorizontalMeasureView extends DragLayerView {
+    protected Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    protected int mTwoDP;
+    protected int maxHeight;
+    protected int minHeight;
+
     public HorizontalMeasureView(Context context) {
         super(context);
         init();
     }
 
-
     @Override
     public String description() {
         return getContext().getString(R.string.sak_horizontal_measure);
     }
-
-
-    protected Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-    protected int mTwoDP;
-
-    protected int maxHeight;
-    protected int minHeight;
-
 
     private void init() {
         mPaint.setColor(Color.BLACK);

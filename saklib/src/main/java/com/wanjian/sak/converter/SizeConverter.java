@@ -9,9 +9,9 @@ import com.wanjian.sak.mess.Size;
  */
 
 public abstract class SizeConverter {
-    public abstract String desc();
-
     public static SizeConverter CONVERTER = new Px2dpSizeConverter();
+
+    public abstract String desc();
 
     public abstract Size convert(Context context, float length);
 

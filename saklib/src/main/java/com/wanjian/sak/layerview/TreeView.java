@@ -28,6 +28,18 @@ import com.wanjian.sak.view.SAKCoverView;
 
 public class TreeView extends DragLayerView {
     private Context mContext;
+    private Paint mPaint;
+    private int mTabW;
+    private int mTxtH;
+    private int mCurLayer;
+    private Matrix mMatrix;
+    private Matrix mDrawMatrix;
+    private int[] mLocation = new int[2];
+    private float mLastX;
+    private float mLastY;
+    private int mMode = 0;
+    private float mLastDist;
+    private boolean mIsScale;
 
     public TreeView(Context context) {
         super(context);
@@ -55,16 +67,6 @@ public class TreeView extends DragLayerView {
         setBackgroundColor(0x88000000);
         mDrawMatrix = new Matrix();
     }
-
-
-    private Paint mPaint;
-    private int mTabW;
-    private int mTxtH;
-    private int mCurLayer;
-    private Matrix mMatrix;
-
-    private Matrix mDrawMatrix;
-    private int[] mLocation = new int[2];
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -186,15 +188,6 @@ public class TreeView extends DragLayerView {
 
         return sb.toString();
     }
-
-
-    private float mLastX;
-    private float mLastY;
-
-    private int mMode = 0;
-    private float mLastDist;
-
-    private boolean mIsScale;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

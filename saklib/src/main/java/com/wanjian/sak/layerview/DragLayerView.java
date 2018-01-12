@@ -14,7 +14,6 @@ import com.wanjian.sak.mess.OnChangeListener;
 public abstract class DragLayerView extends AbsLayerView implements OnChangeListener {
 
 
-
     private float lastX;
     private float lastY;
 
@@ -46,8 +45,6 @@ public abstract class DragLayerView extends AbsLayerView implements OnChangeList
         onChange(event);
         return true;
     }
-
-
 
 
 }

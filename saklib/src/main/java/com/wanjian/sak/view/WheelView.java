@@ -23,6 +23,9 @@ import com.wanjian.sak.R;
  */
 
 public class WheelView extends ListView {
+    private int mHeight;
+    private OnChangeListener mOnChangeListener;
+    private Paint mPaint;
     public WheelView(Context context) {
         super(context);
         init(null);
@@ -32,12 +35,6 @@ public class WheelView extends ListView {
         super(context, attrs);
         init(attrs);
     }
-
-
-
-
-    private int mHeight;
-    private OnChangeListener mOnChangeListener;
 
     private void init(AttributeSet attrs) {
 
@@ -123,8 +120,6 @@ public class WheelView extends ListView {
         getParent().requestDisallowInterceptTouchEvent(true);
         return super.dispatchTouchEvent(ev);
     }
-
-    private Paint mPaint;
 
     @Override
     protected void dispatchDraw(Canvas canvas) {

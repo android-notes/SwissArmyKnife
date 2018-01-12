@@ -27,7 +27,7 @@ public class UnitLayout {
     }
 
     public void onCreate(View view) {
-        if (mSizeConverter.getClass()==SizeConverter.CONVERTER.getClass()){
+        if (mSizeConverter.getClass() == SizeConverter.CONVERTER.getClass()) {
             ((RadioButton) view).setChecked(true);
         }
         ((RadioButton) view).setText(mSizeConverter.desc());

@@ -16,6 +16,15 @@ import com.wanjian.sak.R;
  */
 
 public class CornerMeasureView extends DragLayerView {
+    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private int twoDP;
+    private int fourDP;
+    private int sixDP;
+    private int eightDP;
+    private int tenDP;
+    private int gap;
+    private int textSize;
+
     public CornerMeasureView(Context context) {
         super(context);
         init();
@@ -25,18 +34,6 @@ public class CornerMeasureView extends DragLayerView {
     public String description() {
         return getContext().getString(R.string.sak_corner_measure);
     }
-
-
-    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private int twoDP;
-    private int fourDP;
-    private int sixDP;
-    private int eightDP;
-    private int tenDP;
-
-    private int gap;
-
-    private int textSize;
 
     private void init() {
         mPaint.setColor(Color.BLACK);

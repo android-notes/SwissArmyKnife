@@ -15,6 +15,8 @@ import com.wanjian.sak.R;
  */
 
 public class OperatorView extends LinearLayout {
+    private ViewGroup container;
+
     public OperatorView(Context context) {
         super(context);
         init();
@@ -24,8 +26,6 @@ public class OperatorView extends LinearLayout {
         super(context, attrs);
         init();
     }
-
-    private ViewGroup container;
 
     private void init() {
         setGravity(Gravity.CENTER);

@@ -12,25 +12,22 @@ import android.view.ViewGroup;
  */
 
 public class FloatView extends View {
+    private float mLastX;
+    private float mLastY;
+    private Boolean mIsDrag;
+    private int mTouchSlop;
     public FloatView(Context context) {
         super(context);
         init();
     }
-
     public FloatView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-
     private void init() {
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop() << 1;
     }
-
-    private float mLastX;
-    private float mLastY;
-    private Boolean mIsDrag;
-    private int mTouchSlop;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

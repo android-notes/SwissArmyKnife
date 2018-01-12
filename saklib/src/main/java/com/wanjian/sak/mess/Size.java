@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Size {
 
+    private static List<Size> sList = new LinkedList<>();
     private float length;
     private String unit;
 
@@ -19,6 +20,16 @@ public class Size {
     public Size(int length, String unit) {
         this.length = length;
         this.unit = unit;
+    }
+
+    public static Size obtain() {
+//        if (sList.isEmpty()) {
+//            return new Size();
+//        }
+//
+//        return sList.get(0);
+
+        return new Size();
     }
 
     public float getLength() {
@@ -37,19 +48,6 @@ public class Size {
     public Size setUnit(String unit) {
         this.unit = unit;
         return this;
-    }
-
-
-    private static List<Size> sList = new LinkedList<>();
-
-    public static Size obtain() {
-//        if (sList.isEmpty()) {
-//            return new Size();
-//        }
-//
-//        return sList.get(0);
-
-        return new Size();
     }
 
 //    public static void returnSize(Size size) {

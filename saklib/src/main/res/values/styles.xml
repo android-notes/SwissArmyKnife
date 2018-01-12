@@ -1,8 +1,7 @@
 <resources>
 
-    <declare-styleable name="WheelView"
-        >
-        <attr name="sak_default_position" format="integer"/>
+    <declare-styleable name="WheelView">
+        <attr name="sak_default_position" format="integer" />
     </declare-styleable>
 
 </resources>

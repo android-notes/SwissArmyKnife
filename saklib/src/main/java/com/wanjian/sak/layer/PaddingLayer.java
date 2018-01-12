@@ -17,6 +17,7 @@ import com.wanjian.sak.layer.adapter.LayerAdapter;
 
 public class PaddingLayer extends LayerAdapter {
     private Rect mRect = new Rect();
+
     public PaddingLayer(Context context) {
         super(context);
     }
@@ -37,7 +38,6 @@ public class PaddingLayer extends LayerAdapter {
         canvas.drawRect(locationSize[0], locationSize[1], locationSize[0] + w, locationSize[1] + t, paint);
         canvas.drawRect(locationSize[0] + w - r, locationSize[1], locationSize[0] + w, locationSize[1] + h, paint);
         canvas.drawRect(locationSize[0], locationSize[1] + h - b, locationSize[0] + w, locationSize[1] + h, paint);
-
 
 
         if (l != 0) {
