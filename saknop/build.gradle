@@ -24,6 +24,16 @@ android {
 
 }
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.novoda:bintray-release:0.8.0'
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -35,8 +45,8 @@ dependencies {
 //添加
 publish {
     groupId = 'com.wanjian'
-    artifactId = 'sak'
-    publishVersion = '0.1.3'
+    artifactId = 'sak-nop'
+    publishVersion = '0.0.2'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 
