@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.wanjian.sak.R;
 import com.wanjian.sak.SAK;
 import com.wanjian.sak.converter.SizeConverter;
+import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.view.SAKCoverView;
 
 
@@ -74,7 +75,7 @@ public class TreeView extends DragLayerView {
     }
 
     private void layerCount(Canvas canvas, View view) {
-        if (view == null || view instanceof SAKCoverView) {
+        if (view == null || view instanceof SAKCoverView || ViewFilter.FILTER.filter(view) == false) {
             return;
         }
         mCurLayer++;
