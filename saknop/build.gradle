@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'//添加
+//apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion 22
@@ -42,17 +42,17 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-//添加
-publish {
-    groupId = 'com.wanjian'
-    artifactId = 'sak-nop'
-    publishVersion = '0.0.2'
-    desc = 'ui debug tool 4 android'
-    website = 'https://github.com/android-notes/SwissArmyKnife'
-
-    bintrayUser = 'wanjian' // 账户名
-    bintrayKey = '...' // 就是API key
-    dryRun = false
-
-}
-
+////添加
+//publish {
+//    groupId = 'com.wanjian'
+//    artifactId = 'sak-nop'
+//    publishVersion = '0.0.2'
+//    desc = 'ui debug tool 4 android'
+//    website = 'https://github.com/android-notes/SwissArmyKnife'
+//
+//    bintrayUser = 'wanjian' // 账户名
+//    bintrayKey = '...' // 就是API key
+//    dryRun = false
+//
+//}
+//
