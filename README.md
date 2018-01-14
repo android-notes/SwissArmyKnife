@@ -4,7 +4,7 @@ android免root兼容所有版本ui调试工具
 
 ### 更新日志   
 
-* `compile 'com.wanjian:sak:0.2.0'` 
+* `compile 'com.wanjian:sak:0.2.0'`  2018-1-12
 	*  父控件不可见时不绘制子view信息 
 	
 
@@ -14,9 +14,6 @@ android免root兼容所有版本ui调试工具
     *  关闭功能 `SAK.unInstall(application)`
 
 	
-
-
-### 更新日志
 * `compile 'com.wanjian:sak:0.1.2.4'` （测试版）2017-3-10
 	*  新增view渲染性能，页面渲染性能
 	*  新增单位转换功能，可以控制所有长度的单位
@@ -37,8 +34,6 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 
 
 ### 使用方式
-
-`compile 'com.wanjian:sak:0.1.2.4'` （测试版）
 
 
 android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.sak.SAK.init(Application context) ` ,其他版本还需要在每一个activity的`onResume`中调用`com.wanjian.sak.SAK.resume(Activity act) `，并在Activity的`onPause`中调用`com.wanjian.sak.SAK.pause(Activity act) `。
