@@ -4,6 +4,12 @@ android免root兼容所有版本ui调试工具
 
 ### 更新日志   
 
+
+* `compile 'com.wanjian:sak:0.2.1'`  2018-1-15
+	*  ui 调整
+	
+
+
 * `compile 'com.wanjian:sak:0.2.0'`  2018-1-12
 	*  父控件不可见时不绘制子view信息 
 	
