@@ -45,12 +45,12 @@ dependencies {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak'
-    publishVersion = '0.2.1'
+    publishVersion = '0.2.1.2'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 
     bintrayUser = 'wanjian' // 账户名
-    bintrayKey = '...' // 就是API key
+    bintrayKey = '51b8041b3d4f20f9f1b5dd0dbb4d0d0b6c155021' // 就是API key
     dryRun = false
 
 }

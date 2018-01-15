@@ -3,8 +3,10 @@ package com.wanjian.sak.layer.adapter;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Region;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 
 import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layer.AbsLayer;
@@ -41,6 +43,18 @@ public abstract class LayerAdapter extends AbsLayer {
         if (mCurLayer + 1 > mEndLayer) {
             return;
         }
+        int count = 0;
+        ViewParent parent = view.getParent();
+        if (parent instanceof View) {
+            count = canvas.save();
+            int[] locationAndSize = getLocationAndSize(((View) parent));
+            canvas.clipRect(locationAndSize[0]
+                    , locationAndSize[1]
+                    , locationAndSize[0] + locationAndSize[2]
+                    , locationAndSize[1] + locationAndSize[3]
+                    , Region.Op.INTERSECT);
+        }
+
         mCurLayer++;
         if (mCurLayer >= mStartLayer && mCurLayer <= mEndLayer) {
             drawLayer(canvas, paint, view);
@@ -54,6 +68,9 @@ public abstract class LayerAdapter extends AbsLayer {
             }
         }
         mCurLayer--;
+        if (parent instanceof View) {
+            canvas.restoreToCount(count);
+        }
     }
 
 

@@ -59,7 +59,7 @@ public abstract class AbsLayer {
      */
     protected int[] getLocationAndSize(View view) {
         int[] locations = new int[2];
-        view.getLocationOnScreen(locations);
+        view.getLocationInWindow(locations);
         return new int[]{locations[0], locations[1], view.getWidth(), view.getHeight()};
     }
 

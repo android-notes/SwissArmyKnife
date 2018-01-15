@@ -51,18 +51,18 @@ public class MarginLayer extends LayerAdapter {
                 paint.getTextBounds(txt, 0, txt.length(), mRect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(l, locationSize[1], l + mRect.width(), locationSize[1] + mRect.height(), paint);
+                canvas.drawRect(l, locationSize[1] + locationSize[3] / 2, l + mRect.width(), locationSize[1] + locationSize[3] / 2 + mRect.height(), paint);
                 paint.setColor(Color.BLACK);
-                canvas.drawText(txt, l, locationSize[1] + mRect.height(), paint);
+                canvas.drawText(txt, l, locationSize[1] + locationSize[3] / 2 + mRect.height(), paint);
             }
             if (marginLayoutParams.topMargin != 0) {
                 String txt = "MT" + convertSize(marginLayoutParams.topMargin).getLength();
                 paint.getTextBounds(txt, 0, txt.length(), mRect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(locationSize[0], t, locationSize[0] + mRect.width(), t + mRect.height(), paint);
+                canvas.drawRect(locationSize[0] + locationSize[2] / 2, t, locationSize[0] + locationSize[2] / 2 + mRect.width(), t + mRect.height(), paint);
                 paint.setColor(Color.BLACK);
-                canvas.drawText(txt, locationSize[0], locationSize[1] - marginLayoutParams.topMargin + mRect.height(), paint);
+                canvas.drawText(txt, locationSize[0] + locationSize[2] / 2, t + mRect.height(), paint);
             }
 
             if (marginLayoutParams.rightMargin != 0) {
@@ -70,9 +70,9 @@ public class MarginLayer extends LayerAdapter {
                 paint.getTextBounds(txt, 0, txt.length(), mRect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(locationSize[0] + w, locationSize[1], locationSize[0] + w + mRect.width(), locationSize[1] + mRect.height(), paint);
+                canvas.drawRect(r - mRect.width(), locationSize[1] + locationSize[3] / 2, r, locationSize[1] + locationSize[3] / 2 + mRect.height(), paint);
                 paint.setColor(Color.BLACK);
-                canvas.drawText(txt, locationSize[0] + w, locationSize[1] + mRect.height(), paint);
+                canvas.drawText(txt, r - mRect.width(), locationSize[1] + locationSize[3] / 2 + mRect.height(), paint);
             }
 
             if (marginLayoutParams.bottomMargin != 0) {
@@ -80,9 +80,9 @@ public class MarginLayer extends LayerAdapter {
                 paint.getTextBounds(txt, 0, txt.length(), mRect);
                 paint.setColor(0x88ffffff);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(locationSize[0], locationSize[1] + h, locationSize[0] + mRect.width(), locationSize[1] + h + mRect.height(), paint);
+                canvas.drawRect(locationSize[0] + locationSize[2] / 2, b - mRect.height(), locationSize[0] + locationSize[2] / 2 + mRect.width(), b, paint);
                 paint.setColor(Color.BLACK);
-                canvas.drawText(txt, locationSize[0], locationSize[1] + h + mRect.height(), paint);
+                canvas.drawText(txt, locationSize[0] + locationSize[2] / 2, b, paint);
             }
 
 
