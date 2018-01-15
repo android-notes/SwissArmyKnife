@@ -41,16 +41,16 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-//添加  先执行 generatePomFileForReleasePublication和publishReleasePublicationToMabenLocal，再执行bintrayUpload。在publishing下
+// clean -- build  --- generatePomFileForReleasePublication---publishReleasePublicationToMabenLocal---bintrayUpload---publishing
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak'
-    publishVersion = '0.2.0'
+    publishVersion = '0.2.1'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 
     bintrayUser = 'wanjian' // 账户名
-    bintrayKey = '...jcenter--edit profile--api key' // 就是API key
+    bintrayKey = '...' // 就是API key
     dryRun = false
 
 }
