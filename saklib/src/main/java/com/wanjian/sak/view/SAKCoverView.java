@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 
@@ -26,6 +28,8 @@ public class SAKCoverView extends FrameLayout {
     private OperatorView mOperatorView;
     private RadioGroup mUnitGroup;
 
+    private CheckBox mDrawIfOutOfBounds;
+
     public SAKCoverView(Context context) {
         super(context);
         init();
@@ -38,7 +42,7 @@ public class SAKCoverView extends FrameLayout {
 
         mDrawBoard = (DrawingBoardView) findViewById(R.id.drawBoard);
         mOperatorView = (OperatorView) findViewById(R.id.operatorView);
-
+        mDrawIfOutOfBounds = (CheckBox) findViewById(R.id.drawIfOutOfBounds);
         findViewById(R.id.floatView).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,5 +116,8 @@ public class SAKCoverView extends FrameLayout {
         ((WheelView) mOperatorView.findViewById(R.id.to)).setOnChangeListener(endLayerChangeListener);
     }
 
+    public void setDrawIfOutOfBoundsClickListener(CompoundButton.OnCheckedChangeListener listener) {
+        mDrawIfOutOfBounds.setOnCheckedChangeListener(listener);
+    }
 
 }

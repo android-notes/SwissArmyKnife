@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.CompoundButton;
 
 import com.wanjian.sak.config.Config;
 import com.wanjian.sak.converter.SizeConverter;
@@ -39,15 +40,16 @@ class Manager {
     private Canvas mCanvas;
     private Bitmap mInfo;
     private WeakReference<Activity> mCurActRef;
+    private boolean mDrawIfOutOfBounds = false;
     private ViewTreeObserver.OnPreDrawListener mDrawListener = new ViewTreeObserver.OnPreDrawListener() {
         @Override
         public boolean onPreDraw() {
-            Log.d("SAK", "draw.....");
             View root = mCoverView.getRootView();
 //            root.getViewTreeObserver().removeOnPreDrawListener(this);
             List<AbsLayer> layers = mConfig.getLayers();
             mInfo.eraseColor(0);
             for (AbsLayer layer : layers) {
+                layer.drawIfOutBounds(mDrawIfOutOfBounds);
                 layer.draw(mCanvas, root, mStartLayer, mEndLayer);
             }
             mCoverView.setInfo(mInfo);
@@ -88,6 +90,13 @@ class Manager {
             @Override
             public void onChange(int num) {
                 mEndLayer = num;
+            }
+        });
+
+        mCoverView.setDrawIfOutOfBoundsClickListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mDrawIfOutOfBounds = isChecked;
             }
         });
     }

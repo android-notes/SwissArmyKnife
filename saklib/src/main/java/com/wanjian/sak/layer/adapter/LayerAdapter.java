@@ -43,18 +43,20 @@ public abstract class LayerAdapter extends AbsLayer {
         if (mCurLayer + 1 > mEndLayer) {
             return;
         }
+        boolean drawIfOutOfBounds = isDrawIfOutBounds();
         int count = 0;
         ViewParent parent = view.getParent();
-        if (parent instanceof View) {
-            count = canvas.save();
-            int[] locationAndSize = getLocationAndSize(((View) parent));
-            canvas.clipRect(locationAndSize[0]
-                    , locationAndSize[1]
-                    , locationAndSize[0] + locationAndSize[2]
-                    , locationAndSize[1] + locationAndSize[3]
-                    , Region.Op.INTERSECT);
+        if (drawIfOutOfBounds == false) {
+            if (parent instanceof View) {
+                count = canvas.save();
+                int[] locationAndSize = getLocationAndSize(((View) parent));
+                canvas.clipRect(locationAndSize[0]
+                        , locationAndSize[1]
+                        , locationAndSize[0] + locationAndSize[2]
+                        , locationAndSize[1] + locationAndSize[3]
+                        , Region.Op.INTERSECT);
+            }
         }
-
         mCurLayer++;
         if (mCurLayer >= mStartLayer && mCurLayer <= mEndLayer) {
             drawLayer(canvas, paint, view);
@@ -68,8 +70,10 @@ public abstract class LayerAdapter extends AbsLayer {
             }
         }
         mCurLayer--;
-        if (parent instanceof View) {
-            canvas.restoreToCount(count);
+        if (drawIfOutOfBounds == false) {
+            if (parent instanceof View) {
+                canvas.restoreToCount(count);
+            }
         }
     }
 

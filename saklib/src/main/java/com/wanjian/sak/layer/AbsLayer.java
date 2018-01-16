@@ -19,6 +19,7 @@ public abstract class AbsLayer {
     protected Context mContext;
     private Paint mPaint;
     private boolean mEnable;
+    private boolean mDrawIfOutBounds;
 
     public AbsLayer(Context context) {
         mContext = context;
@@ -37,6 +38,14 @@ public abstract class AbsLayer {
         return mEnable;
     }
 
+
+    public final void drawIfOutBounds(boolean b) {
+        mDrawIfOutBounds = b;
+    }
+
+    protected boolean isDrawIfOutBounds() {
+        return mDrawIfOutBounds;
+    }
 
     public final void draw(Canvas canvas, View view, int startLayer, int endLayer) {
         if (!mEnable) {
