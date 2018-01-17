@@ -4,6 +4,11 @@ android免root兼容所有版本ui调试工具
 
 ### 更新日志  
 
+
+* `compile 'com.wanjian:sak:0.3.1'`  2018-1-17
+	*  解决dialog主题activity显示偏移问题
+	
+
 * `compile 'com.wanjian:sak:0.3.0'`  2018-1-16
 	*  允许超出边界绘制。 默认不允许
 	
