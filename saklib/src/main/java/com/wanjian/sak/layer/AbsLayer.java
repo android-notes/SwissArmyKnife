@@ -69,7 +69,8 @@ public abstract class AbsLayer {
     protected int[] getLocationAndSize(View view) {
         int[] locations = new int[2];
         view.getLocationInWindow(locations);
-        return new int[]{locations[0], locations[1], view.getWidth(), view.getHeight()};
+        View decorView = view.getRootView();// dialog 内边距
+        return new int[]{locations[0] - decorView.getPaddingLeft(), locations[1] - decorView.getPaddingTop(), view.getWidth(), view.getHeight()};
     }
 
     protected Size convertSize(float length) {
