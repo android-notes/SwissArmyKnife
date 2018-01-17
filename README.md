@@ -2,7 +2,11 @@
 android免root兼容所有版本ui调试工具
 
 
-### 更新日志   
+### 更新日志  
+
+* `compile 'com.wanjian:sak:0.3.0'`  2018-1-16
+	*  允许超出边界绘制。 默认不允许
+	
 
 
 * `compile 'com.wanjian:sak:0.2.1'`  2018-1-15
@@ -125,7 +129,9 @@ android 4.0及以上用户直接在application的onCreate中调用 `com.wanjian.
 
 ![image](https://github.com/android-notes/blogimg/blob/master/%E5%B8%83%E5%B1%80%E6%A0%91.jpg?raw=true)
 
-
+### 允许超出边界绘制
+ 
+默认不允许超出父控件边界。当父控件和子控件差不多大小时，子控件的字体大小等文本信息可能显示不完整，允许超出边界绘制后可以完整显示
 
 ### 自定义功能
 
