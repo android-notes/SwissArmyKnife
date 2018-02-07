@@ -4,8 +4,8 @@ android免root兼容所有版本ui调试工具
 
 ### 更新日志  
 
-* autopilot 版
-	*  https://github.com/android-notes/SwissArmyKnife/tree/autopilot   autopilot 分支
+* Autopilot 版
+	*  https://github.com/android-notes/SwissArmyKnife/tree/autopilot   Autopilot 分支
 	*  支持Activity，dialog，popupwindow等，不侵入业务代码
 
 * `compile 'com.wanjian:sak:0.3.1'`  2018-1-17
