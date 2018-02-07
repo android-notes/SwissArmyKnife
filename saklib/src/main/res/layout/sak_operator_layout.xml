@@ -3,159 +3,170 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
     tools:parentTag="android.widget.LinearLayout">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/optContainer"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:paddingBottom="100dp"
-        android:paddingTop="100dp">
+        android:layout_height="wrap_content"
+        android:background="@drawable/sak_box_bag"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/sak_box_bag"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="15dp"
-                android:text="Swiss Army Knife"
-                android:textColor="#000"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="10dp">
+
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:text="Swiss Army Knife-Autopilot"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sak_layer"
-                    android:textColor="#000" />
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <com.wanjian.sak.view.WheelView
-                    android:id="@+id/from"
-                    android:layout_width="@dimen/sak_wheel_width"
-                    android:layout_height="@dimen/sak_wheel_height"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/sak_box_bag"
-                    app:sak_default_position="3"></com.wanjian.sak.view.WheelView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="to"
-                    android:textColor="#000" />
-
-                <com.wanjian.sak.view.WheelView
-                    android:id="@+id/to"
-                    android:layout_width="@dimen/sak_wheel_width"
-                    android:layout_height="@dimen/sak_wheel_height"
-                    android:background="@drawable/sak_box_bag"
-                    app:sak_default_position="30"></com.wanjian.sak.view.WheelView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="@string/sak_unit"
-                    android:textColor="#000" />
-
-                <HorizontalScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <RadioGroup
-                        android:id="@+id/unitGroup"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        tools:layout_height="40dp">
+                        android:text="@string/sak_layer"
+                        android:textColor="#000" />
 
-                    </RadioGroup>
-                </HorizontalScrollView>
+                    <com.wanjian.sak.view.WheelView
+                        android:id="@+id/from"
+                        android:layout_width="@dimen/sak_wheel_width"
+                        android:layout_height="@dimen/sak_wheel_height"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/sak_box_bag"
+                        app:sak_default_position="3"></com.wanjian.sak.view.WheelView>
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="to"
+                        android:textColor="#000" />
 
+                    <com.wanjian.sak.view.WheelView
+                        android:id="@+id/to"
+                        android:layout_width="@dimen/sak_wheel_width"
+                        android:layout_height="@dimen/sak_wheel_height"
+                        android:background="@drawable/sak_box_bag"
+                        app:sak_default_position="30"></com.wanjian.sak.view.WheelView>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="允许超出边界绘制"
-                    android:textColor="#000" />
-
-                <CheckBox
-                    android:id="@+id/drawIfOutOfBounds"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:checked="false" />
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/sak_unit"
+                        android:textColor="#000" />
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <RadioGroup
+                            android:id="@+id/unitGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            tools:layout_height="40dp">
+
+                        </RadioGroup>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="允许超出边界绘制"
+                        android:textColor="#000" />
+
+                    <CheckBox
+                        android:id="@+id/drawIfOutOfBounds"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:checked="false" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/ok"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/sak_corner_but_bag"
-                android:gravity="center"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:text="@string/sak_ok"
-                android:textColor="#000" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/sak_corner_but_bag"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/sak_ok"
+            android:textColor="#000" />
 
 
-            <TextView
-                android:id="@+id/help"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="https://github.com/android-notes/SwissArmyKnife"
-                android:textColor="#b1b1b1" />
-
-        </LinearLayout>
-    </ScrollView>
+        <TextView
+            android:id="@+id/help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="https://github.com/android-notes/SwissArmyKnife"
+            android:textColor="#b1b1b1" />
+    </LinearLayout>
 </merge>

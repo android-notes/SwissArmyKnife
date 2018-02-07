@@ -1,6 +1,5 @@
 package com.wanjian.sak;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 
 import com.wanjian.sak.config.Config;
 import com.wanjian.sak.converter.SizeConverter;
@@ -22,7 +22,6 @@ import com.wanjian.sak.utils.BitmapCreater;
 import com.wanjian.sak.view.SAKCoverView;
 import com.wanjian.sak.view.WheelView;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -39,13 +38,11 @@ class Manager {
     private int mEndLayer = 30;
     private Canvas mCanvas;
     private Bitmap mInfo;
-    private WeakReference<Activity> mCurActRef;
     private boolean mDrawIfOutOfBounds = false;
     private ViewTreeObserver.OnPreDrawListener mDrawListener = new ViewTreeObserver.OnPreDrawListener() {
         @Override
         public boolean onPreDraw() {
             View root = mCoverView.getRootView();
-//            root.getViewTreeObserver().removeOnPreDrawListener(this);
             List<AbsLayer> layers = mConfig.getLayers();
             mInfo.eraseColor(0);
             for (AbsLayer layer : layers) {
@@ -53,7 +50,6 @@ class Manager {
                 layer.draw(mCanvas, root, mStartLayer, mEndLayer);
             }
             mCoverView.setInfo(mInfo);
-//            root.getViewTreeObserver().addOnPreDrawListener(this);
             return true;
         }
     };
@@ -102,15 +98,14 @@ class Manager {
     }
 
 
-    void detach(Activity activity) {
-        ViewGroup dectorView = ((ViewGroup) activity.getWindow().getDecorView());
+    void detach(FrameLayout rootView) {
+        ViewGroup dectorView = rootView;
         dectorView.getViewTreeObserver().removeOnPreDrawListener(mDrawListener);
         dectorView.removeView(mCoverView);
     }
 
-    void attach(Activity activity) {
-        mCurActRef = new WeakReference<>(activity);
-        DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
+    void attach(FrameLayout rootView) {
+        DisplayMetrics metrics = rootView.getResources().getDisplayMetrics();
         if (mInfo == null) {
             mInfo = BitmapCreater.create(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
         }
@@ -131,21 +126,24 @@ class Manager {
         if (mCoverView.getParent() != null) {
             ((ViewGroup) mCoverView.getParent()).removeView(mCoverView);
         }
+        int h = rootView.getHeight() - rootView.getPaddingTop() - rootView.getPaddingBottom();
+        int w = rootView.getWidth() - rootView.getPaddingLeft() - rootView.getPaddingRight();
+        if (w > 0 && h > 0) {
+            mCoverView.setLayoutParams(new FrameLayout.LayoutParams(w, h));
+            int max = (int) (metrics.density * 550);
+            if (h > max) {
+                h = max;
+            }
+            mCoverView.findViewById(R.id.optContainer).getLayoutParams().height = h;
 
-        ViewGroup dectorView = ((ViewGroup) activity.getWindow().getDecorView());
+        }
+        ViewGroup dectorView = rootView;
         dectorView.addView(mCoverView);
         dectorView.getViewTreeObserver().addOnPreDrawListener(mDrawListener);
     }
 
-    void unInstall() {
-        if (mCurActRef == null) {
-            return;
-        }
-        Activity activity = mCurActRef.get();
-        if (activity == null) {
-            return;
-        }
-        ViewGroup decorView = ((ViewGroup) activity.getWindow().getDecorView());
+    void unInstall(FrameLayout rootView) {
+        ViewGroup decorView = rootView;
 
         decorView.getViewTreeObserver().removeOnPreDrawListener(mDrawListener);
 

@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
 import com.wanjian.sak.R;
 import com.wanjian.sak.layerview.AbsLayerView;

@@ -5,32 +5,38 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/install"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Install"
-        android:textColor="#000" />
-
-    <Button
         android:id="@+id/open"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-20dp"
-        android:layout_marginRight="-20dp"
-        android:layout_marginBottom="-20dp"
-        android:text="new Act"
-        android:padding="20dp"
+        android:text="dialog Act"
+        android:textAllCaps="false"
         android:textColor="#000" />
 
-    <com.wanjian.sak.demo.MyView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#e1e1e1" />
+
+    <Button
+        android:id="@+id/dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dialog"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/userDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user dialog"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/popupwindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="popupwindow"
+        android:textAllCaps="false" />
 
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="-20dp"></ListView>
+        android:layout_height="match_parent"></ListView>
 </LinearLayout>
