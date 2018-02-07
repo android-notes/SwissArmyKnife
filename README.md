@@ -41,7 +41,7 @@ android 4.4及以上：
  
 
 ## 工程代码：
-https://github.com/android-notes/SwissArmyKnife/blob/autopilot/README.md
+https://github.com/android-notes/SwissArmyKnife/tree/autopilot   autopilot 分支
 
 
 
