@@ -45,7 +45,7 @@ dependencies {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak-autopilot'
-    publishVersion = '0.0.1'
+    publishVersion = '0.0.2'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 
