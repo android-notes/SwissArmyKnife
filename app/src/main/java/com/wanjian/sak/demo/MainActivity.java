@@ -6,14 +6,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by wanjian on 2017/3/7.
@@ -56,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
                 popupwindow(v);
             }
         });
+
+        findViewById(R.id.userWindow).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userWindow(v);
+            }
+        });
+
         final ListView listView = (ListView) findViewById(R.id.listview);
 
         listView.setAdapter(new BaseAdapter() {
@@ -81,6 +90,22 @@ public class MainActivity extends AppCompatActivity {
                 }
                 ((TextView) convertView.findViewById(R.id.txt)).setText("" + position);
                 return convertView;
+            }
+        });
+    }
+
+    private void userWindow(View v) {
+        final WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        final View view = LayoutInflater.from(this).inflate(R.layout.user_window, null);
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.gravity = Gravity.CENTER;
+        windowManager.addView(view, params);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                windowManager.removeView(view);
             }
         });
     }

@@ -21,34 +21,29 @@ import java.util.Collection;
 
 public class Autopilot extends AbsContentProvider {
 
-    /**
+    /*
      * //加锁
      * 4.0.3_r1    WindowManagerImpl   private View[] mViews;
      * 4.0.4       WindowManagerImpl   private View[] mViews;
-     * <p>
+     *
      * 4.1.1       WindowManagerImpl   private View[] mViews;
      * 4.1.2       WindowManagerImpl   private View[] mViews;
-     * <p>
+     *
      * 4.2_r1      WindowManagerGlobal  private View[] mViews
      * 4.2.2 r1    WindowManagerGlobal  private View[] mViews
-     * <p>
-     * <p>
+     *
      * 4.3_r2.1     WindowManagerGlobal  private View[] mViews;
-     * <p>
-     * <p>
-     * <p>
-     * <p>
+     *
      * //不加锁
      * 4.4_r1       WindowManagerGlobal   private final ArrayList<View> mViews
      * 4.4.2_r1     WindowManagerGlobal   private final ArrayList<View> mViews
-     * <p>
-     * <p>
+     *
      * 5.0.0_r2     WindowManagerGlobal   private final ArrayList<View> mViews
-     * <p>
+     *
      * 6.0.0_r1     WindowManagerGlobal   private final ArrayList<View> mViews
-     * <p>
+     *
      * 7.0.0_r1     WindowManagerGlobal   private final ArrayList<View> mViews
-     * <p>
+     *
      * 8.0.0_r4    WindowManagerGlobal   private final ArrayList<View> mViews
      */
 

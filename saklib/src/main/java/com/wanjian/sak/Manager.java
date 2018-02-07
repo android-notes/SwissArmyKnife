@@ -34,7 +34,7 @@ class Manager {
 
     private SAKCoverView mCoverView;
 
-    private int mStartLayer = 3;
+    private int mStartLayer = 0;
     private int mEndLayer = 30;
     private Canvas mCanvas;
     private Bitmap mInfo;
