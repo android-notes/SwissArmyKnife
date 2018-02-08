@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecAct" android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity
+            android:name=".DialogAct"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity android:name=".SecAct" />
     </application>
 
 </manifest>

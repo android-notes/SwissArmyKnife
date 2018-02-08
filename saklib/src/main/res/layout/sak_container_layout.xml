@@ -10,16 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
-    <com.wanjian.sak.view.OperatorView
-        android:id="@+id/operatorView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:background="#88888888"
-        android:visibility="gone"
-        tools:visibility="visible"></com.wanjian.sak.view.OperatorView>
-
     <com.wanjian.sak.view.FloatView
         android:id="@+id/floatView"
         android:layout_width="40dp"

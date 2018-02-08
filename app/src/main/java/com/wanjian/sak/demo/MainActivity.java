@@ -31,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.open).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), DialogAct.class));
+            }
+        });
+
+        findViewById(R.id.openAct).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), SecAct.class));
             }
         });

@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:parentTag="android.widget.LinearLayout">
+    android:layout_height="match_parent"
+    tools:parentTag="android.widget.FrameLayout">
 
     <LinearLayout
         android:id="@+id/optContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/sak_box_bag"
         android:orientation="vertical">
 
@@ -101,7 +102,8 @@
 
                     <HorizontalScrollView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp">
 
                         <RadioGroup
                             android:id="@+id/unitGroup"
@@ -161,10 +163,12 @@
             android:id="@+id/help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="2dp"
             android:gravity="center"
             android:maxLines="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:singleLine="true"
             android:text="https://github.com/android-notes/SwissArmyKnife"
             android:textColor="#b1b1b1" />

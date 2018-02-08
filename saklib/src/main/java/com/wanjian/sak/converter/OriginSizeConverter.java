@@ -13,7 +13,7 @@ public class OriginSizeConverter extends SizeConverter {
 
     @Override
     public String desc() {
-        return "Origin(px)";
+        return "Px";
     }
 
     @Override

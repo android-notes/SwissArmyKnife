@@ -12,6 +12,14 @@
         android:textAllCaps="false"
         android:textColor="#000" />
 
+    <Button
+        android:id="@+id/openAct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="new Act"
+        android:textAllCaps="false"
+        android:textColor="#000" />
+
 
     <Button
         android:id="@+id/dialog"

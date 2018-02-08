@@ -19,7 +19,7 @@ import java.util.Collection;
  * Created by wanjian on 2018/2/7.
  */
 
-public class Autopilot extends AbsContentProvider {
+public class Autopilot extends AppStartObserver {
 
     /*
      * //加锁
@@ -47,11 +47,14 @@ public class Autopilot extends AbsContentProvider {
      * 8.0.0_r4    WindowManagerGlobal   private final ArrayList<View> mViews
      */
 
+    private Manager manager;
+
     @Override
-    public boolean onCreate() {
+    protected void onStart() {
+        manager = new Manager(getContext(), new Config.Build(getContext()).build());
         hook();
-        return true;
     }
+
 
     private void hook() {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
@@ -81,6 +84,12 @@ public class Autopilot extends AbsContentProvider {
                             });
                         }
                         return b;
+                    }
+
+                    @Override
+                    public View remove(int index) {
+                        View view = super.remove(index);
+                        return view;
                     }
                 });
                 mViewsFiled.setAccessible(false);
@@ -158,11 +167,11 @@ public class Autopilot extends AbsContentProvider {
         for (int i = 0; i < childCount; i++) {
             View child = rootView.getChildAt(i);
             if (child instanceof SAKCoverView) {
-                return;
+                rootView.removeView(child);
             }
         }
 
-        Manager manager = new Manager(getContext(), new Config.Build(getContext()).build());
+//        Manager manager = new Manager(getContext(), new Config.Build(getContext()).build());
         manager.attach(rootView);
 
     }

@@ -11,7 +11,7 @@ import com.wanjian.sak.mess.Size;
 public class Px2dpSizeConverter extends SizeConverter {
     @Override
     public String desc() {
-        return "Dp(pt)";
+        return "Dp";
     }
 
     @Override
