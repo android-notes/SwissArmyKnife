@@ -112,7 +112,7 @@ public class TakeColorView extends DragLayerView {
         }
         root.draw(new Canvas(mBitmap));
         int location[] = new int[2];
-        getLocationOnScreen(location);
+        getLocationInWindow(location);
         if (checkPixelAccess(location[0], location[1], mBitmap)) {
             mLtColor = mBitmap.getPixel(location[0], location[1]);
         } else {
