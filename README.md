@@ -5,12 +5,12 @@ android免root兼容所有版本ui调试工具,支持Activity，dialog，popupwi
 
 ### 更新日志  
 
-* `compile 'com.wanjian:sak-autopilot:0.0.2'`
+* `compile 'com.wanjian:sak-autopilot:0.0.3'`
    监听window创建
 
 ### 使用方式
 
-* `compile 'com.wanjian:sak-autopilot:0.0.2'`
+* `compile 'com.wanjian:sak-autopilot:0.0.3'`
 不需要执行其他任意代码即可
 
 
