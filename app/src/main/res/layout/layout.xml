@@ -49,6 +49,13 @@
         android:text="user window"
         android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/toast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user toast"
+        android:textAllCaps="false" />
+
 
     <ListView
         android:id="@+id/listview"

@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by wanjian on 2017/3/7.
@@ -69,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userWindow(v);
+            }
+        });
+        findViewById(R.id.toast).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG);
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.user_window, null);
+                toast.setView(view);
+                toast.show();
             }
         });
 
