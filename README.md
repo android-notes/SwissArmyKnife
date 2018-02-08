@@ -8,40 +8,14 @@ android免root兼容所有版本ui调试工具
 	*  https://github.com/android-notes/SwissArmyKnife/tree/autopilot   Autopilot 分支
 	*  支持Activity，dialog，popupwindow等，不侵入业务代码
 
-* `compile 'com.wanjian:sak:0.3.1'`  2018-1-17
-	*  解决dialog主题activity显示偏移问题
-	
-
+* `compile 'com.wanjian:sak:0.3.2'`  2018-2-8
+	 
 * `compile 'com.wanjian:sak:0.3.0'`  2018-1-16
 	*  允许超出边界绘制。 默认不允许
-	
-
-
-* `compile 'com.wanjian:sak:0.2.1'`  2018-1-15
-	*  ui 调整
-	
-
 
 * `compile 'com.wanjian:sak:0.2.0'`  2018-1-12
 	*  父控件不可见时不绘制子view信息 
 	
-
-
-* `compile 'com.wanjian:sak:0.1.2.8'` （测试版）2017-4-1
-	*  自动刷新
-    *  关闭功能 `SAK.unInstall(application)`
-
-	
-* `compile 'com.wanjian:sak:0.1.2.4'` （测试版）2017-3-10
-	*  新增view渲染性能，页面渲染性能
-	*  新增单位转换功能，可以控制所有长度的单位
-	*  新增view类型功能
-	*  新增自定义扩展功能，参考最后的  自定义功能
-	*  修复取色器等无法关闭的bug
-	*  修复可能存在的内存泄露
-	*  修复布局树缩放时的bug
-
-
 
 ### SwissArmyKnife是什么
 
