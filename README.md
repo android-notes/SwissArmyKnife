@@ -1,6 +1,7 @@
 # SwissArmyKnife Autopilot版
 
-android免root兼容所有版本ui调试工具,支持Activity，dialog，popupwindow，手动通过windowmanager添加的window（根view需要是FrameLayout）
+android免root兼容所有版本ui调试工具
+支持Activity，dialog，popupwindow，手动通过windowmanager添加的window（根view需要是FrameLayout）,甚至是自定义的Toast（根view需要是FrameLayout）
 
 
 ### 更新日志  
