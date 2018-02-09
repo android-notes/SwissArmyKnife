@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.widget.FrameLayout;
@@ -18,7 +17,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.wanjian.sak.SAK.KEY;
 
 /**
  * Created by wanjian on 2018/2/8.
@@ -72,13 +70,14 @@ class Inject {
             try {
                 Field mViewsFiled = WindowManagerGlobal.class.getDeclaredField("mViews");
                 mViewsFiled.setAccessible(true);
-                List<View> views = (List<View>) mViewsFiled.get(managerGlobal);
-                for (View view : views) {
-                    if (view instanceof FrameLayout) {
-                        insertIfNeeded(((FrameLayout) view));
-                    }
-                }
+
                 synchronized (managerGlobal) {
+                    List<View> views = (List<View>) mViewsFiled.get(managerGlobal);
+                    for (View view : views) {
+                        if (view instanceof FrameLayout) {
+                            insertIfNeeded(((FrameLayout) view));
+                        }
+                    }
                     mViewsFiled.set(managerGlobal, new ArrayList<View>(views) {
                         @Override
                         public boolean add(final View view) {
@@ -117,11 +116,12 @@ class Inject {
             try {
                 Field mViewsFiled = WindowManagerGlobal.class.getDeclaredField("mViews");
                 mViewsFiled.setAccessible(true);
-                List<View> views = (List<View>) mViewsFiled.get(managerGlobal);
-                for (View view : views) {
-                    removeSAKCoverView(view);
-                }
+
                 synchronized (managerGlobal) {
+                    List<View> views = (List<View>) mViewsFiled.get(managerGlobal);
+                    for (View view : views) {
+                        removeSAKCoverView(view);
+                    }
                     mViewsFiled.set(managerGlobal, new ArrayList<>(views));
                 }
                 mViewsFiled.setAccessible(false);

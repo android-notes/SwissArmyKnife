@@ -25,7 +25,6 @@ import com.wanjian.sak.view.WheelView;
 
 import java.util.List;
 
-import static com.wanjian.sak.SAK.KEY;
 
 /**
  * Created by wanjian on 2017/3/7.

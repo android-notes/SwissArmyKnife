@@ -12,7 +12,6 @@ import com.wanjian.sak.utils.Check;
 
 public class SAK {
     public static final int INFO_KEY = R.layout.sak_container_layout;
-    static final int KEY = R.layout.sak_layer_item;
     private static boolean isInstalled = false;
 
     private static Inject inject;
