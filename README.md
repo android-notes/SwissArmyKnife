@@ -6,22 +6,45 @@ android免root兼容所有版本ui调试工具
 
 ### 更新日志  
 
+* `'com.wanjian:sak-autopilot:0.2.0'`
+   随时开启关闭
+
 * `compile 'com.wanjian:sak-autopilot:0.0.3'`
    监听window创建
 
 ### 使用方式
 
-* `compile 'com.wanjian:sak-autopilot:0.0.3'`
-不需要执行其他任意代码即可
+ `'com.wanjian:sak-autopilot:0.2.0'`
+ 
+ 可以多次开启及关闭
+ 
+ ```java
+ 
+  SAK.init(Application application);
+  
+  //同样支持自定义功能
+  SAK.init(Application application, Config config)
+  
+  SAK.unInstall();
+ 
+ ```
 
 
 ### 功能
 
 同 https://github.com/android-notes/SwissArmyKnife 相同，但支持所有window
 
+支持dialog，toast
+
+![dialog](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/dialog.jpg)
+
+![toast](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/toast.jpg)
+
+
+
 ### 原理
 
-参考 `com.wanjian.sak.Autopilot`
+参考 `com.wanjian.sak.Inject`
  
 android 4.2以下：
 
