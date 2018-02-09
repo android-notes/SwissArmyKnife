@@ -7,14 +7,16 @@ android免root兼容所有版本ui调试工具
 ### 更新日志  
 
 * `'com.wanjian:sak-autopilot:0.2.0'`
-   * 随时开启关闭
 
-* `compile 'com.wanjian:sak-autopilot:0.0.3'`
-   * 监听window创建
+   *  随时开启关闭
+
+* `'com.wanjian:sak-autopilot:0.0.3'`
+
+   *  监听window创建
 
 ### 使用方式
 
- `'com.wanjian:sak-autopilot:0.2.0'`
+ `compile 'com.wanjian:sak-autopilot:0.2.0'`
  
  可以多次开启及关闭
  
