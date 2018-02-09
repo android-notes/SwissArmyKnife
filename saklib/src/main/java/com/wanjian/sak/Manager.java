@@ -3,7 +3,6 @@ package com.wanjian.sak;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,8 @@ import com.wanjian.sak.view.SAKCoverView;
 import com.wanjian.sak.view.WheelView;
 
 import java.util.List;
+
+import static com.wanjian.sak.SAK.KEY;
 
 /**
  * Created by wanjian on 2017/3/7.
@@ -88,7 +89,7 @@ class Manager {
 //        dectorView.removeView(mCoverView);
     }
 
-    void attach(FrameLayout rootView) {
+    void attach(final FrameLayout rootView) {
 
         int h = rootView.getHeight() - rootView.getPaddingTop() - rootView.getPaddingBottom();
         int w = rootView.getWidth() - rootView.getPaddingLeft() - rootView.getPaddingRight();
@@ -107,7 +108,7 @@ class Manager {
         });
         final Bitmap info = BitmapCreater.create(w, h, Bitmap.Config.ARGB_8888);
         if (info == null) {
-            Log.w("SAK", "out of memory....");
+            Log.e("SAK", "out of memory....");
             return;
         }
         final Canvas canvas = new Canvas(info);
@@ -116,11 +117,15 @@ class Manager {
             coverView.setLayoutParams(new FrameLayout.LayoutParams(w, h));
         }
         rootView.addView(coverView);
-        rootView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+        ViewTreeObserver.OnPreDrawListener onPreDrawListener = new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
                 View root = coverView.getRootView();
                 List<AbsLayer> layers = mConfig.getLayers();
+                if (info.isRecycled()){
+                    rootView.getViewTreeObserver().removeOnPreDrawListener(this);
+                    return true;
+                }
                 info.eraseColor(0);
                 for (AbsLayer layer : layers) {
                     layer.drawIfOutBounds(mDrawIfOutOfBounds);
@@ -129,7 +134,9 @@ class Manager {
                 coverView.setInfo(info);
                 return true;
             }
-        });
+        };
+        rootView.getViewTreeObserver().addOnPreDrawListener(onPreDrawListener);
+//        rootView.setTag(KEY, onPreDrawListener);
     }
 
     void unInstall(FrameLayout rootView) {

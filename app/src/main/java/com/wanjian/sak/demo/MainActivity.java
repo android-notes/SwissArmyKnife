@@ -17,6 +17,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wanjian.sak.SAK;
+
 /**
  * Created by wanjian on 2017/3/7.
  */
@@ -28,6 +30,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
 
+
+        findViewById(R.id.install).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SAK.init(getApplication());
+            }
+        });
+        findViewById(R.id.uninstall).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SAK.unInstall();
+            }
+        });
 
         findViewById(R.id.open).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -23,19 +23,20 @@ public class MyView extends View {
     int v = 0;
 
 
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            v++;
+            invalidate();
+            mHandler.postDelayed(this, 1000);
+        }
+    };
     Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     private void init() {
         mPaint.setTextSize(50);
         mPaint.setColor(Color.RED);
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                v++;
-                invalidate();
-                mHandler.postDelayed(this, 1000);
-            }
-        }, 1000);
+        mHandler.postDelayed(runnable, 1000);
     }
 
     public MyView(Context context, AttributeSet attrs) {
@@ -48,5 +49,11 @@ public class MyView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawText("" + v, 10, getHeight() / 2, mPaint);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mHandler.removeCallbacks(runnable);
     }
 }

@@ -27,14 +27,27 @@ public class DrawingBoardView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if (mBitmap != null) {
+        if (mBitmap != null && mBitmap.isRecycled() == false) {
             canvas.drawBitmap(mBitmap, 0, 0, null);
         }
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
     }
 
     public void setInfo(Bitmap info) {
         mBitmap = info;
 //        invalidate();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (mBitmap != null && mBitmap.isRecycled() == false) {
+            mBitmap.recycle();
+        }
     }
 
 }

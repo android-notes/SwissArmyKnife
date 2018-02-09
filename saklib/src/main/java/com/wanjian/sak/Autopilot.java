@@ -18,7 +18,7 @@ import java.util.Collection;
 /**
  * Created by wanjian on 2018/2/7.
  */
-
+@Deprecated
 public class Autopilot extends AppStartObserver {
 
     /*

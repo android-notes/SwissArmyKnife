@@ -2,9 +2,9 @@
     package="com.wanjian.sak">
 
     <application>
-        <provider
+        <!--<provider
             android:name=".Autopilot"
-            android:authorities=".autopilot"></provider>
+            android:authorities="com.wanjian.sak.autopilot"></provider>-->
     </application>
 
 </manifest>

@@ -9,7 +9,7 @@ import android.net.Uri;
 /**
  * Created by wanjian on 2018/2/7.
  */
-
+@Deprecated
 abstract class AppStartObserver extends ContentProvider {
     @Override
     public boolean onCreate() {
