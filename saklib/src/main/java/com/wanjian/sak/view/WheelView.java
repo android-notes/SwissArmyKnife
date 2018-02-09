@@ -26,6 +26,7 @@ public class WheelView extends ListView {
     private int mHeight;
     private OnChangeListener mOnChangeListener;
     private Paint mPaint;
+
     public WheelView(Context context) {
         super(context);
         init(null);

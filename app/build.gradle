@@ -32,6 +32,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22+'
     testCompile 'junit:junit:4.12'
     compile project(':saklib')
+
+    // https://mvnrepository.com/artifact/com.squareup.leakcanary/leakcanary-android
+    compile group: 'com.squareup.leakcanary', name: 'leakcanary-android', version: '1.5'
+
 }
 
 

@@ -13,7 +13,7 @@
     <com.wanjian.sak.view.FloatView
         android:id="@+id/floatView"
         android:layout_width="40dp"
-        android:layout_gravity="right|center_vertical"
         android:layout_height="40dp"
+        android:layout_gravity="right|center_vertical"
         android:background="@drawable/sak_launcher" />
 </merge>

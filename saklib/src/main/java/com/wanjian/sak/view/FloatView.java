@@ -16,10 +16,12 @@ public class FloatView extends View {
     private float mLastY;
     private Boolean mIsDrag;
     private int mTouchSlop;
+
     public FloatView(Context context) {
         super(context);
         init();
     }
+
     public FloatView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();

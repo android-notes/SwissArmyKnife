@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 
 import com.wanjian.sak.R;
 import com.wanjian.sak.layerview.AbsLayerView;
@@ -32,6 +31,7 @@ public class OperatorView extends FrameLayout {
     private CheckBox mDrawIfOutOfBounds;
 
     private View mOptContainer;
+
     public OperatorView(Context context) {
         super(context);
         init();
@@ -42,12 +42,14 @@ public class OperatorView extends FrameLayout {
         init();
     }
 
-    public void show(){
+    public void show() {
         mOptContainer.setVisibility(VISIBLE);
     }
-    public void hide(){
+
+    public void hide() {
         mOptContainer.setVisibility(GONE);
     }
+
     private void init() {
 //        setGravity(Gravity.CENTER);
 //        setOrientation(VERTICAL);
@@ -55,7 +57,7 @@ public class OperatorView extends FrameLayout {
         container = (ViewGroup) findViewById(R.id.container);
         mUnitGroup = ((RadioGroup) findViewById(R.id.unitGroup));
         mDrawIfOutOfBounds = (CheckBox) findViewById(R.id.drawIfOutOfBounds);
-        mOptContainer=findViewById(R.id.optContainer);
+        mOptContainer = findViewById(R.id.optContainer);
         findViewById(R.id.ok).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

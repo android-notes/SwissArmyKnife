@@ -22,7 +22,6 @@ public class SecAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.sec_act);
 
 
@@ -48,8 +47,8 @@ public class SecAct extends AppCompatActivity {
         });
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        bitmap= BitmapCreater.create(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
-        if (bitmap!=null){
+        bitmap = BitmapCreater.create(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
+        if (bitmap != null) {
             bitmap.eraseColor(Color.BLACK);
         }
     }

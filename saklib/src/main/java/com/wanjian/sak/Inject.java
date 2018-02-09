@@ -183,47 +183,6 @@ class Inject {
         return null;
     }
 
-    class ObserveViewFiledTask implements Runnable {
-
-        private Object obj;
-        private Field field;
-
-        ObserveViewFiledTask(Object object) {
-            this.obj = object;
-            Class clz = obj.getClass();
-            try {
-                field = clz.getDeclaredField("mViews");
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-        }
-
-        View[] last = null;
-        final int delay = 1000;
-
-        @Override
-        public void run() {
-            synchronized (obj) {
-                try {
-                    View[] views = (View[]) field.get(obj);
-                    if (views != last) {
-                        last = views;
-                        if (views != null && views.length > 0) {
-                            View rootView = views[views.length - 1];
-                            if (rootView instanceof FrameLayout) {
-                                insertIfNeeded(((FrameLayout) rootView));
-                            }
-                        }
-                    }
-                    handler.postDelayed(this, delay);
-
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     private void observerViewsField(final Object obj) {
 
         try {
@@ -259,6 +218,45 @@ class Inject {
             }
         }
         manager.attach(rootView);
+    }
+
+    class ObserveViewFiledTask implements Runnable {
+
+        final int delay = 1000;
+        View[] last = null;
+        private Object obj;
+        private Field field;
+        ObserveViewFiledTask(Object object) {
+            this.obj = object;
+            Class clz = obj.getClass();
+            try {
+                field = clz.getDeclaredField("mViews");
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void run() {
+            synchronized (obj) {
+                try {
+                    View[] views = (View[]) field.get(obj);
+                    if (views != last) {
+                        last = views;
+                        if (views != null && views.length > 0) {
+                            View rootView = views[views.length - 1];
+                            if (rootView instanceof FrameLayout) {
+                                insertIfNeeded(((FrameLayout) rootView));
+                            }
+                        }
+                    }
+                    handler.postDelayed(this, delay);
+
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }

@@ -13,16 +13,8 @@ import android.view.View;
  */
 
 public class MyView extends View {
-    public MyView(Context context) {
-        super(context);
-        init();
-    }
-
     Handler mHandler = new Handler();
-
     int v = 0;
-
-
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -32,11 +24,9 @@ public class MyView extends View {
         }
     };
     Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-    private void init() {
-        mPaint.setTextSize(50);
-        mPaint.setColor(Color.RED);
-        mHandler.postDelayed(runnable, 1000);
+    public MyView(Context context) {
+        super(context);
+        init();
     }
 
     public MyView(Context context, AttributeSet attrs) {
@@ -44,6 +34,11 @@ public class MyView extends View {
         init();
     }
 
+    private void init() {
+        mPaint.setTextSize(50);
+        mPaint.setColor(Color.RED);
+        mHandler.postDelayed(runnable, 1000);
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {

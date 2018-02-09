@@ -4,75 +4,98 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/install"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="install"
-        android:textAllCaps="false"
-        android:textColor="#000" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/uninstall"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/install"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="install"
+            android:textAllCaps="false"
+            android:textColor="#000" />
+
+        <Button
+            android:id="@+id/uninstall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="un install"
+            android:textAllCaps="false"
+            android:textColor="#000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="un install"
-        android:textAllCaps="false"
-        android:textColor="#000" />
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog Act"
+            android:textAllCaps="false"
+            android:textColor="#000" />
 
-    <Button
-        android:id="@+id/open"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/openAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="new Act"
+            android:textAllCaps="false"
+            android:textColor="#000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="dialog Act"
-        android:textAllCaps="false"
-        android:textColor="#000" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/openAct"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/userDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user dialog"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="new Act"
-        android:textAllCaps="false"
-        android:textColor="#000" />
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/popupwindow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="popupwindow"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="dialog"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/userWindow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user window"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/userDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="user dialog"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/toast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user toast"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/popupwindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="popupwindow"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/userWindow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="user window"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/toast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="user toast"
-        android:textAllCaps="false" />
-
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listview"

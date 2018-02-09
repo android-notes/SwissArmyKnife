@@ -93,7 +93,7 @@ class Manager {
         int h = rootView.getHeight() - rootView.getPaddingTop() - rootView.getPaddingBottom();
         int w = rootView.getWidth() - rootView.getPaddingLeft() - rootView.getPaddingRight();
 
-        final SAKCoverView coverView = new SAKCoverView(rootView.getContext());
+        final SAKCoverView coverView = new SAKCoverView(rootView.getContext().getApplicationContext());
         coverView.setOnFloatClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +121,7 @@ class Manager {
             public boolean onPreDraw() {
                 View root = coverView.getRootView();
                 List<AbsLayer> layers = mConfig.getLayers();
-                if (info.isRecycled()){
+                if (info.isRecycled()) {
                     rootView.getViewTreeObserver().removeOnPreDrawListener(this);
                     return true;
                 }
