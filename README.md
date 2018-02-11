@@ -1,7 +1,16 @@
 # SwissArmyKnife Autopilot版
 
-android免root兼容所有版本ui调试工具
+
+### 具体功能点这 >>>> [https://github.com/android-notes/SwissArmyKnife](https://github.com/android-notes/SwissArmyKnife)
+
+
 支持Activity，dialog，popupwindow，手动通过windowmanager添加的window（根view需要是FrameLayout）,甚至是自定义的Toast（根view需要是FrameLayout）
+
+![dialog](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/dialog.jpg)
+
+![toast](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/toast.jpg)
+
+
 
 
 ### 更新日志  
@@ -32,16 +41,7 @@ android免root兼容所有版本ui调试工具
  ```
 
 
-### 功能
-
-同 https://github.com/android-notes/SwissArmyKnife 相同，但支持所有window
-
-支持dialog，toast
-
-![dialog](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/dialog.jpg)
-
-![toast](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/toast.jpg)
-
+ 
 
 
 ### 原理
