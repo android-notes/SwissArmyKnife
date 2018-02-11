@@ -1,7 +1,7 @@
 # SwissArmyKnife Autopilot版
 
 
-### 具体功能点这 >>>> [https://github.com/android-notes/SwissArmyKnife](https://github.com/android-notes/SwissArmyKnife)
+### 具体功能点这 >>>> [https://github.com/android-notes/SwissArmyKnife/blob/master/README.md](https://github.com/android-notes/SwissArmyKnife/blob/master/README.md)
 
 
 支持Activity，dialog，popupwindow，手动通过windowmanager添加的window（根view需要是FrameLayout）,甚至是自定义的Toast（根view需要是FrameLayout）
