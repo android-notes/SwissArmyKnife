@@ -139,6 +139,7 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 
 注意：默认会自动缩放Fragment类名文字的大小，以保证类名只显示在Fragment所在的范围，这时如果Fragment很小，就会导致类名很小，这时可以尝试开启  允许超出边际绘制，这时Fragment的类名就会扩大绘制范围，保证可以看清。
 
+![page name](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/%E9%A1%B5%E9%9D%A2%E5%90%8D%E7%A7%B0.png)
 
 
 ### 自定义功能
