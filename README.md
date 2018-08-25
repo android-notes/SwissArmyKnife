@@ -3,6 +3,12 @@
 
 ### 更新日志  
 
+* `'com.wanjian:sak-autopilot:0.2.2'`
+
+   *  显示Activity名称
+   *  显示Fragment名称，通过层级滚轮控制显示的层级
+
+
 * `'com.wanjian:sak-autopilot:0.2.0'`
 
    *  随时开启关闭
@@ -123,6 +129,17 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 ### 允许超出边界绘制
  
 默认不允许超出父控件边界。当父控件和子控件差不多大小时，子控件的字体大小等文本信息可能显示不完整，允许超出边界绘制后可以完整显示
+
+
+### 页面名称
+会显示fragment的完整类名，每个 x 代表一个fragment，x中间显示的是当前fragment的类名，fragment重叠越多，粉红色颜色越深
+
+注意：有些页面中fragment可能重叠特别多，导致fragment的类名也重叠在了一起，不好分辨，这时可以通过层级滚轮来筛选出只显示某一层级深度区间的fragment。
+（直接通过Activity.getSupportFragmentManager添加的fragment的层级是0，当通过该fragment的childFragmentManger再次添加Fragment时，新添加的Fragment层级就是1，以此类推）
+
+注意：默认会自动缩放Fragment类名文字的大小，以保证类名只显示在Fragment所在的范围，这时如果Fragment很小，就会导致类名很小，这时可以尝试开启  允许超出边际绘制，这时Fragment的类名就会扩大绘制范围，保证可以看清。
+
+
 
 ### 自定义功能
 
