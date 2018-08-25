@@ -18,6 +18,7 @@ import com.wanjian.sak.utils.BitmapCreater;
 public class SecAct extends AppCompatActivity {
 
     Bitmap bitmap;//Activity是否泄漏更明显
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,5 +52,8 @@ public class SecAct extends AppCompatActivity {
         if (bitmap != null) {
             bitmap.eraseColor(Color.BLACK);
         }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragContainer, new ContainerFragment())
+        .commit();
     }
 }

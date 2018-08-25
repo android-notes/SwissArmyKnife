@@ -24,4 +24,6 @@
     <string name="sak_close">Close</string>
     <string name="sak_ok">OK</string>
     <string name="sak_help">Help</string>
+    <string name="sak_activity_name">Page Name（Activity）</string>
+    <string name="sak_fragment_name">Page Name（Fragment）</string>
 </resources>

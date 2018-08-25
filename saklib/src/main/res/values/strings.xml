@@ -24,4 +24,6 @@
     <string name="sak_close">关闭</string>
     <string name="sak_ok">确定</string>
     <string name="sak_help">帮助</string>
+    <string name="sak_activity_name">页面名称（Activity）</string>
+    <string name="sak_fragment_name">页面名称（Fragment）</string>
 </resources>

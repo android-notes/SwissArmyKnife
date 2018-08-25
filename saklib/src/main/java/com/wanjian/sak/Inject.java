@@ -22,29 +22,29 @@ import java.util.List;
  * Created by wanjian on 2018/2/8.
  */
 
-    /*
-     * 4.0.3_r1    WindowManagerImpl   private View[] mViews;
-     * 4.0.4       WindowManagerImpl   private View[] mViews;
-     *
-     * 4.1.1       WindowManagerImpl   private View[] mViews;
-     * 4.1.2       WindowManagerImpl   private View[] mViews;
-     *
-     * 4.2_r1      WindowManagerGlobal  private View[] mViews
-     * 4.2.2 r1    WindowManagerGlobal  private View[] mViews
-     *
-     * 4.3_r2.1     WindowManagerGlobal  private View[] mViews;
-     *
-     * 4.4_r1       WindowManagerGlobal   private final ArrayList<View> mViews
-     * 4.4.2_r1     WindowManagerGlobal   private final ArrayList<View> mViews
-     *
-     * 5.0.0_r2     WindowManagerGlobal   private final ArrayList<View> mViews
-     *
-     * 6.0.0_r1     WindowManagerGlobal   private final ArrayList<View> mViews
-     *
-     * 7.0.0_r1     WindowManagerGlobal   private final ArrayList<View> mViews
-     *
-     * 8.0.0_r4    WindowManagerGlobal   private final ArrayList<View> mViews
-     */
+/*
+ * 4.0.3_r1    WindowManagerImpl   private View[] mViews;
+ * 4.0.4       WindowManagerImpl   private View[] mViews;
+ *
+ * 4.1.1       WindowManagerImpl   private View[] mViews;
+ * 4.1.2       WindowManagerImpl   private View[] mViews;
+ *
+ * 4.2_r1      WindowManagerGlobal  private View[] mViews
+ * 4.2.2 r1    WindowManagerGlobal  private View[] mViews
+ *
+ * 4.3_r2.1     WindowManagerGlobal  private View[] mViews;
+ *
+ * 4.4_r1       WindowManagerGlobal   private final ArrayList<View> mViews
+ * 4.4.2_r1     WindowManagerGlobal   private final ArrayList<View> mViews
+ *
+ * 5.0.0_r2     WindowManagerGlobal   private final ArrayList<View> mViews
+ *
+ * 6.0.0_r1     WindowManagerGlobal   private final ArrayList<View> mViews
+ *
+ * 7.0.0_r1     WindowManagerGlobal   private final ArrayList<View> mViews
+ *
+ * 8.0.0_r4    WindowManagerGlobal   private final ArrayList<View> mViews
+ */
 
 class Inject {
     private Manager manager;
@@ -226,11 +226,16 @@ class Inject {
         View[] last = null;
         private Object obj;
         private Field field;
+        private Field mAttachInfoField;
+
         ObserveViewFiledTask(Object object) {
             this.obj = object;
             Class clz = obj.getClass();
             try {
                 field = clz.getDeclaredField("mViews");
+                field.setAccessible(true);
+                mAttachInfoField = View.class.getDeclaredField("mAttachInfo");
+                mAttachInfoField.setAccessible(true);
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
             }
@@ -246,7 +251,11 @@ class Inject {
                         if (views != null && views.length > 0) {
                             View rootView = views[views.length - 1];
                             if (rootView instanceof FrameLayout) {
-                                insertIfNeeded(((FrameLayout) rootView));
+                                if (mAttachInfoField.get(rootView) != null) {
+                                    insertIfNeeded(((FrameLayout) rootView));
+                                } else {
+
+                                }
                             }
                         }
                     }

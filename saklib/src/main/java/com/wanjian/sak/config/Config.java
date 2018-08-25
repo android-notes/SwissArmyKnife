@@ -8,10 +8,12 @@ import com.wanjian.sak.converter.Px2dpSizeConverter;
 import com.wanjian.sak.converter.SizeConverter;
 import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layer.AbsLayer;
+import com.wanjian.sak.layer.ActivityNameLayer;
 import com.wanjian.sak.layer.BackgroundColorLayer;
 import com.wanjian.sak.layer.BitmapWidthHeightLayer;
 import com.wanjian.sak.layer.BorderLayer;
 import com.wanjian.sak.layer.ForceBitmapWidthHeightLayer;
+import com.wanjian.sak.layer.FragmentNameLayer;
 import com.wanjian.sak.layer.InfoLayer;
 import com.wanjian.sak.layer.MarginLayer;
 import com.wanjian.sak.layer.PaddingLayer;
@@ -92,6 +94,8 @@ public class Config {
             mDefaultLayers.add(new ForceBitmapWidthHeightLayer(mContext));
             mDefaultLayers.add(new InfoLayer(mContext));
             mDefaultLayers.add(new ViewClassLayer(mContext));
+            mDefaultLayers.add(new ActivityNameLayer(mContext));
+            mDefaultLayers.add(new FragmentNameLayer(mContext));
 
             mDefaultLayerViews.add(new HorizontalMeasureView(mContext));
             mDefaultLayerViews.add(new VerticalMeasureView(mContext));

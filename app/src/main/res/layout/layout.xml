@@ -97,6 +97,24 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_selector"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="state color"
+        android:textColor="@drawable/color_selector" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#6f00ff"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="state color"
+        android:textColor="@drawable/color_selector" />
+
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"

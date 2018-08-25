@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:color="@color/colorPrimary" android:state_pressed="true">
+        <color android:color="@color/colorAccent" />
+    </item>
+    <item android:color="#0f0">
+        <color android:color="#f8fc15" />
+    </item>
+</selector>

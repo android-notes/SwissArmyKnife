@@ -29,4 +29,11 @@
         android:textAllCaps="false"
         android:textColor="#000" />
 
+    <FrameLayout
+        android:id="@+id/fragContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
 </LinearLayout>

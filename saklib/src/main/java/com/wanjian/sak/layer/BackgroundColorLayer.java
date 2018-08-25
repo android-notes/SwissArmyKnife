@@ -27,6 +27,9 @@ public class BackgroundColorLayer extends LayerTxtAdapter {
             return "";
         }
         Drawable drawable = view.getBackground();
+        if (drawable != null) {
+            drawable = drawable.getCurrent();
+        }
         if (drawable instanceof ColorDrawable) {
             int color = ((ColorDrawable) drawable).getColor();
             String txt = String.format("#%08x", color);
