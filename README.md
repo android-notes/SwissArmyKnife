@@ -155,7 +155,7 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 ![bianji](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/%E7%BC%96%E8%BE%91%E4%BF%A1%E6%81%AF.jpg)
 
 ### 相对距离
-开启后长按控件a即可选中控件a，然后再长按控件b，这时就会显示相对距离了
+开启后长按控件a即可选中控件a，然后再长按控件b，这时就会显示相对距离了。单位可以在设置主页切换，默认dp
 （不要同时开启编辑控件）
 ![juli](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/%E7%9B%B8%E5%AF%B9%E8%B7%9D%E7%A6%BB.jpg)
 
