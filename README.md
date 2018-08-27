@@ -152,15 +152,15 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 ### 编辑控件
 开启编辑控件后，长按需要编辑的控件即可弹出修改框，可以修改内外边距，字体颜色，大小等信息
 （不要同时开启相对距离）
-
+![bianji](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/%E7%BC%96%E8%BE%91%E4%BF%A1%E6%81%AF.jpg)
 
 ### 相对距离
-开启后长按控件a即可选中控件a，然后再长按控件b，这时就会显示响度距离了
+开启后长按控件a即可选中控件a，然后再长按控件b，这时就会显示相对距离了
 （不要同时开启编辑控件）
-
+![juli](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/%E7%9B%B8%E5%AF%B9%E8%B7%9D%E7%A6%BB.jpg)
 
 ### 网格
-
+![wanggeg](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/%E7%BD%91%E6%A0%BC.jpg)
 
 ### 自定义功能
 
