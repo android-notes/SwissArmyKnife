@@ -3,6 +3,13 @@
 
 ### 更新日志  
 
+
+* `'com.wanjian:sak-autopilot:0.3.0'`
+
+   *  长按编辑控件内外边距颜色等
+   *  长按查看控件距离
+
+
 * `'com.wanjian:sak-autopilot:0.2.2'`
 
    *  显示Activity名称
@@ -140,6 +147,19 @@ SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有andr
 注意：默认会自动缩放Fragment类名文字的大小，以保证类名只显示在Fragment所在的范围，这时如果Fragment很小，就会导致类名很小，这时可以尝试开启  允许超出边际绘制，这时Fragment的类名就会扩大绘制范围，保证可以看清。
 
 ![page name](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/autopilot/img/%E9%A1%B5%E9%9D%A2%E5%90%8D%E7%A7%B0.png)
+
+
+### 编辑控件
+开启编辑控件后，长按需要编辑的控件即可弹出修改框，可以修改内外边距，字体颜色，大小等信息
+（不要同时开启相对距离）
+
+
+### 相对距离
+开启后长按控件a即可选中控件a，然后再长按控件b，这时就会显示响度距离了
+（不要同时开启编辑控件）
+
+
+### 网格
 
 
 ### 自定义功能
