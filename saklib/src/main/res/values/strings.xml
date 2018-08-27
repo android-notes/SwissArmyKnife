@@ -26,4 +26,7 @@
     <string name="sak_help">帮助</string>
     <string name="sak_activity_name">页面名称（Activity）</string>
     <string name="sak_fragment_name">页面名称（Fragment）</string>
+    <string name="sak_edit_view">编辑控件(长按选择控件)</string>
+    <string name="sak_grid">网格</string>
+    <string name="sak_relative_distance">相对距离(长按选择控件)</string>
 </resources>

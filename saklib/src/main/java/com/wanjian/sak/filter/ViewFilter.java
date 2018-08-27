@@ -11,7 +11,7 @@ import com.wanjian.sak.view.SAKCoverView;
 public abstract class ViewFilter {
     public static ViewFilter FILTER = new ViewFilter() {
         @Override
-        public boolean apply(View view) {
+        protected boolean apply(View view) {
             return view.getVisibility() == View.VISIBLE;
         }
     };
@@ -24,7 +24,7 @@ public abstract class ViewFilter {
         return apply(view);
     }
 
-    public abstract boolean apply(View view);
+    protected abstract boolean apply(View view);
 
     @Override
     public int hashCode() {

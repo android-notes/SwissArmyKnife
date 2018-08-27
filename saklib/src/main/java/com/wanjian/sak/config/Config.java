@@ -25,10 +25,13 @@ import com.wanjian.sak.layer.ViewDrawPerformanceLayer;
 import com.wanjian.sak.layer.WidthHeightLayer;
 import com.wanjian.sak.layerview.AbsLayerView;
 import com.wanjian.sak.layerview.CornerMeasureView;
+import com.wanjian.sak.layerview.GridLayerView;
 import com.wanjian.sak.layerview.HorizontalMeasureView;
+import com.wanjian.sak.layerview.RelativeLayerView;
 import com.wanjian.sak.layerview.TakeColorView;
 import com.wanjian.sak.layerview.TreeView;
 import com.wanjian.sak.layerview.VerticalMeasureView;
+import com.wanjian.sak.layerview.ViewEditView;
 import com.wanjian.sak.utils.Check;
 
 import java.util.ArrayList;
@@ -97,6 +100,9 @@ public class Config {
             mDefaultLayers.add(new ActivityNameLayer(mContext));
             mDefaultLayers.add(new FragmentNameLayer(mContext));
 
+            mDefaultLayerViews.add(new ViewEditView(mContext));
+            mDefaultLayerViews.add(new GridLayerView(mContext));
+            mDefaultLayerViews.add(new RelativeLayerView(mContext));
             mDefaultLayerViews.add(new HorizontalMeasureView(mContext));
             mDefaultLayerViews.add(new VerticalMeasureView(mContext));
             mDefaultLayerViews.add(new CornerMeasureView(mContext));

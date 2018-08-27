@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DisplayMetrics app = getResources().getDisplayMetrics();
         setContentView(R.layout.layout);
 
 
@@ -125,6 +127,12 @@ public class MainActivity extends AppCompatActivity {
                 return convertView;
             }
         });
+        getWindow().getDecorView().setPadding(dp2px(40), dp2px(40), dp2px(40), dp2px(40));
+    }
+
+    public int dp2px(float length) {
+        float scale = getResources().getDisplayMetrics().density;
+        return (int) (length * scale + 0.5f);
     }
 
     private void userWindow(View v) {

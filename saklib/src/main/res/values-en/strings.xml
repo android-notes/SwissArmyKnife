@@ -26,4 +26,7 @@
     <string name="sak_help">Help</string>
     <string name="sak_activity_name">Page Name（Activity）</string>
     <string name="sak_fragment_name">Page Name（Fragment）</string>
+    <string name="sak_edit_view">Edit View(long press)</string>
+    <string name="sak_grid">Grid</string>
+    <string name="sak_relative_distance">Relative Distance(long press)</string>
 </resources>

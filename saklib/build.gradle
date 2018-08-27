@@ -5,7 +5,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 11
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -63,7 +63,7 @@ def getKey() {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak-autopilot'
-    publishVersion = '0.2.2'
+    publishVersion = '0.3.0'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 

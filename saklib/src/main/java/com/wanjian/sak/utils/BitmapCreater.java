@@ -11,10 +11,12 @@ public class BitmapCreater {
 
         Check.isNull(config, "config");
         if (w <= 0) {
-            throw new IllegalArgumentException("w can not be <= 0");
+            new IllegalArgumentException("w can not be <= 0").printStackTrace();
+            return null;
         }
         if (h <= 0) {
-            throw new IllegalArgumentException("h can not be <= 0");
+            new IllegalArgumentException("h can not be <= 0").printStackTrace();
+            return null;
         }
         for (int i = 0; i < 3; i++) {
             try {

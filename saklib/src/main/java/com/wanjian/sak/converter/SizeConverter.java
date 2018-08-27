@@ -15,4 +15,6 @@ public abstract class SizeConverter {
 
     public abstract Size convert(Context context, float length);
 
+    public abstract int recovery(Context context, float length);
+
 }

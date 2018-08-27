@@ -26,4 +26,9 @@ public class OriginSizeConverter extends SizeConverter {
         return size;
     }
 
+    @Override
+    public int recovery(Context context, float length) {
+        return (int) length;
+    }
+
 }

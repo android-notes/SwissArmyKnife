@@ -19,4 +19,10 @@ public class Px2SpSizeConverter extends SizeConverter {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return Size.obtain().setLength((int) (length / fontScale + 0.5f)).setUnit("sp");
     }
+
+    @Override
+    public int recovery(Context context, float length) {
+        float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (length * fontScale + 0.5f);
+    }
 }

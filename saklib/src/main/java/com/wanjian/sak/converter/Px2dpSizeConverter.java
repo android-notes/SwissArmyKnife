@@ -25,6 +25,12 @@ public class Px2dpSizeConverter extends SizeConverter {
         return size;
     }
 
+    @Override
+    public int recovery(Context context, float length) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (length * scale + 0.5f);
+    }
+
     private int px2dp(Context context, float px) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (px / scale + 0.5f);
