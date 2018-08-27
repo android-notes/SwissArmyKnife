@@ -27,7 +27,7 @@
 
 ### SwissArmyKnife是什么
 
-SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有android版本，不需要root权限。可以直接在android手机屏幕上显示Activity，dialog，popupwindow，手动通过windowmanager添加的window（根view需要是FrameLayout）,甚至是自定义的Toast（根view需要是FrameLayout）的边界，内外边距大小，每一个控件大小，图片大小，字体颜色，大小，以及自定义信息。同时可以直接在屏幕上取色，另外还提供了直尺，圆角尺等工具，可以直接测量大小。针对android开发者还提供了布局树查看功能，可以直接在手机屏幕查看当前所有控件层次信息等。
+SwissArmyKnife 是一款方便调试android UI的工具，可以兼容所有android版本，不需要root权限。可以直接在android手机屏幕上显示Activity，dialog，popupwindow，手动通过windowmanager添加的window（根view需要是FrameLayout）,甚至是自定义的Toast（根view需要是FrameLayout）的边界，内外边距大小，每一个控件大小，图片大小，字体颜色，大小，以及自定义信息。同时可以直接在屏幕上取色，另外还提供了直尺，圆角尺等工具，可以直接测量大小，相对距离，网格，控件信息编辑。针对android开发者还提供了布局树查看功能，可以直接在手机屏幕查看当前所有控件层次信息等。
 
 #### 可以通过滚动层级滚轮来控制只显示某一层级的信息，避免层级覆盖等。
 #### 默认不允许超出父控件边界。当父控件和子控件都比较小时，子控件的字体大小等文本信息可能显示不完整，允许超出边界绘制后可以完整显示
