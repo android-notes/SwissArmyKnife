@@ -1,5 +1,6 @@
 # SwissArmyKnife Autopilot版
 
+## 准备第三次重构了，有什么好的建议欢迎提 issue 
 
 ### 更新日志  
 
