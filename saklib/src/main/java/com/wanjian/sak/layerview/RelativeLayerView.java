@@ -32,8 +32,9 @@ public class RelativeLayerView extends AbsLayerView {
     public RelativeLayerView(Context context) {
         super(context);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        txtSize = dp2px(12);
+        txtSize = dp2px(10);
         paint.setTextSize(txtSize);
+        paint.setStrokeWidth(dp2px(1));
         init();
     }
 
@@ -105,14 +106,15 @@ public class RelativeLayerView extends AbsLayerView {
             int y = location2[1] + secondView.getHeight() / 2;
             int length = location1[0] - (location2[0] + secondView.getWidth());
             canvas.translate(x, y);
+            paint.setColor(Color.RED);
             canvas.drawLine(0, 0, length, 0, paint);
             Size size = ISizeConverter.CONVERTER.convert(getContext(), length);
             String txt = String.valueOf(size.getLength());
             float txtLength = paint.measureText(txt);
             canvas.translate(length / 2 - txtLength / 2, txtSize / 2);
             paint.setColor(0xffffffff);
-            canvas.drawRect(0, -txtSize, txtLength, 0, paint);
-            paint.setColor(0xff000000);
+            canvas.drawRect(-2, -txtSize - 2, txtLength + 2, 2, paint);
+            paint.setColor(0xffff0000);
             canvas.drawText(txt, 0, 0, paint);
             canvas.restore();
         }
@@ -123,14 +125,15 @@ public class RelativeLayerView extends AbsLayerView {
             int y = location2[1] + secondView.getHeight() / 2;
             int length = location2[0] - (location1[0] + firstView.getWidth());
             canvas.translate(x, y);
+            paint.setColor(Color.RED);
             canvas.drawLine(0, 0, -length, 0, paint);
             Size size = ISizeConverter.CONVERTER.convert(getContext(), length);
             String txt = String.valueOf(size.getLength());
             float txtLength = paint.measureText(txt);
             canvas.translate(-length / 2 - txtLength / 2, txtSize / 2);
             paint.setColor(0xffffffff);
-            canvas.drawRect(0, -txtSize, txtLength, 0, paint);
-            paint.setColor(0xff000000);
+            canvas.drawRect(-2, -txtSize - 2, txtLength + 2, 2, paint);
+            paint.setColor(0xffff0000);
             canvas.drawText(txt, 0, 0, paint);
             canvas.restore();
         }
@@ -141,14 +144,15 @@ public class RelativeLayerView extends AbsLayerView {
             int y = location2[1] + secondView.getHeight();
             int length = location1[1] - (location2[1] + secondView.getHeight());
             canvas.translate(x, y);
+            paint.setColor(Color.RED);
             canvas.drawLine(0, 0, 0, length, paint);
             Size size = ISizeConverter.CONVERTER.convert(getContext(), length);
             String txt = String.valueOf(size.getLength());
             float txtLength = paint.measureText(txt);
             canvas.translate(-txtLength / 2, length / 2 + txtSize / 2);
             paint.setColor(0xffffffff);
-            canvas.drawRect(0, -txtSize, txtLength, 0, paint);
-            paint.setColor(0xff000000);
+            canvas.drawRect(-2, -txtSize - 2, txtLength + 2, 2, paint);
+            paint.setColor(0xffff0000);
             canvas.drawText(txt, 0, 0, paint);
             canvas.restore();
         }
@@ -159,14 +163,15 @@ public class RelativeLayerView extends AbsLayerView {
             int y = location2[1];
             int length = location2[1] - (location1[1] + firstView.getHeight());
             canvas.translate(x, y);
+            paint.setColor(Color.RED);
             canvas.drawLine(0, 0, 0, -length, paint);
             Size size = ISizeConverter.CONVERTER.convert(getContext(), length);
             String txt = String.valueOf(size.getLength());
             float txtLength = paint.measureText(txt);
             canvas.translate(-txtLength / 2, -length / 2 + txtSize / 2);
             paint.setColor(0xffffffff);
-            canvas.drawRect(0, -txtSize, txtLength, 0, paint);
-            paint.setColor(0xff000000);
+            canvas.drawRect(-2, -txtSize - 2, txtLength + 2, 2, paint);
+            paint.setColor(0xffff0000);
             canvas.drawText(txt, 0, 0, paint);
             canvas.restore();
         }
@@ -175,12 +180,8 @@ public class RelativeLayerView extends AbsLayerView {
 
     private void drawBorder(Canvas canvas, View view, int[] location) {
         view.getLocationInWindow(location);
-
         canvas.save();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.argb(150, 245, 212, 217));
-        canvas.drawRect(location[0], location[1], location[0] + view.getWidth(), location[1] + view.getHeight(), paint);
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawRect(location[0], location[1], location[0] + view.getWidth(), location[1] + view.getHeight(), paint);
         canvas.restore();

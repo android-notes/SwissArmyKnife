@@ -139,4 +139,9 @@ public class ViewEditView extends AbsLayerView {
         Toast.makeText(getContext(), "长按编辑控件", Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        targetView = null;
+    }
 }

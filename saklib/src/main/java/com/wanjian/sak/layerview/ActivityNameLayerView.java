@@ -18,12 +18,21 @@ public class ActivityNameLayerView extends AbsLayerView {
 
     private final Paint mPaint;
     String actName;
+    private Paint dashLinePaint;
+    private int radius;
 
     public ActivityNameLayerView(Context context) {
         super(context);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setTextSize(dp2px(10));
-//        mPaint.setColor();
+        mPaint.setColor(Color.RED);
+
+        dashLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        dashLinePaint.setColor(Color.RED);
+        dashLinePaint.setStyle(Paint.Style.STROKE);
+        dashLinePaint.setStrokeWidth(dp2px(1));
+        radius = dp2px(8);
+//        dashLinePaint.setPathEffect(new DashPathEffect(new float[]{20, 10}, 0));
     }
 
     @Override
@@ -72,34 +81,34 @@ public class ActivityNameLayerView extends AbsLayerView {
     }
 
 
-    protected int getTextSize() {
-        return dp2px(20);
-    }
-
-    protected int coverColor() {
-        return Color.argb(100, 245, 212, 217);
-    }
-
     protected void drawInfo(Canvas canvas, int x, int y, int w, int h, String name) {
-
         canvas.save();
 
-        mPaint.setColor(coverColor());
-        canvas.drawRect(x, y, x + w, y + h, mPaint);
-        mPaint.setColor(Color.BLACK);
-        canvas.drawLine(x, y, x + w, y + h, mPaint);
-        canvas.drawLine(x + w, y, x, y + h, mPaint);
+        canvas.drawLine(x, y, x + radius, y, dashLinePaint);
+        canvas.drawLine(x, y, x, y + radius, dashLinePaint);
+
+        canvas.drawLine(x + w, y, x + w - radius, y, dashLinePaint);
+        canvas.drawLine(x + w, y, x + w, y + radius, dashLinePaint);
+
+
+        canvas.drawLine(x, y + h, x + radius, y + h, dashLinePaint);
+        canvas.drawLine(x, y + h, x, y + h - radius, dashLinePaint);
+
+
+        canvas.drawLine(x + w, y + h, x + w - radius, y + h, dashLinePaint);
+        canvas.drawLine(x + w, y + h, x + w, y + h - radius, dashLinePaint);
+
+
+        canvas.drawLine(x, y, x + w, y + h, dashLinePaint);
+        canvas.drawLine(x + w, y, x, y + h, dashLinePaint);
 
         TextPaint textPaint = new TextPaint(mPaint);
-//        textPaint.setColor(getColor());
-        textPaint.setTextSize(getTextSize());
+        textPaint.setTextSize(dp2px(13));
         canvas.translate(x, y);
-        //文本宽度不能大于fragment宽度的80%
         StaticLayout staticLayout = new StaticLayout(name, textPaint, (int) (w * 0.8), Layout.Alignment.ALIGN_CENTER, 1, 0, false);
 
         int txtW = staticLayout.getWidth();
         int txtH = staticLayout.getHeight();
-        //文本高度若大于fragment高度80%并且不允许超出绘制区间的话则缩放canvas，保证文本绘制范围在fragment内
         if (txtH > 0 && txtH > h * 0.8) {
             float scale = h * 0.8f / txtH;
             int realW = (int) (txtW * scale);

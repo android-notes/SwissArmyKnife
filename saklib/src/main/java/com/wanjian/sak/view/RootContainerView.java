@@ -30,4 +30,10 @@ public class RootContainerView extends FrameLayout {
     public void setTapListener(SAKEntranceView.OnTapListener listener) {
         entranceView.setTapListener(listener);
     }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        entranceView.setTapListener(null);
+        super.onDetachedFromWindow();
+    }
 }

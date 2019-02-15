@@ -148,5 +148,6 @@ public class TranslationLayerView extends AbsLayerView {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         target = null;
+        targetView = null;
     }
 }

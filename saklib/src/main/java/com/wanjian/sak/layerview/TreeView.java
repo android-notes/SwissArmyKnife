@@ -27,7 +27,6 @@ import com.wanjian.sak.view.RootContainerView;
  */
 
 public class TreeView extends AbsLayerView {
-    private Context mContext;
     private Paint mPaint;
     private int mTabW;
     private int mTxtH;
@@ -43,7 +42,6 @@ public class TreeView extends AbsLayerView {
 
     public TreeView(Context context) {
         super(context);
-        mContext = context;
         init();
     }
 
@@ -58,7 +56,7 @@ public class TreeView extends AbsLayerView {
     }
 
     private int convertSize(int leng) {
-        return (int) ISizeConverter.CONVERTER.convert(mContext, leng).getLength();
+        return (int) ISizeConverter.CONVERTER.convert(getContext(), leng).getLength();
     }
 
     private void init() {

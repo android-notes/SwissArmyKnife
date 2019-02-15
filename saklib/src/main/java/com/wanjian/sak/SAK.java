@@ -103,18 +103,19 @@ public class SAK {
         }
     }
 
-    private static void addContainerView(final View view) {
+    private static void addContainerView(View view) {
         if ((view instanceof FrameLayout) == false
                 && (view instanceof RelativeLayout) == false) {
             return;
         }
-        final RootContainerView rootContainerView = new RootContainerView(new ContextThemeWrapper(view.getContext(), R.style.SAK_Theme));
+        final RootContainerView rootContainerView = new RootContainerView(new ContextThemeWrapper(context, R.style.SAK_Theme));
         ((ViewGroup) view).addView(rootContainerView);
+        final Context ctx = view.getContext();
         rootContainerView.setTapListener(new SAKEntranceView.OnTapListener() {
             @Override
             public void onDoubleTap() {
                 activateCurWindow(rootContainerView);
-                showOptPanel(view.getContext());
+                showOptPanel(ctx);
             }
 
             @Override
