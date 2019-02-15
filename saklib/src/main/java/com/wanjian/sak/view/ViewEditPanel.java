@@ -13,18 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.converter.Px2SpSizeConverter;
-import com.wanjian.sak.converter.SizeConverter;
 
 import java.lang.ref.WeakReference;
 
 public class ViewEditPanel extends LinearLayout {
-    public ViewEditPanel(Context context) {
-        super(context);
-        setGravity(Gravity.CENTER);
-        init(LayoutInflater.from(context).inflate(R.layout.sak_edit_panel_layout, this, true));
-    }
-
     private TextView title;
     private EditText width;
     private EditText height;
@@ -43,14 +37,19 @@ public class ViewEditPanel extends LinearLayout {
     private EditText text;
     private EditText color;
     private EditText backgroundColor;
-
-
     private ViewGroup textRow;
     private ViewGroup sizeRow;
     private ViewGroup colorRow;
     private ViewGroup weightRow;
     private ViewGroup weightSumRow;
+    private WeakReference<View> targetViewRef;
 
+
+    public ViewEditPanel(Context context) {
+        super(context);
+        setGravity(Gravity.CENTER);
+        init(LayoutInflater.from(context).inflate(R.layout.sak_edit_panel_layout, this, true));
+    }
 
     private void init(View view) {
         title = (TextView) findViewById(R.id.title);
@@ -77,7 +76,7 @@ public class ViewEditPanel extends LinearLayout {
         weightSumRow = (ViewGroup) findViewById(R.id.weightSumRow);
         textRow = (ViewGroup) findViewById(R.id.textRow);
 
-        findViewById(R.id.ok).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.confirm).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 View targetView = targetViewRef.get();
@@ -113,7 +112,9 @@ public class ViewEditPanel extends LinearLayout {
                     e.printStackTrace();
                 }
                 targetView.requestLayout();
-                setVisibility(GONE);
+                if (listener != null) {
+                    listener.onClick(v);
+                }
             }
         });
 
@@ -145,7 +146,7 @@ public class ViewEditPanel extends LinearLayout {
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         } else {
             try {
-                params.height = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(heightInput));
+                params.height = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(heightInput));
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -160,7 +161,7 @@ public class ViewEditPanel extends LinearLayout {
             params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
         } else {
             try {
-                params.width = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(widthInput));
+                params.width = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(widthInput));
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -169,22 +170,22 @@ public class ViewEditPanel extends LinearLayout {
 
     private void setMargin(Context context, MarginLayoutParams marginLayoutParams) {
         try {
-            marginLayoutParams.leftMargin = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(ml.getText().toString()));
+            marginLayoutParams.leftMargin = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(ml.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         try {
-            marginLayoutParams.rightMargin = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(mr.getText().toString()));
+            marginLayoutParams.rightMargin = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(mr.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         try {
-            marginLayoutParams.topMargin = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(mt.getText().toString()));
+            marginLayoutParams.topMargin = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(mt.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         try {
-            marginLayoutParams.bottomMargin = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(mb.getText().toString()));
+            marginLayoutParams.bottomMargin = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(mb.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -193,7 +194,7 @@ public class ViewEditPanel extends LinearLayout {
     private void setTextInfo(Context context, TextView textView) {
         try {
             try {
-                int px = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(size.getText().toString()));
+                int px = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(size.getText().toString()));
                 textView.setTextSize(new Px2SpSizeConverter().convert(context, px).getLength());
             } catch (NumberFormatException e) {
                 e.printStackTrace();
@@ -212,32 +213,30 @@ public class ViewEditPanel extends LinearLayout {
     private void setPadding(View targetView, Context context) {
         int paddingLeft = targetView.getPaddingLeft();
         try {
-            paddingLeft = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(pl.getText().toString()));
+            paddingLeft = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(pl.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         int paddingRight = targetView.getPaddingRight();
         try {
-            paddingRight = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(pr.getText().toString()));
+            paddingRight = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(pr.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         int paddingTop = targetView.getPaddingTop();
         try {
-            paddingTop = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(pt.getText().toString()));
+            paddingTop = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(pt.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         int paddingBottom = targetView.getPaddingBottom();
         try {
-            paddingBottom = SizeConverter.CONVERTER.recovery(context, Float.parseFloat(pb.getText().toString()));
+            paddingBottom = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(pb.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         targetView.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
     }
-
-    private WeakReference<View> targetViewRef;
 
     public void attachTargetView(View view) {
         Context context = getContext();
@@ -280,7 +279,7 @@ public class ViewEditPanel extends LinearLayout {
             sizeRow.setVisibility(VISIBLE);
             colorRow.setVisibility(VISIBLE);
             textRow.setVisibility(VISIBLE);
-            size.setText(SizeConverter.CONVERTER.convert(context, textView.getTextSize()).getLength() + "");
+            size.setText(ISizeConverter.CONVERTER.convert(context, textView.getTextSize()).getLength() + "");
             color.setText(String.format("#%08x", textView.getCurrentTextColor()));
             text.setText(textView.getText());
         }
@@ -297,18 +296,18 @@ public class ViewEditPanel extends LinearLayout {
     }
 
     private void setPadding(Context context, View view) {
-        pl.setText(SizeConverter.CONVERTER.convert(context, view.getPaddingLeft()).getLength() + "");
-        pr.setText(SizeConverter.CONVERTER.convert(context, view.getPaddingRight()).getLength() + "");
-        pt.setText(SizeConverter.CONVERTER.convert(context, view.getPaddingTop()).getLength() + "");
-        pb.setText(SizeConverter.CONVERTER.convert(context, view.getPaddingBottom()).getLength() + "");
+        pl.setText(ISizeConverter.CONVERTER.convert(context, view.getPaddingLeft()).getLength() + "");
+        pr.setText(ISizeConverter.CONVERTER.convert(context, view.getPaddingRight()).getLength() + "");
+        pt.setText(ISizeConverter.CONVERTER.convert(context, view.getPaddingTop()).getLength() + "");
+        pb.setText(ISizeConverter.CONVERTER.convert(context, view.getPaddingBottom()).getLength() + "");
 
     }
 
     private void getMargin(MarginLayoutParams params, Context context) {
-        ml.setText(SizeConverter.CONVERTER.convert(context, params.leftMargin).getLength() + "");
-        mr.setText(SizeConverter.CONVERTER.convert(context, params.rightMargin).getLength() + "");
-        mt.setText(SizeConverter.CONVERTER.convert(context, params.topMargin).getLength() + "");
-        mb.setText(SizeConverter.CONVERTER.convert(context, params.bottomMargin).getLength() + "");
+        ml.setText(ISizeConverter.CONVERTER.convert(context, params.leftMargin).getLength() + "");
+        mr.setText(ISizeConverter.CONVERTER.convert(context, params.rightMargin).getLength() + "");
+        mt.setText(ISizeConverter.CONVERTER.convert(context, params.topMargin).getLength() + "");
+        mb.setText(ISizeConverter.CONVERTER.convert(context, params.bottomMargin).getLength() + "");
     }
 
 //    private float parseFloat(String txt, float defaultValue) {
@@ -325,7 +324,7 @@ public class ViewEditPanel extends LinearLayout {
         } else if (params.width == ViewGroup.LayoutParams.MATCH_PARENT) {
             width.setText("M");
         } else {
-            width.setText(SizeConverter.CONVERTER.convert(context, params.width).getLength() + "");
+            width.setText(ISizeConverter.CONVERTER.convert(context, params.width).getLength() + "");
         }
 
         if (params.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
@@ -333,10 +332,11 @@ public class ViewEditPanel extends LinearLayout {
         } else if (params.height == ViewGroup.LayoutParams.MATCH_PARENT) {
             height.setText("M");
         } else {
-            height.setText(SizeConverter.CONVERTER.convert(context, params.height).getLength() + "");
+            height.setText(ISizeConverter.CONVERTER.convert(context, params.height).getLength() + "");
         }
     }
-//
+
+    //
 //    private int parseInt(String txt, int defaultValue) {
 //        try {
 //            return Integer.parseInt(txt);
@@ -344,4 +344,9 @@ public class ViewEditPanel extends LinearLayout {
 //            return defaultValue;
 //        }
 //    }
+    private OnClickListener listener;
+
+    public void setOnConfirmClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
 }

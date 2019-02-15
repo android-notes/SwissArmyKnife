@@ -3,7 +3,6 @@ package com.wanjian.sak.layer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,7 +12,7 @@ import com.wanjian.sak.layer.adapter.LayerTxtAdapter;
 /**
  * Created by wanjian on 2017/3/1.
  */
-
+@Deprecated
 public class ViewDrawPerformanceLayer extends LayerTxtAdapter {
     private Canvas mCanvas;
     private Bitmap mBitmap;
@@ -30,7 +29,7 @@ public class ViewDrawPerformanceLayer extends LayerTxtAdapter {
     }
 
     @Override
-    protected void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer) {
+    protected void onDraw(Canvas canvas, View view) {
         View root = view.getRootView();
         if (root.getWidth() == 0 || root.getHeight() == 0) {
             return;
@@ -45,12 +44,12 @@ public class ViewDrawPerformanceLayer extends LayerTxtAdapter {
             mBitmap = Bitmap.createBitmap(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
             mCanvas.setBitmap(mBitmap);
         }
-        super.onDraw(canvas, paint, view, startLayer, endLayer);
+        super.onDraw(canvas, view);
 
     }
 
     @Override
-    protected void drawLayer(Canvas canvas, Paint paint, View view) {
+    protected void drawLayer(Canvas canvas, View view) {
 
         if (!(view instanceof ViewGroup)) {
             mCanvas.save();
@@ -61,7 +60,7 @@ public class ViewDrawPerformanceLayer extends LayerTxtAdapter {
 
             mCanvas.restore();
             mTime = String.valueOf((end - start) / 10_000 / 100f);
-            super.drawLayer(canvas, paint, view);
+            super.drawLayer(canvas, view);
         }
 
 

@@ -1,10 +1,10 @@
 package com.wanjian.sak.layer;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.wanjian.sak.R;
-import com.wanjian.sak.SAK;
 import com.wanjian.sak.layer.adapter.LayerTxtAdapter;
 
 
@@ -13,6 +13,8 @@ import com.wanjian.sak.layer.adapter.LayerTxtAdapter;
  */
 
 public class InfoLayer extends LayerTxtAdapter {
+    public static final int INFO_KEY = R.layout.sak_container_layout;
+
     public InfoLayer(Context context) {
         super(context);
     }
@@ -20,7 +22,7 @@ public class InfoLayer extends LayerTxtAdapter {
 
     @Override
     protected String getTxt(View view) {
-        Object obj = view.getTag(SAK.INFO_KEY);
+        Object obj = view.getTag(INFO_KEY);
         String info;
         if (obj == null) {
             info = "";
@@ -29,6 +31,11 @@ public class InfoLayer extends LayerTxtAdapter {
         }
         return info;
 
+    }
+
+    @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_custom_info_icon);
     }
 
     @Override

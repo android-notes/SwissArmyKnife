@@ -16,17 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wanjian.sak.R;
-import com.wanjian.sak.SAK;
-import com.wanjian.sak.converter.SizeConverter;
+import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.filter.ViewFilter;
-import com.wanjian.sak.view.SAKCoverView;
+import com.wanjian.sak.layer.InfoLayer;
+import com.wanjian.sak.view.RootContainerView;
 
 
 /**
  * Created by wanjian on 2016/10/24.
  */
 
-public class TreeView extends DragLayerView {
+public class TreeView extends AbsLayerView {
     private Context mContext;
     private Paint mPaint;
     private int mTabW;
@@ -48,12 +48,17 @@ public class TreeView extends DragLayerView {
     }
 
     @Override
+    public Drawable icon() {
+        return getResources().getDrawable(R.drawable.sak_layout_tree_icon);
+    }
+
+    @Override
     public String description() {
         return getContext().getString(R.string.sak_layout_tree);
     }
 
     private int convertSize(int leng) {
-        return (int) SizeConverter.CONVERTER.convert(mContext, leng).getLength();
+        return (int) ISizeConverter.CONVERTER.convert(mContext, leng).getLength();
     }
 
     private void init() {
@@ -77,7 +82,7 @@ public class TreeView extends DragLayerView {
     }
 
     private void layerCount(Canvas canvas, View view) {
-        if (view == null || view instanceof SAKCoverView || ViewFilter.FILTER.filter(view) == false) {
+        if (view == null || view instanceof RootContainerView || ViewFilter.FILTER.filter(view) == false) {
             return;
         }
         mCurLayer++;
@@ -184,7 +189,7 @@ public class TreeView extends DragLayerView {
             sb.append(" -txt:").append(txt);
         }
         sb.append(" -visible:").append(visStr).append(" ");
-        sb.append(" -extra:").append(view.getTag(SAK.INFO_KEY));
+        sb.append(" -extra:").append(view.getTag(InfoLayer.INFO_KEY));
 
         return sb.toString();
     }
@@ -253,8 +258,4 @@ public class TreeView extends DragLayerView {
     }
 
 
-    @Override
-    public void onChange(MotionEvent motionEvent) {
-
-    }
 }

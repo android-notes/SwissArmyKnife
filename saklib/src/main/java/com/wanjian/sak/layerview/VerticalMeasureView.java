@@ -2,7 +2,11 @@ package com.wanjian.sak.layerview;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.wanjian.sak.R;
 
@@ -15,6 +19,10 @@ public class VerticalMeasureView extends HorizontalMeasureView {
         super(context);
     }
 
+    @Override
+    public Drawable icon() {
+        return getResources().getDrawable(R.drawable.sak_ver_measure_icon);
+    }
 
     @Override
     public String description() {
@@ -25,12 +33,19 @@ public class VerticalMeasureView extends HorizontalMeasureView {
     public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
         params.width = dp2px(60);
         params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        if (params instanceof FrameLayout.LayoutParams) {
+            ((LayoutParams) params).gravity = Gravity.CENTER;
+        }
         return params;
     }
 
 
     @Override
     protected void onDraw(Canvas canvas) {
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(1);
+        canvas.drawRect(0, 0, getWidth(), getHeight(), mPaint);
+        mPaint.setStyle(Paint.Style.FILL);
 
         int h = getHeight();
         canvas.translate(maxHeight, 0);

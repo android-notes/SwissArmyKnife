@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 
@@ -14,7 +15,7 @@ import com.wanjian.sak.R;
 /**
  * Created by wanjian on 2016/11/10.
  */
-
+@Deprecated
 public class CornerMeasureView extends DragLayerView {
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private int twoDP;
@@ -28,6 +29,11 @@ public class CornerMeasureView extends DragLayerView {
     public CornerMeasureView(Context context) {
         super(context);
         init();
+    }
+
+    @Override
+    public Drawable icon() {
+        return getResources().getDrawable(R.drawable.sak_corner_measure_icon);
     }
 
     @Override

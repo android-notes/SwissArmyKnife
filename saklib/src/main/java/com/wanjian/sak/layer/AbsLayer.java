@@ -2,61 +2,79 @@ package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.wanjian.sak.converter.SizeConverter;
+import com.wanjian.sak.ILayer;
+import com.wanjian.sak.R;
+import com.wanjian.sak.config.Config;
+import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.mess.Size;
-import com.wanjian.sak.utils.Color;
 
 
 /**
  * Created by wanjian on 2016/10/23.
  */
 
-public abstract class AbsLayer {
+public abstract class AbsLayer implements ILayer {
 
     protected Context mContext;
-    private Paint mPaint;
     private boolean mEnable;
-    private boolean mDrawIfOutBounds;
+    private Config config;
 
     public AbsLayer(Context context) {
         mContext = context;
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setTextSize(dp2px(10));
-        mPaint.setColor(getColor());
     }
 
-    public abstract String description();
+    public void attachConfig(Config config) {
+        this.config = config;
+    }
 
+    @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_launcher_icon);
+    }
+
+    @Override
     public void enable(boolean enable) {
         this.mEnable = enable;
     }
 
+    @Override
     public boolean isEnable() {
         return mEnable;
     }
 
-
-    public final void drawIfOutBounds(boolean b) {
-        mDrawIfOutBounds = b;
+    public Context getContext() {
+        return mContext;
     }
 
-    protected boolean isDrawIfOutBounds() {
-        return mDrawIfOutBounds;
+    protected int getStartRange() {
+        return config.getStartRange();
     }
 
-    public final void draw(Canvas canvas, View view, int startLayer, int endLayer) {
+    protected int getEndRange() {
+        return config.getEndRange();
+    }
+//    public final void drawIfOutBounds(boolean b) {
+//        mDrawIfOutBounds = b;
+//    }
+
+    protected boolean isClipDraw() {
+        return config.isClipDraw();
+    }
+
+    public final void draw(Canvas canvas, View view) {
         if (!mEnable) {
             return;
         }
         canvas.save();
-        onDraw(canvas, mPaint, view, startLayer, endLayer);
+        onDraw(canvas, view);
         canvas.restore();
     }
 
-    protected abstract void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer);
+    protected abstract void onDraw(Canvas canvas, View view);
 
     protected int getColor() {
         return Color.BLACK;
@@ -74,7 +92,7 @@ public abstract class AbsLayer {
     }
 
     protected Size convertSize(float length) {
-        return SizeConverter.CONVERTER.convert(mContext, length);
+        return ISizeConverter.CONVERTER.convert(mContext, length);
     }
 
     protected int dp2px(float dip) {
@@ -98,7 +116,6 @@ public abstract class AbsLayer {
         if (obj == null) {
             return false;
         }
-
         return obj.getClass() == getClass();
     }
 }

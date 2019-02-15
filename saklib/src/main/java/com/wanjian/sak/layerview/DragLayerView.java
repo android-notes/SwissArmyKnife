@@ -1,8 +1,10 @@
 package com.wanjian.sak.layerview;
 
 import android.content.Context;
+import android.support.v4.view.GestureDetectorCompat;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
+import android.view.View;
 
 import com.wanjian.sak.mess.OnChangeListener;
 
@@ -13,38 +15,49 @@ import com.wanjian.sak.mess.OnChangeListener;
 
 public abstract class DragLayerView extends AbsLayerView implements OnChangeListener {
 
-
-    private float lastX;
-    private float lastY;
+    private OnTouchListener touchListener;
 
     public DragLayerView(Context context) {
         super(context);
+        init();
+    }
+
+    private void init() {
+        final GestureDetectorCompat detectorCompat = new GestureDetectorCompat(getContext(), new GestureDetector.SimpleOnGestureListener() {
+            private float lastRowX;
+            private float lastRowY;
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                setTranslationX(getTranslationX() + (e2.getRawX() - lastRowX));
+                setTranslationY(getTranslationY() + (e2.getRawY() - lastRowY));
+                lastRowX = e2.getRawX();
+                lastRowY = e2.getRawY();
+                return true;
+            }
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                lastRowX = e.getRawX();
+                lastRowY = e.getRawY();
+                return true;
+            }
+        });
+        detectorCompat.setIsLongpressEnabled(false);
+        super.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                boolean b = false;
+                if (touchListener != null) {
+                    b = touchListener.onTouch(v, event);
+                }
+                return detectorCompat.onTouchEvent(event) || b;
+            }
+        });
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            lastX = event.getRawX();
-            lastY = event.getRawY();
-        } else {
-            float curX = event.getRawX();
-            float curY = event.getRawY();
-            ViewGroup.LayoutParams params = getLayoutParams();
-            if (!(params instanceof ViewGroup.MarginLayoutParams)) {
-                return super.onTouchEvent(event);
-            }
-            ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) params);
-            marginLayoutParams.leftMargin += (curX - lastX);
-            marginLayoutParams.topMargin += (curY - lastY);
-            requestLayout();
-            lastX = curX;
-            lastY = curY;
-
-        }
-        onChange(event);
-        return true;
+    public void setOnTouchListener(OnTouchListener l) {
+        touchListener = l;
     }
-
-
 }

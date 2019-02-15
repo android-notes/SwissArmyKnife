@@ -3,6 +3,7 @@ package com.wanjian.sak.layerview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 
 import com.wanjian.sak.R;
@@ -16,6 +17,11 @@ public class GridLayerView extends AbsLayerView {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(color());
         setWillNotDraw(false);
+    }
+
+    @Override
+    public Drawable icon() {
+        return getResources().getDrawable(R.drawable.sak_grid_icon);
     }
 
     @Override

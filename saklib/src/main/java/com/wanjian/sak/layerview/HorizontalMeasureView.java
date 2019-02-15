@@ -4,8 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.wanjian.sak.R;
 
@@ -26,17 +29,22 @@ public class HorizontalMeasureView extends DragLayerView {
     }
 
     @Override
+    public Drawable icon() {
+        return getResources().getDrawable(R.drawable.sak_hori_measure_icon);
+    }
+
+    @Override
     public String description() {
         return getContext().getString(R.string.sak_horizontal_measure);
     }
 
     private void init() {
+        setWillNotDraw(false);
         mPaint.setColor(Color.BLACK);
         mTwoDP = dp2px(2);
         mPaint.setTextSize(dp2px(8));
         maxHeight = dp2px(10);
         minHeight = dp2px(5);
-
     }
 
 
@@ -44,6 +52,10 @@ public class HorizontalMeasureView extends DragLayerView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(1);
+        canvas.drawRect(0, 0, getWidth(), getHeight(), mPaint);
+        mPaint.setStyle(Paint.Style.FILL);
         int w = getWidth();
         canvas.translate(0, maxHeight);
         canvas.drawLine(0, 0, w, 0, mPaint);
@@ -65,6 +77,9 @@ public class HorizontalMeasureView extends DragLayerView {
     public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
         params.height = dp2px(60);
+        if (params instanceof FrameLayout.LayoutParams) {
+            ((LayoutParams) params).gravity = Gravity.CENTER;
+        }
         return params;
     }
 

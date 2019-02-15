@@ -1,14 +1,25 @@
 package com.wanjian.sak.layerview;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.wanjian.sak.R;
 import com.wanjian.sak.utils.BitmapCreater;
@@ -21,26 +32,36 @@ public class TakeColorView extends DragLayerView {
 
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    private int mTextW;
-    private int mTextH;
-
-    private Integer mLtColor;
-    private Integer mRtColor;
-    private Integer mLbColor;
-    private Integer mRbColor;
-
+    private int borderWidth;
     private Bitmap mBitmap;
+    private int color;
+    private int location[] = new int[2];
+    private Toast toast;
 
     public TakeColorView(Context context) {
         super(context);
         init();
+        toast = Toast.makeText(context, null, Toast.LENGTH_LONG);
     }
 
     private void init() {
+        setWillNotDraw(false);
         mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setTextSize(dp2px(12));
-        setBackgroundResource(R.drawable.sak_take_color_bag);
+        borderWidth = dp2px(5);
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                onChange(event);
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public Drawable icon() {
+        return getResources().getDrawable(R.drawable.sak_color_picker_icon);
     }
 
     @Override
@@ -50,51 +71,48 @@ public class TakeColorView extends DragLayerView {
 
     @Override
     public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
-        Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
-        mTextH = fontMetrics.bottom - fontMetrics.top;
-        mTextW = (int) mPaint.measureText("#ffffffff");
-
-        params.width = mTextW * 3;
-        params.height = mTextH * 6;
+        if (params instanceof FrameLayout.LayoutParams) {
+            ((LayoutParams) params).gravity = Gravity.CENTER;
+        }
+        params.height = params.width = dp2px(100);
         return params;
     }
 
-
-    @Override
     public void onChange(MotionEvent motionEvent) {
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                down();
+                draw2Bitmap();
+                pickColor();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                pickColor();
                 break;
             case MotionEvent.ACTION_UP:
-                up();
+                draw2Bitmap();
+                pickColor();
                 break;
         }
     }
 
-    private void drawColor(Canvas canvas, int color, int l, int t, int r, int b) {
-        mPaint.setColor(color);
-        canvas.drawRect(l, t, r, b, mPaint);
-        if ((~color | 0xff000000) == color) {
-            mPaint.setColor(0xffff0000);
-        } else {
-            mPaint.setColor((~color | 0xff000000));
+    private void pickColor() {
+        if (mBitmap == null) {
+            return;
         }
-
-        canvas.drawText(String.format("#%08x", color), l, t + mTextH, mPaint);
-
+        getLocationInWindow(location);
+        int r = getWidth() / 2;
+        if (checkPixelAccess(location[0] + r, location[1] + r, mBitmap)) {
+            color = mBitmap.getPixel(location[0] + r, location[1] + r);
+        }
+        SpannableString string = new SpannableString(String.format("#%08X", color));
+        string.setSpan(new ForegroundColorSpan(0xff48c09e), 0, string.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        string.setSpan(new RelativeSizeSpan(2), 0, string.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        toast.setText(string);
+        toast.show();
+        invalidate();
     }
 
-    public void down() {
-        mLtColor = null;
-        mRtColor = null;
-        mLbColor = null;
-        mRbColor = null;
-    }
+    private void draw2Bitmap() {
 
-    public void up() {
-
-        setVisibility(INVISIBLE);
         View root = getRootView();
         if (mBitmap == null) {
             mBitmap = BitmapCreater.create(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
@@ -110,33 +128,10 @@ public class TakeColorView extends DragLayerView {
             Log.w("SAK", "out of memory....");
             return;
         }
+        setVisibility(INVISIBLE);
         root.draw(new Canvas(mBitmap));
-        int location[] = new int[2];
-        getLocationInWindow(location);
-        if (checkPixelAccess(location[0], location[1], mBitmap)) {
-            mLtColor = mBitmap.getPixel(location[0], location[1]);
-        } else {
-            mLtColor = null;
-        }
-
-        if (checkPixelAccess(location[0] + getWidth(), location[1], mBitmap)) {
-            mRtColor = mBitmap.getPixel(location[0] + getWidth(), location[1]);
-        } else {
-            mRtColor = null;
-        }
-        if (checkPixelAccess(location[0], location[1] + getHeight(), mBitmap)) {
-            mLbColor = mBitmap.getPixel(location[0], location[1] + getHeight());
-        } else {
-            mLbColor = null;
-        }
-        if (checkPixelAccess(location[0] + getWidth(), location[1] + getHeight(), mBitmap)) {
-            mRbColor = mBitmap.getPixel(location[0] + getWidth(), location[1] + getHeight());
-        } else {
-            mRbColor = null;
-        }
         setVisibility(VISIBLE);
     }
-
 
     private boolean checkPixelAccess(int x, int y, Bitmap bitmap) {
         if (x < 0) {
@@ -161,27 +156,43 @@ public class TakeColorView extends DragLayerView {
         super.onDraw(canvas);
         int w = getWidth();
         int h = getHeight();
-
-        mPaint.setStyle(Paint.Style.FILL);
-        if (mLtColor != null) {
-            drawColor(canvas, mLtColor, 0, 0, w / 2, h / 2);
-        }
-        if (mLbColor != null) {
-            drawColor(canvas, mLbColor, 0, h / 2, w / 2, h);
-        }
-
-        if (mRtColor != null) {
-            drawColor(canvas, mRtColor, w / 2, 0, w, h / 2);
-        }
-        if (mRbColor != null) {
-            drawColor(canvas, mRbColor, w / 2, h / 2, w, h);
-        }
-
+        float radius = w / 2f;
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.BLACK);
-        canvas.drawRect(0, 0, w - 1, h - 1, mPaint);
+        mPaint.setStrokeWidth(borderWidth);
+        mPaint.setColor(0xff48c09e);
+        canvas.translate(radius, radius);
+        canvas.drawCircle(0, 0, radius - borderWidth, mPaint);
+
+        mPaint.setColor(color);
+        mPaint.setStrokeWidth(borderWidth * 2);
+        canvas.drawCircle(0, 0, radius - borderWidth * 3, mPaint);
+
+        mPaint.setColor(0xff48c09e);
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStrokeWidth(1);
+        canvas.drawLine(-w / 2, 0, -1, 0, mPaint);
+        canvas.drawLine(1, 0, w / 2, 0, mPaint);
+
+        canvas.drawLine(0, -1, 0, -h / 2, mPaint);
+        canvas.drawLine(0, 1, 0, h / 2, mPaint);
 
 
     }
 
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        Animator set = AnimatorInflater.loadAnimator(getContext(), R.animator.sak_shake_animator);
+        set.setTarget(this);
+        set.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                draw2Bitmap();
+                pickColor();
+            }
+        });
+        set.start();
+    }
 }

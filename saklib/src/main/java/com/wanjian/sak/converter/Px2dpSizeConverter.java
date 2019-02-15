@@ -8,7 +8,7 @@ import com.wanjian.sak.mess.Size;
  * Created by wanjian on 2017/2/20.
  */
 
-public class Px2dpSizeConverter extends SizeConverter {
+public class Px2dpSizeConverter extends ISizeConverter {
     @Override
     public String desc() {
         return "Dp";

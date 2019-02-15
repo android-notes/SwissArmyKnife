@@ -2,7 +2,6 @@ package com.wanjian.sak.layer.adapter;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Region;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import android.view.ViewParent;
 
 import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layer.AbsLayer;
-import com.wanjian.sak.view.SAKCoverView;
+import com.wanjian.sak.view.RootContainerView;
 
 
 /**
@@ -29,21 +28,21 @@ public abstract class LayerAdapter extends AbsLayer {
 
 
     @Override
-    protected void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer) {
-        this.mStartLayer = startLayer;
-        this.mEndLayer = endLayer;
+    protected void onDraw(Canvas canvas, View view) {
+        this.mStartLayer = getStartRange();
+        this.mEndLayer = getEndRange();
         mCurLayer = -1;
-        layerCount(canvas, view, paint);
+        layerCount(canvas, view);
     }
 
-    private void layerCount(Canvas canvas, View view, Paint paint) {
-        if (view == null || view instanceof SAKCoverView || ViewFilter.FILTER.filter(view) == false) {
+    private void layerCount(Canvas canvas, View view) {
+        if (view == null || view instanceof RootContainerView || ViewFilter.FILTER.filter(view) == false) {
             return;
         }
         if (mCurLayer + 1 > mEndLayer) {
             return;
         }
-        boolean drawIfOutOfBounds = isDrawIfOutBounds();
+        boolean drawIfOutOfBounds = !isClipDraw();
         int count = 0;
         ViewParent parent = view.getParent();
         if (drawIfOutOfBounds == false) {
@@ -59,14 +58,14 @@ public abstract class LayerAdapter extends AbsLayer {
         }
         mCurLayer++;
         if (mCurLayer >= mStartLayer && mCurLayer <= mEndLayer) {
-            drawLayer(canvas, paint, view);
+            drawLayer(canvas, view);
         }
 
         if (view instanceof ViewGroup) {
             ViewGroup vg = ((ViewGroup) view);
             for (int i = 0; i < vg.getChildCount(); i++) {
                 View child = vg.getChildAt(i);
-                layerCount(canvas, child, paint);
+                layerCount(canvas, child);
             }
         }
         mCurLayer--;
@@ -78,5 +77,5 @@ public abstract class LayerAdapter extends AbsLayer {
     }
 
 
-    protected abstract void drawLayer(Canvas canvas, Paint paint, View view);
+    protected abstract void drawLayer(Canvas canvas, View view);
 }

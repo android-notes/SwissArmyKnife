@@ -1,6 +1,7 @@
 package com.wanjian.sak.layer;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.wanjian.sak.R;
@@ -25,6 +26,11 @@ public class WidthHeightLayer extends LayerTxtAdapter {
         String txt = convertSize(w).getLength() + ":" + convertSize(h).getLength();
 
         return txt;
+    }
+
+    @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_width_height_icon);
     }
 
     @Override

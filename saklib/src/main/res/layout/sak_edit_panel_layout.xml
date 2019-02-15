@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_marginTop="10dp"
-    android:background="@drawable/sak_box_bag"
-    android:clickable="true"
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical">
 
     <TextView
@@ -20,7 +16,7 @@
         android:textColor="#000" />
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingLeft="10dp"
@@ -29,7 +25,7 @@
 
 
         <TableLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
@@ -43,9 +39,10 @@
 
                 <EditText
                     android:id="@+id/width"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
                     android:digits="mMWw0123456789"
                     android:gravity="center"
@@ -69,9 +66,10 @@
 
                 <EditText
                     android:id="@+id/height"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
                     android:digits="mMWw0123456789"
                     android:gravity="center"
@@ -97,13 +95,14 @@
 
                 <EditText
                     android:id="@+id/weight"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
                     android:gravity="center"
-                    android:maxLines="1"
                     android:inputType="numberDecimal"
+                    android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:textColor="#000" />
@@ -125,9 +124,10 @@
 
                 <EditText
                     android:id="@+id/weightSum"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
                     android:gravity="center"
                     android:inputType="numberDecimal"
@@ -182,12 +182,13 @@
 
                 <EditText
                     android:id="@+id/ml"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
@@ -207,12 +208,13 @@
 
                 <EditText
                     android:id="@+id/mr"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
@@ -231,12 +233,13 @@
 
                 <EditText
                     android:id="@+id/mt"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
@@ -255,12 +258,13 @@
 
                 <EditText
                     android:id="@+id/mb"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
@@ -286,12 +290,13 @@
 
                 <EditText
                     android:id="@+id/pl"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
@@ -309,12 +314,13 @@
 
                 <EditText
                     android:id="@+id/pr"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
@@ -332,12 +338,13 @@
 
                 <EditText
                     android:id="@+id/pt"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
@@ -355,12 +362,13 @@
 
                 <EditText
                     android:id="@+id/pb"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
@@ -383,12 +391,13 @@
 
                 <EditText
                     android:id="@+id/size"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
                     android:gravity="center"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
@@ -410,9 +419,10 @@
 
                 <EditText
                     android:id="@+id/color"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
                     android:digits="#0123456789abcdefABCDEF"
                     android:gravity="center"
@@ -438,9 +448,10 @@
 
                 <EditText
                     android:id="@+id/text"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
                     android:gravity="center"
                     android:maxLines="1"
@@ -460,12 +471,13 @@
 
                 <EditText
                     android:id="@+id/backgroundColor"
-                    android:layout_width="90dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/sak_input_bg"
-                    android:gravity="center"
                     android:digits="#0123456789abcdefABCDEF"
+                    android:gravity="center"
                     android:maxLength="9"
                     android:maxLines="1"
                     android:paddingBottom="5dp"
@@ -481,7 +493,7 @@
 
 
     <TextView
-        android:id="@+id/ok"
+        android:id="@+id/confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"

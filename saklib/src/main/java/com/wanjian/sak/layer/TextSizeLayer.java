@@ -1,6 +1,8 @@
 package com.wanjian.sak.layer;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,6 +28,11 @@ public class TextSizeLayer extends LayerTxtAdapter {
         }
 
         return "";
+    }
+
+    @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_text_size_icon);
     }
 
     @Override

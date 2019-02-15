@@ -1,6 +1,7 @@
 package com.wanjian.sak.layer;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,6 +28,11 @@ public class TextColorLayer extends LayerTxtAdapter {
             return txt;
         }
         return "";
+    }
+
+    @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_text_color_icon);
     }
 
     @Override

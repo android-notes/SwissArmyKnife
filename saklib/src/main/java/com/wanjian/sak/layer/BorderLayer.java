@@ -2,12 +2,13 @@ package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.wanjian.sak.R;
 import com.wanjian.sak.layer.adapter.LayerAdapter;
-import com.wanjian.sak.utils.Color;
 
 
 /**
@@ -16,6 +17,7 @@ import com.wanjian.sak.utils.Color;
 
 public class BorderLayer extends LayerAdapter {
 
+    private final Paint mPaint;
     private int[] mLocationSize;
     private int mCornerW;
     private int mStrokeW;
@@ -25,20 +27,22 @@ public class BorderLayer extends LayerAdapter {
 
     public BorderLayer(Context context) {
         super(context);
-//        enable(true);
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setTextSize(dp2px(10));
+        mPaint.setColor(getColor());
     }
 
     @Override
-    protected void drawLayer(Canvas canvas, Paint paint, View view) {
+    protected void drawLayer(Canvas canvas, View view) {
         mCornerW = dp2px(6);
         mStrokeW = dp2px(1);
         w = view.getWidth();
         h = view.getHeight();
         mLocationSize = getLocationAndSize(view);
-        paint.setColor(getBorderColor());
-        drawBorder(canvas, view, paint);
-        paint.setColor(getCornerColor());
-        drawCorner(canvas, view, paint);
+        mPaint.setColor(getBorderColor());
+        drawBorder(canvas, view, mPaint);
+        mPaint.setColor(getCornerColor());
+        drawCorner(canvas, view, mPaint);
     }
 
     protected int getBorderColor() {
@@ -71,6 +75,11 @@ public class BorderLayer extends LayerAdapter {
         canvas.drawLine(mLocationSize[0] + w, mLocationSize[1] + h - mCornerW, mLocationSize[0] + w, mLocationSize[1] + h, mPaint);
         mPaint.setStrokeWidth(sw);
 
+    }
+
+    @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_border_icon);
     }
 
     @Override

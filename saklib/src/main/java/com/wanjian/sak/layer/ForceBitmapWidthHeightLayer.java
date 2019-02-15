@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 /**
  * Created by wanjian on 2016/10/25.
  */
-
+@Deprecated
 public class ForceBitmapWidthHeightLayer extends LayerTxtAdapter {
     public ForceBitmapWidthHeightLayer(Context context) {
         super(context);

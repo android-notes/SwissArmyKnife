@@ -237,7 +237,7 @@ view.getVisibility()==View.VISIBLE即可。
 
 ### 原理
 
-参考 `com.wanjian.sak.Inject`
+参考 ` `
  
 android 4.2以下：
 

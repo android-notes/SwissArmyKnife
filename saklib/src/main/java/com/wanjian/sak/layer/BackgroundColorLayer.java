@@ -40,6 +40,11 @@ public class BackgroundColorLayer extends LayerTxtAdapter {
     }
 
     @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_background_color_icon);
+    }
+
+    @Override
     public String description() {
         return mContext.getString(R.string.sak_bag_color);
     }

@@ -37,6 +37,11 @@ public class BitmapWidthHeightLayer extends LayerTxtAdapter {
 
 
     @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_img_size);
+    }
+
+    @Override
     public String description() {
         return mContext.getString(R.string.sak_image_w_h);
     }
