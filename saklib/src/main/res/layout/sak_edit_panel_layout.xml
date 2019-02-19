@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="10dp"
-        android:text="标题" />
+        android:padding="12dp"
+        tools:text="标题" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,9 +25,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
 
             <TableLayout
@@ -78,8 +78,7 @@
                         android:digits="mMWw0123456789"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:padding="6dp"
-                        />
+                        android:padding="6dp" />
 
                 </TableRow>
 
@@ -104,8 +103,7 @@
                         android:gravity="center"
                         android:inputType="numberDecimal"
                         android:maxLines="1"
-                        android:padding="6dp"
-                        />
+                        android:padding="6dp" />
 
                 </TableRow>
 
@@ -153,8 +151,7 @@
                         android:digits="lLtTrRbBCHV|"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:padding="6dp"
-                        />
+                        android:padding="6dp" />
 
                 </TableRow>
 
@@ -163,7 +160,7 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/sak_card_background"
                 android:padding="10dp">
 
@@ -217,8 +214,7 @@
                         android:gravity="center"
                         android:inputType="numberDecimal"
                         android:maxLines="1"
-                        android:padding="6dp"
-                        />
+                        android:padding="6dp" />
 
                 </TableRow>
 
@@ -239,8 +235,7 @@
                         android:gravity="center"
                         android:inputType="numberDecimal"
                         android:maxLines="1"
-                        android:padding="6dp"
-                        />
+                        android:padding="6dp" />
 
                 </TableRow>
 
@@ -271,7 +266,7 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/sak_card_background"
                 android:padding="10dp">
 
@@ -372,7 +367,7 @@
                 android:id="@+id/textTable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/sak_card_background"
                 android:padding="10dp">
 
@@ -466,7 +461,7 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/sak_card_background"
                 android:padding="10dp">
 

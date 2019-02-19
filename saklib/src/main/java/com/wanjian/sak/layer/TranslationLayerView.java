@@ -45,7 +45,7 @@ public class TranslationLayerView extends AbsLayer {
 
     @Override
     public String description() {
-        return "移动控件";
+        return getResources().getString(R.string.sak_translation_view);
     }
 
     @Override

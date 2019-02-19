@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#f5f6f7"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="15dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="1">
 
         <LinearLayout
@@ -45,7 +45,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/sak_card_background"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -54,7 +54,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="层级区间" />
+                    android:text="@string/sak_layer" />
 
                 <NumberPicker
                     android:id="@+id/startRange"
@@ -75,7 +75,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/sak_card_background"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -84,13 +84,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="单位" />
+                    android:text="@string/sak_unit" />
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <RadioGroup
+                    <LinearLayout
                         android:id="@+id/unitGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,14 +101,14 @@
                         android:showDividers="middle">
 
 
-                    </RadioGroup>
+                    </LinearLayout>
                 </HorizontalScrollView>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/sak_card_background"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -118,7 +118,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="允许超出边界绘制" />
+                    android:text="@string/sak_clip_draw" />
 
                 <CheckBox
                     android:id="@+id/clipDraw"
@@ -129,12 +129,15 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:autoLink="web"
-                android:text="https://github.com/android-notes/SwissArmyKnife/blob/autopilot/README.md"
-                android:textColorLink="#b1b0b0"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="https://github.com/android-notes"
+                android:textColor="#b1b0b0"
                 android:textIsSelectable="true" />
 
         </LinearLayout>
@@ -145,11 +148,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/sak_corner_but_bag"
         android:paddingBottom="10dp"
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
         android:paddingTop="10dp"
-        android:text="确定" />
+        android:text="@string/sak_ok" />
 </LinearLayout>

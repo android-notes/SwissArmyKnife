@@ -120,10 +120,10 @@ public class Config {
             mContext = context.getApplicationContext();
             mDefaultLayerViews.add(new FragmentNameLayer(mContext));
             mDefaultLayerViews.add(new ActivityNameLayerView(mContext));
-            mDefaultLayerViews.add(new TakeColorView(mContext));
             mDefaultLayerViews.add(new ViewEditView(mContext));
             mDefaultLayerViews.add(new RelativeLayerView(mContext));
             mDefaultLayerViews.add(new TranslationLayerView(mContext));
+            mDefaultLayerViews.add(new TakeColorView(mContext));
             mDefaultLayerViews.add(new HorizontalMeasureView(mContext));
             mDefaultLayerViews.add(new VerticalMeasureView(mContext));
             mDefaultLayerViews.add(new ScalpelLayerView(mContext));

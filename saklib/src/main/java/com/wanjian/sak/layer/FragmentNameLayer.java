@@ -32,6 +32,9 @@ public class FragmentNameLayer extends ActivityNameLayerView {
     @Override
     protected void onUiUpdate(Canvas canvas, View rootView) {
         super.onUiUpdate(canvas, rootView);
+        if (mActivity == null || mActivity.isFinishing()) {
+            return;
+        }
         mStartLayer = getStartRange();
         mEndLayer = getEndRange();
         traversal(canvas, mActivity.getSupportFragmentManager(), 0);

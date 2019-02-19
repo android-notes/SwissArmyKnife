@@ -11,5 +11,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
         android:layout_marginTop="40dp"
-        android:src="@drawable/sak_entrance_shadow_icon" />
+        android:src="@drawable/sak_entrance_icon" />
 </merge>

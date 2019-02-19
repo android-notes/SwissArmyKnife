@@ -1,6 +1,8 @@
 package com.wanjian.sak.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -15,8 +17,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.wanjian.sak.R;
@@ -30,7 +30,7 @@ public class OptPanelView extends LinearLayout {
     private GridView function;
     private NumberPicker startRange;
     private NumberPicker endRange;
-    private RadioGroup unitGroup;
+    private LinearLayout unitGroup;
     private CheckBox clipDraw;
     private Config config;
     private OnClickListener confirmListener;
@@ -46,7 +46,7 @@ public class OptPanelView extends LinearLayout {
         function = (GridView) findViewById(R.id.function);
         startRange = (NumberPicker) findViewById(R.id.startRange);
         endRange = (NumberPicker) findViewById(R.id.endRange);
-        unitGroup = (RadioGroup) findViewById(R.id.unitGroup);
+        unitGroup = (LinearLayout) findViewById(R.id.unitGroup);
         clipDraw = (CheckBox) findViewById(R.id.clipDraw);
 
         findViewById(R.id.confirm).setOnClickListener(new OnClickListener() {
@@ -57,6 +57,19 @@ public class OptPanelView extends LinearLayout {
                 }
             }
         });
+        findViewById(R.id.help).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Uri uri = Uri.parse("https://github.com/android-notes/SwissArmyKnife/blob/autopilot/README.md");
+                final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    getContext().startActivity(intent);
+                } catch (Exception e) {
+                }
+            }
+        });
+
     }
 
     public void attachConfig(Config config) {
@@ -101,11 +114,11 @@ public class OptPanelView extends LinearLayout {
     }
 
     private void setClipDraw() {
-        clipDraw.setChecked(!config.isClipDraw());
+        clipDraw.setChecked(config.isClipDraw());
         clipDraw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                config.setClipDraw(!isChecked);
+                config.setClipDraw(isChecked);
             }
         });
     }
@@ -114,19 +127,22 @@ public class OptPanelView extends LinearLayout {
         List<ISizeConverter> sizeConverters = config.getSizeConverters();
         final LayoutInflater inflater = LayoutInflater.from(getContext());
         for (final ISizeConverter converter : sizeConverters) {
-            RadioButton button = (RadioButton) inflater.inflate(R.layout.sak_radiobutton, unitGroup, false);
+            //fuck 4.1
+            final CheckBox button = (CheckBox) inflater.inflate(R.layout.sak_radiobutton, unitGroup, false);
             unitGroup.addView(button);
             button.setText(converter.desc());
-            button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            button.setOnClickListener(new OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        ISizeConverter.CONVERTER = converter;
+                public void onClick(View v) {
+                    for (int i = unitGroup.getChildCount() - 1; i > -1; i--) {
+                        ((CheckBox) unitGroup.getChildAt(i)).setChecked(false);
                     }
+                    button.setChecked(true);
+                    ISizeConverter.CONVERTER = converter;
                 }
             });
         }
-        ((RadioButton) unitGroup.getChildAt(0)).setChecked(true);
+        ((CheckBox) unitGroup.getChildAt(0)).setChecked(true);
     }
 
     private void setFunctions() {
