@@ -2,7 +2,6 @@ package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.text.SpannableString;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,7 +23,7 @@ public class TextSizeLayer extends LayerTxtAdapter {
     protected String getTxt(View view) {
         if (view instanceof TextView) {
             float size = ((TextView) view).getTextSize();
-            return String.valueOf(convertSize(size).getLength());
+            return String.valueOf(getSizeConverter().convert(getContext(), size).getLength());
         }
 
         return "";
@@ -37,6 +36,6 @@ public class TextSizeLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return mContext.getString(R.string.sak_txt_size);
+        return getContext().getString(R.string.sak_txt_size);
     }
 }

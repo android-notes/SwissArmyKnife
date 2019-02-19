@@ -1,4 +1,4 @@
-package com.wanjian.sak.layerview;
+package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,13 +12,11 @@ import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wanjian.sak.R;
-import com.wanjian.sak.converter.ISizeConverter;
-import com.wanjian.sak.filter.ViewFilter;
-import com.wanjian.sak.layer.InfoLayer;
 import com.wanjian.sak.view.RootContainerView;
 
 
@@ -26,7 +24,7 @@ import com.wanjian.sak.view.RootContainerView;
  * Created by wanjian on 2016/10/24.
  */
 
-public class TreeView extends AbsLayerView {
+public class TreeView extends AbsLayer {
     private Paint mPaint;
     private int mTabW;
     private int mTxtH;
@@ -56,7 +54,7 @@ public class TreeView extends AbsLayerView {
     }
 
     private int convertSize(int leng) {
-        return (int) ISizeConverter.CONVERTER.convert(getContext(), leng).getLength();
+        return (int) getSizeConverter().convert(getContext(), leng).getLength();
     }
 
     private void init() {
@@ -80,7 +78,7 @@ public class TreeView extends AbsLayerView {
     }
 
     private void layerCount(Canvas canvas, View view) {
-        if (view == null || view instanceof RootContainerView || ViewFilter.FILTER.filter(view) == false) {
+        if (view == null || view instanceof RootContainerView || getViewFilter().filter(view) == false) {
             return;
         }
         mCurLayer++;
@@ -251,7 +249,7 @@ public class TreeView extends AbsLayerView {
     }
 
     @Override
-    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
+    public ViewGroup.LayoutParams getLayoutParams(FrameLayout.LayoutParams params) {
         return params;
     }
 

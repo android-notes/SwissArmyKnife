@@ -1,13 +1,15 @@
-package com.wanjian.sak.layerview;
+package com.wanjian.sak.layer;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -15,13 +17,16 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.support.DragLayerView;
 import com.wanjian.sak.utils.BitmapCreater;
 
 /**
@@ -32,24 +37,47 @@ public class TakeColorView extends DragLayerView {
 
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    private int borderWidth;
+    private int mBorderWidth;
     private Bitmap mBitmap;
-    private int color;
-    private int location[] = new int[2];
-    private Toast toast;
+    private int mColor;
+    private int mLocation[] = new int[2];
+    private TextView mColorValueView;
 
     public TakeColorView(Context context) {
         super(context);
-        init();
-        toast = Toast.makeText(context, null, Toast.LENGTH_LONG);
+        init(context);
     }
 
-    private void init() {
+    @SuppressLint("ClickableViewAccessibility")
+    private void init(Context context) {
         setWillNotDraw(false);
+        mColorValueView = (TextView) LayoutInflater.from(context).inflate(R.layout.sak_toast_layout, null);
+        mColorValueView.setOnTouchListener(new OnTouchListener() {
+            private float lastX = 0;
+            private float lastY = 0;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                    lastX = event.getRawX();
+                    lastY = event.getRawY();
+                } else {
+                    float cx = event.getRawX();
+                    float cy = event.getRawY();
+                    WindowManager.LayoutParams params = ((WindowManager.LayoutParams) v.getLayoutParams());
+                    params.x += (cx - lastX);
+                    params.y += (lastY - cy);
+                    updateWindow(mColorValueView, params);
+                    lastX = cx;
+                    lastY = cy;
+                }
+                return true;
+            }
+        });
         mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setTextSize(dp2px(12));
-        borderWidth = dp2px(5);
+        mBorderWidth = dp2px(5);
         setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -70,15 +98,13 @@ public class TakeColorView extends DragLayerView {
     }
 
     @Override
-    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
-        if (params instanceof FrameLayout.LayoutParams) {
-            ((LayoutParams) params).gravity = Gravity.CENTER;
-        }
+    public ViewGroup.LayoutParams getLayoutParams(FrameLayout.LayoutParams params) {
+        params.gravity = Gravity.CENTER;
         params.height = params.width = dp2px(100);
         return params;
     }
 
-    public void onChange(MotionEvent motionEvent) {
+    private void onChange(MotionEvent motionEvent) {
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 draw2Bitmap();
@@ -98,16 +124,15 @@ public class TakeColorView extends DragLayerView {
         if (mBitmap == null) {
             return;
         }
-        getLocationInWindow(location);
+        getLocationInWindow(mLocation);
         int r = getWidth() / 2;
-        if (checkPixelAccess(location[0] + r, location[1] + r, mBitmap)) {
-            color = mBitmap.getPixel(location[0] + r, location[1] + r);
+        if (checkPixelAccess(mLocation[0] + r, mLocation[1] + r, mBitmap)) {
+            mColor = mBitmap.getPixel(mLocation[0] + r, mLocation[1] + r);
         }
-        SpannableString string = new SpannableString(String.format("#%08X", color));
+        SpannableString string = new SpannableString(String.format("#%08X", mColor));
         string.setSpan(new ForegroundColorSpan(0xff48c09e), 0, string.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         string.setSpan(new RelativeSizeSpan(2), 0, string.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        toast.setText(string);
-        toast.show();
+        mColorValueView.setText(string);
         invalidate();
     }
 
@@ -158,14 +183,14 @@ public class TakeColorView extends DragLayerView {
         int h = getHeight();
         float radius = w / 2f;
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(borderWidth);
+        mPaint.setStrokeWidth(mBorderWidth);
         mPaint.setColor(0xff48c09e);
         canvas.translate(radius, radius);
-        canvas.drawCircle(0, 0, radius - borderWidth, mPaint);
+        canvas.drawCircle(0, 0, radius - mBorderWidth, mPaint);
 
-        mPaint.setColor(color);
-        mPaint.setStrokeWidth(borderWidth * 2);
-        canvas.drawCircle(0, 0, radius - borderWidth * 3, mPaint);
+        mPaint.setColor(mColor);
+        mPaint.setStrokeWidth(mBorderWidth * 2);
+        canvas.drawCircle(0, 0, radius - mBorderWidth * 3, mPaint);
 
         mPaint.setColor(0xff48c09e);
         mPaint.setStyle(Paint.Style.FILL);
@@ -181,8 +206,7 @@ public class TakeColorView extends DragLayerView {
 
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+    public void onAttached(View view) {
         Animator set = AnimatorInflater.loadAnimator(getContext(), R.animator.sak_shake_animator);
         set.setTarget(this);
         set.addListener(new AnimatorListenerAdapter() {
@@ -194,5 +218,20 @@ public class TakeColorView extends DragLayerView {
             }
         });
         set.start();
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.format = PixelFormat.RGBA_8888;
+        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
+        params.type = WindowManager.LayoutParams.TYPE_APPLICATION;
+        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        params.y = dp2px(60);
+        showWindow(mColorValueView, params);
+    }
+
+    @Override
+    protected void onDetached(View rootView) {
+        super.onDetached(rootView);
+        removeWindow(mColorValueView);
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,17 +25,23 @@ public class PageDrawPerformanceLayer extends AbsLayer {
         super(context);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setTextSize(dp2px(10));
-        mPaint.setColor(getColor());
+//        mPaint.setColor(getColor());
     }
 
 
     @Override
     public String description() {
-        return mContext.getString(R.string.sak_page_draw_performance);
+        return getContext().getString(R.string.sak_page_draw_performance);
     }
 
     @Override
-    protected void onDraw(Canvas canvas, View view) {
+    public Drawable icon() {
+        return null;
+    }
+
+
+    @Override
+    protected void onUiUpdate(Canvas canvas, View view) {
         if (!(view instanceof ViewGroup)) {
             return;
         }

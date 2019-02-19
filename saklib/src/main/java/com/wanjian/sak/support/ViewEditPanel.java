@@ -1,4 +1,4 @@
-package com.wanjian.sak.view;
+package com.wanjian.sak.support;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -43,7 +43,17 @@ public class ViewEditPanel extends LinearLayout {
     private ViewGroup weightRow;
     private ViewGroup weightSumRow;
     private WeakReference<View> targetViewRef;
-
+    private ISizeConverter sizeConverter;
+    private View textTable;
+    //
+//    private int parseInt(String txt, int defaultValue) {
+//        try {
+//            return Integer.parseInt(txt);
+//        } catch (Exception e) {
+//            return defaultValue;
+//        }
+//    }
+    private OnClickListener listener;
 
     public ViewEditPanel(Context context) {
         super(context);
@@ -52,6 +62,7 @@ public class ViewEditPanel extends LinearLayout {
     }
 
     private void init(View view) {
+        textTable = findViewById(R.id.textTable);
         title = (TextView) findViewById(R.id.title);
         width = (EditText) findViewById(R.id.width);
         height = (EditText) findViewById(R.id.height);
@@ -146,7 +157,7 @@ public class ViewEditPanel extends LinearLayout {
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         } else {
             try {
-                params.height = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(heightInput));
+                params.height = sizeConverter.recovery(context, Float.parseFloat(heightInput));
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -161,7 +172,7 @@ public class ViewEditPanel extends LinearLayout {
             params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
         } else {
             try {
-                params.width = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(widthInput));
+                params.width = sizeConverter.recovery(context, Float.parseFloat(widthInput));
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -170,22 +181,22 @@ public class ViewEditPanel extends LinearLayout {
 
     private void setMargin(Context context, MarginLayoutParams marginLayoutParams) {
         try {
-            marginLayoutParams.leftMargin = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(ml.getText().toString()));
+            marginLayoutParams.leftMargin = sizeConverter.recovery(context, Float.parseFloat(ml.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         try {
-            marginLayoutParams.rightMargin = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(mr.getText().toString()));
+            marginLayoutParams.rightMargin = sizeConverter.recovery(context, Float.parseFloat(mr.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         try {
-            marginLayoutParams.topMargin = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(mt.getText().toString()));
+            marginLayoutParams.topMargin = sizeConverter.recovery(context, Float.parseFloat(mt.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         try {
-            marginLayoutParams.bottomMargin = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(mb.getText().toString()));
+            marginLayoutParams.bottomMargin = sizeConverter.recovery(context, Float.parseFloat(mb.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -194,7 +205,7 @@ public class ViewEditPanel extends LinearLayout {
     private void setTextInfo(Context context, TextView textView) {
         try {
             try {
-                int px = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(size.getText().toString()));
+                int px = sizeConverter.recovery(context, Float.parseFloat(size.getText().toString()));
                 textView.setTextSize(new Px2SpSizeConverter().convert(context, px).getLength());
             } catch (NumberFormatException e) {
                 e.printStackTrace();
@@ -213,25 +224,25 @@ public class ViewEditPanel extends LinearLayout {
     private void setPadding(View targetView, Context context) {
         int paddingLeft = targetView.getPaddingLeft();
         try {
-            paddingLeft = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(pl.getText().toString()));
+            paddingLeft = sizeConverter.recovery(context, Float.parseFloat(pl.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         int paddingRight = targetView.getPaddingRight();
         try {
-            paddingRight = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(pr.getText().toString()));
+            paddingRight = sizeConverter.recovery(context, Float.parseFloat(pr.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         int paddingTop = targetView.getPaddingTop();
         try {
-            paddingTop = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(pt.getText().toString()));
+            paddingTop = sizeConverter.recovery(context, Float.parseFloat(pt.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         int paddingBottom = targetView.getPaddingBottom();
         try {
-            paddingBottom = ISizeConverter.CONVERTER.recovery(context, Float.parseFloat(pb.getText().toString()));
+            paddingBottom = sizeConverter.recovery(context, Float.parseFloat(pb.getText().toString()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -275,13 +286,16 @@ public class ViewEditPanel extends LinearLayout {
         setPadding(context, view);
 
         if (view instanceof TextView) {
+            textTable.setVisibility(VISIBLE);
             TextView textView = (TextView) view;
             sizeRow.setVisibility(VISIBLE);
             colorRow.setVisibility(VISIBLE);
             textRow.setVisibility(VISIBLE);
-            size.setText(ISizeConverter.CONVERTER.convert(context, textView.getTextSize()).getLength() + "");
+            size.setText(sizeConverter.convert(context, textView.getTextSize()).getLength() + "");
             color.setText(String.format("#%08x", textView.getCurrentTextColor()));
             text.setText(textView.getText());
+        } else {
+            textTable.setVisibility(GONE);
         }
 
         Drawable drawable = view.getBackground();
@@ -296,18 +310,11 @@ public class ViewEditPanel extends LinearLayout {
     }
 
     private void setPadding(Context context, View view) {
-        pl.setText(ISizeConverter.CONVERTER.convert(context, view.getPaddingLeft()).getLength() + "");
-        pr.setText(ISizeConverter.CONVERTER.convert(context, view.getPaddingRight()).getLength() + "");
-        pt.setText(ISizeConverter.CONVERTER.convert(context, view.getPaddingTop()).getLength() + "");
-        pb.setText(ISizeConverter.CONVERTER.convert(context, view.getPaddingBottom()).getLength() + "");
+        pl.setText(sizeConverter.convert(context, view.getPaddingLeft()).getLength() + "");
+        pr.setText(sizeConverter.convert(context, view.getPaddingRight()).getLength() + "");
+        pt.setText(sizeConverter.convert(context, view.getPaddingTop()).getLength() + "");
+        pb.setText(sizeConverter.convert(context, view.getPaddingBottom()).getLength() + "");
 
-    }
-
-    private void getMargin(MarginLayoutParams params, Context context) {
-        ml.setText(ISizeConverter.CONVERTER.convert(context, params.leftMargin).getLength() + "");
-        mr.setText(ISizeConverter.CONVERTER.convert(context, params.rightMargin).getLength() + "");
-        mt.setText(ISizeConverter.CONVERTER.convert(context, params.topMargin).getLength() + "");
-        mb.setText(ISizeConverter.CONVERTER.convert(context, params.bottomMargin).getLength() + "");
     }
 
 //    private float parseFloat(String txt, float defaultValue) {
@@ -318,13 +325,20 @@ public class ViewEditPanel extends LinearLayout {
 //        }
 //    }
 
-    public void getWidthHeight(Context context, ViewGroup.LayoutParams params) {
+    private void getMargin(MarginLayoutParams params, Context context) {
+        ml.setText(sizeConverter.convert(context, params.leftMargin).getLength() + "");
+        mr.setText(sizeConverter.convert(context, params.rightMargin).getLength() + "");
+        mt.setText(sizeConverter.convert(context, params.topMargin).getLength() + "");
+        mb.setText(sizeConverter.convert(context, params.bottomMargin).getLength() + "");
+    }
+
+    private void getWidthHeight(Context context, ViewGroup.LayoutParams params) {
         if (params.width == ViewGroup.LayoutParams.WRAP_CONTENT) {
             width.setText("W");
         } else if (params.width == ViewGroup.LayoutParams.MATCH_PARENT) {
             width.setText("M");
         } else {
-            width.setText(ISizeConverter.CONVERTER.convert(context, params.width).getLength() + "");
+            width.setText(sizeConverter.convert(context, params.width).getLength() + "");
         }
 
         if (params.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
@@ -332,21 +346,15 @@ public class ViewEditPanel extends LinearLayout {
         } else if (params.height == ViewGroup.LayoutParams.MATCH_PARENT) {
             height.setText("M");
         } else {
-            height.setText(ISizeConverter.CONVERTER.convert(context, params.height).getLength() + "");
+            height.setText(sizeConverter.convert(context, params.height).getLength() + "");
         }
     }
 
-    //
-//    private int parseInt(String txt, int defaultValue) {
-//        try {
-//            return Integer.parseInt(txt);
-//        } catch (Exception e) {
-//            return defaultValue;
-//        }
-//    }
-    private OnClickListener listener;
-
     public void setOnConfirmClickListener(OnClickListener listener) {
         this.listener = listener;
+    }
+
+    public void setSizeConverter(ISizeConverter sizeConverter) {
+        this.sizeConverter = sizeConverter;
     }
 }

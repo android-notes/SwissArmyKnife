@@ -1,4 +1,4 @@
-package com.wanjian.sak.layerview;
+package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,10 +7,11 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.view.MotionEvent;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.support.DragLayerView;
 
 /**
  * Created by wanjian on 2016/11/10.
@@ -96,14 +97,10 @@ public class CornerMeasureView extends DragLayerView {
 
 
     @Override
-    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
+    public ViewGroup.LayoutParams getLayoutParams(FrameLayout.LayoutParams params) {
         params.width = dp2px(150);
         params.height = dp2px(120);
         return params;
     }
 
-    @Override
-    public void onChange(MotionEvent motionEvent) {
-
-    }
 }

@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.layer.adapter.LayerTxtAdapter;
 
 
@@ -23,9 +24,8 @@ public class WidthHeightLayer extends LayerTxtAdapter {
     protected String getTxt(View view) {
         int w = view.getWidth();
         int h = view.getHeight();
-        String txt = convertSize(w).getLength() + ":" + convertSize(h).getLength();
-
-        return txt;
+        ISizeConverter converter = getSizeConverter();
+        return converter.convert(getContext(), w).getLength() + ":" + converter.convert(getContext(), h).getLength();
     }
 
     @Override
@@ -33,8 +33,9 @@ public class WidthHeightLayer extends LayerTxtAdapter {
         return getContext().getResources().getDrawable(R.drawable.sak_width_height_icon);
     }
 
+
     @Override
     public String description() {
-        return mContext.getString(R.string.sak_width_height);
+        return getContext().getString(R.string.sak_width_height);
     }
 }

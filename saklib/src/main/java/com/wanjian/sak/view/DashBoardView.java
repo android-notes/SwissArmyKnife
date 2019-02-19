@@ -10,7 +10,6 @@ import android.view.ViewParent;
 
 import com.wanjian.sak.config.Config;
 import com.wanjian.sak.layer.AbsLayer;
-import com.wanjian.sak.layerview.AbsLayerView;
 
 import java.util.List;
 
@@ -30,9 +29,9 @@ public class DashBoardView extends DrawingBoardView {
         if (config == null) {
             return;
         }
-        List<AbsLayer> layers = config.getLayers();
+        List<AbsLayer> layers = config.getLayerViews();
         for (AbsLayer layer : layers) {
-            layer.draw(canvas, getRootView());
+            layer.uiUpdate(canvas, getRootView());
         }
     }
 
@@ -51,8 +50,9 @@ public class DashBoardView extends DrawingBoardView {
             return;
         }
         invalidate();
-        for (AbsLayerView layerView : config.getLayerViews()) {
-            if (layerView.isEnable() == false) {
+
+        for (AbsLayer layerView : config.getLayerViews()) {
+            if (!layerView.isEnable()) {
                 removeView(layerView);
                 continue;
             }
@@ -63,5 +63,6 @@ public class DashBoardView extends DrawingBoardView {
             addView(layerView, layerView.getLayoutParams(generateDefaultLayoutParams()));
         }
     }
+
 
 }

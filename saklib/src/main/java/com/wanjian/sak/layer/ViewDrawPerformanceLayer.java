@@ -3,6 +3,7 @@ package com.wanjian.sak.layer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,11 +26,16 @@ public class ViewDrawPerformanceLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return mContext.getString(R.string.sak_view_draw_performance);
+        return getContext().getString(R.string.sak_view_draw_performance);
     }
 
     @Override
-    protected void onDraw(Canvas canvas, View view) {
+    public Drawable icon() {
+        return null;
+    }
+
+    @Override
+    protected void onUiUpdate(Canvas canvas, View view) {
         View root = view.getRootView();
         if (root.getWidth() == 0 || root.getHeight() == 0) {
             return;
@@ -44,12 +50,12 @@ public class ViewDrawPerformanceLayer extends LayerTxtAdapter {
             mBitmap = Bitmap.createBitmap(root.getWidth(), root.getHeight(), Bitmap.Config.ARGB_8888);
             mCanvas.setBitmap(mBitmap);
         }
-        super.onDraw(canvas, view);
+        super.onUiUpdate(canvas, view);
 
     }
 
     @Override
-    protected void drawLayer(Canvas canvas, View view) {
+    protected void onDrawLayer(Canvas canvas, View view) {
 
         if (!(view instanceof ViewGroup)) {
             mCanvas.save();
@@ -60,7 +66,7 @@ public class ViewDrawPerformanceLayer extends LayerTxtAdapter {
 
             mCanvas.restore();
             mTime = String.valueOf((end - start) / 10_000 / 100f);
-            super.drawLayer(canvas, view);
+            super.onDrawLayer(canvas, view);
         }
 
 

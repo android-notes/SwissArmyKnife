@@ -19,6 +19,7 @@ import com.wanjian.sak.R;
 public class SAKEntranceView extends ImageView {
 
     private OnTapListener tapListener;
+    private boolean isMoved = false;
 
     public SAKEntranceView(Context context) {
         this(context, null);
@@ -28,8 +29,6 @@ public class SAKEntranceView extends ImageView {
         super(context, attrs);
         init();
     }
-
-    private boolean isMoved = false;
 
     private void init() {
 //        setImageResource(R.drawable.sak_entrance_icon);

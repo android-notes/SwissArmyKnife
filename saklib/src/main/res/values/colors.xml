@@ -4,4 +4,7 @@
     <color name="sak_color_ffffff">#FFFFFF</color>
     <color name="sak_color_border">#f1f1f1</color>
     <color name="sak_color_ff0000">#FF0000</color>
+    <color name="sak_color_ff333333">#FF333333</color>
+    <color name="sak_color_primary">#ff48c09e</color>
+    <color name="sak_color_ff999999">#c2c2c2</color>
 </resources>

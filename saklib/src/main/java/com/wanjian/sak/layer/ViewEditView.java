@@ -1,4 +1,4 @@
-package com.wanjian.sak.layerview;
+package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -10,16 +10,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.wanjian.sak.R;
-import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.view.RootContainerView;
-import com.wanjian.sak.view.ViewEditPanel;
+import com.wanjian.sak.support.ViewEditPanel;
 
-public class ViewEditView extends AbsLayerView {
-    private View targetView;
-    private int[] location = new int[2];
+public class ViewEditView extends AbsLayer {
+    private View mTarget;
+    private int[] mLocation = new int[2];
 
     public ViewEditView(Context context) {
         super(context);
@@ -36,13 +34,6 @@ public class ViewEditView extends AbsLayerView {
         return getContext().getString(R.string.sak_edit_view);
     }
 
-    @Override
-    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        return params;
-    }
-
     private void init() {
         final GestureDetectorCompat detectorCompat = new GestureDetectorCompat(getContext(), new GestureDetector.SimpleOnGestureListener() {
 
@@ -51,15 +42,15 @@ public class ViewEditView extends AbsLayerView {
                 super.onLongPress(e);
                 View target = findPressView((int) e.getRawX(), (int) e.getRawY());
                 final ViewEditPanel editPanel = new ViewEditPanel(new ContextThemeWrapper(getContext(), R.style.SAK_Theme));
+                editPanel.setSizeConverter(getSizeConverter());
                 editPanel.attachTargetView(target);
-                final WindowManager manager = (WindowManager) getRootView().getContext().getSystemService(Context.WINDOW_SERVICE);
                 WindowManager.LayoutParams params = new WindowManager.LayoutParams();
                 params.format = PixelFormat.RGBA_8888;
-                manager.addView(editPanel, params);
+                showWindow(editPanel, params);
                 editPanel.setOnConfirmClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        manager.removeViewImmediate(editPanel);
+                        removeWindow(editPanel);
                     }
                 });
             }
@@ -98,13 +89,13 @@ public class ViewEditView extends AbsLayerView {
     }
 
     protected View findPressView(int x, int y) {
-        targetView = getRootView();
-        traversal(targetView, x, y);
-        return targetView;
+        mTarget = getRootView();
+        traversal(mTarget, x, y);
+        return mTarget;
     }
 
     private void traversal(View view, int x, int y) {
-        if (ViewFilter.FILTER.filter(view) == false) {
+        if (getViewFilter().filter(view) == false) {
             return;
         }
         if (view.getVisibility() != VISIBLE) {
@@ -115,7 +106,7 @@ public class ViewEditView extends AbsLayerView {
             return;
         }
 
-        targetView = view;
+        mTarget = view;
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = ((ViewGroup) view);
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
@@ -126,22 +117,20 @@ public class ViewEditView extends AbsLayerView {
     }
 
     private boolean inRange(View view, int x, int y) {
-        view.getLocationOnScreen(location);
-        return (location[0] <= x
-                && location[1] <= y
-                && location[0] + view.getWidth() >= x
-                && location[1] + view.getHeight() >= y);
+        view.getLocationOnScreen(mLocation);
+        return (mLocation[0] <= x
+                && mLocation[1] <= y
+                && mLocation[0] + view.getWidth() >= x
+                && mLocation[1] + view.getHeight() >= y);
     }
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        Toast.makeText(getContext(), "长按编辑控件", Toast.LENGTH_LONG).show();
+    public void onAttached(View view) {
+//        Toast.makeText(getContext(), "长按编辑控件", Toast.LENGTH_LONG).show();
     }
 
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        targetView = null;
+    public void onDetached(View view) {
+        mTarget = null;
     }
 }

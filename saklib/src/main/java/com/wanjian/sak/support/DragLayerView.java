@@ -1,4 +1,4 @@
-package com.wanjian.sak.layerview;
+package com.wanjian.sak.support;
 
 import android.content.Context;
 import android.support.v4.view.GestureDetectorCompat;
@@ -6,14 +6,14 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.wanjian.sak.mess.OnChangeListener;
+import com.wanjian.sak.layer.AbsLayer;
 
 
 /**
  * Created by wanjian on 2017/2/20.
  */
 
-public abstract class DragLayerView extends AbsLayerView implements OnChangeListener {
+public abstract class DragLayerView extends AbsLayer {
 
     private OnTouchListener touchListener;
 

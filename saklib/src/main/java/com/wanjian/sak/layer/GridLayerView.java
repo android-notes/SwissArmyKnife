@@ -1,21 +1,20 @@
-package com.wanjian.sak.layerview;
+package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.view.ViewGroup;
 
 import com.wanjian.sak.R;
 
-public class GridLayerView extends AbsLayerView {
+public class GridLayerView extends AbsLayer {
 
-    private Paint paint;
+    private Paint mPaint;
 
     public GridLayerView(Context context) {
         super(context);
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(color());
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setColor(color());
         setWillNotDraw(false);
     }
 
@@ -30,13 +29,6 @@ public class GridLayerView extends AbsLayerView {
     }
 
     @Override
-    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        return params;
-    }
-
-    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         int w = getWidth();
@@ -44,10 +36,10 @@ public class GridLayerView extends AbsLayerView {
         int space = space();
 
         for (int i = space; i < w; i += space) {
-            canvas.drawLine(i, 0, i, h, paint);
+            canvas.drawLine(i, 0, i, h, mPaint);
         }
         for (int i = space; i < h; i += space) {
-            canvas.drawLine(0, i, w, i, paint);
+            canvas.drawLine(0, i, w, i, mPaint);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.wanjian.sak.layerview;
+package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -30,12 +30,10 @@ public class VerticalMeasureView extends HorizontalMeasureView {
     }
 
     @Override
-    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
+    public ViewGroup.LayoutParams getLayoutParams(FrameLayout.LayoutParams params) {
         params.width = dp2px(60);
         params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        if (params instanceof FrameLayout.LayoutParams) {
-            ((LayoutParams) params).gravity = Gravity.CENTER;
-        }
+        params.gravity = Gravity.CENTER;
         return params;
     }
 

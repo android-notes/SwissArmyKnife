@@ -29,7 +29,7 @@ public class SecAct extends AppCompatActivity {
         findViewById(R.id.install).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SAK.init(getApplication());
+                SAK.init(getApplication(), null);
             }
         });
         findViewById(R.id.uninstall).setOnClickListener(new View.OnClickListener() {
@@ -54,6 +54,6 @@ public class SecAct extends AppCompatActivity {
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragContainer, new ContainerFragment())
-        .commit();
+                .commit();
     }
 }

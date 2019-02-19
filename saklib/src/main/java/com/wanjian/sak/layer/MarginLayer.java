@@ -2,7 +2,6 @@ package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -10,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.layer.adapter.LayerAdapter;
+
+import java.text.DecimalFormat;
 
 
 /**
@@ -19,75 +21,77 @@ import com.wanjian.sak.layer.adapter.LayerAdapter;
 
 public class MarginLayer extends LayerAdapter {
 
-    private final Paint mPaint;
+    private final Paint mTextPaint;
+    private final Paint mBgPaint;
+    private final Paint mMarginPaint;
+    private final int mTxtColor = 0xFF000000;
+    private final int mBgColor = 0x88FFFFFF;
+    private final int mMarginColor = 0x33FF0008;
     private Rect mRect = new Rect();
+    private DecimalFormat mFormat = new DecimalFormat("#.###");
 
     public MarginLayer(Context context) {
         super(context);
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setTextSize(dp2px(10));
-        mPaint.setColor(getColor());
+        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint.setTextSize(dp2px(10));
+        mTextPaint.setColor(mTxtColor);
+
+        mBgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mBgPaint.setColor(mBgColor);
+
+        mMarginPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mMarginPaint.setColor(mMarginColor);
     }
 
     @Override
-    protected void drawLayer(Canvas canvas, View view) {
-
+    protected void onDrawLayer(Canvas canvas, View view) {
+        if (view.getRootView() == view) {
+            return;
+        }
         ViewGroup.LayoutParams params = view.getLayoutParams();
         if (params instanceof ViewGroup.MarginLayoutParams) {//画 外边距
-            int[] locationSize = getLocationAndSize(view);
             int w = view.getWidth();
             int h = view.getHeight();
             ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) params);
-            mPaint.setStyle(Paint.Style.FILL);
-            mPaint.setColor(0x33ff0000);
-            int l = locationSize[0] - marginLayoutParams.leftMargin;
-            int t = locationSize[1] - marginLayoutParams.topMargin;
-            int r = locationSize[0] + w + marginLayoutParams.rightMargin;
-            int b = locationSize[1] + h + marginLayoutParams.bottomMargin;
 
-            canvas.drawRect(l, locationSize[1], locationSize[0], locationSize[1] + h, mPaint);//left
-            canvas.drawRect(locationSize[0] + w, locationSize[1], r, locationSize[1] + h, mPaint);//right
-            canvas.drawRect(locationSize[0], t, locationSize[0] + w, locationSize[1], mPaint);
-            canvas.drawRect(locationSize[0], locationSize[1] + h, locationSize[0] + w, b, mPaint);
 
+            int l = -marginLayoutParams.leftMargin;
+            int t = -marginLayoutParams.topMargin;
+            int r = w + marginLayoutParams.rightMargin;
+            int b = h + marginLayoutParams.bottomMargin;
+
+            canvas.drawRect(l, 0, 0, h, mMarginPaint);//left
+            canvas.drawRect(w, 0, r, h, mMarginPaint);//right
+            canvas.drawRect(0, t, w, 0, mMarginPaint);
+            canvas.drawRect(0, h, w, b, mMarginPaint);
+            ISizeConverter converter = getSizeConverter();
+            Context context = getContext();
 
             if (marginLayoutParams.leftMargin != 0) {
-                String txt = "ML" + convertSize(marginLayoutParams.leftMargin).getLength();
-                mPaint.getTextBounds(txt, 0, txt.length(), mRect);
-                mPaint.setColor(0x88ffffff);
-                mPaint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(l, locationSize[1] + locationSize[3] / 2, l + mRect.width(), locationSize[1] + locationSize[3] / 2 + mRect.height(), mPaint);
-                mPaint.setColor(Color.BLACK);
-                canvas.drawText(txt, l, locationSize[1] + locationSize[3] / 2 + mRect.height(), mPaint);
+                String txt = "L" + mFormat.format(converter.convert(context, marginLayoutParams.leftMargin).getLength());
+                mTextPaint.getTextBounds(txt, 0, txt.length(), mRect);
+                canvas.drawRect(l, h / 2, l + mRect.width(), h / 2 + mRect.height(), mBgPaint);
+                canvas.drawText(txt, l, h / 2 + mRect.height(), mTextPaint);
             }
             if (marginLayoutParams.topMargin != 0) {
-                String txt = "MT" + convertSize(marginLayoutParams.topMargin).getLength();
-                mPaint.getTextBounds(txt, 0, txt.length(), mRect);
-                mPaint.setColor(0x88ffffff);
-                mPaint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(locationSize[0] + locationSize[2] / 2, t, locationSize[0] + locationSize[2] / 2 + mRect.width(), t + mRect.height(), mPaint);
-                mPaint.setColor(Color.BLACK);
-                canvas.drawText(txt, locationSize[0] + locationSize[2] / 2, t + mRect.height(), mPaint);
+                String txt = "T" + mFormat.format(converter.convert(context, marginLayoutParams.topMargin).getLength());
+                mTextPaint.getTextBounds(txt, 0, txt.length(), mRect);
+                canvas.drawRect(w / 2, t, w / 2 + mRect.width(), t + mRect.height(), mBgPaint);
+                canvas.drawText(txt, w / 2, t + mRect.height(), mTextPaint);
             }
 
             if (marginLayoutParams.rightMargin != 0) {
-                String txt = "MR" + convertSize(marginLayoutParams.rightMargin).getLength();
-                mPaint.getTextBounds(txt, 0, txt.length(), mRect);
-                mPaint.setColor(0x88ffffff);
-                mPaint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(r - mRect.width(), locationSize[1] + locationSize[3] / 2, r, locationSize[1] + locationSize[3] / 2 + mRect.height(), mPaint);
-                mPaint.setColor(Color.BLACK);
-                canvas.drawText(txt, r - mRect.width(), locationSize[1] + locationSize[3] / 2 + mRect.height(), mPaint);
+                String txt = "R" + mFormat.format(converter.convert(context, marginLayoutParams.rightMargin).getLength());
+                mTextPaint.getTextBounds(txt, 0, txt.length(), mRect);
+                canvas.drawRect(r - mRect.width(), h / 2, r, h / 2 + mRect.height(), mBgPaint);
+                canvas.drawText(txt, r - mRect.width(), h / 2 + mRect.height(), mTextPaint);
             }
 
             if (marginLayoutParams.bottomMargin != 0) {
-                String txt = "MB" + convertSize(marginLayoutParams.bottomMargin).getLength();
-                mPaint.getTextBounds(txt, 0, txt.length(), mRect);
-                mPaint.setColor(0x88ffffff);
-                mPaint.setStyle(Paint.Style.FILL);
-                canvas.drawRect(locationSize[0] + locationSize[2] / 2, b - mRect.height(), locationSize[0] + locationSize[2] / 2 + mRect.width(), b, mPaint);
-                mPaint.setColor(Color.BLACK);
-                canvas.drawText(txt, locationSize[0] + locationSize[2] / 2, b, mPaint);
+                String txt = "B" + mFormat.format(converter.convert(context, marginLayoutParams.bottomMargin).getLength());
+                mTextPaint.getTextBounds(txt, 0, txt.length(), mRect);
+                canvas.drawRect(w / 2, b - mRect.height(), w / 2 + mRect.width(), b, mBgPaint);
+                canvas.drawText(txt, w / 2, b, mTextPaint);
             }
 
 
@@ -101,6 +105,6 @@ public class MarginLayer extends LayerAdapter {
 
     @Override
     public String description() {
-        return mContext.getString(R.string.sak_margin);
+        return getContext().getString(R.string.sak_margin);
     }
 }

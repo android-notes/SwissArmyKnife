@@ -40,6 +40,6 @@ public class InfoLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return mContext.getString(R.string.sak_personal_info);
+        return getContext().getString(R.string.sak_personal_info);
     }
 }

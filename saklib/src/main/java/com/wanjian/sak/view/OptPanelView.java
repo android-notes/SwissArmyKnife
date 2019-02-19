@@ -19,14 +19,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.wanjian.sak.ILayer;
 import com.wanjian.sak.R;
 import com.wanjian.sak.config.Config;
 import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.layer.AbsLayer;
-import com.wanjian.sak.layerview.AbsLayerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OptPanelView extends LinearLayout {
@@ -104,11 +101,11 @@ public class OptPanelView extends LinearLayout {
     }
 
     private void setClipDraw() {
-        clipDraw.setChecked(config.isClipDraw());
+        clipDraw.setChecked(!config.isClipDraw());
         clipDraw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                config.setClipDraw(isChecked);
+                config.setClipDraw(!isChecked);
             }
         });
     }
@@ -133,17 +130,14 @@ public class OptPanelView extends LinearLayout {
     }
 
     private void setFunctions() {
-        List<AbsLayer> layers = config.getLayers();
-        List<AbsLayerView> layerViews = config.getLayerViews();
-        final List<ILayer> iLayers = new ArrayList<>(layers.size() + layerViews.size());
-        iLayers.addAll(layers);
-        iLayers.addAll(layerViews);
+        final List<AbsLayer> layerViews = config.getLayerViews();
 
-        setAdapter(iLayers);
+
+        setAdapter(layerViews);
         function.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ILayer layer = iLayers.get(position);
+                AbsLayer layer = layerViews.get(position);
                 layer.enable(!layer.isEnable());
                 //GridScroller 不复用控件，可以直接修改view
                 Holder holder = (Holder) view.getTag(R.layout.sak_function_item);
@@ -156,7 +150,7 @@ public class OptPanelView extends LinearLayout {
         });
     }
 
-    private void setAdapter(final List<ILayer> iLayers) {
+    private void setAdapter(final List<AbsLayer> iLayers) {
 
         final LayoutInflater inflater = LayoutInflater.from(getContext());
 
@@ -167,7 +161,7 @@ public class OptPanelView extends LinearLayout {
             }
 
             @Override
-            public ILayer getItem(int position) {
+            public AbsLayer getItem(int position) {
                 return iLayers.get(position);
             }
 
@@ -187,7 +181,7 @@ public class OptPanelView extends LinearLayout {
                     convertView.setTag(R.layout.sak_function_item, holder);
                 }
                 Holder holder = (Holder) convertView.getTag(R.layout.sak_function_item);
-                ILayer layer = getItem(position);
+                AbsLayer layer = getItem(position);
                 holder.title.setText(layer.description());
                 holder.icon.setImageDrawable(layer.icon());
                 if (layer.isEnable()) {

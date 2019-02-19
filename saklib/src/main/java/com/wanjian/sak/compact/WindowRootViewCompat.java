@@ -62,13 +62,22 @@ public abstract class WindowRootViewCompat {
         return sInstance;
     }
 
-    public void addWindowChangeListener(IWindowChangeListener changeListener) {
+    public final void addWindowChangeListener(IWindowChangeListener changeListener) {
         if (changeListener == null) {
             return;
         }
         sInstance.onAddWindowChangeListener(changeListener);
     }
 
+    public final void removeWindowChangeListener(IWindowChangeListener changeListener) {
+        if (changeListener == null) {
+            return;
+        }
+        sInstance.onRemoveWindowChangeListener(changeListener);
+    }
+
     abstract void onAddWindowChangeListener(@NonNull IWindowChangeListener changeListener);
+
+    abstract void onRemoveWindowChangeListener(@NonNull IWindowChangeListener changeListener);
 
 }

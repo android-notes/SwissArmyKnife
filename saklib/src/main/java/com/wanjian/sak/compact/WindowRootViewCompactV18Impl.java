@@ -45,6 +45,9 @@ class WindowRootViewCompactV18Impl extends WindowRootViewCompactV16Impl {
 
     @Override
     void check() {
+        if (changeListeners == null || changeListeners.isEmpty()) {
+            return;
+        }
         try {
             View[] curViews = (View[]) mViewsField.get(mWindowManagerGlobal);
             if (curViews != lastViews) {
@@ -66,4 +69,10 @@ class WindowRootViewCompactV18Impl extends WindowRootViewCompactV16Impl {
             changeListener.onAddWindow(view);
         }
     }
+
+    @Override
+    void onRemoveWindowChangeListener(@NonNull IWindowChangeListener changeListener) {
+        changeListeners.remove(changeListener);
+    }
+
 }

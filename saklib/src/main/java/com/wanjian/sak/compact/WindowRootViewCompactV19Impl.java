@@ -79,4 +79,8 @@ class WindowRootViewCompactV19Impl extends WindowRootViewCompat {
             changeListener.onAddWindow(view);
         }
     }
+    @Override
+    void onRemoveWindowChangeListener(@NonNull IWindowChangeListener changeListener) {
+        changeListeners.remove(changeListener);
+    }
 }

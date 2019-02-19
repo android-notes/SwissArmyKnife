@@ -2,52 +2,51 @@ package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 
-import com.wanjian.sak.ILayer;
-import com.wanjian.sak.R;
 import com.wanjian.sak.config.Config;
 import com.wanjian.sak.converter.ISizeConverter;
-import com.wanjian.sak.mess.Size;
-
+import com.wanjian.sak.filter.ViewFilter;
 
 /**
- * Created by wanjian on 2016/10/23.
+ * Created by wanjian on 2017/3/9.
  */
 
-public abstract class AbsLayer implements ILayer {
-
-    protected Context mContext;
+public abstract class AbsLayer extends FrameLayout {
     private boolean mEnable;
     private Config config;
 
     public AbsLayer(Context context) {
-        mContext = context;
+        super(context);
     }
 
     public void attachConfig(Config config) {
         this.config = config;
     }
 
-    @Override
-    public Drawable icon() {
-        return getContext().getResources().getDrawable(R.drawable.sak_launcher_icon);
-    }
+    public abstract String description();
 
-    @Override
-    public void enable(boolean enable) {
+    public abstract Drawable icon();
+
+    public final void enable(boolean enable) {
         this.mEnable = enable;
+        onStateChange(enable);
     }
 
-    @Override
-    public boolean isEnable() {
+    protected void onStateChange(boolean isEnable) {
+
+    }
+
+    public final boolean isEnable() {
         return mEnable;
     }
 
-    public Context getContext() {
-        return mContext;
+    protected boolean isClipDraw() {
+        return config.isClipDraw();
     }
 
     protected int getStartRange() {
@@ -57,27 +56,36 @@ public abstract class AbsLayer implements ILayer {
     protected int getEndRange() {
         return config.getEndRange();
     }
-//    public final void drawIfOutBounds(boolean b) {
-//        mDrawIfOutBounds = b;
-//    }
 
-    protected boolean isClipDraw() {
-        return config.isClipDraw();
-    }
-
-    public final void draw(Canvas canvas, View view) {
-        if (!mEnable) {
+    public final void uiUpdate(Canvas canvas, View view) {
+        if (!isEnable()) {
             return;
         }
-        canvas.save();
-        onDraw(canvas, view);
-        canvas.restore();
+        int count = canvas.save();
+        onUiUpdate(canvas, view);
+        canvas.restoreToCount(count);
     }
 
-    protected abstract void onDraw(Canvas canvas, View view);
+    protected void onUiUpdate(Canvas canvas, View rootView) {
 
-    protected int getColor() {
-        return Color.BLACK;
+    }
+
+    @Override
+    protected final void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        onAttached(getRootView());
+    }
+
+    protected void onAttached(View rootView) {
+    }
+
+    @Override
+    protected final void onDetachedFromWindow() {
+        onDetached(getRootView());
+        super.onDetachedFromWindow();
+    }
+
+    protected void onDetached(View rootView) {
     }
 
     /**
@@ -91,31 +99,41 @@ public abstract class AbsLayer implements ILayer {
         return new int[]{locations[0] - decorView.getPaddingLeft(), locations[1] - decorView.getPaddingTop(), view.getWidth(), view.getHeight()};
     }
 
-    protected Size convertSize(float length) {
-        return ISizeConverter.CONVERTER.convert(mContext, length);
-    }
-
-    protected int dp2px(float dip) {
-        float density = mContext.getResources().getDisplayMetrics().density;
+    protected int dp2px(int dip) {
+        float density = getRootView().getResources().getDisplayMetrics().density;
         return (int) (dip * density + 0.5);
     }
 
-    protected int px2dp(float px) {
-        final float scale = mContext.getResources().getDisplayMetrics().density;
-        return (int) (px / scale + 0.5f);
+    protected int px2dp(float pxValue) {
+        final float scale = getRootView().getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
     }
 
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    protected ISizeConverter getSizeConverter() {
+        return ISizeConverter.CONVERTER;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return obj.getClass() == getClass();
+    protected ViewFilter getViewFilter() {
+        return ViewFilter.FILTER;
     }
+
+    protected void showWindow(View view, WindowManager.LayoutParams params) {
+        WindowManager manager = (WindowManager) getRootView().getContext().getSystemService(Context.WINDOW_SERVICE);
+        manager.addView(view, params);
+    }
+
+    protected void updateWindow(View view, WindowManager.LayoutParams params) {
+        WindowManager manager = (WindowManager) getRootView().getContext().getSystemService(Context.WINDOW_SERVICE);
+        manager.updateViewLayout(view, params);
+    }
+
+    protected void removeWindow(View view) {
+        WindowManager manager = (WindowManager) getRootView().getContext().getSystemService(Context.WINDOW_SERVICE);
+        manager.removeViewImmediate(view);
+    }
+
+    public ViewGroup.LayoutParams getLayoutParams(FrameLayout.LayoutParams params) {
+        return params;
+    }
+
 }

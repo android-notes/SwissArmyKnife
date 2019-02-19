@@ -29,6 +29,6 @@ public class ViewClassLayer extends LayerTxtAdapter {
 
     @Override
     public String description() {
-        return mContext.getString(R.string.sak_view_name);
+        return getContext().getString(R.string.sak_view_name);
     }
 }

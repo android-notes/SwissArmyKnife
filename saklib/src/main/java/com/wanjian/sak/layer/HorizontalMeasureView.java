@@ -1,4 +1,4 @@
-package com.wanjian.sak.layerview;
+package com.wanjian.sak.layer;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,11 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.support.DragLayerView;
 
 
 /**
@@ -51,7 +51,6 @@ public class HorizontalMeasureView extends DragLayerView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(1);
         canvas.drawRect(0, 0, getWidth(), getHeight(), mPaint);
@@ -74,18 +73,10 @@ public class HorizontalMeasureView extends DragLayerView {
 
 
     @Override
-    public ViewGroup.LayoutParams getLayoutParams(ViewGroup.LayoutParams params) {
+    public ViewGroup.LayoutParams getLayoutParams(FrameLayout.LayoutParams params) {
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
         params.height = dp2px(60);
-        if (params instanceof FrameLayout.LayoutParams) {
-            ((LayoutParams) params).gravity = Gravity.CENTER;
-        }
+        params.gravity = Gravity.CENTER;
         return params;
-    }
-
-
-    @Override
-    public void onChange(MotionEvent motionEvent) {
-
     }
 }

@@ -5,11 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Region;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 
-import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layer.AbsLayer;
-import com.wanjian.sak.view.RootContainerView;
 
 
 /**
@@ -19,63 +16,76 @@ import com.wanjian.sak.view.RootContainerView;
 public abstract class LayerAdapter extends AbsLayer {
     private int mStartLayer;
     private int mEndLayer;
-
-    private int mCurLayer = -1;
+    private boolean isClip;
 
     public LayerAdapter(Context context) {
         super(context);
     }
 
-
     @Override
-    protected void onDraw(Canvas canvas, View view) {
-        this.mStartLayer = getStartRange();
-        this.mEndLayer = getEndRange();
-        mCurLayer = -1;
-        layerCount(canvas, view);
-    }
-
-    private void layerCount(Canvas canvas, View view) {
-        if (view == null || view instanceof RootContainerView || ViewFilter.FILTER.filter(view) == false) {
-            return;
-        }
-        if (mCurLayer + 1 > mEndLayer) {
-            return;
-        }
-        boolean drawIfOutOfBounds = !isClipDraw();
-        int count = 0;
-        ViewParent parent = view.getParent();
-        if (drawIfOutOfBounds == false) {
-            if (parent instanceof View) {
-                count = canvas.save();
-                int[] locationAndSize = getLocationAndSize(((View) parent));
-                canvas.clipRect(locationAndSize[0]
-                        , locationAndSize[1]
-                        , locationAndSize[0] + locationAndSize[2]
-                        , locationAndSize[1] + locationAndSize[3]
-                        , Region.Op.INTERSECT);
-            }
-        }
-        mCurLayer++;
-        if (mCurLayer >= mStartLayer && mCurLayer <= mEndLayer) {
-            drawLayer(canvas, view);
-        }
-
-        if (view instanceof ViewGroup) {
-            ViewGroup vg = ((ViewGroup) view);
-            for (int i = 0; i < vg.getChildCount(); i++) {
-                View child = vg.getChildAt(i);
-                layerCount(canvas, child);
-            }
-        }
-        mCurLayer--;
-        if (drawIfOutOfBounds == false) {
-            if (parent instanceof View) {
-                canvas.restoreToCount(count);
-            }
-        }
+    protected void onUiUpdate(Canvas canvas, View rootView) {
+        mStartLayer = getStartRange();
+        mEndLayer = getEndRange();
+        isClip = isClipDraw();
+        layerCount(canvas, rootView, 0);
     }
 
 
-    protected abstract void drawLayer(Canvas canvas, View view);
+    private void layerCount(Canvas canvas, View view, int curLayer) {
+        if (!getViewFilter().filter(view)) {
+            return;
+        }
+        if (curLayer > mEndLayer) {
+            return;
+        }
+        canvas.save();
+        if (curLayer >= mStartLayer) {
+            drawLayer(canvas, view, curLayer);
+        }
+        if (!(view instanceof ViewGroup)) {
+            canvas.restore();
+            return;
+        }
+
+        clipIfNeeded(canvas, view, curLayer);
+
+        ViewGroup vg = ((ViewGroup) view);
+        for (int i = 0, len = vg.getChildCount(); i < len; i++) {
+            View child = vg.getChildAt(i);
+            layerCount(canvas, child, curLayer + 1);
+        }
+
+        canvas.restore();
+    }
+
+    private void clipIfNeeded(Canvas canvas, View view, int curLayer) {
+        if (!isClip) {
+            return;
+        }
+
+        int w = view.getWidth();
+        int h = view.getHeight();
+        canvas.clipRect(0
+                , 0
+                , w
+                , h
+                , Region.Op.INTERSECT);
+    }
+
+
+    private void drawLayer(Canvas canvas, View view, int curLayer) {
+        int pl = 0;
+        int pt = 0;
+        if (curLayer == 1) {
+            View decorView = (View) view.getParent();
+            pl = decorView.getPaddingLeft();
+            pt = decorView.getPaddingTop();
+        }
+        canvas.translate(view.getX() - pl, view.getY() - pt);
+        int count = canvas.save();
+        onDrawLayer(canvas, view);
+        canvas.restoreToCount(count);
+    }
+
+    protected abstract void onDrawLayer(Canvas canvas, View view);
 }
