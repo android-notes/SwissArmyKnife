@@ -104,4 +104,5 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 当开启新窗口时，需要手动点击一次屏幕右侧的 靶心 按钮，以此激活当前窗口，不然当前窗口不会启用 SwissArmyKnife！
 
 
-
+### 功能拓展
+[https://github.com/android-notes/SwissArmyKnife/blob/autopilot/README_Dev.md](https://github.com/android-notes/SwissArmyKnife/blob/autopilot/README_Dev.md)
