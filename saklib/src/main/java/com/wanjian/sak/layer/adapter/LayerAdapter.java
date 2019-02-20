@@ -80,8 +80,8 @@ public abstract class LayerAdapter extends AbsLayer {
             View decorView = (View) view.getParent();
             pl = decorView.getPaddingLeft();
             pt = decorView.getPaddingTop();
-        }
-        canvas.translate(view.getX() - pl, view.getY() - pt);
+        }//view.getLocationInWindow();
+        canvas.translate(view.getX() - pl - view.getScrollX(), view.getY() - pt - view.getScrollY());
         int count = canvas.save();
         onDrawLayer(canvas, view);
         canvas.restoreToCount(count);
