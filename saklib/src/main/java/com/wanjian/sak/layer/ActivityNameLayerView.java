@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.Layout;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.text.style.BackgroundColorSpan;
 import android.view.View;
 
 import com.wanjian.sak.R;
@@ -82,7 +85,9 @@ public class ActivityNameLayerView extends AbsLayer {
         TextPaint textPaint = new TextPaint(mPaint);
         textPaint.setTextSize(dp2px(13));
         canvas.translate(x, y);
-        StaticLayout staticLayout = new StaticLayout(txt, textPaint, (int) (w * 0.8), Layout.Alignment.ALIGN_CENTER, 1, 0, false);
+        SpannableString decorStr = new SpannableString(txt);
+        decorStr.setSpan(new BackgroundColorSpan(0x99FFFFFF), 0, txt.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        StaticLayout staticLayout = new StaticLayout(decorStr, textPaint, (int) (w * 0.8), Layout.Alignment.ALIGN_CENTER, 1, 0, false);
 
         int txtW = staticLayout.getWidth();
         int txtH = staticLayout.getHeight();

@@ -44,7 +44,7 @@ public class GridLayerView extends AbsLayer {
     }
 
     protected int color() {
-        return 0x88000000;
+        return 0x55000000;
     }
 
     protected int space() {
