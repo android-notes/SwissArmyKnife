@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'//添加
-
+//apply plugin: "com.wanjian.tinypng"
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 22
+        minSdkVersion 12
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -38,12 +38,13 @@ buildscript {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // https://mvnrepository.com/artifact/com.android.support/support-v4
-    compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.android.support:support-v4:26.1.0'
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
+
 }
 
 def getKey() {
@@ -63,7 +64,7 @@ def getKey() {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak-autopilot'
-    publishVersion = '0.3.0'
+    publishVersion = '0.4.0-beta'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 
@@ -72,4 +73,21 @@ publish {
     dryRun = false
 
 }
-
+//
+//tinyPng {
+//    //http://www.bccto.me/  临时邮箱申请key
+//    //把下面的keys换成你申请的key，建议多配置几个
+//    enable true
+//    abortOnError false
+//    skip9Png true
+//    appendCompressRecord false
+//    keys = ["FBYz4WZR5tj9S4Jv4tCL5m3KgrQnXBgP",
+//            "1sQXBgXvvhfx5j1l10DKRvVvrlD3rcS4",
+//            "DdMZxbJ7W9K15hSZ6G5QVNbqh7PKGxjX",
+//            "xS2CNP0w7Sp4Xz7P1DvcCZNsQ9QJNsyb",
+//            "X7z8kgM3zw1Fr3R8RQTkhN3Kynx8xpdX",
+//            "mT1td5Qt6JW7yy0n2pkJd6ZwBxmHsjBy",
+//            "ctW1PG2wJhpJYxDhcj4NSgQ14WFxC7gb",
+//            "SWxfXRhZ6H1wnXnd3j5HmbK8wCpvdH0X",
+//    ]
+//}

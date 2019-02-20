@@ -2,13 +2,11 @@ package com.wanjian.sak.converter;
 
 import android.content.Context;
 
-import com.wanjian.sak.mess.Size;
-
 /**
  * Created by wanjian on 2017/3/9.
  */
 
-public class Px2SpSizeConverter extends SizeConverter {
+public class Px2SpSizeConverter extends ISizeConverter {
     @Override
     public String desc() {
         return "Sp";

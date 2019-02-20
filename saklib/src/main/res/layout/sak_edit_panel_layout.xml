@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_marginTop="10dp"
-    android:background="@drawable/sak_box_bag"
-    android:clickable="true"
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f6f7"
     android:orientation="vertical">
 
     <TextView
@@ -15,485 +11,519 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="10dp"
-        android:text="标题"
-        android:textColor="#000" />
+        android:padding="12dp"
+        tools:text="标题" />
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+
         android:scrollbarStyle="outsideOverlay">
 
-
-        <TableLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
-            <TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Width"
-                    android:textColor="#000" />
-
-                <EditText
-                    android:id="@+id/width"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:digits="mMWw0123456789"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-
-                    android:singleLine="true"
-                    android:textColor="#000" />
-
-            </TableRow>
-
-            <TableRow android:layout_marginTop="8dp">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Height"
-                    android:textColor="#000" />
-
-                <EditText
-                    android:id="@+id/height"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:digits="mMWw0123456789"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/weightRow"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Weight"
-                    android:textColor="#000" />
-
-                <EditText
-                    android:id="@+id/weight"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/weightSumRow"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Weight Sum"
-                    android:textColor="#000" />
-
-                <EditText
-                    android:id="@+id/weightSum"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_marginTop="8dp"
-                android:visibility="gone">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gravity"
-                    android:textColor="#000" />
-
-                <EditText
-                    android:id="@+id/gravity"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:digits="lLtTrRbBCHV|"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
-
-            </TableRow>
-
-            <TextView
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Margin"
-                android:textColor="#979797" />
+                android:background="@drawable/sak_card_background"
+                android:gravity="center_vertical"
+                android:padding="10dp">
 
-            <TableRow>
+                <TableRow>
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Width" />
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Margin Left"
-                    android:textColor="#000" />
+                    <EditText
+                        android:id="@+id/width"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:digits="mMWw0123456789"
 
-                <EditText
-                    android:id="@+id/ml"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:padding="6dp"
+                        android:singleLine="true"
+                        android:textIsSelectable="false" />
 
-            </TableRow>
+                </TableRow>
 
-            <TableRow android:layout_marginTop="8dp">
+                <TableRow android:layout_marginTop="8dp">
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Height" />
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Margin Right"
-                    android:textColor="#000" />
+                    <EditText
+                        android:id="@+id/height"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:digits="mMWw0123456789"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:padding="6dp" />
 
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/mr"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
+                <TableRow
+                    android:id="@+id/weightRow"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
-            </TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weight" />
 
-            <TableRow android:layout_marginTop="8dp">
+                    <EditText
+                        android:id="@+id/weight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp" />
 
-                <TextView
+                </TableRow>
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Margin Top"
-                    android:textColor="#000" />
+                <TableRow
+                    android:id="@+id/weightSumRow"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
-                <EditText
-                    android:id="@+id/mt"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weight Sum" />
 
-            </TableRow>
+                    <EditText
+                        android:id="@+id/weightSum"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp"
 
-            <TableRow android:layout_marginTop="8dp">
+                        />
 
-                <TextView
+                </TableRow>
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Margin Bottom"
-                    android:textColor="#000" />
+                <TableRow android:layout_marginTop="8dp">
 
-                <EditText
-                    android:id="@+id/mb"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gravity" />
 
-            </TableRow>
+                    <EditText
+                        android:id="@+id/gravity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:digits="lLtTrRbBCHV|"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:padding="6dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Padding"
-                android:textColor="#979797" />
+                android:layout_marginTop="15dp"
+                android:background="@drawable/sak_card_background"
+                android:padding="10dp">
 
-            <TableRow>
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Padding Left"
-                    android:textColor="#000" />
-
-                <EditText
-                    android:id="@+id/pl"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
-
-            </TableRow>
-
-            <TableRow android:layout_marginTop="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Padding Right"
-                    android:textColor="#000" />
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Margin"
+                    android:textColor="#979797" />
 
-                <EditText
-                    android:id="@+id/pr"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
+                <TableRow>
 
-            </TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Margin Left" />
 
-            <TableRow android:layout_marginTop="8dp">
+                    <EditText
+                        android:id="@+id/ml"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Padding Top"
-                    android:textColor="#000" />
+                        />
 
-                <EditText
-                    android:id="@+id/pt"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
+                </TableRow>
 
-            </TableRow>
+                <TableRow android:layout_marginTop="8dp">
 
-            <TableRow android:layout_marginTop="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Padding Bottom"
-                    android:textColor="#000" />
-
-                <EditText
-                    android:id="@+id/pb"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
-
-            </TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Margin Right" />
 
 
-            <TableRow
-                android:id="@+id/sizeRow"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                tools:visibility="visible">
+                    <EditText
+                        android:id="@+id/mr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Text Size"
-                    android:textColor="#000" />
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/size"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
+                <TableRow android:layout_marginTop="8dp">
 
-            </TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Margin Top" />
 
-            <TableRow
-                android:id="@+id/colorRow"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                tools:visibility="visible">
+                    <EditText
+                        android:id="@+id/mt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Text Color"
-                    android:textColor="#000" />
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/color"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:digits="#0123456789abcdefABCDEF"
-                    android:gravity="center"
-                    android:maxLength="9"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
+                <TableRow android:layout_marginTop="8dp">
 
-            </TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Margin Bottom" />
 
-            <TableRow
-                android:id="@+id/textRow"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                tools:visibility="visible">
+                    <EditText
+                        android:id="@+id/mb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp"
+
+                        />
+
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/sak_card_background"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Padding"
+                    android:textColor="#979797" />
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Padding Left" />
+
+                    <EditText
+                        android:id="@+id/pl"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp" />
+
+                </TableRow>
+
+                <TableRow android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Padding Right" />
+
+                    <EditText
+                        android:id="@+id/pr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp" />
+
+                </TableRow>
+
+                <TableRow android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Padding Top" />
+
+                    <EditText
+                        android:id="@+id/pt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp" />
+
+                </TableRow>
+
+                <TableRow android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Padding Bottom" />
+
+                    <EditText
+                        android:id="@+id/pb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp" />
+
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/textTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/sak_card_background"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
                     android:text="Text"
-                    android:textColor="#000" />
+                    android:textColor="#979797" />
 
-                <EditText
-                    android:id="@+id/text"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
-
-            </TableRow>
-
-            <TableRow android:layout_marginTop="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Background Color"
-                    android:textColor="#000" />
-
-                <EditText
-                    android:id="@+id/backgroundColor"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/sak_input_bg"
-                    android:gravity="center"
-                    android:digits="#0123456789abcdefABCDEF"
-                    android:maxLength="9"
-                    android:maxLines="1"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="#000" />
-
-            </TableRow>
+                <TableRow
+                    android:id="@+id/sizeRow"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
 
-        </TableLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Text Size" />
 
+                    <EditText
+                        android:id="@+id/size"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="6dp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/colorRow"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Text Color" />
+
+                    <EditText
+                        android:id="@+id/color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:maxLength="9"
+                        android:maxLines="1"
+                        android:padding="6dp"
+                        android:textAllCaps="true" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/textRow"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Text" />
+
+                    <EditText
+                        android:id="@+id/text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:maxLines="5"
+                        android:padding="6dp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/sak_card_background"
+                android:padding="10dp">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Background Color" />
+
+                    <EditText
+                        android:id="@+id/backgroundColor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sak_input_bg"
+                        android:cursorVisible="false"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:maxLength="9"
+                        android:maxLines="1"
+                        android:padding="6dp"
+                        android:textAllCaps="true" />
+
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
     </ScrollView>
 
 
     <TextView
-        android:id="@+id/ok"
-        android:layout_width="match_parent"
+        android:id="@+id/confirm"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/sak_corner_but_bag"
         android:gravity="center"
-        android:minWidth="100dp"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:text="@string/sak_ok"
-        android:textColor="#000" />
+        android:paddingBottom="10dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:paddingTop="10dp"
+        android:text="@string/sak_ok" />
 
 </LinearLayout>

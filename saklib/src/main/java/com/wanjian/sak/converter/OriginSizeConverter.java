@@ -2,13 +2,11 @@ package com.wanjian.sak.converter;
 
 import android.content.Context;
 
-import com.wanjian.sak.mess.Size;
-
 /**
  * Created by wanjian on 2017/2/20.
  */
 
-public class OriginSizeConverter extends SizeConverter {
+public class OriginSizeConverter extends ISizeConverter {
 
 
     @Override

@@ -3,60 +3,59 @@ package com.wanjian.sak.layer;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.utils.Utils;
 
 import java.util.List;
 
-public class FragmentNameLayer extends ActivityNameLayer {
+public class FragmentNameLayer extends ActivityNameLayerView {
 
+    private int mStartLayer;
+    private int mEndLayer;
+    private FragmentActivity mActivity;
 
     public FragmentNameLayer(Context context) {
         super(context);
     }
 
     @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_page_name_icon);
+    }
+
+    @Override
+    protected void onUiUpdate(Canvas canvas, View rootView) {
+        super.onUiUpdate(canvas, rootView);
+        if (mActivity == null || mActivity.isFinishing()) {
+            return;
+        }
+        mStartLayer = getStartRange();
+        mEndLayer = getEndRange();
+        traversal(canvas, mActivity.getSupportFragmentManager(), 0);
+    }
+
+    @Override
     public String description() {
-        return mContext.getString(R.string.sak_fragment_name);
-    }
-
-    private int mStartLayer = 0;
-    private int mEndLayer = 100;
-    private int mCurLayer = -1;
-
-    @Override
-    protected void onDraw(Canvas canvas, Paint paint, View view, int startLayer, int endLayer) {
-        this.mStartLayer = startLayer;
-        this.mEndLayer = endLayer;
-        mCurLayer = -1;
-        super.onDraw(canvas, paint, view, startLayer, endLayer);
+        return getContext().getString(R.string.sak_fragment_name);
     }
 
 
-    @Override
-    protected void onDrawActInfo(Activity activity, Canvas canvas, Paint paint, View view) {
-        if (activity instanceof FragmentActivity) {
-            FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
-            traversal(canvas, paint, fragmentManager);
-        }
-    }
-
-    private void traversal(Canvas canvas, Paint paint, FragmentManager fragmentManager) {
+    private void traversal(Canvas canvas, FragmentManager fragmentManager, int curLayer) {
         List<Fragment> fragments = fragmentManager.getFragments();
-        if (fragments == null) {
+        if (fragments == null || fragments.isEmpty()) {
             return;
         }
-        if (mCurLayer + 1 > mEndLayer) {
+        if (curLayer > mEndLayer) {
             return;
         }
 
-        mCurLayer++;
-        if (mCurLayer >= mStartLayer && mCurLayer <= mEndLayer) {
+        if (curLayer >= mStartLayer) {
             for (Fragment fragment : fragments) {
                 if (fragment == null) {
                     continue;
@@ -65,7 +64,7 @@ public class FragmentNameLayer extends ActivityNameLayer {
                     View view = fragment.getView();
                     if (view != null) {
                         int localSize[] = getLocationAndSize(view);
-                        drawInfo(canvas, paint, localSize[0], localSize[1], localSize[2], localSize[3], fragment.getClass().getName());
+                        drawInfo(canvas, localSize[0], localSize[1], localSize[2], localSize[3], fragment.getClass().getName());
                     }
                 }
             }
@@ -74,14 +73,24 @@ public class FragmentNameLayer extends ActivityNameLayer {
             if (fragment.isVisible()) {
                 View view = fragment.getView();
                 if (view != null) {
-                    traversal(canvas, paint, fragment.getChildFragmentManager());
+                    traversal(canvas, fragment.getChildFragmentManager(), curLayer + 1);
                 }
             }
         }
-        mCurLayer--;
 
 
     }
 
+    @Override
+    public void onAttached(View view) {
+        Activity activity = Utils.findAct(getRootView());
+        if (activity instanceof FragmentActivity) {
+            mActivity = (FragmentActivity) activity;
+        }
+    }
 
+    @Override
+    protected void onDetached(View rootView) {
+        mActivity = null;
+    }
 }

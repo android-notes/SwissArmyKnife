@@ -5,15 +5,11 @@
     android:layout_height="match_parent"
     tools:parentTag="android.widget.FrameLayout">
 
-    <com.wanjian.sak.view.DrawingBoardView
-        android:id="@+id/drawBoard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.wanjian.sak.view.FloatView
-        android:id="@+id/floatView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <com.wanjian.sak.view.SAKEntranceView
+        android:id="@+id/entranceView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
-        android:background="@drawable/sak_launcher" />
+        android:layout_marginTop="40dp"
+        android:src="@drawable/sak_entrance_icon" />
 </merge>
