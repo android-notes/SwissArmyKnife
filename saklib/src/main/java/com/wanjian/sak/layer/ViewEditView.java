@@ -1,7 +1,6 @@
 package com.wanjian.sak.layer;
 
 import android.content.Context;
-import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.GestureDetectorCompat;
 import android.view.ContextThemeWrapper;
@@ -12,12 +11,13 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.wanjian.sak.R;
-import com.wanjian.sak.view.RootContainerView;
 import com.wanjian.sak.support.ViewEditPanel;
+import com.wanjian.sak.view.RootContainerView;
 
 public class ViewEditView extends AbsLayer {
     private View mTarget;
     private int[] mLocation = new int[2];
+    private View mTouchTarget;
 
     public ViewEditView(Context context) {
         super(context);
@@ -45,7 +45,6 @@ public class ViewEditView extends AbsLayer {
                 editPanel.setSizeConverter(getSizeConverter());
                 editPanel.attachTargetView(target);
                 WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-                params.format = PixelFormat.RGBA_8888;
                 showWindow(editPanel, params);
                 editPanel.setOnConfirmClickListener(new OnClickListener() {
                     @Override
@@ -53,6 +52,12 @@ public class ViewEditView extends AbsLayer {
                         removeWindow(editPanel);
                     }
                 });
+                if (mTouchTarget != null) {
+                    e.setAction(MotionEvent.ACTION_CANCEL);
+                    e.offsetLocation(-mTouchTarget.getX(), -mTouchTarget.getY());
+                    mTouchTarget.dispatchTouchEvent(e);
+                    mTouchTarget = null;
+                }
             }
         });
         super.setOnTouchListener(new View.OnTouchListener() {
@@ -67,24 +72,32 @@ public class ViewEditView extends AbsLayer {
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         super.dispatchTouchEvent(event);
-        int curX = (int) event.getRawX();
-        int curY = (int) event.getRawY();
-        View rootView = getRootView();
-        ViewGroup decorView = ((ViewGroup) rootView);
+        if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+            mTouchTarget = null;
+            int curX = (int) event.getRawX();
+            int curY = (int) event.getRawY();
+            View rootView = getRootView();
+            ViewGroup decorView = ((ViewGroup) rootView);
 
-        for (int i = decorView.getChildCount() - 1; i > -1; i--) {
-            View child = decorView.getChildAt(i);
-            if (child instanceof RootContainerView || child.getVisibility() != VISIBLE) {
-                continue;
-            }
-            if (inRange(child, curX, curY) == false) {
-                continue;
-            }
-            if (child.dispatchTouchEvent(event)) {
-                return true;
+            for (int i = decorView.getChildCount() - 1; i > -1; i--) {
+                View child = decorView.getChildAt(i);
+                if (child instanceof RootContainerView || child.getVisibility() != VISIBLE) {
+                    continue;
+                }
+                if (inRange(child, curX, curY) == false) {
+                    continue;
+                }
+                event.offsetLocation(-child.getX(), -child.getY());
+                if (child.dispatchTouchEvent(event)) {
+                    mTouchTarget = child;
+                    return true;
+                }
             }
         }
-
+        if (mTouchTarget != null) {
+            event.offsetLocation(-mTouchTarget.getX(), -mTouchTarget.getY());
+            mTouchTarget.dispatchTouchEvent(event);
+        }
         return true;
     }
 
@@ -131,6 +144,6 @@ public class ViewEditView extends AbsLayer {
 
     @Override
     public void onDetached(View view) {
-        mTarget = null;
+        mTouchTarget = mTarget = null;
     }
 }

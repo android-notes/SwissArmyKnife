@@ -25,7 +25,7 @@ public class RelativeLayerView extends AbsLayer {
     private View mSecondView;
     private View mTargetView;
     private int mLocation[] = new int[2];
-
+    private View mTouchTarget;
 
     public RelativeLayerView(Context context) {
         super(context);
@@ -53,6 +53,12 @@ public class RelativeLayerView extends AbsLayer {
                     mSecondView = mTargetView;
                 }
                 invalidate();
+                if (mTouchTarget != null) {
+                    e.setAction(MotionEvent.ACTION_CANCEL);
+                    e.offsetLocation(-mTouchTarget.getX(), -mTouchTarget.getY());
+                    mTouchTarget.dispatchTouchEvent(e);
+                    mTouchTarget = null;
+                }
             }
         });
         super.setOnTouchListener(new View.OnTouchListener() {
@@ -184,22 +190,31 @@ public class RelativeLayerView extends AbsLayer {
     public boolean dispatchTouchEvent(MotionEvent event) {
         invalidate();
         super.dispatchTouchEvent(event);
-        int curX = (int) event.getRawX();
-        int curY = (int) event.getRawY();
-        View rootView = getRootView();
-        ViewGroup decorView = ((ViewGroup) rootView);
+        if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+            mTouchTarget = null;
+            int curX = (int) event.getRawX();
+            int curY = (int) event.getRawY();
+            View rootView = getRootView();
+            ViewGroup decorView = ((ViewGroup) rootView);
 
-        for (int i = decorView.getChildCount() - 1; i > -1; i--) {
-            View child = decorView.getChildAt(i);
-            if (child instanceof RootContainerView || child.getVisibility() != VISIBLE) {
-                continue;
+            for (int i = decorView.getChildCount() - 1; i > -1; i--) {
+                View child = decorView.getChildAt(i);
+                if (child instanceof RootContainerView || child.getVisibility() != VISIBLE) {
+                    continue;
+                }
+                if (inRange(child, curX, curY) == false) {
+                    continue;
+                }
+                event.offsetLocation(-child.getX(), -child.getY());
+                if (child.dispatchTouchEvent(event)) {
+                    mTouchTarget = child;
+                    return true;
+                }
             }
-            if (inRange(child, curX, curY) == false) {
-                continue;
-            }
-            if (child.dispatchTouchEvent(event)) {
-                return true;
-            }
+        }
+        if (mTouchTarget != null) {
+            event.offsetLocation(-mTouchTarget.getX(), -mTouchTarget.getY());
+            mTouchTarget.dispatchTouchEvent(event);
         }
         return true;
     }
@@ -253,6 +268,6 @@ public class RelativeLayerView extends AbsLayer {
     }
 
     private void clean() {
-        mTargetView = mFirstView = mSecondView = null;
+        mTouchTarget = mTargetView = mFirstView = mSecondView = null;
     }
 }

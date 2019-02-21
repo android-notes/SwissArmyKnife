@@ -17,7 +17,7 @@ import com.wanjian.sak.view.RootContainerView;
 
 
 public class TranslationLayerView extends AbsLayer {
-    private View mTargetView;
+    //    private View mTargetView;
     private int mTxtSize;
     private int[] mLocation = new int[2];
     private Handler mHandler = new Handler();
@@ -27,12 +27,19 @@ public class TranslationLayerView extends AbsLayer {
     private float mDownY;
     private float mTouchSlop;
     private Paint mPaint;
+    private MotionEvent mDownEvent;
     private ISizeConverter mSizeConverter;
+    private View mTouchTarget;
+    private View mTargetView;
     private Runnable mPending = new Runnable() {
         @Override
         public void run() {
-//            TranslationLayerView.super.dispatchTouchEvent();
             mTargetView = findPressView((int) mDownX, (int) mDownY);
+            if (mTouchTarget != null) {
+                mDownEvent.setAction(MotionEvent.ACTION_CANCEL);
+                mTouchTarget.dispatchTouchEvent(mDownEvent);
+                mTouchTarget = null;
+            }
             invalidate();
         }
     };
@@ -142,26 +149,51 @@ public class TranslationLayerView extends AbsLayer {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
+        invalidate();
+        if (event.getActionMasked() == MotionEvent.ACTION_MOVE && mTargetView != null) {
+            float tx = mTargetView.getTranslationX() + (event.getRawX() - mLastX);
+            float ty = mTargetView.getTranslationY() + (event.getRawY() - mLastY);
+            mTargetView.setTranslationX(tx);
+            mTargetView.setTranslationY(ty);
 
+            mLastX = event.getRawX();
+            mLastY = event.getRawY();
+            return true;
+        }
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
+                mTouchTarget = null;
                 mTargetView = null;
+                mDownEvent = event;
                 mDownX = mLastX = event.getRawX();
                 mDownY = mLastY = event.getRawY();
                 mHandler.postDelayed(mPending, 500);
+
+                int curX = (int) event.getRawX();
+                int curY = (int) event.getRawY();
+                View rootView = getRootView();
+                ViewGroup decorView = ((ViewGroup) rootView);
+
+                for (int i = decorView.getChildCount() - 1; i > -1; i--) {
+                    View child = decorView.getChildAt(i);
+                    if (child instanceof RootContainerView || child.getVisibility() != VISIBLE) {
+                        continue;
+                    }
+                    if (inRange(child, curX, curY) == false) {
+                        continue;
+                    }
+                    event.offsetLocation(-child.getX(), -child.getY());
+                    if (child.dispatchTouchEvent(event)) {
+                        mTouchTarget = child;
+                        return true;
+                    }
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 float cx = event.getRawX();
                 float cy = event.getRawY();
                 if (Math.abs(cx - mDownX) > mTouchSlop || Math.abs(cy - mDownY) > mTouchSlop) {
                     mHandler.removeCallbacks(mPending);
-                }
-                if (mTargetView != null) {
-                    float tx = mTargetView.getTranslationX() + (cx - mLastX);
-                    float ty = mTargetView.getTranslationY() + (cy - mLastY);
-                    mTargetView.setTranslationX(tx);
-                    mTargetView.setTranslationY(ty);
-                    invalidate();
                 }
                 mLastX = cx;
                 mLastY = cy;
@@ -170,21 +202,9 @@ public class TranslationLayerView extends AbsLayer {
                 mHandler.removeCallbacks(mPending);
                 break;
         }
-        if (mTargetView == null) {
-            View rootView = getRootView();
-            ViewGroup decorView = ((ViewGroup) rootView);
-            for (int i = decorView.getChildCount() - 1; i > -1; i--) {
-                View child = decorView.getChildAt(i);
-                if (child instanceof RootContainerView || child.getVisibility() != VISIBLE) {
-                    continue;
-                }
-                if (inRange(child, (int) event.getRawX(), (int) event.getRawY()) == false) {
-                    continue;
-                }
-                if (child.dispatchTouchEvent(event)) {
-                    return true;
-                }
-            }
+        if (mTouchTarget != null) {
+            event.offsetLocation(-mTouchTarget.getX(), -mTouchTarget.getY());
+            mTouchTarget.dispatchTouchEvent(event);
         }
         return true;
     }
@@ -210,7 +230,7 @@ public class TranslationLayerView extends AbsLayer {
         mTargetView = view;
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = ((ViewGroup) view);
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            for (int i = 0, len = viewGroup.getChildCount(); i < len; i++) {
                 View child = viewGroup.getChildAt(i);
                 traversal(child, x, y);
             }
@@ -232,6 +252,7 @@ public class TranslationLayerView extends AbsLayer {
     }
 
     public void onDetached(View view) {
-        mTargetView = null;
+        mTargetView = mTouchTarget = null;
+        mHandler.removeCallbacks(mPending);
     }
 }

@@ -140,7 +140,6 @@ final class Scaffold {
     private void showOptPanel(Context ctx) {
         WindowManager manager = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-        params.format = PixelFormat.RGBA_8888;
         try {
             manager.addView(optPanelView, params);
         } catch (WindowManager.BadTokenException e) {
