@@ -60,7 +60,7 @@ public class OptPanelView extends LinearLayout {
         findViewById(R.id.help).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Uri uri = Uri.parse("https://github.com/android-notes/SwissArmyKnife/blob/autopilot/README.md");
+                final Uri uri = Uri.parse("https://github.com/android-notes/SwissArmyKnife/blob/master/README.md");
                 final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 try {
