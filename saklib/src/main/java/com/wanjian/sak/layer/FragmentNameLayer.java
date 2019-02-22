@@ -3,6 +3,8 @@ package com.wanjian.sak.layer;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -19,9 +21,11 @@ public class FragmentNameLayer extends ActivityNameLayerView {
     private int mStartLayer;
     private int mEndLayer;
     private FragmentActivity mActivity;
+    private Paint mBagPaint = new Paint();
 
     public FragmentNameLayer(Context context) {
         super(context);
+        mBagPaint.setColor(Color.argb(63, 255, 0, 255));
     }
 
     @Override
@@ -64,6 +68,7 @@ public class FragmentNameLayer extends ActivityNameLayerView {
                     View view = fragment.getView();
                     if (view != null) {
                         int localSize[] = getLocationAndSize(view);
+                        canvas.drawRect(localSize[0], localSize[1], localSize[0] + localSize[2], localSize[1] + localSize[3], mBagPaint);
                         drawInfo(canvas, localSize[0], localSize[1], localSize[2], localSize[3], fragment.getClass().getName());
                     }
                 }
