@@ -4,33 +4,119 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/install"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Install"
-        android:textColor="#000" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/open"
+        <Button
+            android:id="@+id/install"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="install"
+            android:textAllCaps="false"
+            android:textColor="#000" />
+
+        <Button
+            android:id="@+id/uninstall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="un install"
+            android:textAllCaps="false"
+            android:textColor="#000" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-20dp"
-        android:layout_marginRight="-20dp"
-        android:layout_marginBottom="-20dp"
-        android:text="new Act"
-        android:padding="20dp"
-        android:textColor="#000" />
+        android:orientation="horizontal">
 
-    <com.wanjian.sak.demo.MyView
+        <Button
+            android:id="@+id/open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog Act"
+            android:textAllCaps="false"
+            android:textColor="#000" />
+
+        <Button
+            android:id="@+id/openAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="new Act"
+            android:textAllCaps="false"
+            android:textColor="#000" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#e1e1e1" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/userDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user dialog"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/popupwindow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="popupwindow"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/userWindow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user window"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/toast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user toast"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_selector"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="state color"
+        android:textColor="@drawable/color_selector" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#6f00ff"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="state color"
+        android:textColor="@drawable/color_selector" />
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="-20dp"></ListView>
+        android:layout_height="match_parent"></ListView>
 </LinearLayout>

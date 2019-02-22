@@ -2,7 +2,7 @@ package com.wanjian.sak.filter;
 
 import android.view.View;
 
-import com.wanjian.sak.view.SAKCoverView;
+import com.wanjian.sak.view.RootContainerView;
 
 /**
  * Created by wanjian on 2017/2/20.
@@ -11,20 +11,20 @@ import com.wanjian.sak.view.SAKCoverView;
 public abstract class ViewFilter {
     public static ViewFilter FILTER = new ViewFilter() {
         @Override
-        public boolean apply(View view) {
+        protected boolean apply(View view) {
             return view.getVisibility() == View.VISIBLE;
         }
     };
 
 
     public final boolean filter(View view) {
-        if (view instanceof SAKCoverView) {
+        if (view instanceof RootContainerView) {
             return false;
         }
         return apply(view);
     }
 
-    public abstract boolean apply(View view);
+    protected abstract boolean apply(View view);
 
     @Override
     public int hashCode() {

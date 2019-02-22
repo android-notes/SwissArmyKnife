@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.wanjian.sak.R;
+import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.layer.adapter.LayerTxtAdapter;
 
 
@@ -23,12 +24,14 @@ public class BitmapWidthHeightLayer extends LayerTxtAdapter {
 
     @Override
     protected String getTxt(View view) {
+        ISizeConverter converter = getSizeConverter();
+        Context context = getContext();
         if (view instanceof ImageView) {
             Drawable drawable = ((ImageView) view).getDrawable();
             if (drawable instanceof BitmapDrawable) {
                 Bitmap bmp = ((BitmapDrawable) drawable).getBitmap();
                 if (bmp != null && !bmp.isRecycled()) {
-                    return convertSize(bmp.getWidth()).getLength() + ":" + convertSize(bmp.getHeight()).getLength();
+                    return (int) converter.convert(context, bmp.getWidth()).getLength() + ":" + (int) converter.convert(context, bmp.getHeight()).getLength();
                 }
             }
         }
@@ -37,7 +40,12 @@ public class BitmapWidthHeightLayer extends LayerTxtAdapter {
 
 
     @Override
+    public Drawable icon() {
+        return getContext().getResources().getDrawable(R.drawable.sak_img_size);
+    }
+
+    @Override
     public String description() {
-        return mContext.getString(R.string.sak_image_w_h);
+        return getContext().getString(R.string.sak_image_w_h);
     }
 }

@@ -2,16 +2,14 @@ package com.wanjian.sak.converter;
 
 import android.content.Context;
 
-import com.wanjian.sak.mess.Size;
-
 /**
  * Created by wanjian on 2017/2/20.
  */
 
-public class Px2dpSizeConverter extends SizeConverter {
+public class Px2dpSizeConverter extends ISizeConverter {
     @Override
     public String desc() {
-        return "Dp(pt)";
+        return "Dp";
     }
 
     @Override
@@ -23,6 +21,12 @@ public class Px2dpSizeConverter extends SizeConverter {
         size.setUnit("dp");
 
         return size;
+    }
+
+    @Override
+    public int recovery(Context context, float length) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (length * scale + 0.5f);
     }
 
     private int px2dp(Context context, float px) {

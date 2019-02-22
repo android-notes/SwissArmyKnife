@@ -1,1 +1,1 @@
-include ':app', ':saklib', ':saknop'
+include ':app', ':saklib'

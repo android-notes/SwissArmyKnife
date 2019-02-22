@@ -4,7 +4,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -32,6 +32,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22+'
     testCompile 'junit:junit:4.12'
     compile project(':saklib')
+//    implementation 'com.wanjian:sak-autopilot:0.2.2'
+    // https://mvnrepository.com/artifact/com.squareup.leakcanary/leakcanary-android
+    compile group: 'com.squareup.leakcanary', name: 'leakcanary-android', version: '1.5.4'
+
 }
 
 

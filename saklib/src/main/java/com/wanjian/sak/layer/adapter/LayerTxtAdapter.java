@@ -2,6 +2,7 @@ package com.wanjian.sak.layer.adapter;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
@@ -13,38 +14,39 @@ import android.view.View;
  */
 
 public abstract class LayerTxtAdapter extends LayerAdapter {
+    private final Paint mPaint;
     private Rect mRect = new Rect();
 
     public LayerTxtAdapter(Context context) {
         super(context);
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setTextSize(dp2px(10));
+        mPaint.setColor(getColor());
     }
 
 
     @Override
-    protected void drawLayer(Canvas canvas, Paint paint, View view) {
+    protected void onDrawLayer(Canvas canvas, View view) {
         String txt = getTxt(view);
         if (txt == null) {
             txt = "";
         }
-        drawTxt(txt, canvas, paint, view);
+        drawTxt(txt, canvas, view);
     }
 
     protected abstract String getTxt(View view);
 
-    private void drawTxt(String txt, Canvas canvas, Paint paint, View view) {
-        paint.setTextSize(getTextSize());
-        int[] locationSize = getLocationAndSize(view);
-
-        paint.getTextBounds(txt, 0, txt.length(), mRect);
-        paint.setColor(getBackgroundColor());
-        canvas.drawRect(locationSize[0], locationSize[1], locationSize[0] + mRect.width() + 2, locationSize[1] + mRect.height() + 2, paint);
-        paint.setColor(getColor());
-        canvas.drawText(txt, locationSize[0] + 1, locationSize[1] + 1 + mRect.height(), paint);
+    private void drawTxt(String txt, Canvas canvas, View view) {
+        mPaint.setTextSize(getTextSize());
+        mPaint.getTextBounds(txt, 0, txt.length(), mRect);
+        mPaint.setColor(getBackgroundColor());
+        canvas.drawRect(0, 0, mRect.width() + 2, mRect.height() + 2, mPaint);
+        mPaint.setColor(getColor());
+        canvas.drawText(txt, 1, 1 + mRect.height(), mPaint);
     }
 
-    @Override
     protected int getColor() {
-        return super.getColor();
+        return Color.BLACK;
     }
 
     protected int getBackgroundColor() {

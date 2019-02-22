@@ -1,7 +1,10 @@
 <resources>
 
-    <declare-styleable name="WheelView">
-        <attr name="sak_default_position" format="integer" />
-    </declare-styleable>
 
+    <style name="SAK_Theme">
+        <item name="android:textColor">#333333</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:colorControlNormal">@color/sak_default_bag</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
 </resources>
