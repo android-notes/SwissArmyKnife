@@ -160,6 +160,8 @@ public class TranslationLayerView extends AbsLayer {
             mLastY = event.getRawY();
             return true;
         }
+        ViewGroup decorView = ((ViewGroup) getRootView());
+
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 mTouchTarget = null;
@@ -171,8 +173,6 @@ public class TranslationLayerView extends AbsLayer {
 
                 int curX = (int) event.getRawX();
                 int curY = (int) event.getRawY();
-                View rootView = getRootView();
-                ViewGroup decorView = ((ViewGroup) rootView);
 
                 for (int i = decorView.getChildCount() - 1; i > -1; i--) {
                     View child = decorView.getChildAt(i);
@@ -182,7 +182,7 @@ public class TranslationLayerView extends AbsLayer {
                     if (inRange(child, curX, curY) == false) {
                         continue;
                     }
-                    event.offsetLocation(-child.getX(), -child.getY());
+                    event.offsetLocation(-child.getX() + decorView.getPaddingLeft(), -child.getY() + decorView.getPaddingTop());
                     if (child.dispatchTouchEvent(event)) {
                         mTouchTarget = child;
                         return true;
@@ -203,7 +203,7 @@ public class TranslationLayerView extends AbsLayer {
                 break;
         }
         if (mTouchTarget != null) {
-            event.offsetLocation(-mTouchTarget.getX(), -mTouchTarget.getY());
+            event.offsetLocation(-mTouchTarget.getX() + decorView.getPaddingLeft(), -mTouchTarget.getY() + decorView.getPaddingTop());
             mTouchTarget.dispatchTouchEvent(event);
         }
         return true;

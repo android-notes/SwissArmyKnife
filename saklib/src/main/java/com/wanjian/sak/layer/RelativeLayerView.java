@@ -190,12 +190,13 @@ public class RelativeLayerView extends AbsLayer {
     public boolean dispatchTouchEvent(MotionEvent event) {
         invalidate();
         super.dispatchTouchEvent(event);
+        View rootView = getRootView();
+        ViewGroup decorView = ((ViewGroup) rootView);
         if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
             mTouchTarget = null;
             int curX = (int) event.getRawX();
             int curY = (int) event.getRawY();
-            View rootView = getRootView();
-            ViewGroup decorView = ((ViewGroup) rootView);
+
 
             for (int i = decorView.getChildCount() - 1; i > -1; i--) {
                 View child = decorView.getChildAt(i);
@@ -205,7 +206,7 @@ public class RelativeLayerView extends AbsLayer {
                 if (inRange(child, curX, curY) == false) {
                     continue;
                 }
-                event.offsetLocation(-child.getX(), -child.getY());
+                event.offsetLocation(-child.getX() + decorView.getPaddingLeft(), -child.getY() + decorView.getPaddingTop());
                 if (child.dispatchTouchEvent(event)) {
                     mTouchTarget = child;
                     return true;
@@ -213,7 +214,7 @@ public class RelativeLayerView extends AbsLayer {
             }
         }
         if (mTouchTarget != null) {
-            event.offsetLocation(-mTouchTarget.getX(), -mTouchTarget.getY());
+            event.offsetLocation(-mTouchTarget.getX() + decorView.getPaddingLeft(), -mTouchTarget.getY() + decorView.getPaddingTop());
             mTouchTarget.dispatchTouchEvent(event);
         }
         return true;
