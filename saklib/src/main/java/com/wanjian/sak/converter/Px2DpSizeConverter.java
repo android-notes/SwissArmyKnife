@@ -6,7 +6,7 @@ import android.content.Context;
  * Created by wanjian on 2017/2/20.
  */
 
-public class Px2dpSizeConverter extends ISizeConverter {
+public class Px2DpSizeConverter extends ISizeConverter {
     @Override
     public String desc() {
         return "Dp";

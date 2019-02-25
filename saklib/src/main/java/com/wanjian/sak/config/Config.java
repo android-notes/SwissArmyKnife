@@ -5,7 +5,7 @@ import android.content.Context;
 import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.converter.OriginSizeConverter;
 import com.wanjian.sak.converter.Px2SpSizeConverter;
-import com.wanjian.sak.converter.Px2dpSizeConverter;
+import com.wanjian.sak.converter.Px2DpSizeConverter;
 import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layer.AbsLayer;
 import com.wanjian.sak.layer.ActivityNameLayerView;
@@ -143,7 +143,7 @@ public class Config {
 
             mDefaultLayerViews.add(new TreeView(mContext));
 
-            mSizeConverterList.add(new Px2dpSizeConverter());
+            mSizeConverterList.add(new Px2DpSizeConverter());
             mSizeConverterList.add(new OriginSizeConverter());
             mSizeConverterList.add(new Px2SpSizeConverter());
             mViewFilter = ViewFilter.FILTER;

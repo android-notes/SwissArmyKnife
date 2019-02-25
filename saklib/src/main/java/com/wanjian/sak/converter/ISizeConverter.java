@@ -7,7 +7,7 @@ import android.content.Context;
  */
 
 public abstract class ISizeConverter {
-    public static ISizeConverter CONVERTER = new Px2dpSizeConverter();
+    public static ISizeConverter CONVERTER = new Px2DpSizeConverter();
 
     public abstract String desc();
 
