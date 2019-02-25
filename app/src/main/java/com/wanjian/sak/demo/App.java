@@ -15,9 +15,5 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         LeakCanary.install(this);
-        DisplayMetrics sys = Resources.getSystem().getDisplayMetrics();
-
-        DisplayMetrics app = getResources().getDisplayMetrics();
-        System.out.println(app);
     }
 }

@@ -142,7 +142,7 @@ public class OptPanelView extends LinearLayout {
                 }
             });
         }
-        ((CheckBox) unitGroup.getChildAt(0)).setChecked(true);
+        unitGroup.getChildAt(0).performClick();
     }
 
     private void setFunctions() {
