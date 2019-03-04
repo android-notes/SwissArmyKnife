@@ -97,6 +97,22 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重新布局"
+            android:textAllCaps="false" />
+
+
+    </LinearLayout>
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

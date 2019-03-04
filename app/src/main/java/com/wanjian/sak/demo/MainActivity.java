@@ -3,7 +3,9 @@ package com.wanjian.sak.demo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -26,6 +29,7 @@ import com.wanjian.sak.SAK;
 
 public class MainActivity extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
                 popupwindow(v);
             }
         });
+        findViewById(R.id.reLayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.requestLayout();
+            }
+        });
 
         findViewById(R.id.userWindow).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
-                return 100;
+                return 1000;
             }
 
             @Override
@@ -122,6 +132,14 @@ public class MainActivity extends AppCompatActivity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 if (convertView == null) {
                     convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item, listView, false);
+                }
+                int value = 1;// (int) (Math.random() * 3);
+                if (value == 1) {
+                    try {
+                        Thread.sleep(30);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
                 ((TextView) convertView.findViewById(R.id.txt)).setText("" + position);
                 return convertView;
