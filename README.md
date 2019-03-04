@@ -3,8 +3,8 @@
 
 ### 更新日志  
 
-* `'com.wanjian:sak-autopilot:0.4.0-beta5'`
-
+* `'com.wanjian:sak-autopilot:0.4.0-beta6'`
+新增 view绘制时间，布局时间，测量时间，事件分发时间折线图
 
 ### SwissArmyKnife
 

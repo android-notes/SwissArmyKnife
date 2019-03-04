@@ -59,7 +59,7 @@ def getKey() {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak-autopilot'
-    publishVersion = '0.4.1'
+    publishVersion = '0.4.0-beta6'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 
