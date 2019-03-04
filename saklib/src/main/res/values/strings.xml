@@ -31,4 +31,10 @@
     <string name="sak_relative_distance">Relative Distance</string>
     <string name="sak_translation_view">Translation</string>
     <string name="sak_clip_draw">Clip Draw</string>
+    <string name="sak_performance">Performance</string>
+    <string name="sak_performance_measure">Measure</string>
+    <string name="sak_performance_layout">Layout</string>
+    <string name="sak_performance_draw">Draw</string>
+    <string name="sak_performance_touch">Touch</string>
+    <string name="sak_performance_handler">Handler</string>
 </resources>

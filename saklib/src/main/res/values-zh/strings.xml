@@ -31,4 +31,10 @@
     <string name="sak_relative_distance">相对距离</string>
     <string name="sak_translation_view">移动控件</string>
     <string name="sak_clip_draw">裁剪绘制范围</string>
+    <string name="sak_performance">性能</string>
+    <string name="sak_performance_measure">Measure</string>
+    <string name="sak_performance_layout">Layout</string>
+    <string name="sak_performance_draw">Draw</string>
+    <string name="sak_performance_touch">Touch</string>
+    <string name="sak_performance_handler">Handler</string>
 </resources>

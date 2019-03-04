@@ -41,6 +41,10 @@ public abstract class AbsLayer extends FrameLayout {
 
     }
 
+    protected Config getConfig() {
+        return config;
+    }
+
     public final boolean isEnable() {
         return mEnable;
     }

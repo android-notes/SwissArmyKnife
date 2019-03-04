@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.converter.OriginSizeConverter;
-import com.wanjian.sak.converter.Px2SpSizeConverter;
 import com.wanjian.sak.converter.Px2DpSizeConverter;
+import com.wanjian.sak.converter.Px2SpSizeConverter;
 import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layer.AbsLayer;
 import com.wanjian.sak.layer.ActivityNameLayerView;
@@ -27,6 +27,7 @@ import com.wanjian.sak.layer.TranslationLayerView;
 import com.wanjian.sak.layer.TreeView;
 import com.wanjian.sak.layer.VerticalMeasureView;
 import com.wanjian.sak.layer.ViewClassLayer;
+import com.wanjian.sak.layer.ViewDrawPerformLayer;
 import com.wanjian.sak.layer.ViewEditView;
 import com.wanjian.sak.layer.WidthHeightLayer;
 import com.wanjian.sak.utils.Check;
@@ -142,6 +143,7 @@ public class Config {
             mDefaultLayerViews.add(new ViewClassLayer(mContext));
 
             mDefaultLayerViews.add(new TreeView(mContext));
+            mDefaultLayerViews.add(new ViewDrawPerformLayer(mContext));
 
             mSizeConverterList.add(new Px2DpSizeConverter());
             mSizeConverterList.add(new OriginSizeConverter());

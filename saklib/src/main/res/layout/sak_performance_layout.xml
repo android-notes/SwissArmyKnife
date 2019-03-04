@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#88000000"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#88000000"
+        android:text="@string/sak_performance_measure"
+        android:textColor="@color/sak_color_ffffff" />
+
+    <com.wanjian.sak.support.FPSView
+        android:id="@+id/measureChart"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#88000000"
+        android:text="@string/sak_performance_layout"
+        android:textColor="@color/sak_color_ffffff" />
+
+    <com.wanjian.sak.support.FPSView
+        android:id="@+id/layoutChart"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#88000000"
+        android:text="@string/sak_performance_draw"
+        android:textColor="@color/sak_color_ffffff" />
+
+    <com.wanjian.sak.support.FPSView
+        android:id="@+id/drawChart"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#88000000"
+        android:text="@string/sak_performance_touch"
+        android:textColor="@color/sak_color_ffffff" />
+
+    <com.wanjian.sak.support.FPSView
+        android:id="@+id/touchChart"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#88000000"
+        android:text="@string/sak_performance_handler"
+        android:textColor="@color/sak_color_ffffff" />
+
+    <com.wanjian.sak.support.FPSView
+        android:id="@+id/handlerChart"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+</LinearLayout>
