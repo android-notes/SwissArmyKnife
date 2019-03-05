@@ -27,8 +27,9 @@ public class FPSView extends View {
         setWillNotDraw(false);
         density = getRootView().getResources().getDisplayMetrics().density;
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setTextSize(dp2px(10));
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(dp2px(1));
+        paint.setStrokeWidth(dp2px(0.8f));
     }
 
     protected int dp2px(float dip) {
@@ -68,5 +69,16 @@ public class FPSView extends View {
         paint.setColor(Color.GREEN);
         int dp16 = dp2px(16) * 2;
         canvas.drawLine(0, -dp16, width, -dp16, paint);
+        canvas.drawText("16", 5, -dp16, paint);
+
+        paint.setColor(Color.RED);
+        int dp30 = dp2px(30) * 2;
+        canvas.drawLine(0, -dp30, width, -dp30, paint);
+        canvas.drawText("30", 5, -dp30, paint);
+
+        paint.setColor(Color.MAGENTA);
+        int dp50 = dp2px(50) * 2;
+        canvas.drawLine(0, -dp50, width, -dp50, paint);
+        canvas.drawText("50", 5, -dp50, paint);
     }
 }

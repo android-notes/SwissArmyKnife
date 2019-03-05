@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'//添加
 //apply plugin: "com.wanjian.tinypng"
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
     defaultConfig {
         minSdkVersion 12
-        targetSdkVersion 26
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -37,9 +37,7 @@ buildscript {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // https://mvnrepository.com/artifact/com.android.support/support-v4
-    compile 'com.android.support:support-v4:26.1.0'
-
-
+    compile 'com.android.support:support-v4:22.1.0'
 }
 
 def getKey() {
@@ -59,7 +57,7 @@ def getKey() {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak-autopilot'
-    publishVersion = '0.4.0-beta6'
+    publishVersion = '0.4.0-beta7'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 

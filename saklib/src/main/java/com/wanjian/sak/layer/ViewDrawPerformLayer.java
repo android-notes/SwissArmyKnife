@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.wanjian.sak.R;
 import com.wanjian.sak.support.FPSView;
@@ -118,11 +117,77 @@ public class ViewDrawPerformLayer extends AbsLayer {
 
     private void initPerformanceChartView() {
         performanceChartView = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.sak_performance_layout, null);
-        measureChart = performanceChartView.findViewById(R.id.measureChart);
-        layoutChart = performanceChartView.findViewById(R.id.layoutChart);
-        drawChart = performanceChartView.findViewById(R.id.drawChart);
-        touchChart = performanceChartView.findViewById(R.id.touchChart);
-        handlerChart = performanceChartView.findViewById(R.id.handlerChart);
+        measureChart = (FPSView) performanceChartView.findViewById(R.id.measureChart);
+        layoutChart = (FPSView) performanceChartView.findViewById(R.id.layoutChart);
+        drawChart = (FPSView) performanceChartView.findViewById(R.id.drawChart);
+        touchChart = (FPSView) performanceChartView.findViewById(R.id.touchChart);
+        handlerChart = (FPSView) performanceChartView.findViewById(R.id.handlerChart);
+
+        performanceChartView.findViewById(R.id.measureTitle).setOnClickListener(new OnClickListener() {
+            private boolean visibility = false;
+
+            @Override
+            public void onClick(View v) {
+                visibility = !visibility;
+                if (visibility) {
+                    measureChart.setVisibility(VISIBLE);
+                } else {
+                    measureChart.setVisibility(GONE);
+                }
+            }
+        });
+        performanceChartView.findViewById(R.id.layoutTitle).setOnClickListener(new OnClickListener() {
+            private boolean visibility = false;
+
+            @Override
+            public void onClick(View v) {
+                visibility = !visibility;
+                if (visibility) {
+                    layoutChart.setVisibility(VISIBLE);
+                } else {
+                    layoutChart.setVisibility(GONE);
+                }
+            }
+        });
+        performanceChartView.findViewById(R.id.drawTitle).setOnClickListener(new OnClickListener() {
+            private boolean visibility = true;
+
+            @Override
+            public void onClick(View v) {
+                visibility = !visibility;
+                if (visibility) {
+                    drawChart.setVisibility(VISIBLE);
+                } else {
+                    drawChart.setVisibility(GONE);
+                }
+            }
+        });
+        performanceChartView.findViewById(R.id.touchTitle).setOnClickListener(new OnClickListener() {
+            private boolean visibility = true;
+
+            @Override
+            public void onClick(View v) {
+                visibility = !visibility;
+                if (visibility) {
+                    touchChart.setVisibility(VISIBLE);
+                } else {
+                    touchChart.setVisibility(GONE);
+                }
+            }
+        });
+        performanceChartView.findViewById(R.id.handlerTitle).setOnClickListener(new OnClickListener() {
+            private boolean visibility = true;
+
+            @Override
+            public void onClick(View v) {
+                visibility = !visibility;
+                if (visibility) {
+                    handlerChart.setVisibility(VISIBLE);
+                } else {
+                    handlerChart.setVisibility(GONE);
+                }
+            }
+        });
 
         performanceChartView.setOnTouchListener(new OnTouchListener() {
             private float lastX = 0;
