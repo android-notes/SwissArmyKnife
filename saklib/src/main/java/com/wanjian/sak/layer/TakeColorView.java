@@ -186,7 +186,7 @@ public class TakeColorView extends DragLayerView {
         mPaint.setStrokeWidth(mBorderWidth);
         mPaint.setColor(0xff48c09e);
         canvas.translate(radius, radius);
-        canvas.drawCircle(0, 0, radius - mBorderWidth, mPaint);
+        canvas.drawCircle(0, 0, radius - mBorderWidth / 2, mPaint);
 
         mPaint.setColor(mColor);
         mPaint.setStrokeWidth(mBorderWidth * 2);

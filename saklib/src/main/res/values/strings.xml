@@ -37,4 +37,5 @@
     <string name="sak_performance_draw">Draw</string>
     <string name="sak_performance_touch">Touch</string>
     <string name="sak_performance_handler">Handler</string>
+    <string name="sak_pick_view">Pick View</string>
 </resources>
