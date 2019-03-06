@@ -8,6 +8,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/viewPicker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="view拾取1"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+
+        <Button
+            android:id="@+id/viewPicker2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="view拾取2"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/viewPicker3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="view拾取3"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
         <FrameLayout
             android:id="@+id/fragContainer"
             android:layout_width="match_parent"
