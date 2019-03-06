@@ -3,8 +3,7 @@
 
 ### 更新日志  
 
-* `'com.wanjian:sak-autopilot:0.4.0-beta7'`
-新增 view绘制时间，布局时间，测量时间，事件分发时间折线图
+* `'com.wanjian:sak-autopilot:0.4.0-beta9'`
 
 ### SwissArmyKnife
 
@@ -13,7 +12,7 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 
 ### 接入方式
 
- `compile 'com.wanjian:sak-autopilot:0.4.0-beta7'`
+ `compile 'com.wanjian:sak-autopilot:0.4.0-beta9'`
  
 
  ```
@@ -33,11 +32,11 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 ![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_func.jpg)
 
 
-### 性能
+### 拾取控件
 
-开启可以看到当前窗口view的绘制耗时，事件分发耗时，measure，layout耗时，handler耗时。（开启后会自动禁用硬件加速，实际绘制时间可能要少一些。ListView会在事件分发时调用getView，所以ListView事件分发时间稍微长一些。RecyclerView会在view绘制时bindView，所以RecyclerView绘制时间会稍长一些）
+开启拾取控件选项后，拖动圆环到要拾取的控件位置即可。可以获取字体颜色，大小，背景色等信息（支持SpannableString）
 
-![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_performance.jpg)
+![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_pickview.jpg)
 
 
 ### 编辑控件
@@ -100,6 +99,13 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 开启后可以看到当前Activity的类名，每一个Fragment的类名。可以通过功能界面的层级区间过滤掉部分Fragment，避免Fragment名称相互覆盖
 
 ![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_fragment_name.jpg)
+
+
+### 性能
+
+开启可以看到当前窗口view的绘制耗时，事件分发耗时，measure，layout耗时，handler耗时。（开启后会自动禁用硬件加速，实际绘制时间可能要少一些。ListView会在事件分发时调用getView，所以ListView事件分发时间稍微长一些。RecyclerView会在view绘制时bindView，所以RecyclerView绘制时间会稍长一些）
+
+![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_performance.jpg)
 
 
 ## 裁剪绘制范围
