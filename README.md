@@ -14,6 +14,8 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 
  `compile 'com.wanjian:sak-autopilot:0.4.0-beta9'`
  
+ no opt 包
+ `compile 'com.wanjian:sak-nop:0.0.3'`
 
  ```
   开启
