@@ -39,7 +39,7 @@ public class FPSView extends View {
 
     public void update(LoopQueue<Long> data) {
         this.data = data;
-        invalidate();
+        postInvalidate();
     }
 
     @Override
