@@ -1,4 +1,4 @@
-# SwissArmyKnife Beta
+# SwissArmyKnife
 
 
 ### 更新日志  
@@ -26,6 +26,10 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
   SAK.unInstall();
 
  ```
+ 
+ 番外版:
+ 自动初始化，命令开启及关闭
+ [https://github.com/android-notes/SwissArmyKnife/tree/autopilot](https://github.com/android-notes/SwissArmyKnife/tree/autopilot)
 
 启动app后会在屏幕右侧看到一个 `蓝色靶心` ，`双击`即可进入功能界面。
 
