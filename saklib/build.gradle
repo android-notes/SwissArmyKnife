@@ -56,8 +56,8 @@ def getKey() {
 // clean -- build  --- generatePomFileForReleasePublication---publishReleasePublicationToMabenLocal---bintrayUpload---publishing
 publish {
     groupId = 'com.wanjian'
-    artifactId = 'sak-autopilot'
-    publishVersion = '0.4.0-beta10'
+    artifactId = 'sak'
+    publishVersion = '2.0.0'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 
