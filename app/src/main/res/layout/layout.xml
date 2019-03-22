@@ -4,6 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="您可以通过如下命令开启、关闭sak"
+        android:textColor="#333333" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="adb shell am broadcast -a com.sak"
+        android:textColor="#000"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +28,7 @@
             android:id="@+id/install"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="install"
+            android:text="手动install"
             android:textAllCaps="false"
             android:textColor="#000" />
 
@@ -21,7 +36,7 @@
             android:id="@+id/uninstall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="un install"
+            android:text="手动un install"
             android:textAllCaps="false"
             android:textColor="#000" />
     </LinearLayout>
@@ -108,7 +123,6 @@
             android:layout_height="wrap_content"
             android:text="重新布局"
             android:textAllCaps="false" />
-
 
 
     </LinearLayout>

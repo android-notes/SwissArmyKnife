@@ -25,13 +25,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
     compile 'com.android.support:appcompat-v7:22.2.1'
-    compile project(':saklib')
-//    implementation 'com.wanjian:sak-autopilot:0.2.2'
-    // https://mvnrepository.com/artifact/com.squareup.leakcanary/leakcanary-android
-    compile group: 'com.squareup.leakcanary', name: 'leakcanary-android', version: '1.5.4'
-
+//    implementation project(':autopilot')
+    compile 'com.wanjian:sak-autopilot:2.0.0'
 }
 
 

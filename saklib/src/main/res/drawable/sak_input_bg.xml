@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/sak_edittext_normal" android:state_focused="false" />
-    <item android:drawable="@drawable/sak_edittext_focused" android:state_focused="true" />
-</selector>

@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wanjian.sak.autopilot">
+
+    <application>
+
+        <provider
+            android:name=".Installer"
+            android:authorities="${applicationId}.sak.autopilot" />
+    </application>
+</manifest>
