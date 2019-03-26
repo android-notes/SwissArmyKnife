@@ -7,7 +7,7 @@ Autopilot 版基于`com.wanjian:sak:xx.xx.xx`，实现了自动初始化，只�
 
 ### 接入方式
 
- `compile 'com.wanjian:sak-autopilot:2.0.0'`
+ `compile 'com.wanjian:sak-autopilot:2.0.1'`
  
  no opt 包
  `compile 'com.wanjian:sak-nop:0.0.3'`
