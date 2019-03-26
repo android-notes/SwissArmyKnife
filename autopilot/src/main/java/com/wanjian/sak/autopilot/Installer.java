@@ -11,12 +11,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.wanjian.sak.SAK;
 
 public class Installer extends ContentProvider {
     @Override
     public boolean onCreate() {
+        Log.w("SAK-Autopilot", "run  adb shell am broadcast -a com.sak  to install/uninstall sak");
         Context context = getContext();
         context.registerReceiver(new BroadcastReceiver() {
             boolean installed = false;

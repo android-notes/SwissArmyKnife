@@ -34,7 +34,7 @@ buildscript {
 }
 
 dependencies {
-    compile 'com.wanjian:sak:2.0.0'
+    compile 'com.wanjian:sak:latest.release'
 }
 
 def getKey() {
@@ -53,7 +53,7 @@ def getKey() {
 publish {
     groupId = 'com.wanjian'
     artifactId = 'sak-autopilot'
-    publishVersion = '2.0.0'
+    publishVersion = '2.0.1'
     desc = 'ui debug tool 4 android'
     website = 'https://github.com/android-notes/SwissArmyKnife'
 
