@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#333333"
+            android:typeface="monospace"
             tools:text="hello" />
     </ScrollView>
 
