@@ -1,11 +1,6 @@
 # SwissArmyKnife
 
 
-### 更新日志  
-
-* `'com.wanjian:sak:2.0.1'`
-在子线程添加、更新、移除 性能统计view，避免在主线程更新性能统计view时导致的主线程looper一直在分发事件问题 @see ViewDrawPerformLayer.java
-
 ### SwissArmyKnife
 
 SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android设备屏幕上显示控件的相关信息
@@ -13,7 +8,7 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 
 ### 接入方式
 
- `compile 'com.wanjian:sak:2.0.1'`
+ `compile 'com.wanjian:sak:2.0.2'`
  
  no opt 包
  `compile 'com.wanjian:sak-nop:0.0.3'`
