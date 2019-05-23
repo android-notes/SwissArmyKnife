@@ -2,7 +2,6 @@ package com.wanjian.sak;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.PixelFormat;
 import android.os.Looper;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -25,6 +24,8 @@ import com.wanjian.sak.view.SAKEntranceView;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.wanjian.sak.utils.VerifyUtils.verify;
 
 final class Scaffold {
 
@@ -100,13 +101,8 @@ final class Scaffold {
             }
         }
     }
-
-    private boolean verify(View view) {
-        return (view instanceof FrameLayout) || (view instanceof RelativeLayout);
-    }
-
     private void addContainerView(View view) {
-        if (!(view instanceof FrameLayout) && !(view instanceof RelativeLayout)) {
+        if (verify(view) == false) {
             return;
         }
         final RootContainerView rootContainerView = new RootContainerView(new ContextThemeWrapper(application, R.style.SAK_Theme));

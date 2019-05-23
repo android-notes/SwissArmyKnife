@@ -2,6 +2,9 @@ package com.wanjian.sak.utils;
 
 import android.app.Activity;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
