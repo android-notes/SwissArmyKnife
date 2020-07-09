@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'//添加
+//apply plugin: 'com.novoda.bintray-release'//添加
 //apply plugin: "com.wanjian.tinypng"
 android {
     compileSdkVersion 29
@@ -30,7 +30,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.1'
-        classpath 'com.novoda:bintray-release:0.8.0'
+//        classpath 'com.novoda:bintray-release:0.8.0'
     }
 }
 
@@ -41,32 +41,32 @@ dependencies {
     compileOnly project(path: ':systemlib')
 }
 
-def getKey() {
-
-    Properties properties = new Properties()
-//    properties.load(new FileInputStream("../local.properties"))
-
-    File propertyFile = new File(rootDir.getAbsolutePath() + "/local.properties")
-    if (propertyFile.exists()) {
-        properties.load(propertyFile.newDataInputStream())
-        return properties.getProperty("jcenter_key")
-    }
-
-
-}
-// clean -- build  --- generatePomFileForReleasePublication---publishReleasePublicationToMabenLocal---bintrayUpload---publishing
-publish {
-    groupId = 'com.wanjian'
-    artifactId = 'sak'
-    publishVersion = '2.0.2'
-    desc = 'ui debug tool 4 android'
-    website = 'https://github.com/android-notes/SwissArmyKnife'
-
-    bintrayUser = 'wanjian' // 账户名
-    bintrayKey = getKey() // 就是API key
-    dryRun = false
-
-}
+//def getKey() {
+//
+//    Properties properties = new Properties()
+////    properties.load(new FileInputStream("../local.properties"))
+//
+//    File propertyFile = new File(rootDir.getAbsolutePath() + "/local.properties")
+//    if (propertyFile.exists()) {
+//        properties.load(propertyFile.newDataInputStream())
+//        return properties.getProperty("jcenter_key")
+//    }
+//
+//
+//}
+//// clean -- build  --- generatePomFileForReleasePublication---publishReleasePublicationToMabenLocal---bintrayUpload---publishing
+//publish {
+//    groupId = 'com.wanjian'
+//    artifactId = 'sak'
+//    publishVersion = '2.0.2'
+//    desc = 'ui debug tool 4 android'
+//    website = 'https://github.com/android-notes/SwissArmyKnife'
+//
+//    bintrayUser = 'wanjian' // 账户名
+//    bintrayKey = getKey() // 就是API key
+//    dryRun = false
+//
+//}
 //
 //tinyPng {
 //    //http://www.bccto.me/  临时邮箱申请key
