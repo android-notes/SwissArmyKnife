@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     .addLayer(RelativeLayerView.class, getIcon(R.drawable.sak_relative_distance_icon), getString(R.string.sak_relative_distance))
                     .addLayer(TranslationLayerView.class, getIcon(R.drawable.sak_drag_icon), getString(R.string.sak_translation_view))
                     .build();
-                SAK.init(getApplication(), config);
+                SAK.init(getApplication(), null);
 //                T.test2(getWindow().getDecorView().getRootView().getParent());
 //                InputEventReceiverCompact.test2(getWindow().getDecorView().getRootView().getParent());
             }
