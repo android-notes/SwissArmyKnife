@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.3"
+    compileSdkVersion 23
+    buildToolsVersion "21.0.0"
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion 15
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         applicationId 'com.wanjian.sak.demo'
@@ -25,12 +25,14 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
+    compile 'me.weishu:free_reflection:1.2.0'
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile project(':saklib')
 //    implementation 'com.wanjian:sak-autopilot:0.2.2'
     // https://mvnrepository.com/artifact/com.squareup.leakcanary/leakcanary-android
-    compile group: 'com.squareup.leakcanary', name: 'leakcanary-android', version: '1.5.4'
+//    compile group: 'com.squareup.leakcanary', name: 'leakcanary-android', version: '1.5.4'
+//    implementation 'com.squareup.leakcanary:plumber-android:2.4'
+//    implementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
 }
 

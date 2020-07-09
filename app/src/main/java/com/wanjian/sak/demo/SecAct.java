@@ -43,7 +43,7 @@ public class SecAct extends AppCompatActivity {
         findViewById(R.id.uninstall).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SAK.unInstall();
+//                SAK.unInstall();
             }
         });
 
@@ -65,7 +65,7 @@ public class SecAct extends AppCompatActivity {
                 .commit();
 
 
-        Button viewPicker1 = findViewById(R.id.viewPicker1);
+        Button viewPicker1 = (Button) findViewById(R.id.viewPicker1);
         SpannableString string = new SpannableString("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         string.setSpan(new AbsoluteSizeSpan(20, true), 3, 5, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         string.setSpan(new AbsoluteSizeSpan(30, true), 5, 10, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
@@ -82,7 +82,7 @@ public class SecAct extends AppCompatActivity {
 
         viewPicker1.setText(string);
 
-        Button viewPicker2 = findViewById(R.id.viewPicker2);
+        Button viewPicker2 = (Button) findViewById(R.id.viewPicker2);
         Spanned spanned = Html.fromHtml("北京市发布霾黄色预警，<font color='#ff0000'><small><small>外出携带好</small></small></font>口罩");
         viewPicker2.setText(spanned);
 

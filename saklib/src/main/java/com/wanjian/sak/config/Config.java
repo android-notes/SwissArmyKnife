@@ -1,6 +1,7 @@
 package com.wanjian.sak.config;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.converter.OriginSizeConverter;
@@ -8,29 +9,7 @@ import com.wanjian.sak.converter.Px2DpSizeConverter;
 import com.wanjian.sak.converter.Px2SpSizeConverter;
 import com.wanjian.sak.filter.ViewFilter;
 import com.wanjian.sak.layer.AbsLayer;
-import com.wanjian.sak.layer.ActivityNameLayerView;
-import com.wanjian.sak.layer.BackgroundColorLayer;
-import com.wanjian.sak.layer.BitmapWidthHeightLayer;
-import com.wanjian.sak.layer.BorderLayer;
-import com.wanjian.sak.layer.FragmentNameLayer;
-import com.wanjian.sak.layer.GridLayerView;
-import com.wanjian.sak.layer.HorizontalMeasureView;
-import com.wanjian.sak.layer.InfoLayer;
-import com.wanjian.sak.layer.MarginLayer;
-import com.wanjian.sak.layer.PaddingLayer;
-import com.wanjian.sak.layer.RelativeLayerView;
-import com.wanjian.sak.layer.ScalpelLayerView;
-import com.wanjian.sak.layer.TakeColorView;
-import com.wanjian.sak.layer.TextColorLayer;
-import com.wanjian.sak.layer.TextSizeLayer;
-import com.wanjian.sak.layer.TranslationLayerView;
-import com.wanjian.sak.layer.TreeView;
-import com.wanjian.sak.layer.VerticalMeasureView;
-import com.wanjian.sak.layer.ViewClassLayer;
-import com.wanjian.sak.layer.ViewDrawPerformLayer;
-import com.wanjian.sak.layer.ViewEditView;
-import com.wanjian.sak.layer.ViewPickerLayer;
-import com.wanjian.sak.layer.WidthHeightLayer;
+import com.wanjian.sak.layer.Layer;
 import com.wanjian.sak.utils.Check;
 
 import java.util.ArrayList;
@@ -45,15 +24,15 @@ public class Config {
 
     private int minRange;
     private int maxRange;
-    private List<AbsLayer> mLayerViews = new ArrayList<>();
+//    private List<AbsLayer> mLayerViews = new ArrayList<>();
     private List<ISizeConverter> mSizeConverterList = new ArrayList<>();
     private int startRange;
     private int endRange;
     private boolean clipDraw;
-
+    List<Item>mLayerList;
     private Config(Build build) {
-        mLayerViews.addAll(build.mDefaultLayerViews);
-        mLayerViews.addAll(build.mCustomerLayerViews);
+//        mLayerViews.addAll(build.mDefaultLayerViews);
+//        mLayerViews.addAll(build.mCustomerLayerViews);
 
         ViewFilter.FILTER = build.mViewFilter;
         mSizeConverterList.addAll(build.mSizeConverterList);
@@ -61,12 +40,16 @@ public class Config {
         minRange = build.min;
         maxRange = build.max;
         clipDraw = build.clipDraw;
+        mLayerList = build.mLayerList;
     }
 
-
-    public List<AbsLayer> getLayerViews() {
-        return mLayerViews;
+    public List<Item> getLayerList() {
+        return mLayerList;
     }
+
+//    public List<AbsLayer> getLayerViews() {
+//        return mLayerViews;
+//    }
 
     public List<ISizeConverter> getSizeConverters() {
         if (mSizeConverterList == null || mSizeConverterList.isEmpty()) {
@@ -110,9 +93,8 @@ public class Config {
     public static class Build {
         Context mContext;
         List<ISizeConverter> mSizeConverterList = new ArrayList<>();
-        List<AbsLayer> mDefaultLayerViews = new ArrayList<>();
-        List<AbsLayer> mCustomerLayerViews = new ArrayList<>();
         ViewFilter mViewFilter;
+        List<Item>mLayerList=new ArrayList<>();
         int min = 0;
         int max = 50;
         boolean clipDraw = true;
@@ -120,32 +102,7 @@ public class Config {
         public Build(Context context) {
             Check.isNull(context, "context");
             mContext = context.getApplicationContext();
-            mDefaultLayerViews.add(new FragmentNameLayer(mContext));
-            mDefaultLayerViews.add(new ActivityNameLayerView(mContext));
-            mDefaultLayerViews.add(new ViewEditView(mContext));
-            mDefaultLayerViews.add(new RelativeLayerView(mContext));
-            mDefaultLayerViews.add(new TranslationLayerView(mContext));
-            mDefaultLayerViews.add(new ViewPickerLayer(mContext));
-            mDefaultLayerViews.add(new TakeColorView(mContext));
-            mDefaultLayerViews.add(new HorizontalMeasureView(mContext));
-            mDefaultLayerViews.add(new VerticalMeasureView(mContext));
-            mDefaultLayerViews.add(new ScalpelLayerView(mContext));
-            mDefaultLayerViews.add(new GridLayerView(mContext));
 
-
-            mDefaultLayerViews.add(new TextSizeLayer(mContext));
-            mDefaultLayerViews.add(new TextColorLayer(mContext));
-            mDefaultLayerViews.add(new BorderLayer(mContext));
-            mDefaultLayerViews.add(new MarginLayer(mContext));
-            mDefaultLayerViews.add(new PaddingLayer(mContext));
-            mDefaultLayerViews.add(new WidthHeightLayer(mContext));
-            mDefaultLayerViews.add(new BitmapWidthHeightLayer(mContext));
-            mDefaultLayerViews.add(new BackgroundColorLayer(mContext));
-            mDefaultLayerViews.add(new InfoLayer(mContext));
-            mDefaultLayerViews.add(new ViewClassLayer(mContext));
-
-            mDefaultLayerViews.add(new TreeView(mContext));
-            mDefaultLayerViews.add(new ViewDrawPerformLayer(mContext));
 
             mSizeConverterList.add(new Px2DpSizeConverter());
             mSizeConverterList.add(new OriginSizeConverter());
@@ -161,8 +118,8 @@ public class Config {
 
         public Build addLayerView(AbsLayer layerView) {
             Check.isNull(layerView, "layerView");
-            mDefaultLayerViews.clear();
-            mCustomerLayerViews.add(layerView);
+//            mDefaultLayerViews.clear();
+//            mCustomerLayerViews.add(layerView);
             return this;
         }
 
@@ -189,6 +146,10 @@ public class Config {
             return this;
         }
 
+        public Build addLayer(Class<? extends Layer> clz, Drawable icon, String iconName) {
+            mLayerList.add(new Item(clz,icon,iconName));
+            return this;
+        }
         public Config build() {
             return new Config(this);
         }

@@ -6,7 +6,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.6.1'
         classpath 'com.novoda:bintray-release:0.8.0'
 //        classpath "com.wanjian.plugin:tinypng:0.0.6"
 //        classpath 'com.android.tools.build:gradle:1.2.3'

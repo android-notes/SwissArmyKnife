@@ -1,9 +1,10 @@
-<manifest package="com.wanjian.sak">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wanjian.sak">
 
     <application>
         <!--<provider
             android:name=".Autopilot"
             android:authorities="com.wanjian.sak.autopilot"></provider>-->
     </application>
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 </manifest>

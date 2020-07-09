@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'//添加
 //apply plugin: "com.wanjian.tinypng"
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 29
+    buildToolsVersion "23.0.1"
     defaultConfig {
-        minSdkVersion 12
-        targetSdkVersion 22
+        minSdkVersion 14
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
@@ -29,7 +29,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.6.1'
         classpath 'com.novoda:bintray-release:0.8.0'
     }
 }
@@ -37,7 +37,8 @@ buildscript {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // https://mvnrepository.com/artifact/com.android.support/support-v4
-    compile 'com.android.support:support-v4:22.1.0'
+    compile 'com.android.support:support-v4:23.0.0'
+    compileOnly project(path: ':systemlib')
 }
 
 def getKey() {

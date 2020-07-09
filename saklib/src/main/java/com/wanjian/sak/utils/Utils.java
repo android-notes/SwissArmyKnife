@@ -2,6 +2,7 @@ package com.wanjian.sak.utils;
 
 import android.app.Activity;
 import android.view.View;
+import android.view.ViewRootImpl;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -12,17 +13,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
-    public static View[] diff(View[] views1, View[] views2) {
-        List<View> list1 = views1 == null ? new ArrayList<View>() : Arrays.asList(views1);
-        List<View> list2 = views2 == null ? new ArrayList<View>() : Arrays.asList(views2);
-        List<View> result = new ArrayList<>(32);
+    public static ViewRootImpl[] diff(ViewRootImpl[] views1, ViewRootImpl[] views2) {
+        List<ViewRootImpl> list1 = views1 == null ? new ArrayList<ViewRootImpl>() : Arrays.asList(views1);
+        List<ViewRootImpl> list2 = views2 == null ? new ArrayList<ViewRootImpl>() : Arrays.asList(views2);
+        List<ViewRootImpl> result = new ArrayList<>(32);
 
-        for (View view : list1) {
+        for (ViewRootImpl view : list1) {
             if (list2.contains(view) == false) {
                 result.add(view);
             }
         }
-        View[] array = new View[result.size()];
+        ViewRootImpl[] array = new ViewRootImpl[result.size()];
         result.toArray(array);
         return array;
     }

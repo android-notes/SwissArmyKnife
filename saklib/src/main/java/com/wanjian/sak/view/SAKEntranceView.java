@@ -31,7 +31,7 @@ public class SAKEntranceView extends ImageView {
     }
 
     private void init() {
-//        setImageResource(R.drawable.sak_entrance_icon);
+        setImageResource(R.drawable.sak_entrance_icon);
         final GestureDetectorCompat detectorCompat = getGestureDetector();
         detectorCompat.setIsLongpressEnabled(false);
         setOnTouchListener(new View.OnTouchListener() {

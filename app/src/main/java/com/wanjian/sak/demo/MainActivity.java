@@ -2,38 +2,53 @@ package com.wanjian.sak.demo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wanjian.sak.SAK;
+import com.wanjian.sak.config.Config;
+import com.wanjian.sak.layer.impl.ActivityNameLayerView;
+import com.wanjian.sak.layer.impl.BorderLayer;
+import com.wanjian.sak.layer.impl.FragmentNameLayer;
+import com.wanjian.sak.layer.impl.GridLayer;
+import com.wanjian.sak.layer.impl.HorizontalMeasureView;
+import com.wanjian.sak.layer.impl.MarginLayer;
+import com.wanjian.sak.layer.impl.PaddingLayer;
+import com.wanjian.sak.layer.impl.RelativeLayerView;
+import com.wanjian.sak.layer.impl.TakeColorLayer;
+import com.wanjian.sak.layer.impl.TextColorLayer;
+import com.wanjian.sak.layer.impl.TextSizeLayer;
+import com.wanjian.sak.layer.impl.TranslationLayerView;
+import com.wanjian.sak.layer.impl.TreeView;
+import com.wanjian.sak.layer.impl.VerticalMeasureView;
+import com.wanjian.sak.layer.impl.ViewClassLayer;
+import com.wanjian.sak.layer.impl.WidthHeightLayer;
 
 /**
  * Created by wanjian on 2017/3/7.
  */
 
 public class MainActivity extends AppCompatActivity {
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +60,44 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.install).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SAK.init(getApplication(), null);
+//                Config config=new Config.Build(getApplicationContext())
+//                    .addLayer(BorderLayer.class)
+//                    .addLayer(HorizontalMeasureView.class)
+//                    .addLayer(RelativeLayerView.class)
+//                    .build();
+//                SAK.init(getApplication(), config);
+//
+
+
+
+                Config config=new Config.Build(getApplicationContext())
+//                    .addLayer(TestLayer.class)
+                    .addLayer(BorderLayer.class, getIcon(R.drawable.sak_border_icon), getString(R.string.sak_border))
+                    .addLayer(GridLayer.class, getIcon(R.drawable.sak_grid_icon), getString(R.string.sak_grid))
+                    .addLayer(PaddingLayer.class, getIcon(R.drawable.sak_padding_icon), getString(R.string.sak_padding))
+                    .addLayer(MarginLayer.class, getIcon(R.drawable.sak_margin_icon), getString(R.string.sak_margin))
+                    .addLayer(WidthHeightLayer.class, getIcon(R.drawable.sak_width_height_icon), getString(R.string.sak_width_height))
+                    .addLayer(TextColorLayer.class, getIcon(R.drawable.sak_text_color_icon), getString(R.string.sak_txt_color))
+                    .addLayer(TextSizeLayer.class, getIcon(R.drawable.sak_text_size_icon), getString(R.string.sak_txt_size))
+                    .addLayer(ActivityNameLayerView.class, getIcon(R.drawable.sak_page_name_icon), getString(R.string.sak_activity_name))
+                    .addLayer(FragmentNameLayer.class, getIcon(R.drawable.sak_page_name_icon), getString(R.string.sak_fragment_name))
+                    .addLayer(HorizontalMeasureView.class, getIcon(R.drawable.sak_hori_measure_icon), getString(R.string.sak_horizontal_measure))
+                    .addLayer(VerticalMeasureView.class, getIcon(R.drawable.sak_ver_measure_icon), getString(R.string.sak_vertical_measure))
+                    .addLayer(TakeColorLayer.class, getIcon(R.drawable.sak_color_picker_icon), getString(R.string.sak_take_color))
+                    .addLayer(ViewClassLayer.class, getIcon(R.drawable.sak_controller_type_icon), getString(R.string.sak_view_name))
+                    .addLayer(TreeView.class, getIcon(R.drawable.sak_layout_tree_icon), getString(R.string.sak_layout_tree))
+                    .addLayer(RelativeLayerView.class, getIcon(R.drawable.sak_relative_distance_icon), getString(R.string.sak_relative_distance))
+                    .addLayer(TranslationLayerView.class, getIcon(R.drawable.sak_drag_icon), getString(R.string.sak_translation_view))
+                    .build();
+                SAK.init(getApplication(), config);
+//                T.test2(getWindow().getDecorView().getRootView().getParent());
+//                InputEventReceiverCompact.test2(getWindow().getDecorView().getRootView().getParent());
             }
         });
         findViewById(R.id.uninstall).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SAK.unInstall();
+//                SAK.unInstall();
             }
         });
 
@@ -214,5 +260,8 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                }).
                 .create().show();
+    }
+   public Drawable getIcon(int id){
+        return getResources().getDrawable(id);
     }
 }

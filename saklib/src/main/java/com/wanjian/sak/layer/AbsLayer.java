@@ -28,9 +28,13 @@ public abstract class AbsLayer extends FrameLayout {
         this.config = config;
     }
 
-    public abstract String description();
+    public   String description(){
+        return null;
+    }
 
-    public abstract Drawable icon();
+    public   Drawable icon(){
+        return null;
+    }
 
     public final void enable(boolean enable) {
         this.mEnable = enable;

@@ -1,170 +1,86 @@
 package com.wanjian.sak;
 
 import android.app.Application;
-import android.content.Context;
-import android.os.Looper;
-import android.view.ContextThemeWrapper;
+import android.view.InputEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.view.ViewRootImpl;
 
-import com.wanjian.sak.compact.IWindowChangeListener;
-import com.wanjian.sak.compact.WindowRootViewCompat;
 import com.wanjian.sak.config.Config;
-import com.wanjian.sak.layer.AbsLayer;
-import com.wanjian.sak.utils.Check;
-import com.wanjian.sak.view.DashBoardView;
-import com.wanjian.sak.view.OptPanelView;
-import com.wanjian.sak.view.RootContainerView;
-import com.wanjian.sak.view.SAKEntranceView;
+import com.wanjian.sak.layer.LayerRoot;
+import com.wanjian.sak.system.input.InputEventListener;
+import com.wanjian.sak.system.input.InputEventReceiverCompact;
+import com.wanjian.sak.system.traversals.ViewTraversalsCompact;
+import com.wanjian.sak.system.traversals.ViewTraversalsListener;
+import com.wanjian.sak.system.window.compact.IWindowChangeListener;
+import com.wanjian.sak.system.window.compact.WindowRootViewCompat;
+import com.wanjian.sak.utils.OptionPanelUtils;
+import com.wanjian.sak.view.SAKContainerView;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.wanjian.sak.utils.VerifyUtils.verify;
+//import com.wanjian.sak.system.canvas.compact.CanvasHolder;
 
 final class Scaffold {
+  private static Application sApplication;
 
-    public void install(Application application, Config config) {
-        if (this.application != null) {
-            return;
+  public void install(final Application application, final Config config) {
+    sApplication = application;
+    WindowRootViewCompat.get(application).addWindowChangeListener(new IWindowChangeListener() {
+
+      @Override
+      public void onAddWindow(final ViewRootImpl viewRootImpl, final View view) {
+        if (view instanceof SAKContainerView) {
+          return;
         }
-        init(application, config);
-    }
-
-    private OptPanelView optPanelView;
-    private Application application;
-    private DashBoardView dashBoardView;
-    private List<WeakReference<View>> windowRef = new ArrayList<>();
-    private IWindowChangeListener windowChangeListener = new IWindowChangeListener() {
-        @Override
-        public void onAddWindow(View view) {
-            windowRef.add(new WeakReference<>(view));
-            addContainerView(view);
-        }
-
-        @Override
-        public void onRemoveWindow(View view) {
-            removeRef(view);
-            removeContainerView(view);
-        }
-    };
-
-    private void removeRef(View view) {
-        // TODO: 2019/2/19
-    }
-
-
-    private void init(final Application application, Config config) {
-        if (Looper.myLooper() != Looper.getMainLooper()) {
-            throw new RuntimeException("init on ui thread !");
-        }
-        Check.isNull(application, "application");
-
-        this.application = application;
-        if (config == null) {
-            config = new Config.Build(application).build();
-        }
-
-        dashBoardView = new DashBoardView(new ContextThemeWrapper(application, R.style.SAK_Theme));
-        dashBoardView.attachConfig(config);
-
-        optPanelView = new OptPanelView(new ContextThemeWrapper(application, R.style.SAK_Theme));
-        optPanelView.attachConfig(config);
-        optPanelView.setOnConfirmClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((WindowManager) application.getSystemService(Context.WINDOW_SERVICE)).removeViewImmediate(optPanelView);
-                dashBoardView.notifyStateChange();
-            }
+        view.post(new Runnable() {
+          @Override
+          public void run() {
+            LayerRoot layerRoot = LayerRoot.create(config, viewRootImpl, view, sApplication);
+            OptionPanelUtils.enableIfNeeded(layerRoot);
+            observerUIChange(config, layerRoot, viewRootImpl, view);
+            observerInputEvent(config, layerRoot, viewRootImpl, view);
+            OptionPanelUtils.addLayerRoot(layerRoot);
+          }
         });
+      }
 
-        for (AbsLayer layerView : config.getLayerViews()) {
-            layerView.attachConfig(config);
-        }
-        WindowRootViewCompat.get(application).addWindowChangeListener(windowChangeListener);
-    }
-
-
-    private void removeContainerView(View view) {
-        if (verify(view) == false) {
-            return;
-        }
-        ViewGroup group = (ViewGroup) view;
-        for (int i = group.getChildCount() - 1; i > -1; i--) {
-            if (group.getChildAt(i) instanceof RootContainerView) {
-                group.removeViewAt(i);
-            }
-        }
-    }
-    private void addContainerView(View view) {
-        if (verify(view) == false) {
-            return;
-        }
-        final RootContainerView rootContainerView = new RootContainerView(new ContextThemeWrapper(application, R.style.SAK_Theme));
-        ((ViewGroup) view).addView(rootContainerView);
-        final Context ctx = view.getContext();
-        rootContainerView.setTapListener(new SAKEntranceView.OnTapListener() {
-            @Override
-            public void onDoubleTap() {
-                activateCurWindow(rootContainerView);
-                showOptPanel(ctx);
-            }
-
-            @Override
-            public void onSingleTap() {
-                activateCurWindow(rootContainerView);
-            }
-        });
-    }
-
-    private void activateCurWindow(RootContainerView rootContainerView) {
-        ViewParent parent = dashBoardView.getParent();
-        if (parent == rootContainerView) {
-            return;
-        }
-        if (parent != null) {
-            ((ViewGroup) parent).removeView(dashBoardView);
-        }
-        rootContainerView.addView(dashBoardView, 0);
-    }
-
-    private void showOptPanel(Context ctx) {
-        WindowManager manager = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-        try {
-            manager.addView(optPanelView, params);
-        } catch (WindowManager.BadTokenException e) {
-            e.printStackTrace();
-        }
-    }
+      @Override
+      public void onRemoveWindow(ViewRootImpl viewRootImpl, View view) {
+//        CanvasHolder.release(viewRootImpl);
+      }
+    });
+    OptionPanelUtils.showEntrance(application, config);
+  }
 
 
-    public void unInstall() {
-        if (Looper.myLooper() != Looper.getMainLooper()) {
-            throw new RuntimeException("unInstall on ui thread !");
-        }
-        if (application == null) {
-            return;
-        }
-        WindowRootViewCompat.get(application).removeWindowChangeListener(windowChangeListener);
-        for (WeakReference<View> reference : windowRef) {
-            View view = reference.get();
-            if (view == null || verify(view) == false) {
-                continue;
-            }
-            ViewGroup group = (ViewGroup) view;
-            for (int i = group.getChildCount() - 1; i > -1; i--) {
-                if (group.getChildAt(i) instanceof RootContainerView) {
-                    group.removeViewAt(i);
-                }
-            }
-        }
-        windowRef.clear();
-        application = null;
-    }
+  private void observerInputEvent(Config config, final LayerRoot layerRoot, final ViewRootImpl viewRootImpl, final View rootView) {
+    InputEventReceiverCompact.get(viewRootImpl, new InputEventListener() {
+      @Override
+      public boolean onBeforeInputEvent(InputEvent inputEvent) {
+        return layerRoot.beforeInputEvent(rootView, inputEvent);
+      }
+
+      @Override
+      public void onAfterInputEvent(InputEvent inputEvent) {
+        layerRoot.afterInputEvent(rootView, inputEvent);
+      }
+    });
+  }
+
+  private void observerUIChange(Config config, final LayerRoot layerRoot, ViewRootImpl viewRootImpl, View view) {
+    new ViewTraversalsCompact().register(viewRootImpl, view, new ViewTraversalsListener() {
+      @Override
+      public void onBeforeTraversal(View rootView) {
+        layerRoot.beforeTraversal(rootView);
+      }
+
+      @Override
+      public void onAfterTraversal(View rootView) {
+        layerRoot.afterTraversal(rootView);
+      }
+    });
+  }
+
+
+//  public void unInstall() {
+//
+//  }
 }

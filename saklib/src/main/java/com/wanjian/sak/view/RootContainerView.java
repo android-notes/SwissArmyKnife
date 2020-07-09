@@ -18,22 +18,8 @@ public class RootContainerView extends FrameLayout {
     public RootContainerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 //        setFitsSystemWindows(false);
-        init(context);
     }
 
-    private void init(Context context) {
-        inflate(context, R.layout.sak_container_layout, this);
-        entranceView = (SAKEntranceView) findViewById(R.id.entranceView);
 
-    }
 
-    public void setTapListener(SAKEntranceView.OnTapListener listener) {
-        entranceView.setTapListener(listener);
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        entranceView.setTapListener(null);
-        super.onDetachedFromWindow();
-    }
 }
