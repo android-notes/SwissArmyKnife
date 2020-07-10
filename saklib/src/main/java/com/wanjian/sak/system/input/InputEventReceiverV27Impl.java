@@ -11,8 +11,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class InputEventReceiverV27Impl extends InputEventReceiver {
-  private InputEventListener listener;
   private ViewRootImpl $$ViewRootImpl;
+  private InputEventListener listener;
   private InputEventReceiver originInputEventReceiver;
 
   public InputEventReceiverV27Impl(InputChannel inputChannel, Looper looper, ViewRootImpl viewRoot, InputEventListener listener, InputEventReceiver originInputEventReceiver) {

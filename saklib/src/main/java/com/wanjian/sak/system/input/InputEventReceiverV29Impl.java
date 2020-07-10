@@ -13,8 +13,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 public class InputEventReceiverV29Impl extends InputEventReceiver {
-  private InputEventListener listener;
   private ViewRootImpl $$ViewRootImpl;
+  private InputEventListener listener;
   private InputEventReceiver originInputEventReceiver;
 
   public InputEventReceiverV29Impl(InputChannel inputChannel, Looper looper, ViewRootImpl viewRoot, InputEventListener listener, InputEventReceiver originInputEventReceiver) {
