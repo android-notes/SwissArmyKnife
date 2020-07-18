@@ -27,7 +27,7 @@ public class OptionPanelUtils {
 
 //    SAKEntranceView entranceView = new SAKEntranceView(application);
     final ImageView entranceView = new ImageView(application);
-    entranceView.setImageResource(R.drawable.sak_entrance_icon);
+    entranceView.setImageResource(R.drawable.sak_launcher_icon);
     int size = ScreenUtils.dp2px(application, 40);
     FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(size, size);
 

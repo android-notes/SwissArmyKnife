@@ -38,4 +38,5 @@
     <string name="sak_performance_touch">Touch</string>
     <string name="sak_performance_handler">Handler</string>
     <string name="sak_pick_view">控件拾取</string>
+    <string name="sak_flash_when_ui_update">UI更新时闪烁</string>
 </resources>

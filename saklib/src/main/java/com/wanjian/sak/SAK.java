@@ -12,6 +12,7 @@ import com.wanjian.sak.layer.impl.ActivityNameLayerView;
 import com.wanjian.sak.layer.impl.BackgroundColorLayer;
 import com.wanjian.sak.layer.impl.BitmapWidthHeightLayer;
 import com.wanjian.sak.layer.impl.BorderLayer;
+import com.wanjian.sak.layer.impl.FlashWindowLayer;
 import com.wanjian.sak.layer.impl.FragmentNameLayer;
 import com.wanjian.sak.layer.impl.GridLayer;
 import com.wanjian.sak.layer.impl.HorizontalMeasureView;
@@ -78,6 +79,7 @@ public class SAK {
           .addLayer(ScalpelFrameLayout.class, application.getDrawable(R.drawable.sak_layer_icon), "Scalpel")
 //          .addLayer(ViewDrawPerformLayer.class, application.getDrawable(R.drawable.sak_performance_icon),application.getString(R.string.sak_performance) )
           .addLayer(BitmapWidthHeightLayer.class, application.getDrawable(R.drawable.sak_img_size),application.getString(R.string.sak_image_w_h) )
+          .addLayer(FlashWindowLayer.class, application.getDrawable(R.drawable.sak_shake_icon),application.getString(R.string.sak_flash_when_ui_update) )
           .build();
     }
     sScaffold.install(application, config);
