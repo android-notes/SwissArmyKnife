@@ -36,5 +36,6 @@
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:maxLines="1"
+        android:textColor="@color/sak_color_ff333333"
         tools:text="hello 瑞士军刀sak" />
 </LinearLayout>

@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.wanjian.sak.config.Config;
 import com.wanjian.sak.layer.impl.ActivityNameLayerView;
+import com.wanjian.sak.layer.impl.BackgroundColorLayer;
+import com.wanjian.sak.layer.impl.BitmapWidthHeightLayer;
 import com.wanjian.sak.layer.impl.BorderLayer;
 import com.wanjian.sak.layer.impl.FragmentNameLayer;
 import com.wanjian.sak.layer.impl.GridLayer;
@@ -16,6 +18,7 @@ import com.wanjian.sak.layer.impl.HorizontalMeasureView;
 import com.wanjian.sak.layer.impl.MarginLayer;
 import com.wanjian.sak.layer.impl.PaddingLayer;
 import com.wanjian.sak.layer.impl.RelativeLayerView;
+import com.wanjian.sak.layer.impl.ScalpelFrameLayout;
 import com.wanjian.sak.layer.impl.TakeColorLayer;
 import com.wanjian.sak.layer.impl.TextColorLayer;
 import com.wanjian.sak.layer.impl.TextSizeLayer;
@@ -38,7 +41,7 @@ public class SAK {
       return;
     }
 
-    if (application.getApplicationInfo().targetSdkVersion >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(application)) {
+    if (application.getApplicationInfo().targetSdkVersion >= Build.VERSION_CODES.M&&Build.VERSION.SDK_INT>=Build.VERSION_CODES.M && !Settings.canDrawOverlays(application)) {
 //      if (ContextCompat.checkSelfPermission(application, Manifest.permission.SYSTEM_ALERT_WINDOW) != PackageManager.PERMISSION_GRANTED) {
       Toast.makeText(application, "需要悬浮窗权限才能使用SwissArmyKnife", Toast.LENGTH_LONG).show();
       Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
@@ -62,6 +65,7 @@ public class SAK {
           .addLayer(WidthHeightLayer.class, application.getDrawable(R.drawable.sak_width_height_icon), application.getString(R.string.sak_width_height))
           .addLayer(TextColorLayer.class, application.getDrawable(R.drawable.sak_text_color_icon), application.getString(R.string.sak_txt_color))
           .addLayer(TextSizeLayer.class, application.getDrawable(R.drawable.sak_text_size_icon), application.getString(R.string.sak_txt_size))
+          .addLayer(BackgroundColorLayer.class, application.getDrawable(R.drawable.sak_background_color_icon), application.getString(R.string.sak_bag_color))
           .addLayer(ActivityNameLayerView.class, application.getDrawable(R.drawable.sak_page_name_icon), application.getString(R.string.sak_activity_name))
           .addLayer(FragmentNameLayer.class, application.getDrawable(R.drawable.sak_page_name_icon), application.getString(R.string.sak_fragment_name))
           .addLayer(HorizontalMeasureView.class, application.getDrawable(R.drawable.sak_hori_measure_icon), application.getString(R.string.sak_horizontal_measure))
@@ -71,6 +75,9 @@ public class SAK {
           .addLayer(TreeView.class, application.getDrawable(R.drawable.sak_layout_tree_icon), application.getString(R.string.sak_layout_tree))
           .addLayer(RelativeLayerView.class, application.getDrawable(R.drawable.sak_relative_distance_icon), application.getString(R.string.sak_relative_distance))
           .addLayer(TranslationLayerView.class, application.getDrawable(R.drawable.sak_drag_icon), application.getString(R.string.sak_translation_view))
+          .addLayer(ScalpelFrameLayout.class, application.getDrawable(R.drawable.sak_layer_icon), "Scalpel")
+//          .addLayer(ViewDrawPerformLayer.class, application.getDrawable(R.drawable.sak_performance_icon),application.getString(R.string.sak_performance) )
+          .addLayer(BitmapWidthHeightLayer.class, application.getDrawable(R.drawable.sak_img_size),application.getString(R.string.sak_image_w_h) )
           .build();
     }
     sScaffold.install(application, config);

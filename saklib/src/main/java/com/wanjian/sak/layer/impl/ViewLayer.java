@@ -5,12 +5,13 @@ import android.graphics.Region;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wanjian.sak.layer.IClip;
 import com.wanjian.sak.layer.IRange;
 import com.wanjian.sak.layer.Layer;
 
-public abstract class ViewLayer extends Layer implements IRange {
+public abstract class ViewLayer extends Layer implements IRange, IClip {
   private int mStartLayer;
-  private int mEndLayer=100;
+  private int mEndLayer = 100;
   private boolean isClip = true;
 
   @Override
@@ -22,6 +23,12 @@ public abstract class ViewLayer extends Layer implements IRange {
   @Override
   public void onEndRangeChange(int end) {
     mEndLayer = end;
+    invalidate();
+  }
+
+  @Override
+  public void onClipChange(boolean clip) {
+    isClip = clip;
     invalidate();
   }
 

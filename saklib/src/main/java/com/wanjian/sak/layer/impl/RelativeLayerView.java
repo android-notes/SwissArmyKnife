@@ -3,7 +3,6 @@ package com.wanjian.sak.layer.impl;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.support.v4.view.GestureDetectorCompat;
 import android.view.GestureDetector;
 import android.view.InputEvent;
@@ -11,7 +10,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wanjian.sak.R;
 import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.converter.Size;
 import com.wanjian.sak.layer.ISize;
@@ -45,7 +43,7 @@ public class RelativeLayerView extends Layer implements ISize {
       @Override
       public void onLongPress(MotionEvent e) {
         super.onLongPress(e);
-          System.out.println("长按了。。。。。。");
+        longPress = true;
         View mTargetView = findPressView((int) e.getRawX(), (int) e.getRawY());
         if (mFirstView != null && mSecondView != null) {
           mFirstView = mSecondView;
@@ -62,17 +60,24 @@ public class RelativeLayerView extends Layer implements ISize {
 
   }
 
-    @Override
-    protected void onAfterTraversal(View rootView) {
-        super.onAfterTraversal(rootView);
-        invalidate();
-    }
+  @Override
+  protected void onAfterTraversal(View rootView) {
+    super.onAfterTraversal(rootView);
+    invalidate();
+  }
 
-    @Override
+  boolean longPress;
+
+  @Override
   protected boolean onBeforeInputEvent(View rootView, InputEvent event) {
     if (event instanceof MotionEvent) {
-        System.out.println("手动到事件。。。");
+      if (((MotionEvent) event).getActionMasked() == MotionEvent.ACTION_DOWN) {
+        longPress = false;
+      }
       detectorCompat.onTouchEvent((MotionEvent) event);
+      if (longPress) {
+        ((MotionEvent) event).setAction(MotionEvent.ACTION_CANCEL);
+      }
     }
     return false;
   }
@@ -103,7 +108,7 @@ public class RelativeLayerView extends Layer implements ISize {
       mPaint.setColor(Color.RED);
       canvas.drawLine(0, 0, length, 0, mPaint);
       Size size = sizeConverter.convert(getContext(), length);
-      String txt = String.valueOf(size.getLength());
+      String txt = size.toString();
       float txtLength = mPaint.measureText(txt);
       canvas.translate(length / 2 - txtLength / 2, mTxtSize / 2);
       mPaint.setColor(Color.WHITE);
@@ -122,7 +127,7 @@ public class RelativeLayerView extends Layer implements ISize {
       mPaint.setColor(Color.RED);
       canvas.drawLine(0, 0, -length, 0, mPaint);
       Size size = sizeConverter.convert(getContext(), length);
-      String txt = String.valueOf(size.getLength());
+      String txt = size.toString();
       float txtLength = mPaint.measureText(txt);
       canvas.translate(-length / 2 - txtLength / 2, mTxtSize / 2);
       mPaint.setColor(Color.WHITE);
@@ -141,7 +146,7 @@ public class RelativeLayerView extends Layer implements ISize {
       mPaint.setColor(Color.RED);
       canvas.drawLine(0, 0, 0, length, mPaint);
       Size size = sizeConverter.convert(getContext(), length);
-      String txt = String.valueOf(size.getLength());
+      String txt = size.toString();
       float txtLength = mPaint.measureText(txt);
       canvas.translate(-txtLength / 2, length / 2 + mTxtSize / 2);
       mPaint.setColor(Color.WHITE);
@@ -160,7 +165,7 @@ public class RelativeLayerView extends Layer implements ISize {
       mPaint.setColor(Color.RED);
       canvas.drawLine(0, 0, 0, -length, mPaint);
       Size size = sizeConverter.convert(getContext(), length);
-      String txt = String.valueOf(size.getLength());
+      String txt = size.toString();
       float txtLength = mPaint.measureText(txt);
       canvas.translate(-txtLength / 2, -length / 2 + mTxtSize / 2);
       mPaint.setColor(Color.WHITE);

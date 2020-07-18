@@ -4,37 +4,33 @@ import android.graphics.Canvas;
 import android.view.DisplayListCanvas;
 import android.view.HardwareCanvas;
 import android.view.RenderNode;
+import android.view.ThreadedRenderer;
 
 import java.lang.reflect.Method;
 
-public class RenderNodeV21Impl extends RenderNodeCompact {
+public class RenderNodeV23Impl extends RenderNodeCompact {
 
   private RenderNode renderNode;
 
-  public RenderNodeV21Impl(String name) {
+  public RenderNodeV23Impl(String name) {
     renderNode = RenderNode.create(name, null);
   }
 
   @Override
   public void drawRenderNode(Canvas canvas) {
-    ((HardwareCanvas) canvas).drawRenderNode(renderNode);
+    ((DisplayListCanvas) canvas).drawRenderNode(renderNode);
   }
 
+
   @Override
-  public HardwareCanvas beginRecording(int width, int height) {
+  public DisplayListCanvas beginRecording(int width, int height) {
     renderNode.setLeftTopRightBottom(0, 0, width, height);
-    try {
-      Method method = RenderNode.class.getDeclaredMethod("start", int.class, int.class);
-      method.setAccessible(true);
-      return (HardwareCanvas) method.invoke(renderNode, width, height);
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
+    return renderNode.start(width,height);
   }
 
   @Override
   public void endRecording(Canvas canvas) {
-    renderNode.end((HardwareCanvas) canvas);
+    renderNode.end((DisplayListCanvas) canvas);
   }
 
   @Override

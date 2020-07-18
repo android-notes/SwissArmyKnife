@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wanjian.sak.R;
 import com.wanjian.sak.converter.ISizeConverter;
 import com.wanjian.sak.layer.Layer;
 import com.wanjian.sak.layer.impl_tmp.InfoLayer;
@@ -71,13 +70,13 @@ public class TreeView extends Layer {
     mDrawMatrix = new Matrix();
   }
 
-    @Override
-    protected void onAfterTraversal(View rootView) {
-        super.onAfterTraversal(rootView);
-        invalidate();
-    }
+  @Override
+  protected void onAfterTraversal(View rootView) {
+    super.onAfterTraversal(rootView);
+    invalidate();
+  }
 
-    @Override
+  @Override
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
     canvas.drawColor(0x88000000);

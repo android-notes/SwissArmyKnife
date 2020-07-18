@@ -2,7 +2,6 @@ package com.wanjian.sak.filter;
 
 import android.view.View;
 
-import com.wanjian.sak.view.RootContainerView;
 
 /**
  * Created by wanjian on 2017/2/20.
@@ -18,9 +17,6 @@ public abstract class ViewFilter {
 
 
     public final boolean filter(View view) {
-        if (view instanceof RootContainerView) {
-            return false;
-        }
         return apply(view);
     }
 

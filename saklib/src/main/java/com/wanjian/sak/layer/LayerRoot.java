@@ -96,7 +96,7 @@ public final class LayerRoot implements EventListener {
     this.viewRootImpl = viewRootImpl;
     this.rootView = rootView;
     for (Item item : config.getLayerList()) {
-      Class<? extends Layer>layerClass=item.layerType;
+      Class<? extends Layer> layerClass = item.layerType;
       Layer layer = null;
       try {
         layer = layerClass.newInstance();
@@ -140,7 +140,8 @@ public final class LayerRoot implements EventListener {
 
   @Override
   public boolean beforeInputEvent(View rootView, InputEvent event) {
-    for (Layer layer : layers) {
+    for (int i = layers.size() - 1; i > -1; i--) {
+      Layer layer = layers.get(i);
       if (layer.isEnable() == false) {
         continue;
       }
@@ -149,16 +150,21 @@ public final class LayerRoot implements EventListener {
         return true;
       }
     }
+
     return false;
   }
 
   @Override
   public void afterInputEvent(View rootView, InputEvent event) {
-    for (Layer layer : layers) {
+    for (int i = layers.size() - 1; i > -1; i--) {
+      Layer layer = layers.get(i);
       if (layer.isEnable() == false) {
         continue;
       }
       layer.afterInputEvent(rootView, event);
+    }
+    for (Layer layer : layers) {
+
     }
   }
 }

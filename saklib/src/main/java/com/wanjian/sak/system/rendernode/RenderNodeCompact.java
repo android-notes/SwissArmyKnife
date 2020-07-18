@@ -11,6 +11,8 @@ public abstract class RenderNodeCompact {
   public static RenderNodeCompact create(String name) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
       return new RenderNodeV29Impl(name);
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      return new RenderNodeV23Impl(name);
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       return new RenderNodeV21Impl(name);
     } else {

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -39,7 +40,7 @@ public class OptionPanelUtils {
     params.height = WindowManager.LayoutParams.WRAP_CONTENT;
     params.gravity = Gravity.END | Gravity.CENTER_VERTICAL;
     params.format = PixelFormat.RGBA_8888;
-    params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL|WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE ;
+    params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
       params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
     } else {
@@ -63,7 +64,7 @@ public class OptionPanelUtils {
         }
         float curX = event.getRawX();
         float curY = event.getRawY();
-        params.x = (int) (params.x + (curX - lastX));
+        params.x = (int) (params.x + (lastX - curX));
         params.y = (int) (params.y + (curY - lastY));
         lastX = curX;
         lastY = curY;
@@ -115,6 +116,16 @@ public class OptionPanelUtils {
       public void onClick(View v) {
         containerView.removeAllViews();
         windowManager.removeView(containerView);
+      }
+    });
+    containerView.setOnKeyListener(new View.OnKeyListener() {
+      @Override
+      public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+          optPanelView.performClick();
+          return true;
+        }
+        return false;
       }
     });
   }

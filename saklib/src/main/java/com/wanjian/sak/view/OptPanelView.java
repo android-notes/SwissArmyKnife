@@ -23,6 +23,7 @@ import com.wanjian.sak.R;
 import com.wanjian.sak.config.Config;
 import com.wanjian.sak.config.Item;
 import com.wanjian.sak.converter.ISizeConverter;
+import com.wanjian.sak.layer.IClip;
 import com.wanjian.sak.layer.IRange;
 import com.wanjian.sak.layer.ISize;
 import com.wanjian.sak.layer.Layer;
@@ -162,8 +163,23 @@ public class OptPanelView extends LinearLayout {
       @Override
       public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         config.setClipDraw(isChecked);
+        changeClip(isChecked);
       }
     });
+  }
+
+  private void changeClip(boolean clip) {
+    for (WeakReference<LayerRoot> weakReference : weakReferences) {
+      LayerRoot layerRoot = weakReference.get();
+      if (layerRoot == null) {
+        continue;
+      }
+      for (Layer layer : layerRoot.getLayers()) {
+        if (layer instanceof IClip) {
+          ((IClip) layer).onClipChange(clip);
+        }
+      }
+    }
   }
 
   private void setSizeConverter() {
@@ -236,6 +252,14 @@ public class OptPanelView extends LinearLayout {
         }
         if (layer.isEnable() != item.isEnable()) {
           layer.enable(item.isEnable());
+          if (layer.isEnable()) {
+            layers.remove(layer);
+            layers.add(layer);
+          } else {
+            layers.remove(layer);
+            layers.add(0, layer);
+          }
+          break;
         }
       }
     }

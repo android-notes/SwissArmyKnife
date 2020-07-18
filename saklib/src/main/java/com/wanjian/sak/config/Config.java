@@ -8,7 +8,6 @@ import com.wanjian.sak.converter.OriginSizeConverter;
 import com.wanjian.sak.converter.Px2DpSizeConverter;
 import com.wanjian.sak.converter.Px2SpSizeConverter;
 import com.wanjian.sak.filter.ViewFilter;
-import com.wanjian.sak.layer.AbsLayer;
 import com.wanjian.sak.layer.Layer;
 import com.wanjian.sak.utils.Check;
 
@@ -116,12 +115,12 @@ public class Config {
             return this;
         }
 
-        public Build addLayerView(AbsLayer layerView) {
-            Check.isNull(layerView, "layerView");
-//            mDefaultLayerViews.clear();
-//            mCustomerLayerViews.add(layerView);
-            return this;
-        }
+//        public Build addLayerView(AbsLayer layerView) {
+//            Check.isNull(layerView, "layerView");
+////            mDefaultLayerViews.clear();
+////            mCustomerLayerViews.add(layerView);
+//            return this;
+//        }
 
         public Build viewFilter(ViewFilter viewFilter) {
             Check.isNull(viewFilter, "viewFilter");

@@ -26,12 +26,14 @@ class HardwareCanvasV29Impl extends HardwareCanvasV26Impl {
   protected Canvas innerRequire() {
     if (threadRenderer != null && isThreadRendererEnable(threadRenderer)) {
       markDrawStart(Choreographer.getInstance());
-      mRootNode = getRooNode(threadRenderer);
+      mRootNode = getRooNodeV29(threadRenderer);
       canvas = mRootNode.beginRecording(getSurfaceW(threadRenderer), getSurfaceH(threadRenderer));
-      translate(canvas, threadRenderer);
+      canvas.translate(getInsertLeft(), getInsertTop());
+      canvas.translate(-getHardwareXOffset(), -getHardwareYOffset());
       saveCount = canvas.save();
       canvas.enableZ();
       canvas.drawRenderNode(getUpdateDisplayListIfDirty());
+      canvas.disableZ();
       return canvas;
     } else {
       mRootNode = null;
@@ -42,7 +44,7 @@ class HardwareCanvasV29Impl extends HardwareCanvasV26Impl {
   @Override
   protected void innerRelease() {
     if (mRootNode != null) {
-      canvas.disableZ();
+//      canvas.disableZ();
       canvas.restoreToCount(saveCount);
       mRootNode.endRecording();
       nSyncAndDrawFrame();
@@ -61,7 +63,7 @@ class HardwareCanvasV29Impl extends HardwareCanvasV26Impl {
     }
   }
 
-  private RenderNode getRooNode(ThreadedRenderer hardwareRenderer) {
+  protected RenderNode getRooNodeV29(ThreadedRenderer hardwareRenderer) {
     try {
       Field mRootNodeF = HardwareRenderer.class.getDeclaredField("mRootNode");
       mRootNodeF.setAccessible(true);

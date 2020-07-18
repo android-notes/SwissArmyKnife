@@ -8,7 +8,6 @@ import android.view.RenderNode;
 import android.view.Surface;
 import android.view.ThreadedRenderer;
 import android.view.View;
-import android.view.ViewParent;
 import android.view.ViewRootImpl;
 
 import java.lang.reflect.Field;
@@ -19,9 +18,9 @@ class HardwareCanvasV21Impl extends CanvasCompact {
   private int count;
   private SoftCanvas softCanvas;
   ThreadedRenderer threadRenderer;
-  private RenderNode mRootNode;
+  RenderNode mRootNode;
   private HardwareCanvas canvas;
-  private int saveCount;
+  int saveCount;
   private long frameTimeNanos;
 
   HardwareCanvasV21Impl(ViewRootImpl viewRootImpl) {
@@ -69,8 +68,11 @@ class HardwareCanvasV21Impl extends CanvasCompact {
       }
 
       saveCount = canvas.save();
+      canvas.translate(getInsertLeft(), getInsertTop());
+      canvas.translate(-getHardwareXOffset(), -getHardwareYOffset());
       canvas.insertReorderBarrier();
       canvas.drawRenderNode(getDisplayList());
+      canvas.insertInorderBarrier();
       return canvas;
     } else {
       mRootNode = null;
@@ -89,7 +91,7 @@ class HardwareCanvasV21Impl extends CanvasCompact {
 
   protected void innerRelease() {
     if (mRootNode != null) {
-      canvas.insertInorderBarrier();
+//      canvas.insertInorderBarrier();
       canvas.restoreToCount(saveCount);
       mRootNode.end(canvas);
       nSyncAndDrawFrame();
@@ -154,15 +156,13 @@ class HardwareCanvasV21Impl extends CanvasCompact {
     }
   }
 
-  protected ThreadedRenderer getHardwareRenderer(ViewParent viewRootImpl) {
+  protected ThreadedRenderer getHardwareRenderer(ViewRootImpl viewRootImpl) {
     try {
       Field mAttachInfoF = ViewRootImpl.class.getDeclaredField("mAttachInfo");
       mAttachInfoF.setAccessible(true);
       Object mAttachInfo = mAttachInfoF.get(viewRootImpl);
       Field threadedRendererF;
-
       threadedRendererF = mAttachInfo.getClass().getDeclaredField("mHardwareRenderer");
-
       threadedRendererF.setAccessible(true);
       return (ThreadedRenderer) threadedRendererF.get(mAttachInfo);
     } catch (Exception e) {
@@ -211,11 +211,51 @@ class HardwareCanvasV21Impl extends CanvasCompact {
     }
   }
 
-  private RenderNode getRooNode(ThreadedRenderer hardwareRenderer) {
+  RenderNode getRooNode(ThreadedRenderer hardwareRenderer) {
     try {
       Field mRootNodeF = hardwareRenderer.getClass().getDeclaredField("mRootNode");
       mRootNodeF.setAccessible(true);
       return (RenderNode) mRootNodeF.get(hardwareRenderer);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  int getHardwareYOffset() {
+    try {
+      Field field = ViewRootImpl.class.getDeclaredField("mHardwareYOffset");
+      field.setAccessible(true);
+      return (int) field.get(viewRootImpl);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  int getHardwareXOffset() {
+    try {
+      Field field = ViewRootImpl.class.getDeclaredField("mHardwareXOffset");
+      field.setAccessible(true);
+      return (int) field.get(viewRootImpl);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  int getInsertTop() {
+    try {
+      Field mInsetLeftF = threadRenderer.getClass().getDeclaredField("mInsetLeft");
+      mInsetLeftF.setAccessible(true);
+      return (int) mInsetLeftF.get(threadRenderer);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  float getInsertLeft() {
+    try {
+      Field mInsetLeftF = threadRenderer.getClass().getDeclaredField("mInsetTop");
+      mInsetLeftF.setAccessible(true);
+      return (int) mInsetLeftF.get(threadRenderer);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

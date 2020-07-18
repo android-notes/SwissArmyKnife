@@ -4,12 +4,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.view.InputEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.wanjian.sak.R;
+import com.wanjian.sak.converter.ISizeConverter;
+import com.wanjian.sak.layer.ISize;
 import com.wanjian.sak.layer.Layer;
 import com.wanjian.sak.utils.ScreenUtils;
 
@@ -18,9 +18,9 @@ import com.wanjian.sak.utils.ScreenUtils;
  * Created by wanjian on 2016/11/10.
  */
 
-public class VerticalMeasureView extends Layer {
+public class VerticalMeasureView extends Layer implements ISize {
   protected Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-  protected int mTwoDP;
+  protected int m20DP;
   protected int maxHeight;
   protected int minHeight;
   private int width;
@@ -35,10 +35,9 @@ public class VerticalMeasureView extends Layer {
   }
 
 
-
   private void init() {
     mPaint.setColor(Color.BLACK);
-    mTwoDP = ScreenUtils.dp2px(getContext(), 2);
+    m20DP = ScreenUtils.dp2px(getContext(), 20);
     mPaint.setTextSize(ScreenUtils.dp2px(getContext(), 8));
     maxHeight = ScreenUtils.dp2px(getContext(), 10);
     minHeight = ScreenUtils.dp2px(getContext(), 5);
@@ -94,7 +93,7 @@ public class VerticalMeasureView extends Layer {
     super.onDraw(canvas);
     canvas.translate(rect.left, rect.top);
     mPaint.setStyle(Paint.Style.FILL);
-    mPaint.setColor(0x33000000);
+    mPaint.setColor(0xbbFFFFFF);
     canvas.drawRect(0, 0, rect.right - rect.left, rect.bottom - rect.top, mPaint);
     mPaint.setStyle(Paint.Style.STROKE);
     mPaint.setColor(Color.BLACK);
@@ -102,21 +101,22 @@ public class VerticalMeasureView extends Layer {
     mPaint.setStyle(Paint.Style.FILL);
     int h = rect.bottom - rect.top;
     int w = rect.right - rect.left;
-    canvas.translate(0, maxHeight);
     canvas.drawLine(0, 0, w, 0, mPaint);
 
-
-    ///
-
-    for (int i = 0; i <= h; i += mTwoDP) {
-      canvas.drawLine(-minHeight, i, minHeight, i, mPaint);
-
-      if ((i / mTwoDP << 1) % 20 == 0) {
-        canvas.drawLine(-maxHeight * 2f, i, maxHeight * 2f, i, mPaint);
-        canvas.drawText(String.valueOf(i) + "/" + (i / mTwoDP << 1), maxHeight, i + mPaint.getTextSize() / 2, mPaint);
+    for (int i = 0; i <= h; i += m20DP) {
+      canvas.drawLine(-maxHeight, i, maxHeight, i, mPaint);
+      canvas.drawText(sizeConverter.convert(getContext(), i).toString(), maxHeight, i, mPaint);
+      for (int j = i; j <= h && j < i + m20DP; j += m20DP / 10) {
+        canvas.drawLine(-minHeight, j, minHeight, j, mPaint);
       }
     }
-
   }
 
+  ISizeConverter sizeConverter = ISizeConverter.CONVERTER;
+
+  @Override
+  public void onSizeConvertChange(ISizeConverter converter) {
+    sizeConverter = converter;
+    invalidate();
+  }
 }

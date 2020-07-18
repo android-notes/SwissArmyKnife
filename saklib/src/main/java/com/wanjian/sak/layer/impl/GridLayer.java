@@ -23,6 +23,12 @@ public class GridLayer extends Layer {
   }
 
   @Override
+  protected void onEnableChange(boolean enable) {
+    super.onEnableChange(enable);
+
+  }
+
+  @Override
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
 
@@ -41,6 +47,7 @@ public class GridLayer extends Layer {
 
   @Override
   protected void onAfterTraversal(View rootView) {
+    invalidate();
   }
 
   protected int color() {
