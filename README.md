@@ -3,31 +3,34 @@
 
 ### SwissArmyKnife
 
-SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android设备屏幕上显示控件的相关信息
+SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android设备屏幕上显示控件的相关信息。3.x版本只对跟View没有任何要求，可以是任意类型的view。
+3.x需要弹窗权限。由于时间有限，暂未兼容Android5.0以下设备
 
 
 ### 接入方式
 
- `compile 'com.wanjian:sak:2.0.2'`
+ ```
+ allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
  
- no opt 包
- `compile 'com.wanjian:sak-nop:0.0.3'`
+ dependencies {
+	        implementation 'com.github.android-notes.SwissArmyKnife:saklib:3.0.1-alpha1'
+         
+       
+	}
+ ```
 
  ```
   开启
   SAK.init(Application application, Config config)
 
-  关闭
-  SAK.unInstall();
-
  ```
  
- 番外版:
- 自动初始化，命令开启及关闭
- [https://github.com/android-notes/SwissArmyKnife/tree/autopilot](https://github.com/android-notes/SwissArmyKnife/tree/autopilot)
-
-启动app后会在屏幕右侧看到一个 `蓝色靶心` ，`双击`即可进入功能界面。
-
+ 备注：需要使用 me.weishu.reflection.Reflection.unseal(this);
 
 ### 功能界面
 
@@ -40,14 +43,7 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 
 ![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_pickview.jpg)
 
-
-### 编辑控件
-
-开启编辑控件选项后，`长按`需要编辑的控件即可弹出编辑窗口，可以修改内外边距大小，字体颜色、大小、背景色等`（该功能和相对距离、移动控件功能冲突，请勿同时开启）`
-
-![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_edit_panel.jpg)
-![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_edit.jpg)
-
+ 
 
 
 ### 相对距离
@@ -78,13 +74,7 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 
 ![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_measure.jpg)
 
-
-### Scalpel
-
-开启后会立体显示view，可以直观的查看view的层级关系，`拖动`屏幕左侧的按钮可以切换角度
-
-![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_scalpel.jpg)
-
+ 
 
 ### 外边距/内边距
 
@@ -102,26 +92,14 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 
 ![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_fragment_name.jpg)
 
-
-### 性能
-
-开启可以看到当前窗口view的绘制耗时，事件分发耗时，measure，layout耗时，handler耗时。（开启后会自动禁用硬件加速，实际绘制时间可能要少一些。ListView会在事件分发时调用getView，所以ListView事件分发时间稍微长一些。RecyclerView会在view绘制时bindView，所以RecyclerView绘制时间会稍长一些）
-
-![image](https://raw.githubusercontent.com/android-notes/SwissArmyKnife/master/img/sak_guide_performance.jpg)
-
-
+ 
 ## 裁剪绘制范围
 
 若内外边距、宽高、字体颜色等信息`不显示,可以关闭 裁剪绘制`。开启该功能可以避免 可以滚动的控件滚动后导致的信息覆盖。
 
-
-## 特别注意：
-当开启新窗口时，需要`手动点击一次屏幕右侧的 靶心 按钮，以此激活当前窗口`，不然当前窗口不会启用 SwissArmyKnife！
-
-
+ 
 ### 效果视频
 
 [http://t.cn/EVB3rcm](http://t.cn/EVB3rcm)
 
-### 功能拓展
-[https://github.com/android-notes/SwissArmyKnife/blob/master/README_Dev.md](https://github.com/android-notes/SwissArmyKnife/blob/master/README_Dev.md)
+ 
