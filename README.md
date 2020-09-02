@@ -3,7 +3,7 @@
 
 ### SwissArmyKnife
 
-SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android设备屏幕上显示控件的相关信息。3.x版本只对跟View没有任何要求，可以是任意类型的view。
+SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android设备屏幕上显示控件的相关信息。3.x版本对根View没有任何要求，可以是任意类型的view。
 3.x需要弹窗权限。由于时间有限，暂未兼容Android5.0以下设备
 
 
