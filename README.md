@@ -97,9 +97,6 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 
 若内外边距、宽高、字体颜色等信息`不显示,可以关闭 裁剪绘制`。开启该功能可以避免 可以滚动的控件滚动后导致的信息覆盖。
 
- 
-### 效果视频
 
-[http://t.cn/EVB3rcm](http://t.cn/EVB3rcm)
 
  
