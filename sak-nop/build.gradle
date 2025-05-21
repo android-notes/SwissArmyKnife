@@ -1,11 +1,10 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.novoda.bintray-release'//添加
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    namespace('com.wanjian.sak')
+    compileSdkVersion 33
     defaultConfig {
-        minSdkVersion 12
-        targetSdkVersion 26
+        minSdkVersion 14
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -21,48 +20,7 @@ android {
     }
 
 }
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-        google()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
-//        classpath 'com.novoda:bintray-release:0.8.0'
-    }
-}
+
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    // https://mvnrepository.com/artifact/com.android.support/support-v4
-
-
 }
-
-def getKey() {
-
-    Properties properties = new Properties()
-//    properties.load(new FileInputStream("../local.properties"))
-
-    File propertyFile = new File(rootDir.getAbsolutePath() + "/local.properties")
-    if (propertyFile.exists()) {
-        properties.load(propertyFile.newDataInputStream())
-        return properties.getProperty("jcenter_key")
-    }
-
-
-}
-// clean -- build  --- generatePomFileForReleasePublication---publishReleasePublicationToMabenLocal---bintrayUpload---publishing
-//publish {
-//    groupId = 'com.wanjian'
-//    artifactId = 'sak-nop'
-//    publishVersion = '0.0.3'
-//    desc = 'ui debug tool 4 android'
-//    website = 'https://github.com/android-notes/SwissArmyKnife'
-//
-//    bintrayUser = 'wanjian' // 账户名
-//    bintrayKey = getKey() // 就是API key
-//    dryRun = false
-//
-//}

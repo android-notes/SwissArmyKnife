@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.wanjian.sak.SAK;
 import com.wanjian.sak.config.Config;
+import com.wanjian.sak.config.Res;
 import com.wanjian.sak.layer.impl.ActivityNameLayerView;
 import com.wanjian.sak.layer.impl.BorderLayer;
 import com.wanjian.sak.layer.impl.FragmentNameLayer;
@@ -72,22 +73,22 @@ public class MainActivity extends AppCompatActivity {
 
                 Config config=new Config.Build(getApplicationContext())
 //                    .addLayer(TestLayer.class)
-                    .addLayer(BorderLayer.class, getIcon(R.drawable.sak_border_icon), getString(R.string.sak_border))
-                    .addLayer(GridLayer.class, getIcon(R.drawable.sak_grid_icon), getString(R.string.sak_grid))
-                    .addLayer(PaddingLayer.class, getIcon(R.drawable.sak_padding_icon), getString(R.string.sak_padding))
-                    .addLayer(MarginLayer.class, getIcon(R.drawable.sak_margin_icon), getString(R.string.sak_margin))
-                    .addLayer(WidthHeightLayer.class, getIcon(R.drawable.sak_width_height_icon), getString(R.string.sak_width_height))
-                    .addLayer(TextColorLayer.class, getIcon(R.drawable.sak_text_color_icon), getString(R.string.sak_txt_color))
-                    .addLayer(TextSizeLayer.class, getIcon(R.drawable.sak_text_size_icon), getString(R.string.sak_txt_size))
-                    .addLayer(ActivityNameLayerView.class, getIcon(R.drawable.sak_page_name_icon), getString(R.string.sak_activity_name))
-                    .addLayer(FragmentNameLayer.class, getIcon(R.drawable.sak_page_name_icon), getString(R.string.sak_fragment_name))
-                    .addLayer(HorizontalMeasureView.class, getIcon(R.drawable.sak_hori_measure_icon), getString(R.string.sak_horizontal_measure))
-                    .addLayer(VerticalMeasureView.class, getIcon(R.drawable.sak_ver_measure_icon), getString(R.string.sak_vertical_measure))
-                    .addLayer(TakeColorLayer.class, getIcon(R.drawable.sak_color_picker_icon), getString(R.string.sak_take_color))
-                    .addLayer(ViewClassLayer.class, getIcon(R.drawable.sak_controller_type_icon), getString(R.string.sak_view_name))
-                    .addLayer(TreeView.class, getIcon(R.drawable.sak_layout_tree_icon), getString(R.string.sak_layout_tree))
-                    .addLayer(RelativeLayerView.class, getIcon(R.drawable.sak_relative_distance_icon), getString(R.string.sak_relative_distance))
-                    .addLayer(TranslationLayerView.class, getIcon(R.drawable.sak_drag_icon), getString(R.string.sak_translation_view))
+                    .addLayer(BorderLayer.class, getIcon(Res.Icon.sak_border_icon), getString(Res.Str.sak_border))
+                    .addLayer(GridLayer.class, getIcon(Res.Icon.sak_grid_icon), getString(Res.Str.sak_grid))
+                    .addLayer(PaddingLayer.class, getIcon(Res.Icon.sak_padding_icon), getString(Res.Str.sak_padding))
+                    .addLayer(MarginLayer.class, getIcon(Res.Icon.sak_margin_icon), getString(Res.Str.sak_margin))
+                    .addLayer(WidthHeightLayer.class, getIcon(Res.Icon.sak_width_height_icon), getString(Res.Str.sak_width_height))
+                    .addLayer(TextColorLayer.class, getIcon(Res.Icon.sak_text_color_icon), getString(Res.Str.sak_txt_color))
+                    .addLayer(TextSizeLayer.class, getIcon(Res.Icon.sak_text_size_icon), getString(Res.Str.sak_txt_size))
+                    .addLayer(ActivityNameLayerView.class, getIcon(Res.Icon.sak_page_name_icon), getString(Res.Str.sak_activity_name))
+                    .addLayer(FragmentNameLayer.class, getIcon(Res.Icon.sak_page_name_icon), getString(Res.Str.sak_fragment_name))
+                    .addLayer(HorizontalMeasureView.class, getIcon(Res.Icon.sak_hori_measure_icon), getString(Res.Str.sak_horizontal_measure))
+                    .addLayer(VerticalMeasureView.class, getIcon(Res.Icon.sak_ver_measure_icon), getString(Res.Str.sak_vertical_measure))
+                    .addLayer(TakeColorLayer.class, getIcon(Res.Icon.sak_color_picker_icon), getString(Res.Str.sak_take_color))
+                    .addLayer(ViewClassLayer.class, getIcon(Res.Icon.sak_controller_type_icon), getString(Res.Str.sak_view_name))
+                    .addLayer(TreeView.class, getIcon(Res.Icon.sak_layout_tree_icon), getString(Res.Str.sak_layout_tree))
+                    .addLayer(RelativeLayerView.class, getIcon(Res.Icon.sak_relative_distance_icon), getString(Res.Str.sak_relative_distance))
+                    .addLayer(TranslationLayerView.class, getIcon(Res.Icon.sak_drag_icon), getString(Res.Str.sak_translation_view))
                     .build();
                 SAK.init(getApplication(), null);
 //                T.test2(getWindow().getDecorView().getRootView().getParent());
