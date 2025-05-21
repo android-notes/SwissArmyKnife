@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 android {
     namespace('com.wanjian.sak')
     compileSdkVersion 33
@@ -25,4 +26,18 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:support-v4:23.0.0'
     compileOnly project(path: ':systemlib')
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.android-notes'
+            artifactId = 'SwissArmyKnife'
+            version = '4.0.5'
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
 }
