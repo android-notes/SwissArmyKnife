@@ -3,6 +3,8 @@
 
 ### SwissArmyKnife
 
+兼容Android5~16
+
 SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android设备屏幕上显示控件的相关信息。3.x版本对根View没有任何要求，可以是任意类型的view。
 3.x需要弹窗权限。由于时间有限，暂未兼容Android5.0以下设备
 
@@ -18,9 +20,7 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 	}
  
  dependencies {
-	        implementation 'com.github.android-notes.SwissArmyKnife:saklib:3.0.1-alpha1'
-         
-       
+	        implementation 'com.github.android-notes.SwissArmyKnife:saklib:4.0.3'
 	}
  ```
 
@@ -30,7 +30,7 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 
  ```
  
- 备注：需要使用 me.weishu.reflection.Reflection.unseal(this);
+ 备注：需要使用 implementation 'org.lsposed.hiddenapibypass:hiddenapibypass:6.1'
 
 ### 功能界面
 
