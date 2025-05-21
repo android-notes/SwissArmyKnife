@@ -6,7 +6,6 @@ import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.view.InputEvent;
 import android.view.View;
 import android.view.ViewRootImpl;
@@ -30,7 +29,7 @@ public final class LayerRoot implements EventListener {
   private CanvasCompact canvasCompact;
   private Handler handler = new Handler(Looper.getMainLooper()) {
     @Override
-    public void handleMessage(@NonNull Message msg) {
+    public void handleMessage(Message msg) {
       super.handleMessage(msg);
       switch (msg.what) {
         case TAG_PENDING_DRAW:

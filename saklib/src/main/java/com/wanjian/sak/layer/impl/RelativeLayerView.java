@@ -3,7 +3,6 @@ package com.wanjian.sak.layer.impl;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.v4.view.GestureDetectorCompat;
 import android.view.GestureDetector;
 import android.view.InputEvent;
 import android.view.MotionEvent;
@@ -17,6 +16,8 @@ import com.wanjian.sak.layer.Layer;
 import com.wanjian.sak.utils.ScreenUtils;
 
 import static android.view.View.VISIBLE;
+
+import androidx.core.view.GestureDetectorCompat;
 
 public class RelativeLayerView extends Layer implements ISize {
   private int mTxtSize;

@@ -3,8 +3,6 @@ package com.wanjian.sak.view;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,11 +44,11 @@ public class OptPanelView extends LinearLayout {
     this.confirmListener = confirmListener;
   }
 
-  public OptPanelView(@NonNull Context context) {
+  public OptPanelView(Context context) {
     this(context, null);
   }
 
-  public OptPanelView(@NonNull final Context context, @Nullable AttributeSet attrs) {
+  public OptPanelView(final Context context, AttributeSet attrs) {
     super(context, attrs);
     inflate(context, R.layout.sak_opt_panel_view, this);
 

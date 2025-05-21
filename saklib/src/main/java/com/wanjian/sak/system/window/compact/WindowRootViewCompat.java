@@ -2,7 +2,6 @@ package com.wanjian.sak.system.window.compact;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.NonNull;
 
 /*
  * get the root view of all windows
@@ -70,8 +69,8 @@ public abstract class WindowRootViewCompat {
     onRemoveWindowChangeListener(changeListener);
   }
 
-  abstract void onAddWindowChangeListener(@NonNull IWindowChangeListener changeListener);
+  abstract void onAddWindowChangeListener(IWindowChangeListener changeListener);
 
-  abstract void onRemoveWindowChangeListener(@NonNull IWindowChangeListener changeListener);
+  abstract void onRemoveWindowChangeListener(IWindowChangeListener changeListener);
 
 }

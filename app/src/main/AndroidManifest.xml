@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name=".DialogAct"
-            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+             />
         <activity android:name=".SecAct" />
     </application>
 

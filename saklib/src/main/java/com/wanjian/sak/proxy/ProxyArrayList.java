@@ -1,6 +1,5 @@
 package com.wanjian.sak.proxy;
 
-import android.support.annotation.NonNull;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -116,7 +115,6 @@ public class ProxyArrayList<E> extends ArrayList<E> {
         origin.trimToSize();
     }
 
-    @NonNull
     @Override
     public Iterator<E> iterator() {
         return origin.iterator();

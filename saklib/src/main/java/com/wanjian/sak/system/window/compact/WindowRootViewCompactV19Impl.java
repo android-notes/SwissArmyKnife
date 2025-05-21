@@ -1,6 +1,5 @@
 package com.wanjian.sak.system.window.compact;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewRootImpl;
 
@@ -87,7 +86,7 @@ class WindowRootViewCompactV19Impl extends WindowRootViewCompat {
     }
 
     @Override
-    void onAddWindowChangeListener(@NonNull IWindowChangeListener changeListener) {
+    void onAddWindowChangeListener(IWindowChangeListener changeListener) {
         changeListeners.add(changeListener);
         for (int i = 0; i < viewRoots.size(); i++) {
             ViewRootImpl viewRoot=viewRoots.get(i);
@@ -97,7 +96,7 @@ class WindowRootViewCompactV19Impl extends WindowRootViewCompat {
 
     }
     @Override
-    void onRemoveWindowChangeListener(@NonNull IWindowChangeListener changeListener) {
+    void onRemoveWindowChangeListener(IWindowChangeListener changeListener) {
         changeListeners.remove(changeListener);
     }
 }

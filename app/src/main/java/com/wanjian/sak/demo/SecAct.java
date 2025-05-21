@@ -1,10 +1,11 @@
 package com.wanjian.sak.demo;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -16,6 +17,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.wanjian.sak.SAK;
 import com.wanjian.sak.utils.BitmapCreater;
 
@@ -23,7 +26,7 @@ import com.wanjian.sak.utils.BitmapCreater;
  * Created by wanjian on 2017/4/1.
  */
 
-public class SecAct extends AppCompatActivity {
+public class SecAct extends FragmentActivity {
 
     Bitmap bitmap;//Activity是否泄漏更明显
 
