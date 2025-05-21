@@ -1,6 +1,7 @@
 package com.wanjian.sak;
 
 import android.app.Application;
+import android.os.Build;
 import android.view.InputEvent;
 import android.view.View;
 import android.view.ViewRootImpl;
@@ -8,6 +9,7 @@ import android.view.ViewRootImpl;
 import com.wanjian.sak.config.Config;
 import com.wanjian.sak.layer.LayerRoot;
 import com.wanjian.sak.system.input.InputEventListener;
+import com.wanjian.sak.system.input.InputEventProcessorCompact;
 import com.wanjian.sak.system.input.InputEventReceiverCompact;
 import com.wanjian.sak.system.traversals.ViewTraversalsCompact;
 import com.wanjian.sak.system.traversals.ViewTraversalsListener;
@@ -52,7 +54,7 @@ final class Scaffold {
 
 
   private void observerInputEvent(Config config, final LayerRoot layerRoot, final ViewRootImpl viewRootImpl, final View rootView) {
-    InputEventReceiverCompact.get(viewRootImpl, new InputEventListener() {
+    InputEventListener listener = new InputEventListener() {
       @Override
       public boolean onBeforeInputEvent(InputEvent inputEvent) {
         return layerRoot.beforeInputEvent(rootView, inputEvent);
@@ -62,7 +64,12 @@ final class Scaffold {
       public void onAfterInputEvent(InputEvent inputEvent) {
         layerRoot.afterInputEvent(rootView, inputEvent);
       }
-    });
+    };
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      InputEventProcessorCompact.get(rootView.getContext(),viewRootImpl, listener);
+    } else {
+      InputEventReceiverCompact.get(viewRootImpl, listener);
+    }
   }
 
   private void observerUIChange(Config config, final LayerRoot layerRoot, ViewRootImpl viewRootImpl, View view) {
