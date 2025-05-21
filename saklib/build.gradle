@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 android {
     namespace('com.wanjian.sak')
     compileSdkVersion 33
