@@ -20,7 +20,7 @@ SwissArmyKnife 是一款方便调试android UI的工具。可以直接在android
 	}
  
  dependencies {
-	implementation 'com.github.android-notes.SwissArmyKnife:saklib:4.0.6'
+	implementation 'com.github.android-notes:SwissArmyKnife:4.0.6'
  }
  ```
 
